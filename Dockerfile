@@ -26,7 +26,6 @@ RUN apt-get clean
 # Conda deps
 USER jovyan
 RUN conda config --show-sources
-RUN conda config --add channels conda-forge
 RUN conda config --add channels jochym
 RUN conda install -y scipy numpy matplotlib ase spglib nglview elastic phonopy
 RUN conda install -y jupyter_contrib_nbextensions 
