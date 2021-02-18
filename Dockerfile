@@ -11,7 +11,7 @@ RUN sed -i 's/main/main contrib non-free/g' /etc/apt/sources.list.d/backports.li
 RUN apt-get update
 RUN apt-get -qy upgrade
 RUN apt-get -qy install git apt-utils
-RUN apt-get -qy install abinit povray imagemagick && apt-get clean
+RUN apt-get -qy install abinit abinit-data povray imagemagick && apt-get clean
 
 # Non-essential dependencies
 RUN apt-get install -qy htop abinit-doc pandoc 
@@ -25,14 +25,13 @@ RUN apt-get clean
 
 # Conda deps
 USER jovyan
+RUN conda config --show-sources
 RUN conda config --add channels conda-forge
 RUN conda config --add channels jochym
 RUN conda install -y scipy numpy matplotlib ase spglib nglview elastic phonopy
 RUN conda install -y jupyter_contrib_nbextensions 
-RUN conda install -y -c damianavila82 rise
-RUN conda install -y -c vpython vpython vpnotebook
 RUN conda update -y --all
-RUN conda clean -tipsy
+RUN conda clean -y --all
 
 # Materials
 USER root
