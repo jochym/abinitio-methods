@@ -9,17 +9,17 @@ RUN sed -i 's/main/main contrib non-free/g' /etc/apt/sources.list
 RUN sed -i 's/main/main contrib non-free/g' /etc/apt/sources.list.d/backports.list
 
 RUN apt-get update
-RUN apt-get -qy upgrade
+RUN apt-get -qy full-upgrade
 RUN apt-get -qy install git apt-utils
-RUN apt-get -qy install abinit abinit-data povray imagemagick && apt-get clean
+RUN apt-get -qy install abinit abinit-data && apt-get clean
 
 # Non-essential dependencies
-RUN apt-get install -qy htop abinit-doc pandoc 
-RUN apt-get install -qy texlive-latex-recommended texlive-fonts-recommended texlive-latex-extra && apt-get clean
+RUN apt-get install -qy htop abinit-doc pandoc vim mc  && apt-get clean
+#RUN apt-get install -qy texlive-latex-recommended texlive-fonts-recommended texlive-latex-extra && apt-get clean
 
 # Extra dependencies
-RUN apt-get update
-RUN apt-get install -y ffmpeg && apt-get clean
+#RUN apt-get update
+#RUN apt-get install -y ffmpeg && apt-get clean
 
 RUN apt-get clean
 
@@ -40,7 +40,7 @@ RUN chown -R jovyan:users /home/jovyan/work
 
 # Update submodules
 USER jovyan
-RUN cd /home/jovyan/work && git submodule init && git submodule update
+#RUN cd /home/jovyan/work && git submodule init && git submodule update
 
 
 
