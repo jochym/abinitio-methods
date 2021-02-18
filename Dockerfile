@@ -6,7 +6,7 @@ USER root
 
 # Add dependencies
 RUN sed -i 's/main/main contrib non-free/g' /etc/apt/sources.list
-RUN ls -lR /etc/apt/
+RUN sed -i 's/main/main contrib non-free/g' /etc/apt/sources.list.d/backports.list
 
 RUN apt-get update
 RUN apt-get -qy upgrade
