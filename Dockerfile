@@ -1,4 +1,4 @@
-FROM jochym/base-notebook
+FROM jochym/jupyter-stacks
 
 MAINTAINER Pawel T.  Jochym <pawel.jochym@ifj.edu.pl>
 
