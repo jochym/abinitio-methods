@@ -3,5 +3,10 @@ set -ex
 jupyter lab build
 jupyter lab clean
 
+# build and install abinit
+echo 
+apt-get build-dep abinit
+
+
 # Setup a workspace
 # jupyter lab workspaces import binder/workspace.json
