@@ -5,8 +5,8 @@ MAINTAINER Pawel T.  Jochym <pawel.jochym@ifj.edu.pl>
 USER root
 
 # Add dependencies
-RUN sed 's/main/main contrib non-free/g' /etc/apt/sources.list
-RUN echo "deb http://cdn-fastly.deb.debian.org/debian jessie-backports main contrib non-free" > /etc/apt/sources.list.d/backports.list
+RUN sed -i 's/main/main contrib non-free/g' /etc/apt/sources.list
+RUN ls -lR /etc/apt/
 
 RUN apt-get update
 RUN apt-get -qy upgrade
