@@ -1,0 +1,7 @@
+set -ex
+
+jupyter lab build
+jupyter lab clean
+
+# Setup a workspace
+# jupyter lab workspaces import binder/workspace.json
