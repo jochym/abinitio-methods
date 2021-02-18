@@ -40,6 +40,6 @@ RUN chown -R jovyan:users /home/jovyan/work
 # Update submodules
 USER jovyan
 #RUN cd /home/jovyan/work && git submodule init && git submodule update
-
+WORKDIR $HOME
 
 
