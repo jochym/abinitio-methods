@@ -5,5 +5,5 @@
 #### *Dept. of computational materials science*
 #### *Institute of Nuclear Physics PAN, Cracow, Poland*
 
-These materials are intended as supplementary materials for the lecture and exercises for PhD students.
+These notebooks are intended as supplementary materials for the lecture and exercises for the PhD students.
 
