@@ -1,4 +1,4 @@
-# Ab initio methods in solid state physics
+# Ab initio methods in solid state physics [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/jochym/ab-initio-methods/HEAD?urlpath=lab)
 ## Lecture materials
 ---
 #### *Przemysław Piekarz, Paweł T. Jochym*
@@ -7,4 +7,3 @@
 
 These materials are intended as supplementary materials for the lecture and exercises for PhD students.
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/jochym/ab-initio-methods/HEAD?urlpath=lab)
