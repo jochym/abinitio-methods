@@ -44,3 +44,8 @@ WORKDIR $HOME
 
 # Import the workspace into JupyterLab
 RUN jupyter lab workspaces import abinit-ws.json
+
+# Set up the abinit program and data
+#ENV ASE_ABINIT_COMMAND="abinit < PREFIX.files > PREFIX.log"
+#ENV ABINIT_PP_PATH="psp/GGA_FHI/:psp/LDA_FHI/:psp/LDA_PAW/:psp/GGA_PAW/"
+ENV ABINIT_PP_PATH="/usr/share/abinit/psp:/usr/share/abinit/psp/HGH"
