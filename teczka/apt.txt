@@ -1,8 +1,0 @@
-vim
-mc
-build-essential 
-fakeroot 
-dpkg-dev
-
-# abinit
-# abinit-data
