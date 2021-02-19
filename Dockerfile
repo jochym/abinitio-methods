@@ -42,4 +42,5 @@ USER jovyan
 #RUN cd /home/jovyan/work && git submodule init && git submodule update
 WORKDIR $HOME
 
-
+# Import the workspace into JupyterLab
+RUN jupyter lab workspaces import abinit-ws.json
