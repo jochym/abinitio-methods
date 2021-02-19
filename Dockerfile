@@ -34,8 +34,8 @@ RUN conda clean -y --all
 
 # Materials
 USER root
-COPY . /home/jovyan/work
-RUN chown -R jovyan:users /home/jovyan/work
+COPY . /home/jovyan/
+RUN chown -R jovyan:users /home/jovyan
 
 # Update submodules
 USER jovyan
