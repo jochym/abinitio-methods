@@ -28,7 +28,9 @@ USER jovyan
 RUN conda config --show-sources
 RUN conda config --add channels jochym
 RUN conda install -y scipy numpy matplotlib ase spglib nglview elastic phonopy
-RUN conda install -y jupyter_contrib_nbextensions 
+RUN conda install -y jupyter_contrib_nbextensions
+RUN conda update -y nodejs
+RUN jupyter labextension install @jupyterlab/katex-extension
 RUN conda update -y --all
 RUN conda clean -y --all
 
