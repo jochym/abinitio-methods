@@ -25,12 +25,13 @@ RUN apt-get clean
 
 # Conda deps
 USER jovyan
+RUN conda init bash
 RUN conda config --show-sources
-RUN conda config --add channels jochym
-RUN conda install -y scipy numpy matplotlib ase spglib nglview elastic phonopy
+RUN conda config --system --add channels jochym
+RUN conda install -y scipy numpy matplotlib ase spglib nglview elastic phonopy mamba
 RUN conda install -y jupyter_contrib_nbextensions
-RUN conda update -y nodejs
-RUN jupyter labextension install @jupyterlab/katex-extension
+#RUN conda update -y nodejs
+#RUN jupyter labextension install @jupyterlab/katex-extension
 RUN conda update -y --all
 RUN conda clean -y --all
 
