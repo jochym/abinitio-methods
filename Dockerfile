@@ -49,6 +49,7 @@ USER jovyan
 WORKDIR $HOME
 
 # Import the workspace into JupyterLab
+RUN jupyter lab build
 RUN jupyter lab clean
 RUN jupyter lab workspaces import abinit-ws.json
 
