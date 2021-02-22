@@ -33,8 +33,6 @@ RUN conda install -y mamba
 RUN mamba install -y scipy numpy matplotlib ase spglib nglview elastic phonopy \
     jupyter_contrib_nbextensions jupytext jupyter-offlinenotebook jupyterlab-python-file
 
-RUN jupyter labextension install @jupyterlab/katex-extension
-
 RUN mamba update -y --all
 RUN mamba clean -y --all
 
@@ -48,9 +46,10 @@ USER jovyan
 #RUN cd /home/jovyan/work && git submodule init && git submodule update
 WORKDIR $HOME
 
-# Import the workspace into JupyterLab
+RUN jupyter labextension install @jupyterlab/katex-extension
 RUN jupyter lab build
 RUN jupyter lab clean
+# Import the workspace into JupyterLab
 RUN jupyter lab workspaces import abinit-ws.json
 
 # Set up the abinit program and data
