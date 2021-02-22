@@ -5,14 +5,14 @@ subtitle: 'I. Electronic properties'
 title: '*Ab initio* methods in solid state physics'
 ---
 
-## *Ab initio* methods in solid state physics
+# *Ab initio* methods in solid state physics
 ## I. Electronic properties
 
 ![image](fig_01/Dirac.png)
 
 ### *Ab initio* methods
 
-![image](fig_01/Abinitio.png)
+![image](fig_01/AbInitio.png)
 
 *Ab initio* is a Latin term meaning \"from the beginning\".
 
