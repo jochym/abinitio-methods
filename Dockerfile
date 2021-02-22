@@ -30,7 +30,7 @@ RUN conda config --show-sources
 RUN conda config --system --add channels jochym
 RUN conda install -y mamba
 
-RUN mamaba install -y scipy numpy matplotlib ase spglib nglview elastic phonopy \
+RUN mamba install -y scipy numpy matplotlib ase spglib nglview elastic phonopy \
     jupyter_contrib_nbextensions jupytext jupyter-offlinenotebook jupyterlab-python-file
 
 RUN jupyter labextension install @jupyterlab/katex-extension
