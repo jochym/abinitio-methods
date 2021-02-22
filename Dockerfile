@@ -28,12 +28,15 @@ USER jovyan
 RUN conda init bash
 RUN conda config --show-sources
 RUN conda config --system --add channels jochym
-RUN conda install -y scipy numpy matplotlib ase spglib nglview elastic phonopy mamba
-RUN conda install -y jupyter_contrib_nbextensions
-#RUN conda update -y nodejs
-#RUN jupyter labextension install @jupyterlab/katex-extension
-RUN conda update -y --all
-RUN conda clean -y --all
+RUN conda install -y mamba
+
+RUN mamaba install -y scipy numpy matplotlib ase spglib nglview elastic phonopy \
+    jupyter_contrib_nbextensions jupytext jupyter-offlinenotebook jupyterlab-python-file
+
+RUN jupyter labextension install @jupyterlab/katex-extension
+
+RUN mamba update -y --all
+RUN mamba clean -y --all
 
 # Materials
 USER root
