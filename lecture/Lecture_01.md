@@ -113,7 +113,7 @@ same quantum state.
 The electron density at point $\bm{r}$ is given by the formula
 $$n(\bm{r})=N\int d\bm{r}_2...d\bm{r}_N |\Phi^*(\bm{r}\sigma,\bm{r}_2\sigma_2,...,\bm{r}_N\sigma_N)|^2.$$
 
-### Hydrogen molecule H$_2$
+### Hydrogen molecule
 
 Accurate numerical solutions of the Schrödingera equation can be
 obtained only for atoms and small molecules. As an example we can
