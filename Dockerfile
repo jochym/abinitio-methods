@@ -50,7 +50,7 @@ RUN jupyter labextension install @jupyterlab/katex-extension
 #RUN jupyter lab build
 RUN jupyter lab clean
 # Import the workspace into JupyterLab
-RUN jupyter lab workspace import --name=default workspace.json
+RUN jupyter lab workspace import --name="" workspace.json
 RUN ls -l .jupyter/lab/workspaces/
 RUN cat .jupyter/lab/workspaces/*
 
