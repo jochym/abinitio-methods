@@ -6,7 +6,7 @@ title: '*Ab initio* methods in solid state physics'
 ---
 
 # *Ab initio* methods in solid state physics
-*Przemysław Piekarz*
+*Przemysław Piekarz, Paweł T. Jochym*
 
 ---
 
