@@ -6,6 +6,10 @@ title: '*Ab initio* methods in solid state physics'
 ---
 
 # *Ab initio* methods in solid state physics
+*Przemysław Piekarz*
+
+---
+
 ## I. Electronic properties
 
 ![image](fig_01/Dirac.png)
@@ -124,8 +128,6 @@ $r_{\text{ab}}$ is the distance between protons.
  
 ![image](fig_01/H2.png)
 
-### Hydrogen molecule H$_2$
-
 W. Heitler and F. London, Zeitschrift für Physik **44**, 455 (1927)
 
 Heitler and London proposed the wave function in the form
@@ -139,7 +141,7 @@ $$\psi_{\alpha}(\bm{r})=\frac{1}{\sqrt{\pi a_0^3}}e^{-\frac{|\bm{r}-\bm{R}_{\alp
 where $a_0$ is Bohr radius and $\bm{R}_{\alpha}$ are positions of
 protons $\alpha=\text{a}$ or $\text{b}$.
 
-### Hydrogen molecule H$_2$
+
 
 $$\text{Singlet state} \ (S=0) \hspace{2mm} \Phi_\text{S}(\bm{r}_1\sigma_1,\bm{r}_2\sigma_2)=\Psi_\text{S}(\bm{r}_1,\bm{r}_2)\frac{1}{\sqrt{2}}(|\uparrow\downarrow\rangle-|\downarrow\uparrow\rangle)$$
 
@@ -154,8 +156,6 @@ $$\text{Triplet state} \ (S=1) \hspace{2mm} \Phi_\text{T}(\bm{r}_1\sigma_1,\bm{r
 
 
 ![image](fig_01/HL-antibonding.png)
-
-### Hydrogen molecule H$_2$
 
 
 Ground state energy\
@@ -173,8 +173,6 @@ electrons in the single state (bonding state), thus lowering the total
 energy in comparison to the energy of two separate atoms. In contrast,
 the electrons in the triplet state do not create the bound state of
 hydrogen atoms (anti-bonding state).
-
-### Hydrogen molecule H$_2$
 
 The best results were obtained within the variational method, in which
 the space part of the wave function is written in the form
@@ -207,8 +205,6 @@ orbitals
 $$\Phi(\bm{r}_1\sigma_1,\bm{r}_2\sigma_2,...,\bm{r}_N\sigma_N)=\psi_1^{\sigma_1}(\bm{r}_1)\psi_2^{\sigma_2}(\bm{r}_2)...\psi_N^{\sigma_N}(\bm{r}_N),$$
 and electron density is given by the formula
 $$\boxed{n(\bm{r})=\sum_{\sigma}n_{\sigma}(\bm{r})=\sum_{i,\sigma} |\psi_i^{\sigma}(\bm{r})|^2.}$$
-
-### Hartree approximation
 
 The total energy is calculated as the expectation value of the
 Hamiltonian
