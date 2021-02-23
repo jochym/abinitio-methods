@@ -50,7 +50,7 @@ RUN jupyter labextension install @jupyterlab/katex-extension
 RUN jupyter lab build
 RUN jupyter lab clean
 # Import the workspace into JupyterLab
-RUN jupyter lab workspaces import default.json
+RUN jupyter lab workspaces import workspace.json
 
 # Set up the abinit program and data
 #ENV ABINIT_PP_PATH="psp/GGA_FHI/:psp/LDA_FHI/:psp/LDA_PAW/:psp/GGA_PAW/"
