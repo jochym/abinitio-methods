@@ -37,10 +37,10 @@ RUN mamba install -y scipy numpy matplotlib ase spglib nglview elastic phonopy \
 RUN mamba update -y --all
 RUN mamba clean -y --all
 
-# Materials
-USER root
-COPY . /home/jovyan/
-RUN chown -R jovyan:users /home/jovyan
+# # Materials
+# USER root
+# COPY . /home/jovyan/
+# RUN chown -R jovyan:users /home/jovyan
 
 # Update submodules
 USER jovyan
