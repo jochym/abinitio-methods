@@ -29,7 +29,7 @@ RUN conda init bash
 RUN conda config --show-sources
 RUN conda config --system --add channels jochym
 RUN conda install -y mamba
-RUN mamba install -y jupyterlab=2
+#RUN mamba install -y jupyterlab=2
 RUN mamba install -y scipy numpy matplotlib ase spglib nglview elastic phonopy \
     jupyter_contrib_nbextensions jupytext jupyter-offlinenotebook jupyterlab-python-file\
     ipywidgets
@@ -48,8 +48,9 @@ USER jovyan
 WORKDIR $HOME
 
 RUN jupyter labextension install \
-    @jupyterlab/katex-extension \
-    @jupyter-widgets/jupyterlab-manager @jupyterlab/toc jupyterlab-jupytext nglview-js-widgets 
+    @jupyterlab/katex-extension nglview-js-widgets 
+#    @jupyter-widgets/jupyterlab-manager @jupyterlab/toc jupyterlab-jupytext  
+
 #RUN jupyter lab build
 RUN jupyter lab clean
 # Import the workspace into JupyterLab
