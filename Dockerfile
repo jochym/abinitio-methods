@@ -47,7 +47,7 @@ USER jovyan
 WORKDIR $HOME
 
 RUN jupyter labextension install @jupyterlab/katex-extension
-RUN jupyter lab build
+#RUN jupyter lab build
 RUN jupyter lab clean
 # Import the workspace into JupyterLab
 RUN jupyter lab workspace import --name=default workspace.json
