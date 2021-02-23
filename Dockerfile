@@ -38,9 +38,9 @@ RUN mamba update -y --all
 RUN mamba clean -y --all
 
 # # Materials
-# USER root
-# COPY . /home/jovyan/
-# RUN chown -R jovyan:users /home/jovyan
+USER root
+COPY workspace-gp.json /home/jovyan/
+RUN chown -R jovyan:users /home/jovyan
 
 # Update submodules
 USER jovyan
