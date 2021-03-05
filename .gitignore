@@ -129,7 +129,7 @@ dmypy.json
 .pyre/
 
 # Working dirs
-work
+work_*
 prev-files
 source-files
 
