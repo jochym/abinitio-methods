@@ -7,6 +7,23 @@
 These notebooks are intended as supplementary materials for the lecture and exercises for the PhD students. Lectures are included in the "lecture" directory as PDF files. The exercises are in the form of notebooks with names starting with numbers: 01_..., 02_..., etc.
 
 ---
+### Lectures
+1. [Electron Interactions](lecture/Ab_initio_lecture_01.pdf)
+2. [Density Functional Theory](lecture/Ab_initio_lecture_02.pdf)
+
+### Exercises
+
+0. [JupyterLab Environment](00_JupyterLab_Environment.ipynb)
+1. [Hydrogen Molecule](01_Hydrogen_Molecule.ipynb)
+2. [Convergence Analysis](02_Convergence_Analysis.ipynb)
+3. [Building Crystals](03_Building_Crystals.ipynb)
+
+---
 
 [![License: CC BY-SA 4.0](https://licensebuttons.net/l/by-sa/4.0/80x15.png)](https://creativecommons.org/licenses/by-sa/4.0/) 
 This work is licensed under CC BY-SA 4.0 
+
+
+[next](https://mybinder.org/v2/gh/jochym/abinitio-methods/env?urlpath=git-pull?repo=https://github.com/jochym/abinitio-methods&urlpath=lab/workspaces/lab/tree/abinitio-methods&branch=next)
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/jochym/abinitio-methods/env?filepath=git-pull%3Frepo%3Dhttps%3A%2F%2Fgithub.com%2Fjochym%2Fabinitio-methods%26urlpath%3Dlab%2Fworkspaces%2Flab%2Ftree%2Fabinitio-methods%26branch%3Dnext)
