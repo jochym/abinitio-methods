@@ -33,7 +33,3 @@ Explore the environment - **you cannot break anything**. If you mess something u
 [![License: CC BY-SA 4.0](https://licensebuttons.net/l/by-sa/4.0/80x15.png)](https://creativecommons.org/licenses/by-sa/4.0/) 
 This work is licensed under CC BY-SA 4.0 
 
-
-[next](https://mybinder.org/v2/gh/jochym/abinitio-methods/env?urlpath=git-pull?repo=https://github.com/jochym/abinitio-methods&urlpath=lab/workspaces/lab/tree/abinitio-methods&branch=next)
-
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/jochym/abinitio-methods/env?filepath=git-pull%3Frepo%3Dhttps%3A%2F%2Fgithub.com%2Fjochym%2Fabinitio-methods%26urlpath%3Dlab%2Fworkspaces%2Flab%2Ftree%2Fabinitio-methods%26branch%3Dnext)
