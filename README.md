@@ -14,7 +14,6 @@ These notebooks are intended as supplementary materials for the lecture and exer
 
 ### Exercises
 
-0. [JupyterLab Environment](00_JupyterLab_Environment.ipynb)
 1. [Hydrogen Molecule](01_Hydrogen_Molecule.ipynb)
 2. [Convergence Analysis](02_Convergence_Analysis.ipynb)
 3. [Building Crystals](03_Building_Crystals.ipynb)
