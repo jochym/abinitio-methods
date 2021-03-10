@@ -10,11 +10,13 @@ These notebooks are intended as supplementary materials for the lecture and exer
 ### Lectures
 1. [Electron Interactions](lecture/Ab_initio_lecture_01.pdf)
 2. [Density Functional Theory](lecture/Ab_initio_lecture_02.pdf)
+3. [Electronic states in crystals](lecture/Ab_initio_lecture_03.pdf)
 
 ### Exercises
 
 1. [Hydrogen Molecule](01_Hydrogen_Molecule.ipynb)
 2. [Convergence Analysis](02_Convergence_Analysis.ipynb)
+3. [Building Crystals](03_Building_Crystals.ipynb)
 
 ---
 
@@ -30,3 +32,4 @@ Explore the environment - **you cannot break anything**. If you mess something u
 
 [![License: CC BY-SA 4.0](https://licensebuttons.net/l/by-sa/4.0/80x15.png)](https://creativecommons.org/licenses/by-sa/4.0/) 
 This work is licensed under CC BY-SA 4.0 
+
