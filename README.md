@@ -11,6 +11,7 @@ These notebooks are intended as supplementary materials for the lecture and exer
 1. [Electron Interactions](lecture/Ab_initio_lecture_01.pdf)
 2. [Density Functional Theory](lecture/Ab_initio_lecture_02.pdf)
 3. [Electronic states in crystals](lecture/Ab_initio_lecture_03.pdf)
+3. [Band structure calculations](lecture/Ab_initio_lecture_04.pdf)
 
 ### Exercises
 
