@@ -18,6 +18,7 @@ These notebooks are intended as supplementary materials for the lecture and exer
 1. [Hydrogen Molecule](01_Hydrogen_Molecule.ipynb)
 2. [Convergence Analysis](02_Convergence_Analysis.ipynb)
 3. [Building Crystals](03_Building_Crystals.ipynb)
+4. [Calculations for Crystals](04_Calculations_for_Crystals.ipynb)
 
 ---
 
