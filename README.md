@@ -20,6 +20,7 @@ These notebooks are intended as supplementary materials for the lecture and exer
 2. [Convergence Analysis](02_Convergence_Analysis.ipynb)
 3. [Building Crystals](03_Building_Crystals.ipynb)
 4. [Calculations for Crystals](04_Calculations_for_Crystals.ipynb)
+5. [Electronic Structure](05_Electronic_structure.ipynb)
 
 ---
 
