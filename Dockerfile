@@ -48,9 +48,9 @@ USER jovyan
 WORKDIR $HOME
 
 RUN jupyter labextension install \
-    @jupyterlab/katex-extension nglview-js-widgets \
+    @jupyterlab/katex-extension  \
     @jupyter-widgets/jupyterlab-manager
-#    @jupyter-widgets/jupyterlab-manager @jupyterlab/toc jupyterlab-jupytext  
+#    @jupyter-widgets/jupyterlab-manager @jupyterlab/toc jupyterlab-jupytext  nglview-js-widgets
 
 #RUN jupyter lab build
 RUN jupyter lab clean
