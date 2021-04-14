@@ -32,7 +32,7 @@ RUN conda install -y mamba
 RUN mamba install -y jupyterlab=2
 RUN mamba install -y scipy numpy matplotlib ase spglib nglview elastic phonopy \
     jupyter_contrib_nbextensions jupytext jupyter-offlinenotebook jupyterlab-python-file\
-    ipywidgets nbgitpuller
+    ipywidgets nbgitpuller jupyterlab-katex
 
 RUN mamba update -y --all
 RUN mamba clean -y --all
@@ -47,9 +47,9 @@ USER jovyan
 #RUN cd /home/jovyan/work && git submodule init && git submodule update
 WORKDIR $HOME
 
-RUN jupyter labextension install \
-    @jupyterlab/katex-extension  \
-    @jupyter-widgets/jupyterlab-manager
+#RUN jupyter labextension install \
+#    @jupyterlab/katex-extension  \
+#    @jupyter-widgets/jupyterlab-manager
 #    @jupyter-widgets/jupyterlab-manager @jupyterlab/toc jupyterlab-jupytext  nglview-js-widgets
 
 #RUN jupyter lab build
