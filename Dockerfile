@@ -59,6 +59,6 @@ RUN jupyter lab workspace import workspace-gp.json
 
 # Set up the abinit program and data
 #ENV ABINIT_PP_PATH="psp/GGA_FHI/:psp/LDA_FHI/:psp/LDA_PAW/:psp/GGA_PAW/"
-ENV ABINIT_PP_PATH="/usr/share/abinit/psp:/usr/share/abinit/psp/HGH:/home/jovyan/work/psp"
+ENV ABINIT_PP_PATH="/usr/share/abinit/psp:/usr/share/abinit/psp/HGH:/home/jovyan/abinitio-methods/psp"
 
 RUN rm workspace-gp.json
