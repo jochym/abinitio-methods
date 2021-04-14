@@ -53,7 +53,8 @@ WORKDIR $HOME
 #    @jupyter-widgets/jupyterlab-manager @jupyterlab/toc jupyterlab-jupytext  nglview-js-widgets
 
 #RUN jupyter lab build
-RUN jupyter lab clean
+#RUN jupyter lab clean
+
 # Import the workspace into JupyterLab
 RUN jupyter lab workspace import workspace-gp.json
 
