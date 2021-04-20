@@ -29,7 +29,7 @@ RUN conda init bash
 RUN conda config --show-sources
 RUN conda config --system --add channels jochym
 RUN conda install -y mamba
-RUN mamba install -y jupyterlab=2
+RUN mamba install -y jupyterlab
 RUN mamba install -y scipy numpy matplotlib ase spglib nglview elastic phonopy \
     jupyter_contrib_nbextensions jupytext jupyter-offlinenotebook jupyterlab-python-file\
     ipywidgets nbgitpuller jupyterlab-mathjax3 rise
