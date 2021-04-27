@@ -22,17 +22,6 @@ RUN apt-get update
 RUN apt-get install -y ffmpeg libeigen3-dev libsymspg-dev g++ libopenblas-dev fftw3-dev cmake libboost-dev libopenmpi-dev && apt-get clean
 RUN apt-get clean
 
-# Build and install ALAMODE
-RUN pwd
-RUN git clone http://github.com/ttadano/alamode.git
-WORKDIR alamode
-RUN pwd && ls -l
-RUN mkdir build && cd build && cmake .. && make -j 
-RUN cp build/alm/alm build/anphon/anphon build/tools/{analyze_phonons,qe2alm,dfc2,fc_virtual} /usr/local/bin/
-RUN pwd && ls -lR build && ls -l /usr/local/bin/
-RUN ldd /usr/local/bin/anphon
-RUN ldd /usr/local/bin/alm
-
 # Conda deps
 USER jovyan
 RUN conda init bash
@@ -53,6 +42,22 @@ RUN chown -R jovyan:users /home/jovyan
 
 # Update submodules
 USER jovyan
+WORKDIR $HOME
+
+# Build and install ALAMODE
+RUN pwd
+RUN git clone http://github.com/ttadano/alamode.git
+WORKDIR alamode
+RUN pwd && ls -l
+RUN mkdir build && cd build && cmake .. 
+RUN cd build && make alm 
+RUN cd build && make anphon 
+RUN cd build && make tools
+#RUN cp build/alm/alm build/anphon/anphon build/tools/{analyze_phonons,qe2alm,dfc2,fc_virtual} /usr/local/bin/
+#RUN pwd && ls -lR build && ls -l /usr/local/bin/
+#RUN ldd /usr/local/bin/anphon
+#RUN ldd /usr/local/bin/alm
+
 WORKDIR $HOME
 
 # Import the workspace into JupyterLab
