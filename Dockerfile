@@ -63,3 +63,17 @@ RUN jupyter lab workspace import workspace-gp.json
 ENV ABINIT_PP_PATH="/usr/share/abinit/psp:/usr/share/abinit/psp/HGH:/home/jovyan/abinitio-methods/psp"
 
 RUN rm workspace-gp.json
+
+# Build alamode
+USER root
+RUN pwd
+RUN git clone http://github.com/ttadano/alamode.git
+WORKDIR alamode
+RUN pwd && ls -l
+RUN apt update 
+RUN apt -q -y install libeigen3-dev libsymspg-dev g++ libopenblas-dev fftw3-dev cmake libboost-dev libopenmpi-dev
+RUN mkdir build && cd build && cmake .. && make -j 
+RUN cp build/alm/alm build/anphon/anphon build/tools/{analyze_phonons,qe2alm,dfc2,fc_virtual} /usr/local/bin/
+RUN pwd && ls -lR build && ls -l /usr/local/bin/
+RUN ldd /usr/local/bin/anphon
+RUN ldd /usr/local/bin/alm
