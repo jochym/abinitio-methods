@@ -52,7 +52,7 @@ RUN pwd && ls -l
 RUN mkdir build && cd build && cmake .. 
 RUN cd build && make alm 
 RUN cd build && make anphon 
-RUN cd build && make tools
+RUN cd build/tools && make 
 
 USER root
 RUN pwd
