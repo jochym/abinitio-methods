@@ -57,9 +57,8 @@ RUN cd build/tools && make
 USER root
 RUN pwd
 RUN cp build/alm/alm build/anphon/anphon build/tools/{analyze_phonons,qe2alm,dfc2,fc_virtual} /usr/local/bin/
-RUN pwd && ls -lR build && ls -l /usr/local/bin/
-RUN ldd /usr/local/bin/anphon
-RUN ldd /usr/local/bin/alm
+RUN cp tools/plot*.py /usr/local/bin
+RUN chmod a+x /usr/local/bin/plot*.py
 
 USER jovyan
 WORKDIR $HOME
