@@ -53,11 +53,15 @@ RUN mkdir build && cd build && cmake ..
 RUN cd build && make alm 
 RUN cd build && make anphon 
 RUN cd build && make tools
-#RUN cp build/alm/alm build/anphon/anphon build/tools/{analyze_phonons,qe2alm,dfc2,fc_virtual} /usr/local/bin/
-#RUN pwd && ls -lR build && ls -l /usr/local/bin/
-#RUN ldd /usr/local/bin/anphon
-#RUN ldd /usr/local/bin/alm
 
+USER root
+RUN pwd
+RUN cp build/alm/alm build/anphon/anphon build/tools/{analyze_phonons,qe2alm,dfc2,fc_virtual} /usr/local/bin/
+RUN pwd && ls -lR build && ls -l /usr/local/bin/
+RUN ldd /usr/local/bin/anphon
+RUN ldd /usr/local/bin/alm
+
+USER jovyan
 WORKDIR $HOME
 
 # Import the workspace into JupyterLab
