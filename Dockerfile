@@ -19,7 +19,7 @@ RUN apt-get install -qy htop abinit-doc pandoc vim mc  && apt-get clean
 
 # Extra dependencies
 RUN apt-get update
-RUN apt-get install -y ffmpeg libeigen3-dev libsymspg-dev g++ libopenblas-dev fftw3-dev cmake libboost-dev libopenmpi-dev && apt-get clean
+RUN apt-get install -y libeigen3-dev libsymspg-dev g++ libopenblas-dev fftw3-dev cmake libboost-dev libopenmpi-dev && apt-get clean
 RUN apt-get clean
 
 # Conda deps
@@ -48,17 +48,19 @@ WORKDIR $HOME
 RUN pwd
 RUN git clone http://github.com/ttadano/alamode.git
 WORKDIR alamode
-RUN pwd && ls -l
 RUN mkdir build && cd build && cmake .. 
 RUN cd build && make alm 
 RUN cd build && make anphon 
 RUN cd build/tools && make 
 
+# Install alamode
 USER root
 RUN pwd
 RUN cp build/alm/alm build/anphon/anphon build/tools/{analyze_phonons,qe2alm,dfc2,fc_virtual} /usr/local/bin/
 RUN cp tools/plot*.py /usr/local/bin
 RUN chmod a+x /usr/local/bin/plot*.py
+RUN apt-get autoremove -y g++ cmake
+RUN cd .. && rm -rf alamode
 
 USER jovyan
 WORKDIR $HOME
