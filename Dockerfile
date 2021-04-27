@@ -45,7 +45,6 @@ USER jovyan
 WORKDIR $HOME
 
 # Build and install ALAMODE
-RUN pwd
 RUN git clone http://github.com/ttadano/alamode.git
 WORKDIR alamode
 RUN mkdir build && cd build && cmake .. 
@@ -55,12 +54,11 @@ RUN cd build/tools && make
 
 # Install alamode
 USER root
-RUN pwd
 RUN cp build/alm/alm build/anphon/anphon build/tools/{analyze_phonons,qe2alm,dfc2,fc_virtual} /usr/local/bin/
 RUN cp tools/plot*.py /usr/local/bin
 RUN chmod a+x /usr/local/bin/plot*.py
 RUN apt-get autoremove -y g++ cmake
-RUN cd .. && rm -rf alamode
+RUN cd .. && ls -l $HOME/alamode
 
 USER jovyan
 WORKDIR $HOME
