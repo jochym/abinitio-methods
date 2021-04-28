@@ -16,6 +16,7 @@ These notebooks are intended as supplementary materials for the lecture and exer
 6. [Strongly correlated and magnetic systems](lecture/Ab_initio_lecture_06.pdf)
 7. [Modeling nanostructures](lecture/Ab_initio_lecture_07.pdf)
 8. [Mechanical properties: elasticity](lecture/Lecture_08/Lecture_08.ipynb)
+9. [Lattice Dynamics](lecture/Lecture_09/Lecture_09.ipynb)
 
 ### Exercises
 
@@ -26,6 +27,7 @@ These notebooks are intended as supplementary materials for the lecture and exer
 5. [Electronic Structure](05_Electronic_Structure.ipynb)
 6. [Magnetic Systems](06_Magnetic_Systems.ipynb)
 7. [Elastic Properties](07_Elastic_Properties.ipynb)
+8. [Lattice Dynamics](08_Lattice_Dynamics.ipynb)
 
 ---
 
