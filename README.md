@@ -16,9 +16,9 @@ These notebooks are intended as supplementary materials for the lecture and exer
 6. [Strongly correlated and magnetic systems](lecture/Ab_initio_lecture_06.pdf)
 7. [Modeling nanostructures](lecture/Ab_initio_lecture_07.pdf)
 8. [Mechanical properties: elasticity](lecture/Lecture_08/Lecture_08.ipynb)
+9. [Lattice Dynamics](lecture/Lecture_09/Lecture_09.ipynb)
 
-### Exercises
-
+### Hands-on examples
 1. [Hydrogen Molecule](01_Hydrogen_Molecule.ipynb)
 2. [Convergence Analysis](02_Convergence_Analysis.ipynb)
 3. [Building Crystals](03_Building_Crystals.ipynb)
@@ -26,9 +26,9 @@ These notebooks are intended as supplementary materials for the lecture and exer
 5. [Electronic Structure](05_Electronic_Structure.ipynb)
 6. [Magnetic Systems](06_Magnetic_Systems.ipynb)
 7. [Elastic Properties](07_Elastic_Properties.ipynb)
+8. [Lattice Dynamics](08_Lattice_Dynamics.ipynb)
 
 ---
-
 ### JupyterLab environment
 
 This is the JupyterLab environment containing materials for the *Ab Initio methods* lecture. The environment contains live examples and lecture materials. The document you are reading right now is a **notebook** containing text (like this one) and code **cells**. Each cell can be edited (double click on it or select it and press `Enter`. After editing the cell can be *rendered* (text cell) or *executed* (code cell) by pressing `Shift Enter`. The code cells contain Python code. Fluent knowledge of the python language is not required for understanding of these examples. `Help` menu on the top bar contains links to manuals for Jupyter environment list of keyboard shortcuts, Python language reference (including beginners guide), and manuals for useful function libraries for plotting (Matplotlib) numerical computation (NumPy) various scientific algorithms (SciPy). Python and JupyterLab references are already opened on the right portion of the screen. The dynamical help panel in the top right corner shows information about objects under the cursor in the notebook.
