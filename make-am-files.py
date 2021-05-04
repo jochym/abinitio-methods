@@ -64,13 +64,13 @@ def gen(name, order, prefix, scale, action, evec, msd, tmax, charge, born, ndat,
 '''
 &general
   PREFIX = {prefix}
-  MODE = phonons ;   
+  MODE = {mode} ;   
   FCSXML = {prefix}.xml 
   NKD = {nkd}
   KD = {kd}
   MASS = {mass}
   TMAX = {tmax}
-  EMIN = 0; EMAX = 1000; DELTA_E = 2
+  EMIN = 0; EMAX = 1500; DELTA_E = 2
   {born}
 /
 
@@ -102,29 +102,32 @@ def gen(name, order, prefix, scale, action, evec, msd, tmax, charge, born, ndat,
     KPATH = '10 10 10'
     
     cell = cr.get_cell()
-    if action == 'dos':
-      KMODE = 2
-      KPATH = ' '.join(grid.split('x'))
+    if action in ['dos','rta']:
+        KMODE = 2
+        KPATH = ' '.join(grid.split('x'))
     if action == 'phon':
-      KMODE = 1
-      if kpath is not None:
-        with open(kpath) as kpf:
-          KPATH = ''.join(kpf.readlines())
-      else :
-        print('No k-path given. Using Gamma-X.', file=sys.stderr)
-        KPATH = 'G 0.0 0.0 0.0   X 0.0 0.5 0.0   51'
-    if action in ['phon','dos']:
-      cell=spglib.find_primitive(cr)[0]    
-      action='phon'
+        KMODE = 1
+        if kpath is not None:
+            with open(kpath) as kpf:
+                KPATH = ''.join(kpf.readlines())
+        else :
+            print('No k-path given. Using Gamma-X.', file=sys.stderr)
+            KPATH = 'G 0.0 0.0 0.0   X 0.0 0.5 0.0   51'
+    if action in ['phon','dos','rta']:
+        cell=spglib.find_primitive(cr)[0]
+        mode = {'phon':'phonons', 'dos':'phonons', 'rta':'RTA'}[action]
+        action='phon'
     if action == 'opt':
-      if ndat > 0:
-        NDATA = f'NDATA = {ndat}'
-      dfset = f'&optimize\n  DFSET = {dfset}\n  {NDATA}\n/\n'
+        if ndat > 0:
+            NDATA = f'NDATA = {ndat}'
+        dfset = f'&optimize\n  DFSET = {dfset}\n  {NDATA}\n/\n'
     else :
-      dfset = ''
+        dfset = ''
     if action in ['gen','opt']:
-      mode = {'gen':'suggest', 'opt':'optimize'}[action]
-      action = 'gen'
+        mode = {'gen':'suggest', 'opt':'optimize'}[action]
+        action = 'gen'
+        
+    
 
 
     cell = '\n  '.join([' '.join(['%14.10f' % c for c in v]) for v in cell])
@@ -147,7 +150,7 @@ def gen(name, order, prefix, scale, action, evec, msd, tmax, charge, born, ndat,
     
     if born :
         if charge is None:
-          charge=prefix
+            charge=prefix
         born = 'BORNINFO = {charge}.born \n  NONANALYTIC = {born} \n'.format(born=born, charge=charge)
     else :
         born = ''
