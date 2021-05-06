@@ -16,7 +16,8 @@ These notebooks are intended as supplementary materials for the lecture and exer
 6. [Strongly correlated and magnetic systems](lecture/Ab_initio_lecture_06.pdf)
 7. [Modeling nanostructures](lecture/Ab_initio_lecture_07.pdf)
 8. [Mechanical properties: elasticity](lecture/Lecture_08/Lecture_08.ipynb)
-9. [Lattice Dynamics](lecture/Lecture_09/Lecture_09.ipynb)
+9. [Lattice Dynamics - harmonic approximation](lecture/Lecture_09/Lecture_09.ipynb)
+10. [Lattice Dynamics - anharmonicity](lecture/Lecture_10/Lecture_10.ipynb)
 
 ### Hands-on examples
 1. [Hydrogen Molecule](01_Hydrogen_Molecule.ipynb)
@@ -27,6 +28,7 @@ These notebooks are intended as supplementary materials for the lecture and exer
 6. [Magnetic Systems](06_Magnetic_Systems.ipynb)
 7. [Elastic Properties](07_Elastic_Properties.ipynb)
 8. [Lattice Dynamics](08_Lattice_Dynamics.ipynb)
+9. [Anharmonicity](09_Anharmonicity.ipynb)
 
 ---
 ### JupyterLab environment
