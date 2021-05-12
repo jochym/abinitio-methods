@@ -30,7 +30,7 @@ RUN conda config --system --add channels jochym
 RUN conda install -y mamba
 RUN mamba install -y jupyterlab scipy numpy matplotlib ase spglib nglview elastic phonopy \
     jupyter_contrib_nbextensions jupytext jupyter-offlinenotebook jupyterlab-python-file\
-    ipywidgets nbgitpuller jupyterlab-mathjax3 rise dxutils mkl
+    ipywidgets nbgitpuller jupyterlab-mathjax3 rise dxutils mkl abipy
 
 RUN mamba update -y --all
 RUN mamba clean -y --all
