@@ -18,6 +18,7 @@ These notebooks are intended as supplementary materials for the lecture and exer
 8. [Mechanical properties: elasticity](lecture/Lecture_08/Lecture_08.ipynb)
 9. [Lattice Dynamics - harmonic approximation](lecture/Lecture_09/Lecture_09.ipynb)
 10. [Lattice Dynamics - anharmonicity](lecture/Lecture_10/Lecture_10.ipynb)
+11. [DFPT](lecture/Ab_initio_lecture_11.pdf)
 
 ### Hands-on examples
 1. [Hydrogen Molecule](01_Hydrogen_Molecule.ipynb)
@@ -29,6 +30,7 @@ These notebooks are intended as supplementary materials for the lecture and exer
 7. [Elastic Properties](07_Elastic_Properties.ipynb)
 8. [Lattice Dynamics](08_Lattice_Dynamics.ipynb)
 9. [Anharmonicity](09_Anharmonicity.ipynb)
+10. [DFPT](10_DFPT.ipynb)
 
 ---
 ### JupyterLab environment
