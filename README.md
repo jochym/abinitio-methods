@@ -19,6 +19,7 @@ These notebooks are intended as supplementary materials for the lecture and exer
 9. [Lattice Dynamics - harmonic approximation](lecture/Lecture_09/Lecture_09.ipynb)
 10. [Lattice Dynamics - anharmonicity](lecture/Lecture_10/Lecture_10.ipynb)
 11. [DFPT](lecture/Ab_initio_lecture_11.pdf)
+12. [Molecular Dynamics](lecture/Lecture_12/12_Molecular_Dynamics.ipynb)
 
 ### Hands-on examples
 1. [Hydrogen Molecule](01_Hydrogen_Molecule.ipynb)
@@ -31,6 +32,7 @@ These notebooks are intended as supplementary materials for the lecture and exer
 8. [Lattice Dynamics](08_Lattice_Dynamics.ipynb)
 9. [Anharmonicity](09_Anharmonicity.ipynb)
 10. [DFPT](10_DFPT.ipynb)
+11. [Nanoparticle Molecular Dynamics](11_Nanoparticle_MD.ipynb)
 
 ---
 ### JupyterLab environment
