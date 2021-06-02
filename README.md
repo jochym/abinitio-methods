@@ -21,6 +21,7 @@ These notebooks are intended as supplementary materials for the lecture and exer
 11. [DFPT](lecture/Ab_initio_lecture_11.pdf)
 12. [Molecular Dynamics](lecture/Lecture_12/12_Molecular_Dynamics.ipynb)
 13. [Lattice Thermodynamics](lecture/Lecture_13/13_Lattice_Thermodynamics.ipynb)
+14. [Your Toolbox](lecture/Lecture_14/14_Toolbox.ipynb)
 
 ### Hands-on examples
 1. [Hydrogen Molecule](01_Hydrogen_Molecule.ipynb)
