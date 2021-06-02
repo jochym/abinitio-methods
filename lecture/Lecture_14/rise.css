@@ -1,0 +1,42 @@
+.reveal, .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+     font-family: "Libre Baskerville", serif;
+    
+}
+
+:root {
+    --main-font: "Libre Baskerville";
+    font-size: 10pt;
+}
+
+:root {
+/*   --color-1: #009D82 ;
+  --color-2: #00493d ; */
+/*   --logo-2: url("img/esd_logo.png") ; /* Not working, TODO */ */
+/*   --name : Workshop: Energy Time Series Storage and Analytics ; /*Not working, TODO*/  */
+}
+
+body { /* Change the logo urls in the line after if needed */
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='40px' width='auto'><text x='10' y='20' fill='grey' font-size='30'>KISD</text></svg>");
+    background-size: 95%;
+    background-position: 100% 98%;
+    background-repeat: no-repeat, no-repeat, no-repeat;
+}
+
+
+.rise-enabled .text_cell {
+    font-size: 100%;
+}
+
+hr {
+    border-top: 1px solid #da9814;
+}
+
+div.left {
+  float: left;
+  width: 60%;
+}
+
+div.right {
+  float: right;
+  width: 35%;
+}
