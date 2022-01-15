@@ -1,4 +1,4 @@
-FROM jochym/jupyter-stacks
+FROM jochym/jupyter-stacks:beta
 
 MAINTAINER Pawel T.  Jochym <pawel.jochym@ifj.edu.pl>
 
