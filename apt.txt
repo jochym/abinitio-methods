@@ -1,0 +1,17 @@
+git 
+apt-utils
+abinit 
+abinit-data
+htop 
+abinit-doc 
+pandoc 
+vim 
+mc
+libeigen3-dev 
+libsymspg-dev 
+g++ 
+libopenblas-dev 
+fftw3-dev 
+cmake 
+libboost-dev 
+libopenmpi-dev
