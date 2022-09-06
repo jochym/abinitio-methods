@@ -1,0 +1,27 @@
+name: abinitio-methods
+channels:
+  - conda-forge
+  - jochym
+dependencies:
+  - python
+  - numpy
+  - scipy
+  - matplotlib
+  - jupyterlab 
+  - ase 
+  - spglib 
+  - nglview 
+  - elastic 
+  - phonopy
+  - jupyter_contrib_nbextensions
+  - jupytext 
+  - jupyter-offlinenotebook 
+  - jupyterlab-python-file
+  - ipywidgets 
+  - nbgitpuller 
+  - jupyterlab-mathjax3 
+  - rise 
+  - dxutils 
+  - mkl 
+  - abipy
+
