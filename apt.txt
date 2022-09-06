@@ -8,6 +8,7 @@ pandoc
 vim 
 mc
 libeigen3-dev 
+libsymspg1
 libsymspg-dev 
 g++ 
 libopenblas-dev 
