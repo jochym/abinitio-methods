@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# Build and install ALAMODE
+git clone http://github.com/ttadano/alamode.git
+cd alamode
+mkdir build && cd build && cmake .. 
+cd build && make alm 
+cd build && make anphon 
+cd build/tools && make 
+
 exit 0
 
 # Build and install ALAMODE
