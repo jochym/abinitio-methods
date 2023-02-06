@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Install the workspace
+jupyter lab workspace import workspace-gp.json
+
 # Build and install ALAMODE
 git clone http://github.com/ttadano/alamode.git
 cd alamode
@@ -7,7 +10,7 @@ mkdir build && cd build && cmake ..
 cd build && make alm 
 cd build && make anphon 
 cd build/tools && make 
-
+jupyter lab workspace import workspace-gp.json
 exit 0
 
 # Build and install ALAMODE
