@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Activate environment
+conda activate notebook
+
 # Install the workspace
 jupyter lab workspace import workspace-gp.json
 
