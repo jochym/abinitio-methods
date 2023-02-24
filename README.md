@@ -1,4 +1,4 @@
-# Ab initio methods in solid state physics [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/jochym/abinitio-methods/env?urlpath=git-pull%3Frepo%3Dhttps%253A%252F%252Fgithub.com%252Fjochym%252Fabinitio-methods%26urlpath%3Dlab%252Fworkspaces%252Flab%252Ftree%252Fabinitio-methods%252F%26branch%3Dmain)
+# Ab initio methods in solid state physics [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/jochym/abinitio-methods/dockerless?urlpath=git-pull%3Frepo%3Dhttps%253A%252F%252Fgithub.com%252Fjochym%252Fabinitio-methods%26urlpath%3Dlab%252Fworkspaces%252Flab%252Ftree%252Fabinitio-methods%252F%26branch%3Dmain)
 
 
 ## Lecture materials
