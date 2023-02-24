@@ -28,7 +28,7 @@ conda env list >> log
 
 cd
 echo >> .profile
-echo ABINIT_PP_PATH="/usr/share/abinit/psp:/usr/share/abinit/psp/HGH:/home/jovyan/abinitio-methods/psp" >> .profile
+echo 'export ABINIT_PP_PATH="/usr/share/abinit/psp:/usr/share/abinit/psp/HGH:/home/jovyan/abinitio-methods/psp"' >> .bashrc
 echo >> .profile
 
 exit 0
