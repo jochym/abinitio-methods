@@ -5,10 +5,3 @@ abinit-doc
 pandoc 
 vim 
 mc
-libeigen3-dev 
-g++ 
-libopenblas-dev 
-fftw3-dev 
-cmake 
-libboost-dev 
-libopenmpi-dev

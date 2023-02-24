@@ -13,6 +13,7 @@ dependencies:
   - nglview 
   - elastic 
   - phonopy
+  - ipython
   - jupyter_contrib_nbextensions
   - jupytext 
   - jupyter-offlinenotebook 
@@ -26,4 +27,11 @@ dependencies:
   - abipy
   - abinit
   - abinit-data
+  - compilers 
+  - openmpi 
+  - boost 
+  - eigen 
+  - cmake 
+  - fftw 
+  - h5py 
 
