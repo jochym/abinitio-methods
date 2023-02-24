@@ -1,0 +1,9 @@
+#!/bin/bash
+
+export ABINIT_PP_PATH="/usr/share/abinit/psp:/usr/share/abinit/psp/HGH:/home/jovyan/abinitio-methods/psp"
+
+echo >> .bashrc
+echo 'export ABINIT_PP_PATH="/usr/share/abinit/psp:/usr/share/abinit/psp/HGH:/home/jovyan/abinitio-methods/psp"' >> .bashrc
+echo >> .bashrc
+
+exec "$@"
