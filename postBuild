@@ -6,7 +6,7 @@ jupyter lab workspace import workspace-gp.json
 # Build and install ALAMODE
 git clone http://github.com/ttadano/alamode.git
 cd alamode
-mkdir build && cd build && cmake .. 
+mkdir build && cd build && cmake -DUSE_MKL_FFT=no -DSPGLIB_ROOT=$CONDA_PREFIX .. 
 make alm 
 make anphon 
 cd tools && make 
@@ -21,7 +21,7 @@ cd
 id > log
 set >> log
 ls -lR  >> log
-jupyter lab workspace import workspace-gp.json
+conda env list >> log
 
 cd
 echo >> .profile
