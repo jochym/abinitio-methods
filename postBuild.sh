@@ -10,6 +10,9 @@ mkdir build && cd build && cmake ..
 cd build && make alm 
 cd build && make anphon 
 cd build/tools && make 
+cd
+id > log
+set >> log
 jupyter lab workspace import workspace-gp.json
 exit 0
 
