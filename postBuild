@@ -16,6 +16,7 @@ cd tools && make
 # Install alamode
 cd ~/alamode/build
 cp alm/alm anphon/anphon tools/{analyze_phonons,qe2alm,dfc2,fc_virtual} ~/.local/bin/
+cd ~/alamode
 cp tools/*.py ~/.local/bin/
 chmod a+x ~/.local/bin/*.py
 
