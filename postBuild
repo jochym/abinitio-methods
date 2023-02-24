@@ -1,6 +1,7 @@
 #!/bin/bash
 
-mkdir .local/bin
+cd
+mkdir -p .local/bin
 
 # Install the workspace
 jupyter lab workspace import workspace-gp.json
