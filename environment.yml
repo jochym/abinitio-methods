@@ -27,7 +27,7 @@ dependencies:
   - abinit
   - abinit-data
   - compilers 
-  - openmpi 
+  - mpich
   - boost 
   - eigen 
   - cmake 
