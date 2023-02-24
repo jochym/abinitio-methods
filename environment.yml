@@ -23,7 +23,6 @@ dependencies:
   - jupyterlab-mathjax3 
   - rise 
   - dxutils 
-  - mkl 
   - abipy
   - abinit
   - abinit-data
@@ -34,4 +33,5 @@ dependencies:
   - cmake 
   - fftw 
   - h5py 
+
 
