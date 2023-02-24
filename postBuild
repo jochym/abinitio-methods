@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# Activate environment
-conda activate notebook
+mkdir .local/bin
 
 # Install the workspace
 jupyter lab workspace import workspace-gp.json
@@ -9,21 +8,20 @@ jupyter lab workspace import workspace-gp.json
 # Build and install ALAMODE
 git clone http://github.com/ttadano/alamode.git
 cd alamode
-mkdir build && cd build && cmake -DUSE_MKL_FFT=no -DSPGLIB_ROOT=$CONDA_PREFIX .. 
+mkdir build && cd build && cmake -DUSE_MKL_FFT=no -DSPGLIB_ROOT=$CONDA_DEFAULT_ENV .. 
 make alm 
 make anphon 
 cd tools && make 
 # Install alamode
 cd ~/alamode/build
-cp build/alm/alm build/anphon/anphon build/tools/{analyze_phonons,qe2alm,dfc2,fc_virtual} ~/.local/bin/
+cp alm/alm anphon/anphon tools/{analyze_phonons,qe2alm,dfc2,fc_virtual} ~/.local/bin/
 cp tools/*.py ~/.local/bin/
 chmod a+x ~/.local/bin/*.py
-ls -l $HOME/alamode
 
 cd
 id > log
 set >> log
-ls -lR  >> log
+ls -laR  >> log
 conda env list >> log
 
 cd
