@@ -7,10 +7,11 @@ jupyter lab workspace import workspace-gp.json
 git clone http://github.com/ttadano/alamode.git
 cd alamode
 mkdir build && cd build && cmake .. 
-cd build && make alm 
-cd build && make anphon 
-cd build/tools && make 
+make alm 
+make anphon 
+cd tools && make 
 # Install alamode
+cd ~/alamode/build
 cp build/alm/alm build/anphon/anphon build/tools/{analyze_phonons,qe2alm,dfc2,fc_virtual} ~/.local/bin/
 cp tools/*.py ~/.local/bin/
 chmod a+x ~/.local/bin/*.py
@@ -21,6 +22,12 @@ id > log
 set >> log
 ls -lR  >> log
 jupyter lab workspace import workspace-gp.json
+
+cd
+echo >> .profile
+echo ABINIT_PP_PATH="/usr/share/abinit/psp:/usr/share/abinit/psp/HGH:/home/jovyan/abinitio-methods/psp" >> .profile
+echo >> .profile
+
 exit 0
 
 # Build and install ALAMODE
