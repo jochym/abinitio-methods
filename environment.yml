@@ -24,4 +24,6 @@ dependencies:
   - dxutils 
   - mkl 
   - abipy
+  - abinit
+  - abinit-data
 

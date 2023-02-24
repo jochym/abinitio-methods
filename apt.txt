@@ -1,7 +1,5 @@
 git 
 apt-utils
-abinit 
-abinit-data
 htop 
 abinit-doc 
 pandoc 
