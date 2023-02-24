@@ -26,11 +26,6 @@ set >> log
 ls -laR  >> log
 conda env list >> log
 
-cd
-echo >> .bashrc
-echo 'export ABINIT_PP_PATH="/usr/share/abinit/psp:/usr/share/abinit/psp/HGH:/home/jovyan/abinitio-methods/psp"' >> .bashrc
-echo >> .bashrc
-
 exit 0
 
 # Build and install ALAMODE
