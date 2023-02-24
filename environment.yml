@@ -17,7 +17,7 @@ dependencies:
   - jupytext 
   - jupyter-offlinenotebook 
   - jupyterlab-python-file
-  - ipywidgets 
+  - ipywidgets <8
   - nbgitpuller 
   - jupyterlab-mathjax3 
   - rise 
