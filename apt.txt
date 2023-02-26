@@ -1,0 +1,8 @@
+git 
+apt-utils
+htop 
+abinit-doc
+abinit-data
+pandoc 
+vim 
+mc

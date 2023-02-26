@@ -1,0 +1,37 @@
+name: abinitio-methods
+channels:
+  - conda-forge
+  - jochym
+dependencies:
+  - python
+  - numpy
+  - scipy
+  - matplotlib
+  - jupyterlab 
+  - ase 
+  - spglib 
+  - nglview 
+  - elastic 
+  - phonopy
+  - ipython
+  - jupyter_contrib_nbextensions
+  - jupytext 
+  - jupyter-offlinenotebook 
+  - jupyterlab-python-file
+  - ipywidgets <8
+  - nbgitpuller 
+  - jupyterlab-mathjax3 
+  - rise 
+  - dxutils 
+  - abipy
+  - abinit
+  - abinit-data
+  - compilers 
+  - mpich
+  - boost 
+  - eigen 
+  - cmake 
+  - fftw 
+  - h5py 
+
+
