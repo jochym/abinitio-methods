@@ -3,6 +3,7 @@ apt-utils
 htop 
 abinit-doc
 abinit-data
+libopenmpi2
 pandoc 
 vim 
 mc
