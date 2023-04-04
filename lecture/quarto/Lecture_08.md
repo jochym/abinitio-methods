@@ -6,12 +6,12 @@ format:
   beamer:
     fontsize: 10pt
     fontfamily: libertine
-include-in-header: "affil.tex"
+include-in-header: "aux/affil.tex"
 aspectratio: 1610
 theme: Madrid
 date: last-modified
 date-format: long
-jupyter: python3
+output-file: "Ab_initio_lecture_08"
 ---
 
 ## Elastic constants
@@ -76,7 +76,7 @@ $$
 
 ::: {.column width="35%"}
 
-![](Components_stress_tensor_cartesian.svg)
+![](aux/Components_stress_tensor_cartesian.svg)
 :::
 [^1]
 ::::
@@ -162,7 +162,7 @@ where $L(C_{ij})$ is a linear combination of independent components of elastic t
 
 ## Small displacement method (I)
 
-![](deform_black.png){width="66%" fig-align="center"}
+![](aux/deform_black.png){width="66%" fig-align="center"}
 
 Starting from set of calculated stresses and strains$\{u^{a}, \sigma^{a}\}$:
 
@@ -285,4 +285,4 @@ The set of equations is usually over-determined. Therefore, it cannot be solved 
 
 ## Calculation procedure
 
-![](../images/flow.pdf){width="80%" fig-align="center"}
+![](aux/flow-2.pdf){width="80%" fig-align="center"}
