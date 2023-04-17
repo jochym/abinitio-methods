@@ -140,3 +140,10 @@ SiC_anh_phonons.pdf
 SiC_dos_conv.pdf
 SiC_dos.pdf
 SiC_phonons.pdf
+
+# Backup files
+*~
+*.swp
+
+# Quatro temporary files
+lecture/quarto/Lecture_*_files/

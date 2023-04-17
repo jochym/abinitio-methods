@@ -1,0 +1,12 @@
+/*-- scss:defaults --*/
+
+// fonts
+$font-family-sans-serif: "Libertine", "Palatino Linotype", "Book Antiqua", Palatino,  FreeSerif, serif !default;
+$presentation-font-size-root: 26px;
+$presentation-h1-font-size: 2em;
+
+/*-- scss:rules --*/
+
+section.quarto-title-block p.subtitle{
+    font-size: $presentation-h2-font-size;
+}
