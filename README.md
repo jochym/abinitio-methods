@@ -7,6 +7,7 @@
 These notebooks are intended as supplementary materials for the lecture and exercises for the PhD students. Lectures are included in the "lecture" directory as PDF files. The exercises are in the form of notebooks with names starting with numbers: 01_..., 02_..., etc.
 
 ---
+
 ### Lectures
 1. [Electron Interactions](lecture/Ab_initio_lecture_01.pdf)
 2. [Density Functional Theory](lecture/Ab_initio_lecture_02.pdf)
@@ -15,13 +16,13 @@ These notebooks are intended as supplementary materials for the lecture and exer
 5. [Exchange functionals](lecture/Ab_initio_lecture_05.pdf)
 6. [Strongly correlated and magnetic systems](lecture/Ab_initio_lecture_06.pdf)
 7. [Modeling nanostructures](lecture/Ab_initio_lecture_07.pdf)
-8. [Mechanical properties: elasticity](lecture/Lecture_08/Lecture_08.ipynb)
-9. [Lattice Dynamics - harmonic approximation](lecture/Lecture_09/Lecture_09.ipynb)
-10. [Lattice Dynamics - anharmonicity](lecture/Lecture_10/Lecture_10.ipynb)
+8. [Mechanical properties: elasticity](lecture/Ab_initio_lecture_08.pdf)
+9. [Lattice Dynamics - harmonic approximation](lecture/Ab_initio_lecture_09.pdf)
+10. [Lattice Dynamics - anharmonicity](lecture/Ab_initio_lecture_10.pdf)
 11. [DFPT](lecture/Ab_initio_lecture_11.pdf)
-12. [Molecular Dynamics](lecture/Lecture_12/12_Molecular_Dynamics.ipynb)
-13. [Lattice Thermodynamics](lecture/Lecture_13/13_Lattice_Thermodynamics.ipynb)
-14. [Your Toolbox](lecture/Lecture_14/14_Toolbox.ipynb)
+12. [Molecular Dynamics](lecture/Ab_initio_lecture_12.pdf)
+13. [Lattice Thermodynamics](lecture/Ab_initio_lecture_13.pdf)
+14. [Your Toolbox](lecture/Ab_initio_lecture_14.pdf)
 
 ### Hands-on examples
 1. [Hydrogen Molecule](01_Hydrogen_Molecule.ipynb)
@@ -37,6 +38,7 @@ These notebooks are intended as supplementary materials for the lecture and exer
 11. [Nanoparticle Molecular Dynamics](11_Nanoparticle_MD.ipynb)
 
 ---
+
 ### JupyterLab environment
 
 This is the JupyterLab environment containing materials for the *Ab Initio methods* lecture. The environment contains live examples and lecture materials. The document you are reading right now is a **notebook** containing text (like this one) and code **cells**. Each cell can be edited (double click on it or select it and press `Enter`. After editing the cell can be *rendered* (text cell) or *executed* (code cell) by pressing `Shift Enter`. The code cells contain Python code. Fluent knowledge of the python language is not required for understanding of these examples. `Help` menu on the top bar contains links to manuals for Jupyter environment list of keyboard shortcuts, Python language reference (including beginners guide), and manuals for useful function libraries for plotting (Matplotlib) numerical computation (NumPy) various scientific algorithms (SciPy). Python and JupyterLab references are already opened on the right portion of the screen. The dynamical help panel in the top right corner shows information about objects under the cursor in the notebook.
