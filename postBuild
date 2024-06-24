@@ -48,7 +48,9 @@ USER jovyan
 WORKDIR $HOME
 
 # Import the workspace into JupyterLab
-RUN jupyter lab workspace import workspace-gp.json
+RUN jupyter lab workspace list
+RUN jupyter lab workspace import --name=abinitio workspace-gp.json
+RUN jupyter lab workspace list
 
 # Set up the abinit program and data
 #ENV ABINIT_PP_PATH="psp/GGA_FHI/:psp/LDA_FHI/:psp/LDA_PAW/:psp/GGA_PAW/"
