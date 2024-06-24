@@ -1,9 +1,9 @@
 git 
 apt-utils
-htop 
+htop
+abinit
 abinit-doc
 abinit-data
-libopenmpi2
 pandoc 
 vim 
 mc
