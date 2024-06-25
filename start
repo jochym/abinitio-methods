@@ -1,13 +1,3 @@
 #!/bin/bash
 
-export ASE_ABINIT_COMMAND="abinit < PREFIX.files > PREFIX.log"
-export ABINIT_PP_PATH="/usr/share/abinit/psp:/usr/share/abinit/psp/HGH:/home/jovyan/abinitio-methods/psp"
-export ABINIT_PP_PATH=${ABINIT_PP_PATH}:/srv/conda/envs/notebook/share/abinit/GGA_FHI
-export ABINIT_PP_PATH=${ABINIT_PP_PATH}:/srv/conda/envs/notebook/share/abinit/GGA_HGHK
-export ABINIT_PP_PATH=${ABINIT_PP_PATH}:/srv/conda/envs/notebook/share/abinit/GGA_PAW
-export ABINIT_PP_PATH=${ABINIT_PP_PATH}:/srv/conda/envs/notebook/share/abinit/LDA_FHI
-export ABINIT_PP_PATH=${ABINIT_PP_PATH}:/srv/conda/envs/notebook/share/abinit/LDA_HGH
-export ABINIT_PP_PATH=${ABINIT_PP_PATH}:/srv/conda/envs/notebook/share/abinit/LDA_PAW
-export ABINIT_PP_PATH=${ABINIT_PP_PATH}:/srv/conda/envs/notebook/share/abinit/LDA_TM
-
 exec "$@"
