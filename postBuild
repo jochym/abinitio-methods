@@ -4,9 +4,11 @@ cd
 mkdir -p .local/bin
 
 # Install the workspace
-jupyter lab workspace list
 jupyter lab workspace import --name=abinitio workspace-gp.json
-jupyter lab workspace list
+
+# configure abinit calculator
+mkdir -p ~/.config/ase
+cp ase_config.ini ~/.config/ase/config.ini
 
 # Build and install ALAMODE
 git clone http://github.com/ttadano/alamode.git
