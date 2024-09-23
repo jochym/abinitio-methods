@@ -13,7 +13,10 @@ jupyter lab workspace list
 rm workspace-gp.json
 
 # Build and install ALAMODE
-git clone http://github.com/ttadano/alamode.git
+# git clone http://github.com/ttadano/alamode.git
+wget https://github.com/ttadano/alamode/archive/refs/tags/v.1.5.0.tar.gz
+tar -xzf v.1.5.0.tar.gz
+mv alamode-v.1.5.0 alamode
 cd alamode
 mkdir build && cd build && cmake -DUSE_MKL_FFT=no -DSPGLIB_ROOT=$CONDA_DEFAULT_ENV .. 
 make alm 
