@@ -2,6 +2,9 @@
 
 cd
 mkdir -p .local/bin
+mkdir -p .config/ase
+
+cp ase.config.ini .config/ase/config.ini
 
 # Install the workspace
 jupyter lab workspace list
