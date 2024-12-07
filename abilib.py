@@ -59,3 +59,27 @@ def scan_param(cryst, param, start=0, stop=1, steps=7,
     dat = np.array(dat).T
     return vs, dat
 
+def polyprint(p, var='x', frm=' %+.5g', notebook=True):
+    '''
+    Pretty-print a polynomial p in the form ready
+    to include in the LaTeX text (without $s).
+    You can specify format used for coeficients in frm argument.
+    '''
+    if len(p) < 1:
+        return ''
+    up = ''.join([(frm + ' %s^{%d}') % (a, var, len(p)-d-1)
+                  for d, a in enumerate(p[:-2]) if abs(a) > 0])
+    lt = ''.join([(frm + ' %s') % (a, var)
+                  for d, a in enumerate(p[-2:-1]) if abs(a) > 0])
+    ft = ''.join([frm % (a,)
+                  for d, a in enumerate(p[-1:]) if abs(a) > 0])
+    s = (up + lt + ft).lstrip()
+    s = s.replace(" ", "")
+    if p[0] > 0:
+        s = s[1:]
+    if notebook:
+        from IPython.display import display, Math
+        return display(Math(s))
+    else :
+        return s
+
