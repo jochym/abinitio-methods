@@ -114,7 +114,7 @@ def gen(name, order, prefix, scale, action, evec, msd, tmax, charge, born, ndat,
             print('No k-path given. Using Gamma-X.', file=sys.stderr)
             KPATH = 'G 0.0 0.0 0.0   X 0.0 0.5 0.0   51'
     if action in ['phon','dos','rta']:
-        cell=spglib.find_primitive(cr)[0]
+        cell=spglib.find_primitive((cr.cell, cr.get_scaled_positions(), cr.get_atomic_numbers()))[0]
         mode = {'phon':'phonons', 'dos':'phonons', 'rta':'RTA'}[action]
         action='phon'
     if action == 'opt':
