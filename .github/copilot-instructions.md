@@ -49,6 +49,7 @@ The book branch contains a comprehensive LaTeX manuscript that provides the theo
 - **NumPy/SciPy/Matplotlib**: Scientific computing and visualization libraries
 - **ABINIT**: Ab initio computational materials science calculator
 - **LaTeX**: Document preparation system for the textbook manuscript
+- **Quarto** (migration target): Modern publishing system for unified scientific content (notebooks and manuscripts)
 
 ## Coding Guidelines
 
@@ -99,6 +100,7 @@ The book branch contains a comprehensive LaTeX manuscript that provides the theo
 - Cross-referencing between notebooks and book content
 - Figure and diagram organization in the book directory
 - Build scripts for LaTeX compilation (if needed)
+- Migration to Quarto-based publishing system (unify content where sensible, but not forcefully)
 
 ❌ **Academic tasks Copilot should NOT modify unless directly requested:**
 - Lecture content in PDF files
@@ -126,6 +128,7 @@ The book branch contains a comprehensive LaTeX manuscript that provides the theo
 - **Multi-language Content**: The book manuscript contains sections in English and Polish (Polish sections start at Chapter 2/Rozdział 2)
 - **Branch Structure**: Main branch focuses on interactive materials; book branch adds comprehensive textbook manuscript
 - **Figure Management**: Keep book figures organized and ensure LaTeX references are correct
+- **Quarto Migration Goal**: The repository aims to migrate to a Quarto-based solution for unified publishing. Prioritize approaches that facilitate this transition and unify content structure where it makes sense, but avoid forced unification that compromises existing functionality
 
 ## Branch-Specific Notes
 
