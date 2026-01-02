@@ -82,7 +82,7 @@ The book branch contains a comprehensive LaTeX manuscript that provides the theo
 - Ensure all references and citations are properly formatted using BibTeX
 - Keep figure files organized in the `book/` directory
 - Use comments to mark sections requiring review (e.g., `% **[REVIEW NEEDED]**: Description of issue`)
-- Preserve multi-language content structure (English and Polish sections)
+- Preserve multi-language content structure (English and Polish sections), except when translating consecutive chapters by user request
 
 ## What Copilot Should Help With
 
