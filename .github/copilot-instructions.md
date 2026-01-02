@@ -21,6 +21,26 @@ This is a work-in-progress (WIP) educational resource. Copilot is intended to he
 - **Data Directories**: `data/`, `psp/` contain supporting data files
 - **Configuration**: `anphon/` and related files for phonon calculations
 
+### Book Branch
+
+The book branch contains a comprehensive LaTeX manuscript that provides the theoretical foundation for the course:
+
+- **LaTeX Source Files**: 
+  - `book/main.tex` - Main manuscript file (246KB, ~4200 lines) containing comprehensive theoretical content
+  - `book/methods-old.tex` - Legacy manuscript file
+  
+- **Supporting Figures and Diagrams**:
+  - Crystal structure diagrams: `crystal.pdf`, `lattice.pdf`, `brillouin.pdf`
+  - Material-specific examples: `BaTiO3.pdf` (barium titanate), `Fe2SiO4-1.pdf` and `Fe2SiO4-2.pdf` (iron orthosilicate), `FeSe.pdf` (iron selenide)
+  - Methodology illustrations: `diagram.pdf`, `gap-hyb.pdf` (hybrid functionals), `pseudopots-new.pdf` (pseudopotentials), `rare-earths.pdf`, `usp.pdf` (ultrasoft pseudopotentials)
+  - Other assets: `Jacob.jpg`, `Fxs.png`
+
+- **Book Content Structure**:
+  - **Introduction**: Historical development of DFT and ab initio methods, from Schrödinger equation to modern density functional theory
+  - **Chapter 1 - Electron Interactions**: Fundamental quantum mechanics, Hartree-Fock approximation, electronic correlations, homogeneous electron gas, hydrogen molecule example (Heitler-London method)
+  - **Chapter 2 - Stany elektronowe w krysztale** (Electronic States in Crystals, in Polish): Crystal lattices, Bravais lattices, reciprocal space, Bloch's theorem, band structure theory
+  - Additional chapters covering DFT theory, electronic structure methods, orbital-dependent functionals, insulators/semiconductors, electric polarization, van der Waals interactions, and many-body effects
+
 ## Key Technologies
 
 - **Python 3**: Primary programming language
@@ -28,6 +48,8 @@ This is a work-in-progress (WIP) educational resource. Copilot is intended to he
 - **ASE (Atomic Simulation Environment)**: Framework for atomic simulations
 - **NumPy/SciPy/Matplotlib**: Scientific computing and visualization libraries
 - **ABINIT**: Ab initio computational materials science calculator
+- **LaTeX**: Document preparation system for the textbook manuscript
+- **Quarto** (migration target): Modern publishing system for unified scientific content (notebooks and manuscripts)
 
 ## Coding Guidelines
 
@@ -54,6 +76,15 @@ This is a work-in-progress (WIP) educational resource. Copilot is intended to he
 - Document any new dependencies clearly
 - Ensure compatibility with JupyterLab/Binder environments
 
+### LaTeX Guidelines
+- Follow standard LaTeX best practices for academic manuscripts
+- Maintain consistency in mathematical notation throughout the document
+- Use descriptive labels for equations, figures, and sections (e.g., `\label{eq:schrodinger}`, `\label{fig:crystal}`)
+- Ensure all references and citations are properly formatted using BibTeX
+- Keep figure files organized in the `book/` directory
+- Use comments to mark sections requiring review (e.g., `% **[REVIEW NEEDED]**: Description of issue`)
+- Preserve multi-language content structure (English and Polish sections), except when translating consecutive chapters by user request
+
 ## What Copilot Should Help With
 
 ✅ **Technical tasks Copilot should assist with:**
@@ -65,10 +96,16 @@ This is a work-in-progress (WIP) educational resource. Copilot is intended to he
 - Build and deployment configurations
 - Testing and validation scripts
 - Integration with JupyterLab/Binder environments
+- LaTeX formatting and structure improvements
+- Cross-referencing between notebooks and book content
+- Figure and diagram organization in the book directory
+- Build scripts for LaTeX compilation (if needed)
+- Migration to Quarto-based publishing system (unify content where sensible, but not forcefully)
 
 ❌ **Academic tasks Copilot should NOT modify unless directly requested:**
 - Lecture content in PDF files
 - Physics equations and theoretical derivations
+- Mathematical proofs and derivations in `main.tex`
 - Scientific conclusions or interpretations
 - Bibliography and references
 - Academic authorship information
@@ -79,6 +116,8 @@ This is a work-in-progress (WIP) educational resource. Copilot is intended to he
 - Verify that computational examples produce expected physical results
 - Ensure backward compatibility with existing notebooks
 - Check that notebooks run successfully in Binder environment
+- Verify LaTeX compilation succeeds without errors (for book branch)
+- Ensure all figures referenced in LaTeX are present in book directory
 
 ## Special Considerations
 
@@ -86,6 +125,22 @@ This is a work-in-progress (WIP) educational resource. Copilot is intended to he
 - **Reproducibility**: Random seeds and computational parameters should be documented
 - **Educational Value**: Changes should enhance learning, not just optimize code
 - **Environment**: Must work in both local JupyterLab and cloud Binder environments
+- **Multi-language Content**: The book manuscript contains sections in English and Polish (Polish sections start at Chapter 2/Rozdział 2)
+- **Branch Structure**: Main branch focuses on interactive materials; book branch adds comprehensive textbook manuscript
+- **Figure Management**: Keep book figures organized and ensure LaTeX references are correct
+- **Quarto Migration Goal**: The repository aims to migrate to a Quarto-based solution for unified publishing. Prioritize approaches that facilitate this transition and unify content structure where it makes sense, but avoid forced unification that compromises existing functionality
+
+## Branch-Specific Notes
+
+### Main Branch
+- Focus: Interactive Jupyter notebooks and lecture PDFs
+- Target: Hands-on computational exercises
+
+### Book Branch
+- Focus: Comprehensive LaTeX textbook manuscript with supporting materials
+- Target: Theoretical foundation and detailed methodology
+- Key File: `book/main.tex` (main manuscript source)
+- Build Process: LaTeX compilation to PDF (build system TBD)
 
 ## Contact and Context
 
