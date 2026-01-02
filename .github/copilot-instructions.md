@@ -10,6 +10,10 @@ This is a work-in-progress (WIP) educational resource. Copilot is intended to he
 
 ## Repository Structure
 
+- **Book Manuscript**: The `book/` directory contains LaTeX source files and supporting materials for the book manuscript:
+  - `main.tex` - Main LaTeX source file for the book
+  - `methods-old.tex` - Legacy methods content
+  - Supporting PDFs and images (diagrams, figures, reference materials)
 - **Lecture Materials**: PDF files in the `lecture/` directory covering topics from electron interactions to lattice thermodynamics
 - **Interactive Notebooks**: Numbered Jupyter notebooks (`.ipynb` files) providing hands-on examples:
   - `00_Index.ipynb` - Main index and introduction
