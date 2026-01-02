@@ -603,74 +603,76 @@ where $r_s$ is its radius
 r_s=(\frac{3}{4\pi n})^{1/3}.
 \end{equation}
 %
-
-Wyliczymy teraz energię gazu elektronowego w przybliżeniu Hartree-Focka.
-Zakładamy, że ładunek dodatni rozłożony jest jednorodnie w całej przestrzeni $V$
-i ma gęstość taką samą jak gaz elektronów. Energia oddziaływania
-elektronów z takim polem kasuje się z energią Hartree i całkowita energia
-elektronu składa się tylko z części kinetycznej i oddziaływania wymiennego.
-Energię wymiany można łatwo wyliczyć przedstawiając potencjał kulombowski
-w postaci transformaty Fouriera
+% **[REVIEW NEEDED]**: Hartree-Fock treatment of electron gas and exchange energy derivation
+We will now calculate the energy of the electron gas in the Hartree-Fock approximation.
+We assume that the positive charge is distributed uniformly throughout the entire space $V$
+and has the same density as the electron gas. The interaction energy
+of electrons with such a field cancels with the Hartree energy, and the total energy
+of an electron consists only of the kinetic part and the exchange interaction.
+The exchange energy can be easily calculated by representing the Coulomb potential
+in the form of a Fourier transform
 %
 \begin{equation}
 \frac{1}{|\mb{r}-\mb{r}'|}=4\pi\int \frac{d\mb{q}}{(2\pi)^3}\frac{e^{i\mb{q}(\mb{r}-\mb{r}')}}{q^2},
 \end{equation}
 %
-Wstawiając funkcję falową w postaci (\ref{pw}) do wyrażenia na energię wymiany 
-i wykonując całkowanie otrzymujemy energie stanów jednoelektronowych
+Inserting the wave function in the form (\ref{pw}) into the expression for the exchange energy 
+and performing integration, we obtain the energies of single-electron states
 %
 \begin{equation}
 E_k=\frac{\hbar^2 k^2}{2m} - \int_{\mb{k'}<\mb{k_F}} \frac{d\bm{k'}}{(2\pi)^3} \frac{4\pi}{|\mb{k}-\mb{k'}|^2}
 =\frac{\hbar^2 k^2}{2m} - \frac{k_F}{\pi}(1+\frac{k_F^2-k^2}{2kk_F}ln|\frac{k_F+k}{k_F-k}|).
 \end{equation}
 %
-Całkowitą energię układu elektronów dostajemy sumując to wyrażenie po wektorze falowym    
+The total energy of the electron system is obtained by summing this expression over the wave vector    
 %
 \begin{equation}
 E=\sum_{k<k_F}[\frac{\hbar^2 k^2}{2m} - \frac{k_F}{\pi}(1+\frac{k_F^2-k^2}{2kk_F}ln|\frac{k_F+k}{k_F-k}|)].
 \end{equation}
 %
-Wykorzystując (\ref{EN}) i zamieniając sumowanie w drugim wyrazie na całkę dostajemy
+Using (\ref{EN}) and converting the summation in the second term to an integral, we obtain
 %
 \begin{equation}
 E=N(\frac{3}{5}E_F - \frac{3k_F}{4\pi})=N(\frac{3}{5}E_F - \frac{3(3\pi^2n)^{\frac{1}{3}}}{4\pi}),
 \end{equation}
-gdzie skorzystaliśmy ze związku (\ref{nkf}). Energia wymiany przypadająca na jeden elektron wynosi 
+where we used the relation (\ref{nkf}). The exchange energy per electron is 
 %
 \begin{equation}
 \varepsilon_x=\frac{E_x}{N}=-\frac{3}{4}\Big(\frac{3}{\pi}\Big)^{\frac{1}{3}}n^\frac{1}{3}.
 \label{exchange}
 \end{equation}
 %
-Ten wzór określający zależność energii wymieny od gęstości elektronowej
-wykorzystywany jest w teorii funkcjonału gęstości w ramach przybliżenia lokalnej gęstości.
+% **[REVIEW NEEDED]**: Exchange energy formula and local density approximation
+This formula determining the dependence of exchange energy on electron density
+is used in density functional theory within the local density approximation.
 
-Dla gazu elektronowego można wyprowadzić wyrażenie opisujące rozkład ładunku dziury wymiennej (\ref{EC}),
-który zależy tylko od odległości $r$
+For an electron gas, one can derive an expression describing the distribution of exchange hole charge (\ref{EC}),
+which depends only on distance $r$
 %
 \begin{equation}
 g^{\sigma}_x(r)=1 - [3\frac{sin(rk_F)-rk_Fcos(rk_F)}{(rk_F)^3}]^2.
 \end{equation}
 %
-Nie jest możliwe wyrażenie energii korelacji dla gazu swobodnych elektronów w postaci 
-funkcji analitycznej gęstości $n$. Pierwszy przybliżony wzór zaproponował Wigner \cite{wigner34}
+% **[REVIEW NEEDED]**: Correlation energy approximations - Wigner, Gell-Mann-Brueckner, and QMC
+It is not possible to express the correlation energy for a free electron gas in the form of 
+an analytical function of density $n$. The first approximate formula was proposed by Wigner \cite{wigner34}
 %
 \begin{equation}
 \varepsilon(r_s)=-\frac{0.44}{r_s+7.8}.
 \end{equation}
 %
-W granicy małych gęstości ($r_s\rightarrow \infty$), electrony tworzą tzw. kryształ Wignera, którego energia korelacji 
-pokrywa się z energią elektrostatyczną zlokalizowanych ładunków punktowych.
-W granicy dużej gęstości ($r_s\rightarrow 0$), Gellmann i Breuckner
-wyprowadzili wzór na gęstość energii korelacji niespolaryzowanego magnetycznie
-gazu elektronów \cite{GB}
+In the limit of low densities ($r_s\rightarrow \infty$), electrons form the so-called Wigner crystal, whose correlation energy 
+coincides with the electrostatic energy of localized point charges.
+In the limit of high density ($r_s\rightarrow 0$), Gell-Mann and Brueckner
+derived a formula for the correlation energy density of a magnetically unpolarized
+electron gas \cite{GB}
 %
 \begin{equation}
 \varepsilon_c (r_s)=0.311\ln(r_s)+r_s(A\ln(r_s)+C)-0.048+... .
 \end{equation}
 %
-Energię korelacji gazu elektronowego najdokładniej wyznaczono numerycznie
-metodą kwantowego Monte Carlo (QMC) \cite{CeperleyAlder80}. 
+The correlation energy of the electron gas was most accurately determined numerically
+by the quantum Monte Carlo (QMC) method \cite{CeperleyAlder80}. 
 
 
 \chapter{Stany elektronowe w krysztale}
