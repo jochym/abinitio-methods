@@ -449,96 +449,99 @@ For the potential calculated in this way, we solve equation (\ref{HF}) determini
 of electronic states. We use the determined wave functions to recalculate the electron density
 and effective potential. We repeat the procedure until the energies and wave functions obtained in successive steps
 are the same or differ by a small specified amount. Most often, the parameter used to test convergence
-rachunku jest całkowita energia układu. Metoda pola samoouzgodnionego zastosowana była po raz pierwszy
-do rozwiązania równania Hartree, które możemy otrzymać z rownania Hartree-Focka po usunięciu
-oddziaływania wymiennego. Równanie Hartree odpowiada funkcji falowej w postaci
-iloczynu niezależnych funkcji jednocząstkowych, czyli opisuje zbiór niezależnych elektronów
-w efektywnym polu elektrostatycznym. Metoda pola samouzgodnionego stosowana jest obecnie w większości 
-metod obliczeniowych struktury elektronowej ciał stałych. 
+of the calculation is the total energy of the system. The self-consistent field method was first applied
+to solve the Hartree equation, which we can obtain from the Hartree-Fock equation by removing
+the exchange interaction. The Hartree equation corresponds to a wave function in the form of
+a product of independent single-particle functions, i.e., it describes a set of independent electrons
+in an effective electrostatic field. The self-consistent field method is currently used in most 
+computational methods for the electronic structure of solids. 
 
-\section{Korelacje elektronowe}
+\section{Electronic correlations}
 
-Podejście Hartree-Focka jest metodą przybliżoną, zatem wyliczona energia
-i funkcje falowe różnią się od wielkości dokładnych, które odpowiadają rozwiązaniom równania
-Schr\"{o}dingera dla funkcji wieloelektronowej.
-Uwzględnienie wszystkich efektów oddziaływań wielociałowych w układzie elektronowym umożliwia
-dodatkowe obniżenie energii całkowitej w porównaniu do energii Hartree-Focka.
-Różnica między dokładną wartością energii ($E_{\rm{exact}}$) i energią wyliczoną w przybliżeniu 
-Hartree-Focka ($E_{\rm{HF}}$), nosi nazwę energii korelacji
+% **[REVIEW NEEDED]**: Correlation energy definition and strongly correlated systems
+The Hartree-Fock approach is an approximate method, so the calculated energy
+and wave functions differ from exact quantities, which correspond to solutions of the Schr\"{o}dinger equation
+for the many-electron wave function.
+Taking into account all effects of many-body interactions in the electronic system enables
+an additional lowering of the total energy compared to the Hartree-Fock energy.
+The difference between the exact energy value ($E_{\rm{exact}}$) and the energy calculated in the 
+Hartree-Fock approximation ($E_{\rm{HF}}$) is called the correlation energy
 %
 \begin{equation}
 E_c=E_{\rm{\text{exact}}}-E_{\rm{\text{HF}}}.
 \end{equation}
 %
-Żródłem korelacji elektronowych są oddziaływania kulombowskie, które dążą do przestrzennej separacji 
-elektronów. Elektron znajdujący się w położeniu $\bm{r}$ powoduje, że inne elektrony unikają tego położenia.
-Czyli prawdopodobieństwo znalezienia elektronu w danym punkcie zależy od położeń wszystkich pozostałych $N-1$
-elektronów. Materiały, w których lokalne oddziaływania kulombowskie mają decydujący wpływ na strukturę elektronową
-i własności transportowe nazywane są układami silnie skorelowanymi. 
+The source of electronic correlations are Coulomb interactions, which tend to spatially separate 
+electrons. An electron located at position $\bm{r}$ causes other electrons to avoid this position.
+That is, the probability of finding an electron at a given point depends on the positions of all the remaining $N-1$
+electrons. Materials in which local Coulomb interactions have a decisive influence on the electronic structure
+and transport properties are called strongly correlated systems. 
 
-Metoda Hartree-Focka jest punktem wyjścia do bardziej zaawansowanych metod stosowanych głównie w chemii kwantowej.
-Można ogólnie zapisać funkcję falową układu $N$ elektronów w postaci rozwinięcia na skończoną ilość wyznaczników Slatera
+% **[REVIEW NEEDED]**: Configuration interaction and multi-determinant methods
+The Hartree-Fock method is the starting point for more advanced methods used mainly in quantum chemistry.
+One can generally write the wave function of a system of $N$ electrons as an expansion in a finite number of Slater determinants
 %
 \begin{equation}
 \Phi(\bm{r}_1,...,\bm{r}_N)=c_0\Phi_0(\bm{r}_1,...,\bm{r}_N)+\sum_{i=1}^{N_\text{det}} c_i\Phi_i(\bm{r}_1,...,\bm{r}_N),
 \end{equation}
 %
-gdzie $\Phi_0$ jest funkcją falową stanu podstawowego w przybliżeniu Hartree-Focka,
-a wyznaczniki $\Phi_i$ odpowiadają stanom wzbudzonym. Im większa liczba tych wyznaczników $N_{\text{det}}$, tym dokładniej
-opisane są korelacje elektronowe. Funkcje $\Phi_i$ konstruowane są przy pomocy orbitali jednoelektronowych, które nie są obsadzone
-w stanie podstawowym i mogą być zajęte przez elektrony wzbudzone. Wyznaczniki mogą opisywać pojedyncze przejścia elektronów do orbitali nieobsadzonych ($\Phi_i^{\text{S}}$),
-podwójne wzbudzenia elektronów ($\Phi_i^{\text{D}}$), potrójne wzbudzenia ($\Phi_i^{\text{T}}$) i tak dalej.
-Całkowita liczba wszystkich możliwych wzbudzonych konfiguracji rośnie bardzo szybko wraz z liczbą elektronów $N$ i orbitali $M$ (zajętych i pustych)
-według wzoru 
+where $\Phi_0$ is the ground state wave function in the Hartree-Fock approximation,
+and the determinants $\Phi_i$ correspond to excited states. The larger the number of these determinants $N_{\text{det}}$, the more accurately
+the electronic correlations are described. The functions $\Phi_i$ are constructed using single-electron orbitals that are not occupied
+in the ground state and can be occupied by excited electrons. The determinants can describe single transitions of electrons to unoccupied orbitals ($\Phi_i^{\text{S}}$),
+double electron excitations ($\Phi_i^{\text{D}}$), triple excitations ($\Phi_i^{\text{T}}$), and so on.
+The total number of all possible excited configurations grows very rapidly with the number of electrons $N$ and orbitals $M$ (occupied and empty)
+according to the formula 
 %
 \begin{equation}
 N_{\text{det}}=\frac{(M+1)!}{N!(M+1-N)!}
 \end{equation}
 %
-W najprostszym podejściu nazywanym metodą oddziaływania konfiguracji ({\it ang. configuration interaction} - CI) \cite{GTO},
-wyznaczniki konstruuje się z zajętych i pustych orbitali jednoelektronowych hamiltonianu Hartree-Focka.
-Funkcja falowa przyjmuje postać szeregu wyznaczników o zwiększającej się ilości wzbudzonych elektronów
+In the simplest approach called the configuration interaction (CI) method \cite{GTO},
+the determinants are constructed from occupied and empty single-electron orbitals of the Hartree-Fock Hamiltonian.
+The wave function takes the form of a series of determinants with an increasing number of excited electrons
 %
 \begin{equation}
 \Phi_{\text{CI}}=c_0\Phi_0+\sum_{i=1}^{N_\text{S}} c^\text{S}_i \Phi_i^{\text{S}}+\sum_{i=1}^{N_\text{D}} c^\text{D}_i \Phi_i^{\text{D}}+\sum_{i=1}^{N_\text{T}} c^\text{T}_i \Phi_i^{\text{T}}+...,
 \label{phiCT}
 \end{equation}
 % 
-gdzie $N_\text{S}$, $N_\text{D}$, $N_\text{T}$ określają ilość wyznaczników dla danej liczby wzbudzonych orbitali.
-Stan podstawowy znajduje się przez wyznaczenie współczynników $c_i$, które minimalizuje energię
+where $N_\text{S}$, $N_\text{D}$, $N_\text{T}$ determine the number of determinants for a given number of excited orbitals.
+The ground state is found by determining the coefficients $c_i$ that minimize the energy
 %
 \begin{equation}
 E_\text{CI}=\int \Phi^*(\bm{r}_1,...,\bm{r}_N)H\Phi(\bm{r}_1,...,\bm{r}_N)d\bm{r}_1d\bm{r}_2...d\bm{r}_N,
 \end{equation}
 %
-gdzie $H$ jest hamiltonianem układu elektronowego (\ref{Sch-el}).
-Minimalizacja przeprowadzana jest przy warunku normalizacji funkcji falowej, co przekłada się na warunek dla wszystkich współczynników rozwinięcia
+where $H$ is the Hamiltonian of the electronic system (\ref{Sch-el}).
+The minimization is carried out under the condition of wave function normalization, which translates into a condition for all expansion coefficients
 $\sum_ic_i^2=1$.
-W granicy nieskończonej liczby wyznaczników tak otrzymana funkcja falowa odpowiada dokładnej funkcji wieloelektronowej.
-W praktyce stosuje się rozwinięcia do kilku największych wyrazów szeregu (\ref{phiCT}), które
-obejmują podwójne, potrójne lub poczwórne wzbudzenia.  
-Następnym krokiem jest umożliwienie optymalizacji również orbitali jednoelektronowych w połączeniu z
-optymalizacją współczynników rozwinięcia w ramach wielokonfiguracyjnej metody pola samouzgodnionego  ({\it ang. multi-configuration self-consistant field }- MCSCF). 
-Metody wielowyznacznikowe pozwalają wyznaczyć bardzo dokładnie funkcje falowe i energie stanów elektronowych, 
-jednak czas obliczeniowy skaluje się eksponencjalnie z rozmiarem układu,
-więc stosowane jest jedynie do małych układów molekularnych.
+In the limit of an infinite number of determinants, the wave function obtained in this way corresponds to the exact many-electron wave function.
+In practice, expansions are used up to a few largest terms of the series (\ref{phiCT}), which
+include double, triple, or quadruple excitations.  
+The next step is to enable optimization of single-electron orbitals as well, in combination with
+optimization of expansion coefficients within the multi-configuration self-consistent field (MCSCF) method. 
+Multi-determinant methods allow very accurate determination of wave functions and energies of electronic states, 
+however, the computational time scales exponentially with the system size,
+so it is used only for small molecular systems.
 
-\section{Gaz elektronowy}
+\section{Electron gas}
 
-Jednorodny gaz elektronowy jest dobrym przybliżeniem rzeczywistej struktury
-elektronowej prostych metali i jest często wykorzystywany w wielu podstawowych
-metodach obliczeniowych (np. w przybliżeniu lokalnej gęstości).
-Najprostszy model gazu elektronowego składa się z nieoddziałujących cząstek
-zamkniętych w sześcianie o objętości $V=L^3$. Długość elektronowej fali de'Broglie'a
-rozchodzącej się w każdym kierunku musi spełniać warunek periodyczności ($n\lambda=L$),
-co prowadzi to kwantowania wektora falowego w kierunkach $x$, $y$ i $z$
+% **[REVIEW NEEDED]**: Free electron gas model and Fermi energy
+A homogeneous electron gas is a good approximation of the actual electronic structure
+of simple metals and is often used in many fundamental
+computational methods (e.g., in the local density approximation).
+The simplest model of an electron gas consists of non-interacting particles
+confined in a cube of volume $V=L^3$. The length of the electronic de Broglie wave
+propagating in each direction must satisfy the periodicity condition ($n\lambda=L$),
+which leads to quantization of the wave vector in the $x$, $y$, and $z$ directions
 %
 \begin{equation}
 \mb{k}=(\frac{2\pi n_x}{L},\frac{2\pi n_x}{L},\frac{2\pi n_x}{L}),
 \end{equation}
 %
-gdzie $n_x$, $n_y$, $n_z$ są liczbami całkowitymi.
-Energie i funkcje falowe dyskretnych stanów elektronowych dane są wzorami
+where $n_x$, $n_y$, $n_z$ are integers.
+The energies and wave functions of discrete electronic states are given by the formulas
 %
 \begin{equation}
 E_k=\frac{\hbar^2 k^2}{2m},
