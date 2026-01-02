@@ -61,7 +61,7 @@ the Schr\"{o}dinger equation must be solved in a self-consistent manner.
 Taking into account the Pauli exclusion principle for the multi-electron wave function, which in its simplest form is written
 is in the form of the Slater determinant, the Hartree-Fock equation can be derived~\cite{fock30,slater30,slater51}.
 In this equation, in addition to the usual Coulomb interaction, there is a non-local
-exchange interaction. This is an interaction that occurs only between electrons with the same spin direction,
+exchange interaction. This is an interaction that occurs only between electrons with parallel spins,
 effectively reducing the Coulomb repulsion between them.
 The Hartree-Fock approach describes electron systems approximately because it does not properly take into account correlations,
 which occur in the many-electron quantum state \cite{wigner34,GB}.
@@ -108,62 +108,66 @@ the method of associated plane waves \cite{Andersen75}, or approaches based on p
 Thanks to these improvements, density functional theory became the basis for calculating electronic structure~\cite{jones}, determining crystal parameters~\cite{payne}, studying lattice dynamics~\cite{parlinski, baroni} and many other material properties~\cite {martin}.
 For its formulation, Walter Kohn received the Nobel Prize in Chemistry in 1998.
 
-Istnieją jednak układy, w których przybliżenia stosowane w DFT załamują się i nie potrafią poprawnie
-opisać struktury elektronowej. Zgodnie z klasyczną teorią pasmową, wiele tlenków metali przejściowych, takich jak NiO lub MnO,
-powinno znajdować się w stanie metalicznym, ze względu na częściowe wypełnienie stanów $3d$.
-Materiały te są w rzeczywistości izolatorami, ponieważ silne oddziaływanie kulombowskie w stanach $3d$
-uniemożliwia swobodny ruch elektronów i prowadzi do ich lokalizacji \cite{peierls}.
-W odróznieniu od izolatorów pasmowych, materiały te nazywane są izolatorami Motta \cite{mott}.
-Takie lokalne oddziaływanie elektronów, opisywane w ramach modelu Hubbarda parametrem $U$ \cite{hubbard},
-jest znacznie silniejsze w stanach $d$ i $f$, niż w bardziej rozległych (zdelokalizoanych) stanach $s$ i $p$.
-Struktura elektronowa tlenków metali przejściowych, wyznaczana w ramach obliczeń LDA lub GGA,
-albo nie posiada przerwy (CoO) albo ta przerwa jest znacznie zaniżona (NiO) \cite{terakura}.
-Zbyt mała przerwa energetyczna jest także problemem w obliczeniach dla klasycznych półprzewodników,
-takich jak krzem lub german, co oznacza, że również w tych materiałach potencjał wymienno-korelacyjny nie jest
-dobrze opisany.
+% **[REVIEW NEEDED]**: Technical terminology for DFT approximations and strongly correlated systems
+However, there are systems in which the approximations used in DFT break down and fail to correctly
+describe the electronic structure. According to classical band theory, many transition metal oxides, such as NiO or MnO,
+should be in a metallic state, due to the partial filling of $3d$ states.
+These materials are actually insulators, because the strong Coulomb interaction in the $3d$ states
+prevents the free movement of electrons and leads to their localization \cite{peierls}.
+In contrast to band insulators, these materials are called Mott insulators \cite{mott}.
+Such local electron interaction, described within the Hubbard model by the parameter $U$ \cite{hubbard},
+is much stronger in $d$ and $f$ states than in the more extended (delocalized) $s$ and $p$ states.
+The electronic structure of transition metal oxides, determined within LDA or GGA calculations,
+either has no gap (CoO) or the gap is significantly underestimated (NiO) \cite{terakura}.
+Too small an energy gap is also a problem in calculations for classical semiconductors,
+such as silicon or germanium, which means that the exchange-correlation potential is not
+well described in these materials either.
 
-Podstawowe przybliżenia stosowane do wyznaczenia energii wymienno-korelacyjnej są źródłem błedów, które prowadzą efektywnie do samooddziaływania elektronów.
-Ten efekt jest szczególnie silny dla stanów $d$ lub $f$ i prowadzi do niekorzystnego wzrostu energii przy lokalizacji elektronów.
-To jest główną przyczyną niepoprawnego stanu metalicznego lub zbyt małej przerwy energetycznej otrzymywanych
-w obliczeniach dla tlenków metali przejściowych.  
-Jedna z metod korekcji tego efektu (SIC) \cite{PZ} polega na bezpośrednim wyliczeniu
-energii samoodziaływania i odjęcia jej od funkcjonału energii całkowitej.
-Metoda ta umożliwia poprawienie struktury elektronowej, ale nie jest łatwa do zaimplementowania w obliczeniach samouzgodnionych.
-Stan elektronowy można również poprawić stosując funkcjonały hybrydowe, w których przybliżona energia wymiany jest częściowo
-zastąpiona dokładną wartością otrzymaną w ramach metody Hartree-Focka \cite{becke93}.
-Wynika to z faktu, że w przybliżeniu Hartree-Focka nie występuje efekt samoodziaływania.
+% **[REVIEW NEEDED]**: Self-interaction correction terminology and hybrid functional description
+The basic approximations used to determine the exchange-correlation energy are a source of errors that effectively lead to electron self-interaction.
+This effect is particularly strong for $d$ or $f$ states and leads to an unfavorable increase in energy upon electron localization.
+This is the main reason for the incorrect metallic state or too small energy gap obtained
+in calculations for transition metal oxides.  
+One method for correcting this effect (SIC) \cite{PZ} consists of directly calculating
+the self-interaction energy and subtracting it from the total energy functional.
+This method enables improvement of the electronic structure, but is not easy to implement in self-consistent calculations.
+The electronic state can also be improved by using hybrid functionals, in which the approximate exchange energy is partially
+replaced by the exact value obtained within the Hartree-Fock method \cite{becke93}.
+This stems from the fact that in the Hartree-Fock approximation there is no self-interaction effect.
   
-Potencjał elektronowy dla zlokalizowanych stanów można również poprawić przez dodanie do funkcjonału DFT
-dodatkowego wyrazu proporcjonalnego do energii oddziaływania $U$. Można to zrobić w przybliżeniu średniego
-pola w ramach metody LDA+U \cite{anisimov}. Zastosowanie tej metody do tlenków metali przejściowych \cite{anisimov}
-lub nadprzewodników wysokotemperaturowych \cite{czyzyk} pozwoliło znacznie poprawić ich strukturę elektronową 
-i własności magnetyczne w porównaniu do standardowych obliczeń DFT.
-Również w przypadku innych złożonych materiałów, w których występują oddziaływania między spinowymi, orbitalnymi
-i sieciowymi stopniami swobody to podejście daje jakościowo lepsze wyniki \cite{orbital1,orbital2,orbital3}.
-W silnie skorelowanych metalach, jakimi są ziemie rzadkie i aktynowce,
-metoda LDA+U pozwala tylko częściowo uwzględnić efekty związane z lokalizacją elekronów.
-Dobrym przykładem jest kryształ plutonu, gdzie bardzo duża niezgodność wyliczanej teoretycznie
-objetości, a wartością eksperymentalną (około 35 \%) może być skorygowana przy użycie
-realistycznej wartości parametru $U$\cite{Pu-LDAU}.
-Niestety, efekty dynamiczne takie jak fluktuacja momentów magnetycznych w stanie paramagnetycznyn, czy efekt Kondo
-nie mogą być poprawnie opisane na poziomie teorii średniego pola.
-W bardziej zaawansowanej metodzie dynamicznego średniego pola (DMFT), efekty wielociałowe
-są uwzględniane przez rozwiązanie modelu domieszki Andersona w ramach dokładnej diagonalizacji
-lub kwantowego Monte Carlo \cite{Georges}. Rozwiązania zawierają informacje o energii własnej i czasie
-życia stanów elektronowych, które nie są dostępne w ramach obliczeń DFT.
-Sama metoda kwantowego Monte Carlo rozwijana jest obecnie bardzo intensywnie i stosowana jest do obliczeń
-struktury elektronowej molekół i ukladów krystalicznych.
+% **[REVIEW NEEDED]**: LDA+U method description and advanced many-body methods  
+The electronic potential for localized states can also be improved by adding to the DFT functional
+an additional term proportional to the interaction energy $U$. This can be done in the mean-field
+approximation within the LDA+U method \cite{anisimov}. Application of this method to transition metal oxides \cite{anisimov}
+or high-temperature superconductors \cite{czyzyk} has significantly improved their electronic structure 
+and magnetic properties compared to standard DFT calculations.
+Also in the case of other complex materials, in which interactions between spin, orbital,
+and lattice degrees of freedom occur, this approach gives qualitatively better results \cite{orbital1,orbital2,orbital3}.
+In strongly correlated metals, such as rare earths and actinides,
+the LDA+U method allows only partial inclusion of effects related to electron localization.
+A good example is plutonium crystal, where the very large discrepancy between the theoretically calculated
+volume and the experimental value (about 35\%) can be corrected using
+a realistic value of the parameter $U$\cite{Pu-LDAU}.
+Unfortunately, dynamic effects such as fluctuation of magnetic moments in the paramagnetic state, or the Kondo effect
+cannot be correctly described at the level of mean-field theory.
+In the more advanced dynamical mean-field theory (DMFT) method, many-body effects
+are included by solving the Anderson impurity model using exact diagonalization
+or quantum Monte Carlo \cite{Georges}. The solutions contain information about the self-energy and lifetime
+of electronic states, which are not available within DFT calculations.
+The quantum Monte Carlo method itself is currently being developed very intensively and is used for calculations
+of the electronic structure of molecules and crystalline systems.
 
 
 \chapter{Electron interactions}
 
 \section{Basic properties}
 
-Spośród wszystkich oddziaływań, które występują w przyrodzie, decydującymi o własnościach fizycznych i chemicznych układów atomowych
-są oddziaływania elektromagnetyczne. 
-Wiązania międzyatomowe, dzięki którym powstają cząsteczki i ciała stałe, 
-są efektem wzajemnych oddziaływań elektrostatycznych w układzie elektronów i jąder atomowych.
-Hamiltonian, który opisuje dowolny układ atomów ma postać
+% **[REVIEW NEEDED]**: Fundamental quantum mechanics terminology - electromagnetic interactions and Hamiltonian description
+Among all interactions that occur in nature, the decisive factors for the physical and chemical properties of atomic systems
+are electromagnetic interactions. 
+Interatomic bonds, which give rise to molecules and solids, 
+are the result of mutual electrostatic interactions in the system of electrons and atomic nuclei.
+The Hamiltonian, which describes an arbitrary system of atoms, has the form
 %
 \begin{equation}
 H=-\frac{\hbar^2}{2m}\sum_{i}\nabla_i^2-\sum_{i,j} \frac{Z_{j}e^2}{|\bm{r}_i-\bm{R}_j|}+\frac{1}{2}\sum_{i\neq j}\frac{e^2}{|\bm{r}_i-\bm{r}_j|}
@@ -171,34 +175,35 @@ H=-\frac{\hbar^2}{2m}\sum_{i}\nabla_i^2-\sum_{i,j} \frac{Z_{j}e^2}{|\bm{r}_i-\bm
 \label{hamiltonian}
 \end{equation}
 %
-gdzie $\bm{r}_i$ określają położenia elektronów, $\bm{R_j}$ położenia jąder atomowych, $Z_j$ ładunki jąder, $M_j$ masy jąder i $m$ jest masą elektronu.
-Pierwsze trzy wyrazy opisują odpowiednio energię kinetyczną elektronów, oddziaływanie elektronów z jądrami i oddziaływania
-między elektronami. Ostatnie dwa wyrazy to energia kinetyczna jąder atomowych i oddziaływanie między
-ładunkami jąder. Pełna funkcja falowa złożonego układu elektronów i jąder atomowych $\Psi(\bm{r}_i,\bm{R}_j)$ spełnia równanie Schr\"{o}dingera
+where $\bm{r}_i$ denote the positions of electrons, $\bm{R_j}$ the positions of atomic nuclei, $Z_j$ the nuclear charges, $M_j$ the nuclear masses, and $m$ is the electron mass.
+The first three terms describe respectively the kinetic energy of electrons, the interaction of electrons with nuclei, and the interactions
+between electrons. The last two terms are the kinetic energy of atomic nuclei and the interaction between
+nuclear charges. The complete wave function of the complex system of electrons and atomic nuclei $\Psi(\bm{r}_i,\bm{R}_j)$ satisfies the Schr\"{o}dinger equation
 %
 \begin{equation}
 H\Psi(\bm{r}_i,\bm{R}_j) = E\Psi(\bm{r}_i,\bm{R}_j),
 \label{Sch}
 \end{equation}
 %
-gdzie $E$ jest całkowitą energią układu.
+where $E$ is the total energy of the system.
 
-Kwantowo-mechaniczny opis kryształu można uprościć wykorzystując duży stosunek masy jadrą atomowego do masy elektronu,
-który dla najlżejszego jądra wodoru wynosi $m_p/m_e=1836$.
-Powoduje to, że dynamika elektronów jest znacznie większa niż jader atomowych i stany elektronowe bardzo szybko (adiabatycznie) dopasowują się
-do aktualnego położenia atomów. Typowe energie związane z ruchem elektronów są rzędu 1 eV, natomiast średnie energie drgań atomowych
-w kryształach są na poziomie 10 meV. 
-Zatem w pierwszym przybliżeniu możemy rozwiązać równanie Schr\"{o}dingera dla podukładu elektronów przy zadanych położeniach atomowych i
-pominąć wpływ kwantowych cech dynamiki atomów na funkcje falowe elektronów.
-Podejście to nazywa się przybliżeniem adiabatycznym lub przybliżeniem Borna-Oppenheimera \cite{BO}.
-Wprowadzając funkcję falową całego układu w postaci iloczynu funkcji elektronowej $\Phi(\bm{r_i},\bm{R_j})$ i funkcji jąder atomowych $\chi(\bm{R}_j)$
+% **[REVIEW NEEDED]**: Born-Oppenheimer approximation description and adiabatic treatment
+The quantum-mechanical description of a crystal can be simplified by exploiting the large ratio of the atomic nuclear mass to the electron mass,
+which for the lightest nucleus, hydrogen, equals $m_p/m_e=1836$.
+This causes the dynamics of electrons to be much faster than that of atomic nuclei, and electronic states adjust very quickly (adiabatically)
+to the current positions of atoms. Typical energies associated with electron motion are on the order of 1 eV, whereas average atomic vibration energies
+in crystals are at the level of 10 meV. 
+Thus, in the first approximation, we can solve the Schr\"{o}dinger equation for the electronic subsystem at fixed atomic positions and
+neglect the influence of quantum features of atomic dynamics on electronic wave functions.
+This approach is called the adiabatic approximation or the Born-Oppenheimer approximation \cite{BO}.
+Introducing the wave function of the entire system as a product of the electronic function $\Phi(\bm{r_i},\bm{R_j})$ and the nuclear function $\chi(\bm{R}_j)$
 %
 \begin{equation}
 \Psi(\bm{r}_i,\bm{R}_j) = \Phi(\bm{r}_i,\bm{R}_j)\chi(\bm{R}_j)
 \label{wave}
 \end{equation}
 %
-można rozseparować (\ref{Sch}) na dwa równania 
+one can separate (\ref{Sch}) into two equations 
 %
 \begin{equation}
 (-\frac{\hbar^2}{2m}\sum_{i=1}^N \nabla_i^2-\sum_{i,j} \frac{Z_{j}e^2}{|\bm{r}_i-\bm{R}_j|}+\frac{1}{2}\sum_{i\neq j}
@@ -210,56 +215,58 @@ można rozseparować (\ref{Sch}) na dwa równania
 (-\sum_j \frac{\hbar^2}{2M_j} \nabla_j^2 -\sum_{i,j} \frac{Z_iZ_je^2}{|\bm{R}_i-\bm{R}_j|}+E_n(\bm{R}_j))\chi_{n\alpha}(\bm{R}_j)=\varepsilon_{n\alpha}\chi_{n\alpha}(\bm{R}_j).
 \end{equation}
 %
-Pierwsze równanie opisuje funkcje falowe i energie własne $E_n(\bm{R}_j)$ układu elektronowego przy ustalonych położeniach jąder atomowych, gdzie $n$ oznacza zdefiniowany zbiór liczb kwantowych stanu elektronowego. Z drugiego równania możemy otrzymać funkcje falowe i energie własne $\varepsilon_{n\alpha}$ związane z ruchem jąder atomowych,
-gdzie $\alpha$ jest kwantową liczbą, która charakteryzuje te wielkości. Energia potencjalna w równaniu opisującym ruch jąder atomowych zależy od wzajemnego oddziaływania między jądrami i od energii podukładu elektronowego $E_n(\bm{R}_j)$. Obie wielkości są funkcją aktualnego położenia wszystkich jąder atomowych.  
+The first equation describes the wave functions and eigenvalues $E_n(\bm{R}_j)$ of the electronic system at fixed positions of atomic nuclei, where $n$ denotes a defined set of quantum numbers of the electronic state. From the second equation we can obtain the wave functions and eigenvalues $\varepsilon_{n\alpha}$ associated with the motion of atomic nuclei,
+where $\alpha$ is a quantum number that characterizes these quantities. The potential energy in the equation describing the motion of atomic nuclei depends on the mutual interaction between nuclei and on the energy of the electronic subsystem $E_n(\bm{R}_j)$. Both quantities are functions of the current positions of all atomic nuclei.  
 
-Zapiszmy funkcję falową układu $N$ elektronów, przy zadanych położeniach jader atomowych, w formie $\Phi(\bm{r}_1,\bm{r}_2,...,\bm{r}_N)$. 
-Znajomość funcji falowej pozwala wyznaczyć wiele podstawowych wielkości fizycznych dla danego układu. W szczególności gęstość elektronowa w punkcie $\bm{r}$
-dana jest wzorem
+Let us write the wave function of a system of $N$ electrons, at fixed positions of atomic nuclei, in the form $\Phi(\bm{r}_1,\bm{r}_2,...,\bm{r}_N)$. 
+Knowledge of the wave function allows us to determine many basic physical quantities for a given system. In particular, the electron density at point $\bm{r}$
+is given by the formula
 %
 \begin{equation}
 n(\bm{r})=N\int d\bm{r}_2...d\bm{r}_N \Phi^*(\bm{r},\bm{r}_2,...,\bm{r}_N) \Phi(\bm{r},\bm{r}_2,...,\bm{r}_N).
 \end{equation}
 %
-Podstawową własnością elektronowej funkcji falowej jest jej antysymetryczność. Oznacza, że zamiana miejscami dwóch elektronów powoduje zmianę jej znaku
+% **[REVIEW NEEDED]**: Pauli exclusion principle and fermion antisymmetry
+The fundamental property of the electronic wave function is its antisymmetry. This means that exchanging the positions of two electrons causes a sign change
 %
 \begin{equation}
 \Phi(\bm{r}_1,\bm{r}_2,...,\bm{r}_i,...,\bm{r}_j,...,\bm{r}_N)=-\Phi(\bm{r}_1,\bm{r}_2,...,\bm{r}_j,...,\bm{r}_i,...,\bm{r}_N).
 \label{anty}
 \end{equation}
 %
-Ta własność wynika z zakazu Pauliego, który mówi, że dwa fermiony (czyli cząstki o spinie połówkowym) nie mogą znajdować się w tym samym stanie kwantowym - w stanie opisanym takim samym zestawem liczb kwantowych.
+This property follows from the Pauli exclusion principle, which states that two fermions (i.e., particles with half-integer spin) cannot occupy the same quantum state - a state described by the same set of quantum numbers.
 
-Równanie Schr\"{o}dingera (\ref{Sch-el}) zawiera oddziaływania wielociałowe i nie posiada dokładnych rozwiązań analitycznych, z wyjątkiem atomu wodoru lub innych układów jednoelektronowych. Dokładne rozwiązania numeryczne równania Schr\"{o}dingera można uzyskać jedynie dla pojedynczych atomów i małych molekuł.
-Jako przykład rozważmy prosty układ z dwoma elektronami, jakim jest cząsteczka wodoru H$_2$.
-Hamiltonian tego układu, po uwzlędnieniu przybliżenia Borna-Oppenheimera, przyjmuje postać
+% **[REVIEW NEEDED]**: Hydrogen molecule example - Heitler-London method terminology
+The Schr\"{o}dinger equation (\ref{Sch-el}) contains many-body interactions and has no exact analytical solutions, except for the hydrogen atom or other one-electron systems. Exact numerical solutions of the Schr\"{o}dinger equation can be obtained only for individual atoms and small molecules.
+As an example, let us consider a simple system with two electrons, which is the hydrogen molecule H$_2$.
+The Hamiltonian of this system, after including the Born-Oppenheimer approximation, takes the form
 %
 \begin{equation}
 H=-\frac{\hbar^2}{2m}\nabla_1^2-\frac{\hbar^2}{2m}\nabla_2^2-\frac{e^2}{r_{1A}}-\frac{e^2}{r_{1B}}-\frac{e^2}{r_{2A}}-\frac{e^2}{r_{2B}}+\frac{e^2}{r_{12}}+\frac{e^2}{r_{AB}},
 \end{equation}
 %  
-gdzie $r_{1A}$, $r_{1B}$, $r_{2A}$, $r_{1B}$ oznaczają odległości elektronów (1 i 2) od dwóch protonów ($A$ i $B$), $r_{12}$ jest odległością między elektronami
-i $r_{AB}$ odległością miedzy protonami. 
-W roku 1927, Heitler i London zaproponowali funkcję falową w formie \cite{HL}
+where $r_{1A}$, $r_{1B}$, $r_{2A}$, $r_{2B}$ denote the distances of electrons (1 and 2) from the two protons ($A$ and $B$), $r_{12}$ is the distance between electrons,
+and $r_{AB}$ is the distance between protons. 
+In 1927, Heitler and London proposed a wave function in the form \cite{HL}
 %
 \begin{equation}
 \Phi(\bm{r}_1,\bm{r}_2)=N_{\pm}[\psi_A(\bm{r}_1)\psi_B(\bm{r}_2)\pm \psi_B(\bm{r}_1)\psi_A(\bm{r}_2)]\chi_{\sigma},
 \end{equation}
 %
-gdzie $N_{\pm}$ jest czynnikiem normalizacyjnym, $\chi_{\sigma}$ jest częścią spinową funkcji falowej, a cztery funkcje $\psi_{\alpha}(\bm{r})$
-sa orbitalami $1s$ dla stanu podstawowego atomu wodoru
+where $N_{\pm}$ is the normalization factor, $\chi_{\sigma}$ is the spin part of the wave function, and the four functions $\psi_{\alpha}(\bm{r})$
+are $1s$ orbitals for the ground state of the hydrogen atom
 %
 \begin{equation}
 \psi_{\alpha}(\bm{r})=\frac{1}{\sqrt{\pi a_0^3}}e^{-\frac{|\bm{r}-\bm{r}_{\alpha}|}{a_0}},
 \end{equation}
-gdzie $a_0$ jest promieniem Bohra, a $\bm{r}_{\alpha}$ jest położeniem protonu $\alpha=A$ lub $B$.
-Biorąc pod uwagę warunek antysymetryczności (\ref{anty}), funkcja falowa przyjmuje jedną z dopuszczalnych postaci
+where $a_0$ is the Bohr radius, and $\bm{r}_{\alpha}$ is the position of proton $\alpha=A$ or $B$.
+Taking into account the antisymmetry condition (\ref{anty}), the wave function takes one of the allowed forms
 %
 \begin{equation}
 \Phi_S(\bm{r}_1,\bm{r}_2)=N_{+}[\psi_A(\bm{r}_1)\psi_B(\bm{r}_2)+\psi_B(\bm{r}_1)\psi_A(\bm{r}_2)]\frac{1}{\sqrt{2}}(|\uparrow\downarrow\rangle-|\downarrow\uparrow\rangle),
 \end{equation}
 %
-dla całkowitego spinu $S=0$ (stan singletowy), oraz
+for total spin $S=0$ (singlet state), and
 %
 \begin{equation}
 \Phi_T(\bm{r}_1,\bm{r}_2)=\begin{cases}
@@ -269,28 +276,29 @@ N_{-}[\psi_A(\bm{r}_1)\phi_B(\bm{r}_2)-\psi_B(\bm{r}_1)\psi_A(\bm{r}_2)]|\downar
 \end{cases}
 \end{equation}
 %
-dla spinu $S=1$ (stan trypletowy). Stanem podstawowym cząsteczki wodoru jest stan singletowy, którego energia
-$E_S$ jest niższa od energii stanu stanu trypletowego $E_T$ dla każdej odległości między protonami $r_{AB}$.
-Stan związany odpowiada minimum energetycznemu $E_S=\langle\Phi_S|H|\Phi_S\rangle$, które dostajemy dla $r_{AB}=0.87$ \AA. Ta odległość jest większa od wartości eksperymentalnej równej 0.74 \AA. Natomiast wyliczona energia dysocjacji cząsteczki na dwa atomy wodoru wynosi $E_d=3.14$ eV i jest mniejsza od energii zmierzonej 4.75 eV. Jest to przykład wiązania kowalencyjnego, w którym dwa elektrony o przeciwnych spinach zostają uwspólnione, co prowadzi
-do obniżenia energii całego układu w porównaniu do sumy energii dwóch osobnych atomów.  
-W odróżnieniu od stanu singletowego, stan trypletowy nie tworzy stanu związanego dwóch atomów wodoru.
-Dokładniejsze wartości $r_{AB}=0.74$ \AA\ i $E_d=3.63$ eV otrzymuje się w przybliżeniu Hartree-Focka, które będzie tematem następnego rozdziału.
-Najlepsze wyniki uzyskuje się metodą wariacyjną, w której funkcja falowa zapisana jest w ogólnej formie iloczynu symetrycznej funkcji przestrzennej i antysymetrycznej funkcji spinowej \cite{JC}
+for spin $S=1$ (triplet state). The ground state of the hydrogen molecule is the singlet state, whose energy
+$E_S$ is lower than the energy of the triplet state $E_T$ for any distance between protons $r_{AB}$.
+The bound state corresponds to the energy minimum $E_S=\langle\Phi_S|H|\Phi_S\rangle$, which we obtain for $r_{AB}=0.87$ \AA. This distance is larger than the experimental value of 0.74 \AA. Meanwhile, the calculated dissociation energy of the molecule into two hydrogen atoms is $E_d=3.14$ eV and is smaller than the measured energy of 4.75 eV. This is an example of a covalent bond, in which two electrons with opposite spins become shared, which leads
+to a lowering of the energy of the entire system compared to the sum of energies of two separate atoms.  
+In contrast to the singlet state, the triplet state does not form a bound state of two hydrogen atoms.
+More accurate values $r_{AB}=0.74$ \AA\ and $E_d=3.63$ eV are obtained in the Hartree-Fock approximation, which will be the subject of the next chapter.
+The best results are obtained by the variational method, in which the wave function is written in the general form of a product of a symmetric spatial function and an antisymmetric spin function \cite{JC}
 %
 \begin{equation}
 \Phi_S(\bm{r}_1,\bm{r}_2)=\Psi(\bm{r}_1,\bm{r}_2)\chi_0.
 \end{equation} 
 %
-Część przestrzenna funkcji falowej zależy od $M$ parametrów wariacyjnych, $p_1$, $p_2$,..., $p_M$.
-Minimalizując energię układu dla $M=13$ otrzymuje się wartości $E_d=4.70$ eV i $r_{AB}=4.74$ \AA, w bardzo dobrej zgodności z danymi eksperymentalnymi \cite{JC}.   
-Dla większości badanych układów molekularnych i ciał stałych nie da się wyliczyć dokładnych rozwiązań równania Schr\"{o}dingera. 
-Zatem konieczne jest stosowanie metod przybliżonych, głównie numerycznych, które pozwalają wyznaczyć najlepsze możliwe funkcje falowe i energie stanów elektronowych
-w rozsądnym czasie obliczeniowym. 
+The spatial part of the wave function depends on $M$ variational parameters, $p_1$, $p_2$,..., $p_M$.
+Minimizing the system energy for $M=13$ yields values $E_d=4.70$ eV and $r_{AB}=4.74$ \AA, in very good agreement with experimental data \cite{JC}.   
+For most studied molecular systems and solids, it is not possible to calculate exact solutions of the Schr\"{o}dinger equation. 
+Therefore, it is necessary to use approximate methods, mainly numerical, which allow us to determine the best possible wave functions and energies of electronic states
+in a reasonable computational time. 
 
-\section{Równanie Hartree-Focka}
+\section{Hartree-Fock equation}
 \label{sec:HF}
 
-Jedną z pierwszych metod zostosowaną do opisu układów molekularnych jest przybliżenie Hartree-Focka \cite{hartree28,fock30,slater30}. W tym podejściu funkcja falowa układu $N$ elektronów ma postać wyznacznika Slatera
+% **[REVIEW NEEDED]**: Slater determinant and Hartree-Fock approximation terminology
+One of the first methods used to describe molecular systems is the Hartree-Fock approximation \cite{hartree28,fock30,slater30}. In this approach, the wave function of a system of $N$ electrons has the form of a Slater determinant
 %
 \begin{equation}
 \Phi = \frac{1}{\sqrt{N!}} 
@@ -303,31 +311,31 @@ Jedną z pierwszych metod zostosowaną do opisu układów molekularnych jest prz
 \label{slater}
 \end{equation}
 %
-gdzie funkcje jednoelektronowe są iloczynem części zależnej od położenia $\bm{r}_i$
-i od spinu $\sigma_i$
+where the single-electron functions are products of the part depending on position $\bm{r}_i$
+and on spin $\sigma_i$
 %
 \begin{equation}
 \phi_i(\bm{r}_i,\sigma_i)=\psi_i^{\sigma_i}(\bm{r}_i)\xi_i(\sigma_i).
 \end{equation}
 %
-Funkcja falowa zapisana w postaci wyznacznika Slatera spełnia podstawowe
-własności układu nieodróżnialnych cząstek.
-Zamiana miejscami dwóch elektronów odpowiada zamianie dwóch kolumn w wyznaczniku, co powoduje
-zmianę znaku funkcji falowej zgodnie z warunkiem antysymetryczności.
-Jeżeli dwa elektrony znajdują się w tym samym stanie kwantowym to dwie kolumny
-są jednakowe i cały wyznacznik się zeruje, co zgodne jest z zakazem Pauliego. 
+The wave function written in the form of a Slater determinant satisfies the basic
+properties of a system of indistinguishable particles.
+Exchanging two electrons corresponds to exchanging two columns in the determinant, which causes
+a sign change of the wave function in accordance with the antisymmetry condition.
+If two electrons are in the same quantum state, then two columns
+are identical and the entire determinant vanishes, which is consistent with the Pauli exclusion principle. 
 
-Rozwiązanie równania Schr\"{o}dingera odpowiada funkcji falowej, dla której średnia
-z hamiltonianu przyjmuje wartość minimalną. Przy założeniu ortonormalności funkcji $\Phi$
-odpowiada to zasadzie wariacyjnej w postaci
+The solution of the Schr\"{o}dinger equation corresponds to a wave function for which the average
+of the Hamiltonian takes a minimum value. Assuming orthonormality of the function $\Phi$,
+this corresponds to the variational principle in the form
 %
 \begin{equation}
 \delta(\langle\Phi|H|\Phi\rangle - E\langle\Phi|\Phi\rangle)=0,
 \label{var}
 \end{equation}
 %
-gdzie symbol $\delta$ oznacza pochodną wariacyjną.
-Wyliczając średnią z hamiltonianu dla podukładu elektronowego (\ref{Sch-el}) w stanie opisanym funkcją falową (\ref{slater}) otrzymujemy
+where the symbol $\delta$ denotes the variational derivative.
+Calculating the average of the Hamiltonian for the electronic subsystem (\ref{Sch-el}) in the state described by the wave function (\ref{slater}), we obtain
 %
 \begin{equation}
 \langle\Phi|H|\Phi\rangle=\sum_{i,\sigma}\int d\mb{r} \psi_i^{\sigma*}(\mb{r})[-\frac{\hbar^2}{2m}\nabla_i^2+V_Z(\mb{r})]\psi_i^{\sigma}(\mb{r}) 
@@ -335,30 +343,31 @@ Wyliczając średnią z hamiltonianu dla podukładu elektronowego (\ref{Sch-el})
 \label{E_HF}
 \end{equation}
 %
-gdzie $V_Z$ jest potencjałem elektrostatycznym wytwarzanym przez jądra atomowe, a $E_H$ nazywa się energią Hartree 
+% **[REVIEW NEEDED]**: Hartree energy and exchange energy terminology
+where $V_Z$ is the electrostatic potential generated by atomic nuclei, and $E_H$ is called the Hartree energy 
 %
 \begin{equation}
 E_H=\frac{e^2}{2}\sum_{i,j,\sigma,\sigma'}
 \int d\mb{r} \int d\mb{r}' \frac{\psi_i^{\sigma*}(\mb{r})\psi_j^{\sigma'*}(\mb{r}')\psi_i^{\sigma}(\mb{r})\psi_j^{\sigma'}(\mb{r}')}{|\mb{r}-\mb{r}'|}.
 \end{equation}
 %
-Wprowadzając gęstość ładunkową w punkcie $\mb{r}$
+Introducing the charge density at point $\mb{r}$
 %
 \begin{equation}
 n(\mb{r})=e\sum_{i,\sigma} |\psi_i^{\sigma}(\mb{r})|^2,
 \label{dens}
 \end{equation}
 %
-możemy zapisać energię Hartree w prostszej formie
+we can write the Hartree energy in a simpler form
 %
 \begin{equation}
 E_H=\frac{1}{2} \int d\mb{r} \int d\mb{r}' \frac{n(\mb{r})n(\mb{r}')}{|\mb{r}-\mb{r}'|}, 
 \label{Hartree}
 \end{equation}
 %
-która odpowiada klasycznej energii oddziaływania kulombowskiego przy zadanym rozkładzie gęstości ładunku elektrycznego. 
+which corresponds to the classical Coulomb interaction energy for a given distribution of electric charge density. 
 %
-$E_x$ nazywa się energią wymiany i wynosi
+$E_x$ is called the exchange energy and equals
 %
 \begin{equation}
 E_x=-\frac{e^2}{2}\sum_{i,j,\sigma}
@@ -366,18 +375,19 @@ E_x=-\frac{e^2}{2}\sum_{i,j,\sigma}
 \label{exc}
 \end{equation}
 %
-Energia wymiany jest wielkością kwantową, która nie ma odpowiednika w fizyce klasycznej. 
-Oddziaływanie wymianne charakteryzują dwie ważne cechy, które są ze sobą ściśle powiązane. 
-Przede wszystkim, oddziaływanie to dotyczy tylko elektronów o takim samym kierunku spinu. 
-Zgodnie z zasadą Pauliego dwa elektrony o tym samym kierunku spinu nie moga mieć takich samych
-pozostałych liczb kwantowych, co wiązałoby się z obsadzeniem tego samego stanu kwantowego. 
-Efektywnie prowadzi to do powiększenia odległości między takimi elektronami i
-obniżenia energii oddziaływania kulombowskiego. Z tego wynika druga cecha
-oddziaływania wymiennego: wartość ujemna energii tego oddziaływania. Można interpretować oddziaływanie wymienne
-jako oddziaływanie kulombowskie elektronu z ładunkiem dodatnim tzw. {\it dziurą wymienną} ({\it ang. exchange hole}),
-która powoduje redukcję gestości ładunku ujemnego wokół każdego elektronu. 
+% **[REVIEW NEEDED]**: Exchange interaction and exchange hole concept
+The exchange energy is a quantum quantity that has no counterpart in classical physics. 
+The exchange interaction is characterized by two important features that are closely related to each other. 
+First of all, this interaction concerns only electrons with parallel spins. 
+According to the Pauli exclusion principle, two electrons with parallel spins cannot have the same
+remaining quantum numbers, which would be associated with occupying the same quantum state. 
+Effectively, this leads to an increase in the distance between such electrons and
+a reduction of the Coulomb interaction energy. From this follows the second feature
+of the exchange interaction: the negative value of this interaction energy. One can interpret the exchange interaction
+as the Coulomb interaction of an electron with a positive charge called the {\it exchange hole},
+which causes a reduction of the negative charge density around each electron. 
 
-Po zastosowaniu metody wariacyjnej do (\ref{E_HF}) otrzymujemy równanie Hartree-Focka
+After applying the variational method to (\ref{E_HF}), we obtain the Hartree-Fock equation
 %
 \begin{equation}
 [-\frac{\hbar^2}{2m}\nabla_i^2+V_Z(\mb{r})+V_H(\mb{r})]\psi_i^{\sigma}(\mb{r})
@@ -385,16 +395,16 @@ Po zastosowaniu metody wariacyjnej do (\ref{E_HF}) otrzymujemy równanie Hartree
 \label{HF}
 \end{equation} 
 %
-gdzie $V_H$ oznacza potencjał Hartree
+where $V_H$ denotes the Hartree potential
 %
 \begin{equation}
 V_H(\mb{r})=\int d\mb{r}' \frac{n(\mb{r}')}{|\mb{r}-\mb{r}'|}.
 \end{equation}
 %
-Równanie Hartree-Focka jest równaniem nieliniowymi ponieważ w ostatnim wyrazie Hamiltonianu występuje poszukiwana funkcja falowa.
-Slater zaproponował inną postać równań (\ref{HF}), która
-pozwala lepiej zrozumieć charakter oddziaływania wymiennego \cite{slater51}.
-Mnożąc i dzieląc wyraz wymienny przez $\psi_i^{\sigma}(r)$ otrzymujemy
+The Hartree-Fock equation is a nonlinear equation because the last term of the Hamiltonian contains the wave function we are looking for.
+Slater proposed a different form of equations (\ref{HF}), which
+allows better understanding of the nature of the exchange interaction \cite{slater51}.
+Multiplying and dividing the exchange term by $\psi_i^{\sigma}(r)$, we obtain
 %
 \begin{equation}
 [-\frac{\hbar^2}{2m}\nabla_i^2+V_Z(\mb{r})+V_H(\mb{r})
@@ -402,132 +412,136 @@ Mnożąc i dzieląc wyraz wymienny przez $\psi_i^{\sigma}(r)$ otrzymujemy
 \label{HFS}
 \end{equation}
 %
-gdzie $n(\mb{r},\mb{r}')$ można interpretować jako gęstość ładunku wymiennego 
+where $n(\mb{r},\mb{r}')$ can be interpreted as the exchange charge density 
 %
 \begin{equation}
 n(\mb{r},\mb{r}')= e\sum_{j,\sigma}\frac{\psi_j^{\sigma*}(\mb{r}')\psi_i^{\sigma}(\mb{r}')\psi_j^{\sigma}(\mb{r})\psi_i^{\sigma*}(\mb{r})}{\psi_i^{\sigma*}(\mb{r})\psi_i^{\sigma}(\mb{r})},
 \label{EC}
 \end{equation}
 %
-która jest funkcją dwóch położeń $\mb{r}$ i $\mb{r}'$ i zależy od stanu kwantowego $i$. Całkowity ładunek wymienny
-równy jest ładunkowi pojedynczego elektronu, co łatwo pokazać wykonując całkowanie po $\mb{r}'$ i korzystaniu z ortogonalności 
-funkcji falowych
+which is a function of two positions $\mb{r}$ and $\mb{r}'$ and depends on the quantum state $i$. The total exchange charge
+equals the charge of a single electron, which can be easily shown by integrating over $\mb{r}'$ and using the orthogonality 
+of wave functions
 %
 \begin{equation}
 q=e\sum_{j,\sigma}[\int d\mb{r}'\psi_j^{\sigma*}(\mb{r}')\psi_i^{\sigma}(\mb{r}')]\frac{\psi_j^{\sigma}(\mb{r})}{\psi_i^{\sigma}(\mb{r})}=
 e\sum_{j,\sigma}\delta_{ij}\frac{\psi_j^{\sigma}(\mb{r})}{\psi_i^{\sigma}(\mb{r})}=e.
 \end{equation}
 %
-Biorąc pod uwagę przypadek, gdy obydwa położenia są jednakowe $\bm{r}=\bm{r'}$ otrzymujemy gęstość ładunku wymiennego zgodną ze wzorem (\ref{dens}).
-Powoduje to, że wyraz opisujący oddziaływanie elektronu z jego własnym polem wymiennym ma taką sama postać jak potencjał Hartree, ale z przeciwny znakiem
-Dzięki tej własności, obydwa wyrazy się wzajemnie kasują i w przybliżeniu Hartree-Focka nie występuje problem oddziaływania elektronu z jego własnym polem ({\it samooddziaływanie, ang. self-interaction}). 
-W formie (\ref{HFS}) równanie Hartree-Focka ma postać jednoelektronowego równania Schr\"{o}dingera z potencjałem wymiennym wytwarzanym
-w miejscu znajdowania się elektronu przez ładunek wymienny.
-Zgodnie z twierdzeniem Koopmansa, wartości własne $E_i$ odpowiadają energiom koniecznym do usunięcia elektronu z orbitalu 
+% **[REVIEW NEEDED]**: Self-interaction cancellation and Koopmans' theorem
+Taking into account the case when both positions are the same $\bm{r}=\bm{r'}$, we obtain the exchange charge density consistent with formula (\ref{dens}).
+This causes the term describing the interaction of an electron with its own exchange field to have the same form as the Hartree potential, but with the opposite sign.
+Due to this property, both terms cancel each other out, and in the Hartree-Fock approximation there is no problem of an electron interacting with its own field ({\it self-interaction}). 
+In the form (\ref{HFS}), the Hartree-Fock equation has the form of a one-electron Schr\"{o}dinger equation with an exchange potential generated
+at the location of the electron by the exchange charge.
+According to Koopmans' theorem, the eigenvalues $E_i$ correspond to the energies required to remove an electron from the orbital 
 $\psi_i^{\sigma}(\mb{r})$~\cite{Koopman}.
 
 
-\section{Metoda pola samouzgodnionego}
+\section{Self-consistent field method}
 
-Równania Hartree-Focka najczęściej rozwiązuje się numerycznie stosując metodę pola samouzgodnionego, nazywaną również przybliżeniem średniego pola.
-Przy zadanych położeniach atomów wybieramy początkowe funkcje falowe $\psi_{i0}^{\sigma}$, 
-które przykładowo mogą być orbitalami izolowanych atomów.
-Dla tych funkcji falowych wyliczamy gęstość elektronową $n(\mb{r})$ i potencjał $V(\mb{r})$ 
-w każdym punkcie przestrzeni badanego układu. 
-Dla tak wyliczonego potencjału rozwiązujemy równanie (\ref{HF}) wyznaczając zbiór jednoelektronowych funkcji falowych i energii 
-stanów elektronowych. Wyznaczone funkcje falowe stosujemy do ponownego wyliczenia gęstości elektronów
-i potencjału efektywnego. Procedurę powtarzamy do momentu, gdy otrzymane w kolejnych krokach energie i funkcje falowe
-są jednakowe lub różnią się o niewielką zadaną wielkość. Najczęściej parametrem służącym do badania zbieżności
-rachunku jest całkowita energia układu. Metoda pola samoouzgodnionego zastosowana była po raz pierwszy
-do rozwiązania równania Hartree, które możemy otrzymać z rownania Hartree-Focka po usunięciu
-oddziaływania wymiennego. Równanie Hartree odpowiada funkcji falowej w postaci
-iloczynu niezależnych funkcji jednocząstkowych, czyli opisuje zbiór niezależnych elektronów
-w efektywnym polu elektrostatycznym. Metoda pola samouzgodnionego stosowana jest obecnie w większości 
-metod obliczeniowych struktury elektronowej ciał stałych. 
+The Hartree-Fock equations are most often solved numerically using the self-consistent field method, also called the mean-field approximation.
+For fixed atomic positions, we choose initial wave functions $\psi_{i0}^{\sigma}$, 
+which can be, for example, orbitals of isolated atoms.
+For these wave functions, we calculate the electron density $n(\mb{r})$ and potential $V(\mb{r})$ 
+at each point in space of the studied system. 
+For the potential calculated in this way, we solve equation (\ref{HF}) determining the set of one-electron wave functions and energies 
+of electronic states. We use the determined wave functions to recalculate the electron density
+and effective potential. We repeat the procedure until the energies and wave functions obtained in successive steps
+are the same or differ by a small specified amount. Most often, the parameter used to test convergence
+of the calculation is the total energy of the system. The self-consistent field method was first applied
+to solve the Hartree equation, which we can obtain from the Hartree-Fock equation by removing
+the exchange interaction. The Hartree equation corresponds to a wave function in the form of
+a product of independent single-particle functions, i.e., it describes a set of independent electrons
+in an effective electrostatic field. The self-consistent field method is currently used in most 
+computational methods for the electronic structure of solids. 
 
-\section{Korelacje elektronowe}
+\section{Electronic correlations}
 
-Podejście Hartree-Focka jest metodą przybliżoną, zatem wyliczona energia
-i funkcje falowe różnią się od wielkości dokładnych, które odpowiadają rozwiązaniom równania
-Schr\"{o}dingera dla funkcji wieloelektronowej.
-Uwzględnienie wszystkich efektów oddziaływań wielociałowych w układzie elektronowym umożliwia
-dodatkowe obniżenie energii całkowitej w porównaniu do energii Hartree-Focka.
-Różnica między dokładną wartością energii ($E_{\rm{exact}}$) i energią wyliczoną w przybliżeniu 
-Hartree-Focka ($E_{\rm{HF}}$), nosi nazwę energii korelacji
+% **[REVIEW NEEDED]**: Correlation energy definition and strongly correlated systems
+The Hartree-Fock approach is an approximate method, so the calculated energy
+and wave functions differ from exact quantities, which correspond to solutions of the Schr\"{o}dinger equation
+for the many-electron wave function.
+Taking into account all effects of many-body interactions in the electronic system enables
+an additional lowering of the total energy compared to the Hartree-Fock energy.
+The difference between the exact energy value ($E_{\rm{exact}}$) and the energy calculated in the 
+Hartree-Fock approximation ($E_{\rm{HF}}$) is called the correlation energy
 %
 \begin{equation}
 E_c=E_{\rm{\text{exact}}}-E_{\rm{\text{HF}}}.
 \end{equation}
 %
-Żródłem korelacji elektronowych są oddziaływania kulombowskie, które dążą do przestrzennej separacji 
-elektronów. Elektron znajdujący się w położeniu $\bm{r}$ powoduje, że inne elektrony unikają tego położenia.
-Czyli prawdopodobieństwo znalezienia elektronu w danym punkcie zależy od położeń wszystkich pozostałych $N-1$
-elektronów. Materiały, w których lokalne oddziaływania kulombowskie mają decydujący wpływ na strukturę elektronową
-i własności transportowe nazywane są układami silnie skorelowanymi. 
+The source of electronic correlations are Coulomb interactions, which tend to spatially separate 
+electrons. An electron located at position $\bm{r}$ causes other electrons to avoid this position.
+That is, the probability of finding an electron at a given point depends on the positions of all the remaining $N-1$
+electrons. Materials in which local Coulomb interactions have a decisive influence on the electronic structure
+and transport properties are called strongly correlated systems. 
 
-Metoda Hartree-Focka jest punktem wyjścia do bardziej zaawansowanych metod stosowanych głównie w chemii kwantowej.
-Można ogólnie zapisać funkcję falową układu $N$ elektronów w postaci rozwinięcia na skończoną ilość wyznaczników Slatera
+% **[REVIEW NEEDED]**: Configuration interaction and multi-determinant methods
+The Hartree-Fock method is the starting point for more advanced methods used mainly in quantum chemistry.
+One can generally write the wave function of a system of $N$ electrons as an expansion in a finite number of Slater determinants
 %
 \begin{equation}
 \Phi(\bm{r}_1,...,\bm{r}_N)=c_0\Phi_0(\bm{r}_1,...,\bm{r}_N)+\sum_{i=1}^{N_\text{det}} c_i\Phi_i(\bm{r}_1,...,\bm{r}_N),
 \end{equation}
 %
-gdzie $\Phi_0$ jest funkcją falową stanu podstawowego w przybliżeniu Hartree-Focka,
-a wyznaczniki $\Phi_i$ odpowiadają stanom wzbudzonym. Im większa liczba tych wyznaczników $N_{\text{det}}$, tym dokładniej
-opisane są korelacje elektronowe. Funkcje $\Phi_i$ konstruowane są przy pomocy orbitali jednoelektronowych, które nie są obsadzone
-w stanie podstawowym i mogą być zajęte przez elektrony wzbudzone. Wyznaczniki mogą opisywać pojedyncze przejścia elektronów do orbitali nieobsadzonych ($\Phi_i^{\text{S}}$),
-podwójne wzbudzenia elektronów ($\Phi_i^{\text{D}}$), potrójne wzbudzenia ($\Phi_i^{\text{T}}$) i tak dalej.
-Całkowita liczba wszystkich możliwych wzbudzonych konfiguracji rośnie bardzo szybko wraz z liczbą elektronów $N$ i orbitali $M$ (zajętych i pustych)
-według wzoru 
+where $\Phi_0$ is the ground state wave function in the Hartree-Fock approximation,
+and the determinants $\Phi_i$ correspond to excited states. The larger the number of these determinants $N_{\text{det}}$, the more accurately
+the electronic correlations are described. The functions $\Phi_i$ are constructed using single-electron orbitals that are not occupied
+in the ground state and can be occupied by excited electrons. The determinants can describe single transitions of electrons to unoccupied orbitals ($\Phi_i^{\text{S}}$),
+double electron excitations ($\Phi_i^{\text{D}}$), triple excitations ($\Phi_i^{\text{T}}$), and so on.
+The total number of all possible excited configurations grows very rapidly with the number of electrons $N$ and orbitals $M$ (occupied and empty)
+according to the formula 
 %
 \begin{equation}
 N_{\text{det}}=\frac{(M+1)!}{N!(M+1-N)!}
 \end{equation}
 %
-W najprostszym podejściu nazywanym metodą oddziaływania konfiguracji ({\it ang. configuration interaction} - CI) \cite{GTO},
-wyznaczniki konstruuje się z zajętych i pustych orbitali jednoelektronowych hamiltonianu Hartree-Focka.
-Funkcja falowa przyjmuje postać szeregu wyznaczników o zwiększającej się ilości wzbudzonych elektronów
+In the simplest approach called the configuration interaction (CI) method \cite{GTO},
+the determinants are constructed from occupied and empty single-electron orbitals of the Hartree-Fock Hamiltonian.
+The wave function takes the form of a series of determinants with an increasing number of excited electrons
 %
 \begin{equation}
 \Phi_{\text{CI}}=c_0\Phi_0+\sum_{i=1}^{N_\text{S}} c^\text{S}_i \Phi_i^{\text{S}}+\sum_{i=1}^{N_\text{D}} c^\text{D}_i \Phi_i^{\text{D}}+\sum_{i=1}^{N_\text{T}} c^\text{T}_i \Phi_i^{\text{T}}+...,
 \label{phiCT}
 \end{equation}
 % 
-gdzie $N_\text{S}$, $N_\text{D}$, $N_\text{T}$ określają ilość wyznaczników dla danej liczby wzbudzonych orbitali.
-Stan podstawowy znajduje się przez wyznaczenie współczynników $c_i$, które minimalizuje energię
+where $N_\text{S}$, $N_\text{D}$, $N_\text{T}$ determine the number of determinants for a given number of excited orbitals.
+The ground state is found by determining the coefficients $c_i$ that minimize the energy
 %
 \begin{equation}
 E_\text{CI}=\int \Phi^*(\bm{r}_1,...,\bm{r}_N)H\Phi(\bm{r}_1,...,\bm{r}_N)d\bm{r}_1d\bm{r}_2...d\bm{r}_N,
 \end{equation}
 %
-gdzie $H$ jest hamiltonianem układu elektronowego (\ref{Sch-el}).
-Minimalizacja przeprowadzana jest przy warunku normalizacji funkcji falowej, co przekłada się na warunek dla wszystkich współczynników rozwinięcia
+where $H$ is the Hamiltonian of the electronic system (\ref{Sch-el}).
+The minimization is carried out under the condition of wave function normalization, which translates into a condition for all expansion coefficients
 $\sum_ic_i^2=1$.
-W granicy nieskończonej liczby wyznaczników tak otrzymana funkcja falowa odpowiada dokładnej funkcji wieloelektronowej.
-W praktyce stosuje się rozwinięcia do kilku największych wyrazów szeregu (\ref{phiCT}), które
-obejmują podwójne, potrójne lub poczwórne wzbudzenia.  
-Następnym krokiem jest umożliwienie optymalizacji również orbitali jednoelektronowych w połączeniu z
-optymalizacją współczynników rozwinięcia w ramach wielokonfiguracyjnej metody pola samouzgodnionego  ({\it ang. multi-configuration self-consistant field }- MCSCF). 
-Metody wielowyznacznikowe pozwalają wyznaczyć bardzo dokładnie funkcje falowe i energie stanów elektronowych, 
-jednak czas obliczeniowy skaluje się eksponencjalnie z rozmiarem układu,
-więc stosowane jest jedynie do małych układów molekularnych.
+In the limit of an infinite number of determinants, the wave function obtained in this way corresponds to the exact many-electron wave function.
+In practice, expansions are used up to a few largest terms of the series (\ref{phiCT}), which
+include double, triple, or quadruple excitations.  
+The next step is to enable optimization of single-electron orbitals as well, in combination with
+optimization of expansion coefficients within the multi-configuration self-consistent field (MCSCF) method. 
+Multi-determinant methods allow very accurate determination of wave functions and energies of electronic states, 
+however, the computational time scales exponentially with the system size,
+so it is used only for small molecular systems.
 
-\section{Gaz elektronowy}
+\section{Electron gas}
 
-Jednorodny gaz elektronowy jest dobrym przybliżeniem rzeczywistej struktury
-elektronowej prostych metali i jest często wykorzystywany w wielu podstawowych
-metodach obliczeniowych (np. w przybliżeniu lokalnej gęstości).
-Najprostszy model gazu elektronowego składa się z nieoddziałujących cząstek
-zamkniętych w sześcianie o objętości $V=L^3$. Długość elektronowej fali de'Broglie'a
-rozchodzącej się w każdym kierunku musi spełniać warunek periodyczności ($n\lambda=L$),
-co prowadzi to kwantowania wektora falowego w kierunkach $x$, $y$ i $z$
+% **[REVIEW NEEDED]**: Free electron gas model and Fermi energy
+A homogeneous electron gas is a good approximation of the actual electronic structure
+of simple metals and is often used in many fundamental
+computational methods (e.g., in the local density approximation).
+The simplest model of an electron gas consists of non-interacting particles
+confined in a cube of volume $V=L^3$. The length of the electronic de Broglie wave
+propagating in each direction must satisfy the periodicity condition ($n\lambda=L$),
+which leads to quantization of the wave vector in the $x$, $y$, and $z$ directions
 %
 \begin{equation}
-\mb{k}=(\frac{2\pi n_x}{L},\frac{2\pi n_x}{L},\frac{2\pi n_x}{L}),
+\mb{k}=(\frac{2\pi n_x}{L},\frac{2\pi n_y}{L},\frac{2\pi n_z}{L}),
 \end{equation}
 %
-gdzie $n_x$, $n_y$, $n_z$ są liczbami całkowitymi.
-Energie i funkcje falowe dyskretnych stanów elektronowych dane są wzorami
+where $n_x$, $n_y$, $n_z$ are integers.
+The energies and wave functions of discrete electronic states are given by the formulas
 %
 \begin{equation}
 E_k=\frac{\hbar^2 k^2}{2m},
@@ -538,125 +552,127 @@ E_k=\frac{\hbar^2 k^2}{2m},
 \label{pw}
 \end{equation}
 %
-Zakładamy, że układ nie jest spolaryzowany magnetycznie i liczba elektronów ze spinami skierowanymi 
-do góry i na dół jest jednakowa, $N_{\uparrow}=N_{\downarrow}=\frac{1}{2}N$.
-Zgodnie z zakazem Pauliego w stanie kwantowym o danym wektorze falowym $\mb{k}$ mogą
-znajdować się maksymalnie dwa elektrony o przeciwnych kierunkach spinu.
-W temperaturze $T=0$ K elektrony obsadzają kolejne stany od najniższego do
-maksymalnej wartości $E_F$ nazywanej energią Fermiego. 
-Całkowita energia układu $N$ elektronów wynosi
+We assume that the system is not magnetically polarized and the number of electrons with spins pointing 
+up and down is the same, $N_{\uparrow}=N_{\downarrow}=\frac{1}{2}N$.
+According to the Pauli exclusion principle, in a quantum state with a given wave vector $\mb{k}$, there can be
+a maximum of two electrons with opposite spins.
+At temperature $T=0$ K, electrons occupy consecutive states from the lowest to
+the maximum value $E_F$ called the Fermi energy. 
+The total energy of a system of $N$ electrons is
 %
 \begin{equation}
 E=2\sum_{k<k_F} E_k = \frac{2V}{(2\pi)^3}\int d\bm{k} \frac{\hbar^2 k^2}{2m} = \frac{V}{(2\pi)^3}\frac{4\pi\hbar^2}{5m} k_F^5, 
 \label{E}
 \end{equation}
 %
-gdzie $(2\pi)^3/V$ jest objętością w przestrzeni odwrotnej przypadającą na jeden stan elektronowy, 
-a $k_F$ jest wektorem falowym Fermiego, który jest promieniem kuli w przestrzeni odwrotnej
-zawierającej zajęte stany elektronowe. W ogólnym przypadku powierzchnia obejmująca zajęte stany elektronowe,
-nazywana powierzchnią Fermiego, może mieć dowolny kształt i składać się z wielu odrębnych części.
-Liczba elektronów znajdująca się w objętości $V$ wyraża się wzorem
+where $(2\pi)^3/V$ is the volume in reciprocal space per one electronic state, 
+and $k_F$ is the Fermi wave vector, which is the radius of a sphere in reciprocal space
+containing the occupied electronic states. In the general case, the surface encompassing occupied electronic states,
+called the Fermi surface, can have any shape and consist of many separate parts.
+The number of electrons in volume $V$ is expressed by the formula
 %
 \begin{equation}
 N=\frac{2V}{(2\pi)^3}\int d\bm{k}=\frac{2V}{(2\pi)^3}\frac{4\pi}{3} k_F^3.  
 \label{N}
 \end{equation}
 %
-Dzieląc (\ref{E}) przez (\ref{N}) otrzymujemy średnią energię przypadającą
-na pojedynczy elektron, wyrażoną przez energię Fermiego
+Dividing (\ref{E}) by (\ref{N}), we obtain the average energy per
+single electron, expressed through the Fermi energy
 %
 \begin{equation}
 \frac{E}{N}=\frac{3}{5} \frac{\hbar^2 k_F^2}{2m} = \frac{3}{5} E_F.
 \label{EN}
 \end{equation}  
 %
-W przypadku jednorodnego gazu gęstość elektronowa dana jest wyrażeniem
+In the case of a homogeneous gas, the electron density is given by the expression
 %
 \begin{equation}
 n = \frac{N}{V} = \frac{k_F^3}{3\pi^2}.
 \label{nkf}
 \end{equation}
 %
-Często używaną wielkością jest objętość kuli w przestrzeni rzeczywistej przypadająca na jeden elektron 
+A commonly used quantity is the volume of a sphere in real space per one electron 
 %
 \begin{equation}
 V_s=\frac{4\pi}{3}r_{s}^3=\frac{1}{n},
 \end{equation}
 %
-gdzie $r_s$ jest jej promieniem
+where $r_s$ is its radius
 %
 \begin{equation}
 r_s=(\frac{3}{4\pi n})^{1/3}.
 \end{equation}
 %
-
-Wyliczymy teraz energię gazu elektronowego w przybliżeniu Hartree-Focka.
-Zakładamy, że ładunek dodatni rozłożony jest jednorodnie w całej przestrzeni $V$
-i ma gęstość taką samą jak gaz elektronów. Energia oddziaływania
-elektronów z takim polem kasuje się z energią Hartree i całkowita energia
-elektronu składa się tylko z części kinetycznej i oddziaływania wymiennego.
-Energię wymiany można łatwo wyliczyć przedstawiając potencjał kulombowski
-w postaci transformaty Fouriera
+% **[REVIEW NEEDED]**: Hartree-Fock treatment of electron gas and exchange energy derivation
+We will now calculate the energy of the electron gas in the Hartree-Fock approximation.
+We assume that the positive charge is distributed uniformly throughout the entire volume $V$
+and has the same density as the electron gas. The interaction energy
+of electrons with such a field cancels with the Hartree energy, and the total energy
+of an electron consists only of the kinetic part and the exchange interaction.
+The exchange energy can be easily calculated by representing the Coulomb potential
+in the form of a Fourier transform
 %
 \begin{equation}
 \frac{1}{|\mb{r}-\mb{r}'|}=4\pi\int \frac{d\mb{q}}{(2\pi)^3}\frac{e^{i\mb{q}(\mb{r}-\mb{r}')}}{q^2},
 \end{equation}
 %
-Wstawiając funkcję falową w postaci (\ref{pw}) do wyrażenia na energię wymiany 
-i wykonując całkowanie otrzymujemy energie stanów jednoelektronowych
+Inserting the wave function in the form (\ref{pw}) into the expression for the exchange energy 
+and performing integration, we obtain the energies of single-electron states
 %
 \begin{equation}
 E_k=\frac{\hbar^2 k^2}{2m} - \int_{\mb{k'}<\mb{k_F}} \frac{d\bm{k'}}{(2\pi)^3} \frac{4\pi}{|\mb{k}-\mb{k'}|^2}
 =\frac{\hbar^2 k^2}{2m} - \frac{k_F}{\pi}(1+\frac{k_F^2-k^2}{2kk_F}ln|\frac{k_F+k}{k_F-k}|).
 \end{equation}
 %
-Całkowitą energię układu elektronów dostajemy sumując to wyrażenie po wektorze falowym    
+The total energy of the electron system is obtained by summing this expression over the wave vector    
 %
 \begin{equation}
 E=\sum_{k<k_F}[\frac{\hbar^2 k^2}{2m} - \frac{k_F}{\pi}(1+\frac{k_F^2-k^2}{2kk_F}ln|\frac{k_F+k}{k_F-k}|)].
 \end{equation}
 %
-Wykorzystując (\ref{EN}) i zamieniając sumowanie w drugim wyrazie na całkę dostajemy
+Using (\ref{EN}) and converting the summation in the second term to an integral, we obtain
 %
 \begin{equation}
 E=N(\frac{3}{5}E_F - \frac{3k_F}{4\pi})=N(\frac{3}{5}E_F - \frac{3(3\pi^2n)^{\frac{1}{3}}}{4\pi}),
 \end{equation}
-gdzie skorzystaliśmy ze związku (\ref{nkf}). Energia wymiany przypadająca na jeden elektron wynosi 
+where we used the relation (\ref{nkf}). The exchange energy per electron is 
 %
 \begin{equation}
 \varepsilon_x=\frac{E_x}{N}=-\frac{3}{4}\Big(\frac{3}{\pi}\Big)^{\frac{1}{3}}n^\frac{1}{3}.
 \label{exchange}
 \end{equation}
 %
-Ten wzór określający zależność energii wymieny od gęstości elektronowej
-wykorzystywany jest w teorii funkcjonału gęstości w ramach przybliżenia lokalnej gęstości.
+% **[REVIEW NEEDED]**: Exchange energy formula and local density approximation
+This formula determining the dependence of exchange energy on electron density
+is used in density functional theory within the local density approximation.
 
-Dla gazu elektronowego można wyprowadzić wyrażenie opisujące rozkład ładunku dziury wymiennej (\ref{EC}),
-który zależy tylko od odległości $r$
+For an electron gas, one can derive an expression describing the distribution of exchange hole charge (\ref{EC}),
+which depends only on distance $r$
 %
 \begin{equation}
 g^{\sigma}_x(r)=1 - [3\frac{sin(rk_F)-rk_Fcos(rk_F)}{(rk_F)^3}]^2.
 \end{equation}
 %
-Nie jest możliwe wyrażenie energii korelacji dla gazu swobodnych elektronów w postaci 
-funkcji analitycznej gęstości $n$. Pierwszy przybliżony wzór zaproponował Wigner \cite{wigner34}
+% **[REVIEW NEEDED]**: Correlation energy approximations - Wigner, Gell-Mann-Brueckner, and QMC
+It is not possible to express the correlation energy for a free electron gas in the form of 
+an analytical function of density $n$. The first approximate formula was proposed by Wigner \cite{wigner34}
 %
 \begin{equation}
 \varepsilon(r_s)=-\frac{0.44}{r_s+7.8}.
 \end{equation}
 %
-W granicy małych gęstości ($r_s\rightarrow \infty$), electrony tworzą tzw. kryształ Wignera, którego energia korelacji 
-pokrywa się z energią elektrostatyczną zlokalizowanych ładunków punktowych.
-W granicy dużej gęstości ($r_s\rightarrow 0$), Gellmann i Breuckner
-wyprowadzili wzór na gęstość energii korelacji niespolaryzowanego magnetycznie
-gazu elektronów \cite{GB}
+In the limit of low densities ($r_s\rightarrow \infty$), electrons form the so-called Wigner crystal, whose correlation energy 
+coincides with the electrostatic energy of localized point charges.
+In the limit of high density ($r_s\rightarrow 0$), Gell-Mann and Brueckner
+derived a formula for the correlation energy density of a magnetically unpolarized
+electron gas \cite{GB}
 %
 \begin{equation}
 \varepsilon_c (r_s)=0.311\ln(r_s)+r_s(A\ln(r_s)+C)-0.048+... .
 \end{equation}
 %
-Energię korelacji gazu elektronowego najdokładniej wyznaczono numerycznie
-metodą kwantowego Monte Carlo (QMC) \cite{CeperleyAlder80}. 
+The correlation energy of the electron gas was most accurately determined numerically
+by the quantum Monte Carlo (QMC) method \cite{CeperleyAlder80}. 
 
 
 \chapter{Stany elektronowe w krysztale}
