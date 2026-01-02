@@ -66,7 +66,7 @@ This is a work-in-progress (WIP) educational resource. Copilot is intended to he
 - Testing and validation scripts
 - Integration with JupyterLab/Binder environments
 
-❌ **Academic tasks Copilot should NOT modify:**
+❌ **Academic tasks Copilot should NOT modify unless directly requested:**
 - Lecture content in PDF files
 - Physics equations and theoretical derivations
 - Scientific conclusions or interpretations
