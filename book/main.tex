@@ -3214,88 +3214,88 @@ of the electronic band, $U>W$. Indeed, from Figure 6.2 it follows that the width
 When the Coulomb interaction energy $U$ exceeds $W$, the energy gap grows practically linearly with its value. 
 As can be seen from Figure 6.3, the gap values depend on the type of magnetic ordering and for the AFM state are larger than for the FM state.
 
-\chapter{Polaryzacja elektryczna}
+\chapter{Electric polarization}
 
-\section{Teoria fazy Berry'ego}
+\section{Berry phase theory}
 
-Polaryzacja elektryczna odgrywa ważną rolę w wielu zjawiskach fizycznych występujacych w dielektrykach. 
-Wyznaczenie wartości polaryzacji elektrycznej w materiałach periodycznych jakimi są kryształy stanowiło duży problem teoretyczny. 
-W obliczeniach z pierwszych zasad, dzięki periodycznym warunkom brzegowym, takie układy traktowane sa jako nieskończone
-i zwykle nie bierze sie pod uwagę wpływu powierzchni materiału. 
-W układzie skończonym można wyznaczyć polaryzację elektryczną obliczając całkowity moment dipolowy złożony z części jonowej
-i elektronowej
+Electric polarization plays an important role in many physical phenomena occurring in dielectrics. 
+Determining the value of electric polarization in periodic materials such as crystals posed a major theoretical problem. 
+In first-principles calculations, due to periodic boundary conditions, such systems are treated as infinite
+and the influence of the material surface is usually not taken into account. 
+In a finite system, electric polarization can be determined by calculating the total dipole moment composed of ionic
+and electronic parts
 %
 \begin{equation}
 \bm{P}=\frac{e}{\Omega}\sum_jZ_j\bm{R}_j+\frac{1}{\Omega}\int d\bm{r} n(\bm{r}) \bm{r},
 \label{polaryzacja}
 \end{equation}
 % 
-gdzie zarówno sumowanie po wszystkich jonach o ładunku $Z_je$, jak i całkowanie gestości elektronowej $n(\bm{r})$ 
-odbywa się po całej objetości $\Omega$. Z tego samego wzoru można wyliczyć zmianę polaryzacji $\Delta \bm{P}$
-wywołaną zmianą rozkładu gęstości elektronowej $\Delta n(\bm{r})$, np. na skutek przemieszczenia się atomów. 
+where both the summation over all ions with charge $Z_je$ and the integration of electron density $n(\bm{r})$ 
+is performed over the entire volume $\Omega$. From this same formula, one can calculate the change in polarization $\Delta \bm{P}$
+induced by a change in the electron density distribution $\Delta n(\bm{r})$, for example, as a result of atomic displacements. 
 
-W układach periodycznych własności całego kryształu zależą od rozmieszczenia atomów w komórce prymitywnej.
-Wydaje się, że całkowity moment dipolowy kryształu i polaryzację elektryczną można wyznaczyć stosując wzór (\ref{polaryzacja}),
-do pojedynczej komórki. Jednak takie podejście możliwe jest tylko w skrajnych przepadkach kryształów jonowych
-lub molekularnych i odpowiada klasycznemu opisowi typu Clausiusa-Mossottiego, w którym występują izolowane dipole elektryczne.
-Gęstość elektronowa jest wielkością ciągłą i nie jest możliwe podzielenia całego obszaru kryształu w sposób jednoznaczny.  
-Co więcej, wiązania kowalencyjne, ktore występuja w ferroelektrykach, mają naturę kwantową i poprawny opis polaryzacji elektrycznej
-wymaga formalizmu kwantowego. 
+In periodic systems, the properties of the entire crystal depend on the arrangement of atoms in the primitive cell.
+It seems that the total dipole moment of the crystal and electric polarization can be determined by applying formula (\ref{polaryzacja})
+to a single cell. However, such an approach is only possible in limiting cases of ionic
+or molecular crystals and corresponds to the classical Clausius-Mossotti description, in which isolated electric dipoles occur.
+Electron density is a continuous quantity and it is not possible to divide the entire crystal region in a unique way.  
+Moreover, covalent bonds that occur in ferroelectrics have a quantum nature and a proper description of electric polarization
+requires a quantum formalism. 
 
-Punktem startowym, który umożliwia wyznaczenie polaryzacji w układach periodycznych jest 
-fundamentalna zależność między lokalną wartością polaryzacji elektronowej i przepływającym prądem
+The starting point that enables the determination of polarization in periodic systems is 
+the fundamental relationship between the local value of electronic polarization and the flowing current
 %
 \begin{equation}
 \bm{P}_e(\bm{r},t)=\int_{t_0}^t dt' j_e(\bm{r},t').
 \label{delP}
 \end{equation}
 %
-Wzór ten umożliwia również pomiar zmiany polaryzacji $\Delta \bm{P}$ przez wyznaczenie przepływającego prądu.
-Przykładowo, mierząc zmiany polaryzacji w funkcji deformacji kryształu można wyznaczyć stałą piezoelektryczną.
-Przełomem w teorii były prace, w których pokazano związek polaryzacji elektrycznej z geometryczną fazą Berry'ego~\cite{berry1,berry2}. 
-W obliczeniach zamiast czasu wprowadza się parametr $\lambda\in [0,1]$, który  
-opisuje adiabatyczną transformację układu generującą zmianę polaryzacji
+This formula also enables the measurement of the change in polarization $\Delta \bm{P}$ by determining the flowing current.
+For example, by measuring changes in polarization as a function of crystal deformation, one can determine the piezoelectric constant.
+The breakthrough in theory came with works showing the relationship of electric polarization with the geometric Berry phase~\cite{berry1,berry2}. 
+In calculations, instead of time, a parameter $\lambda\in [0,1]$ is introduced, which  
+describes the adiabatic transformation of the system generating the change in polarization
 %
 \begin{equation}
 \Delta\bm{P}_e = \int_0^1 d\lambda \frac{\partial\bm{P}_e}{\partial\lambda}. 
 \end{equation}
 %
-Przykładowo parametr $\lambda$ może być współrzędną, która określa położenie atomu w sieci krystalicznej.  
-Stosując wyrażenie z rachunku zaburzeń można powiązać pochodną polaryzacji ze strukturą elektronową 
+For example, the parameter $\lambda$ can be a coordinate that determines the position of an atom in the crystal lattice.  
+Using an expression from perturbation theory, one can relate the derivative of polarization to the electronic structure 
 %
 \begin{equation}
-\frac{\partial\bm{P}_e}{\partial\lambda}=-i\frac{e\hbar}{\Omega m_e}\sum_{\bm{k}}\sum_{n=1}^{occ}\sum_{=1}^{emp}\frac{\langle\psi^{\lambda}_{\bm{k}n}|\bm{p}
+\frac{\partial\bm{P}_e}{\partial\lambda}=-i\frac{e\hbar}{\Omega m_e}\sum_{\bm{k}}\sum_{n=1}^{occ}\sum_{m=1}^{emp}\frac{\langle\psi^{\lambda}_{\bm{k}n}|\bm{p}
 |\psi^{\lambda}_{\bm{k}m}\rangle\langle\psi^{\lambda}_{\bm{k}m}|\partial V^{\lambda}_{\text{KS}}/\partial\lambda|\psi^{\lambda}_{\bm{k}n}\rangle}{(\varepsilon^{\lambda}_{\bm{k}n}-\varepsilon^{\lambda}_{\bm{k}m})^2}+c.c.,
 \label{partialP}
 \end{equation}
 %
-gdzie sumowanie wykonywane jest po wszystkich stanach zajętych i pustych z pierwszej strefy Brillouina. 
-Elementy maciorzowe operatora pędu można wyrazić zależnością
+where the summation is performed over all occupied and empty states from the first Brillouin zone. 
+Matrix elements of the momentum operator can be expressed by the relation
 %
 \begin{equation}
 \langle\psi^{\lambda}_{\bm{k}n}|\bm{p}|\psi^{\lambda}_{\bm{k}m}\rangle=\frac{m_e}{\hbar}\langle u^\lambda_{\bm{k}n}|[\nabla_{\bm{k}},H^\lambda_{\bm{k}}]|u^\lambda_{\bm{k}m}\rangle,
 \end{equation}
 %
-w której $u^\lambda_{\bm{k}m}$ jest częścią periodyczną funkcji Blocha, a hamiltonian dany jest wyrażeniem
+in which $u^\lambda_{\bm{k}m}$ is the periodic part of the Bloch function, and the Hamiltonian is given by the expression
 %
 \begin{equation}
 H^\lambda_{\bm{k}}=\frac{1}{2m_e}(-i\hbar\nabla+\hbar\bm{k})^2+V^\lambda_\text{KS}.
 \end{equation}
 %
-Podobnie można wyrazić elementy macierzowe pochodnej potencjału Kohna-Shama
+Similarly, one can express the matrix elements of the derivative of the Kohn-Sham potential
 %
 \begin{equation}
 \langle\psi^{\lambda}_{\bm{k}n}|\frac{\partial V^{\lambda}_{\text{KS}}}{\partial\lambda}|\psi^{\lambda}_{\bm{k}m}\rangle=\frac{m_e}{\hbar}\langle u^\lambda_{\bm{k}n}|[\frac{\partial}{\partial\lambda},H^\lambda_{\bm{k}}]|u^\lambda_{\bm{k}m}\rangle.
 \end{equation}
 %
-Po wstawieniu elementów macierzowych do (\ref{partialP}) otrzymujemy
+After inserting the matrix elements into (\ref{partialP}), we obtain
 %
 \begin{equation}
 \Delta \bm{P}_e=\frac{-ie}{8\pi^3}\sum_{n=1}^{occ}\int_\text{BZ}d\bm{k}\int_0^1d\lambda[\langle\nabla u^\lambda_{\bm{k}n}|                  
 \frac{\partial u^\lambda_{\bm{k}n}}{\partial\lambda}\rangle-\langle\frac{\partial u^\lambda_{\bm{k}n}}{\partial\lambda}|                  
 \nabla_{\bm{k}} u^\lambda_{\bm{k}n}\rangle].
 \end{equation}
-Wykonując całkowanie przez części i wykorzystując periodyczność funkcji $u_{\bm{k}n}$ dostajemy
+Performing integration by parts and using the periodicity of the function $u_{\bm{k}n}$, we obtain
 %
 \begin{equation}
 \Delta \bm{P}_e=\bm{P}^{\lambda=1}_e-\bm{P}^{\lambda=0}_e,
@@ -3309,154 +3309,153 @@ gdzie
 \label{pol2}
 \end{equation}
 %
-Występująca w tym wzorze całka jest bezpośrednio związana z fazą Berry'ego stanów elektronowych~\cite{Zak}.
-Wielkość wektorowa $\bm{A}(\bm{k})=i\langle u^\lambda_{\bm{k}n}|\nabla_{\bm{k}}|u^\lambda_{\bm {k}n}\rangle$
-nazywa się potencjałem cechowania lub połączeniem Berry'ego, a całka tej wielkość
-po zamkniętym obszarze jest fazą Berry'ego, którą dla danego pasma $n$ i kierunku $j$ można zapisać w formie
+The integral appearing in this formula is directly related to the Berry phase of electronic states~\cite{Zak}.
+The vector quantity $\bm{A}(\bm{k})=i\langle u^\lambda_{\bm{k}n}|\nabla_{\bm{k}}|u^\lambda_{\bm {k}n}\rangle$
+is called the gauge potential or Berry connection, and the integral of this quantity
+over a closed region is the Berry phase, which for a given band $n$ and direction $j$ can be written in the form
 %
 \begin{equation}
 \phi^\lambda_{nj}=\frac{i}{\Omega_\text{BZ}}\int_\text{BZ} d\bm{k}\langle u^\lambda_{\bm{k}n}|\bm{G}_j\nabla_{\bm{k}}|u^\lambda_{\bm {k}n}\rangle,
 \end{equation}
 %
-gdzie $\bm{G}_j$ jest wektorem sieci odwrotnej. 
-Polaryzacja związana z pasmem $n$ wyraża się wzorem
+where $\bm{G}_j$ is a reciprocal lattice vector. 
+The polarization associated with band $n$ is expressed by the formula
 %
 \begin{equation}
 \bm{P}^\lambda_n=\frac{e}{2\pi\Omega}\sum_j\phi^\lambda_{nj}\bm{R}_j.
 \end{equation}
 %
-Otrzymany wynik, który pokazuje związek polaryzacji elektrycznej z fazą funkcji falowej nie jest zaskoczeniem.
-W mechanice kwantowej, faza funkcji falowej jest bezpośrednio związana z prądem elektrycznym
-i zgodnie ze wzorem (\ref{delP}) określa również polaryzację elektryczną. 
-Tak jak każda faza, również polaryzacja elektryczna nie jest wartością zdefiniowaną jednoznaczne, a jedynie określoną {\it modulo}
-stała wartość. Żeby określić tę wartość zakładamy, że stan początkowy ($\lambda=0$) i końcowy ($\lambda=1$) opisane
-są tym samym hamiltonianem. Wtedy funkcje falowe dla tych stanów mogą różnić się tylko wartością fazy
+The obtained result, which shows the relationship of electric polarization with the phase of the wave function, is not surprising.
+In quantum mechanics, the phase of the wave function is directly related to the electric current
+and according to formula (\ref{delP}) also determines the electric polarization. 
+% **[REVIEW NEEDED]**: Consider the precise wording of "modulo a constant value" in this context.
+Like any phase, electric polarization is also not a uniquely defined value, but only defined {\it modulo}
+a constant value. To determine this value, we assume that the initial state ($\lambda=0$) and final state ($\lambda=1$) are described
+by the same Hamiltonian. Then the wave functions for these states can differ only by the value of the phase
 %
 \begin{equation}
 u^{\lambda=1}_{\bm{k}n}(\bm{r})=e^{i\theta_{\bm{k}n}}u^{\lambda=0}_{\bm{\bm{k}n}}(\bm{r}).
 \end{equation}
 %
-Zmianę fazy można zapisać w ogólnej formie
+The change in phase can be written in the general form
 %
 \begin{equation}
 \theta_{\bm{k}n}=\beta_{\bm{k}n}+\bm{k}\bm{R}_n,
 \end{equation}
 %
-gdzie $\beta_{\bm{k}n}$ jest funkcją periodyczną w $\bm{k}$. Zgodnie ze wzorem (\ref{pol2}), zmiana polaryzacji w tym przypadku wynosi
+where $\beta_{\bm{k}n}$ is a periodic function in $\bm{k}$. According to formula (\ref{pol2}), the change in polarization in this case is
 %
 \begin{equation}
 \Delta\bm{P}_e=-\frac{e}{8\pi^3}\sum_{n=1}^{occ}\int_\text{BZ}d\bm{k}\nabla_{\bm{k}}\theta_{\bm{k}n}=\frac{e}{\Omega}\sum_{n=1}^{occ}\bm{R}_n=\frac{e}{\Omega}\bm{R}.
 \end{equation}
 %
-Dla każdej sieci krystalicznej, można określić najmniejszą wartość $e\bm{R}_1/\Omega$, 
-która definiuje kwant polaryzacji, związany z symetrią translacyjną potencjału elektronowego, $V(\bm{r})=V(\bm{r}-\bm{R}_1)$.
-Ze względu na periodyczność kryształu wartość bezwględna polaryzacji nie ma większego sensu i istotna jest zmiana polaryzacji między dwoma stanami.
-Przesunięcia atomów, które zwykle są brane pod uwagę, są znacznie mniejsze niż odległości między atomami i wyliczana zmiana polaryzacji
-jest dużo mniejsza niż kwant polaryzacji, $\Delta\bm{P}_e\ll e\bm{R}_1/\Omega$. Pozwala to wyeliminować niejednoznaczność wartości polaryzacji
-w praktycznych zastosowaniach.  
+For each crystal lattice, one can determine the smallest value $e\bm{R}_1/\Omega$, 
+which defines the polarization quantum, associated with the translational symmetry of the electronic potential, $V(\bm{r})=V(\bm{r}-\bm{R}_1)$.
+Due to the periodicity of the crystal, the absolute value of polarization does not make much sense and what matters is the change in polarization between two states.
+Atomic displacements that are typically considered are much smaller than distances between atoms, and the calculated change in polarization
+is much smaller than the polarization quantum, $\Delta\bm{P}_e\ll e\bm{R}_1/\Omega$. This allows one to eliminate the ambiguity in the value of polarization
+in practical applications.  
 
-Polaryzację elektryczna można wyrazić również w reprezentacji funkcji Wanniera,
-które sa transformatami Fouriera funkcji Blocha
+Electric polarization can also be expressed in the representation of Wannier functions,
+which are Fourier transforms of Bloch functions
 %
 \begin{equation}
 \psi^{\lambda}_{\bm{k}j}=e^{i\bm{k}{r}}u^\lambda_{\bm{k}n}(\bm{r})=\frac{1}{\sqrt{N}}\sum_je^{i\bm{k}\bm{R}_j}w^\lambda_n(\bm{r}-\bm{R}_j),
 \end{equation}
 %
-gdzie $\bm{R}_j$ są wektorami sieci krystalicznej. Wyliczają z tej zależności $u^\lambda_{\bm{k}n}$ i wstawiając do wzoru (\ref{pol2}) otrzymujemy 
+where $\bm{R}_j$ are crystal lattice vectors. Calculating $u^\lambda_{\bm{k}n}$ from this relation and inserting it into formula (\ref{pol2}), we obtain 
 %
 \begin{equation}
 \Delta\bm{P}_e=-\frac{e}{\Omega}\sum_{n=1}^{occ} [\int d\bm{r} \bm{r}|w^{\lambda=1}_n(\bm{r})|^2-\int d\bm{r} \bm{r}|w^{\lambda=0}_n(\bm{r})|^2].
 \end{equation}
 %
-Ten wzór pokazuje, że zmiana polaryzacji jest proporcjonalna do przesunięcia środka ciężkości rozkładu gestości ładunku,
-zlokalizowanego na orbitalach Wanniera, wywołanego adiabatyczną zmianą potencjału elektronowego.
+This formula shows that the change in polarization is proportional to the shift of the center of gravity of the charge density distribution,
+localized on Wannier orbitals, induced by an adiabatic change in the electronic potential.
 
 
-\section{Ładunki efektywne}
+\section{Effective charges}
 
-Zgodnie ze wzorem (\ref{polaryzacja}), całkowita zmiana polaryzacji wzdłuż kierunku $\alpha$
-składa się z części jonowej i elektronowej
+According to formula (\ref{polaryzacja}), the total change in polarization along direction $\alpha$
+consists of ionic and electronic parts
 %
 \begin{equation}
 (\Delta\bm{P})_\alpha=(\Delta\bm{P}_\text{ion})_\alpha+(\Delta\bm{P}_e)_\alpha.
 \label{pol3}
 \end{equation}
 % 
-Część elektronowa polaryzacji dana jest wyrażeniami (\ref{pol1}) i (\ref{pol2}), natomiast część jonowa wyliczana jest ze wzoru
+The electronic part of polarization is given by expressions (\ref{pol1}) and (\ref{pol2}), while the ionic part is calculated from the formula
 %
 \begin{equation}
 (\Delta\bm{P}_\text{ion})_\alpha=\frac{e}{\Omega}Z_\text{ion}u_\alpha,
 \label{pol4}
 \end{equation}
 %
-gdzie $Z_{ion}$ jest ładunkiem rdzenia atomowego, a $u_\alpha$ wartością przesunięcia atomów.
-Zmianę całkowitej polaryzacji można zapisać w formie
+where $Z_{ion}$ is the atomic core charge, and $u_\alpha$ is the value of atomic displacement.
+The change in total polarization can be written in the form
 %
 \begin{equation}
 (\Delta\bm{P})_\alpha = \frac{\partial P_\alpha}{\partial u_\beta}u_\beta = \frac{e}{\Omega}Z^*_{\alpha\beta} u_\beta,
 \label{pol5}
 \end{equation}
 %
-gdzie $Z^*_{\alpha\beta}$ jest tensorem ładunków efektywnych Borna.
-Liczba niezależnych i niezerowych składowych tensora zależy od symetrii kryształu i ilości nierównowaznych położeń atomowych. 
-Wszystkie składowe tensora $Z^*_{\alpha\beta}$ można wyznaczyć korzystając ze wzoru (\ref{pol5}), wyliczając
-zmianę polaryzacji dla wychyleń atomów w różnych kierunkach. 
+where $Z^*_{\alpha\beta}$ is the Born effective charge tensor.
+The number of independent and nonzero components of the tensor depends on the crystal symmetry and the number of inequivalent atomic positions. 
+All components of the tensor $Z^*_{\alpha\beta}$ can be determined using formula (\ref{pol5}), by calculating
+the change in polarization for atomic displacements in different directions. 
 
-Ładunki efektywne przyjmują niezerowe wartości we wszystkich izolatorach i odgrywają ważną rolę przy opisie
-dynamiki sieci. Przesunięcia jonów związane z podłużnymi modami optycznymi (LO) w centrum strefy Brillouina ($\bm{k}=0$), które aktywne są w podczerwieni ({\it ang. infrared modes}), generują makroskopową polaryzację elektryczną i w ten sposób modyfikują siły międzyatomowe.
-Te dodatkowe siły powodują, że energia modów LO blisko punktu $\Gamma$ jest większa niż poprzecznych modów optycznych (TO).
-Powoduje to rozszczepienie LO-TO, które może być wyliczone jeżeli znamy ładunki efektywne jonów i stałą dielektryczną materiału~\cite{PCM}.
+Effective charges take nonzero values in all insulators and play an important role in describing
+lattice dynamics. Ion displacements associated with longitudinal optical modes (LO) at the center of the Brillouin zone ($\bm{k}=0$), which are active in the infrared ({\it infrared modes}), generate macroscopic electric polarization and thus modify interatomic forces.
+These additional forces cause the energy of LO modes near the $\Gamma$ point to be larger than that of transverse optical modes (TO).
+This causes the LO-TO splitting, which can be calculated if we know the effective charges of ions and the dielectric constant of the material~\cite{PCM}.
 
  
-\section{Ferroelektryki}
+\section{Ferroelectrics}
 
-Ferroelektryki należą do osobnej grupy izolatorów, w których spontanicznie pojawia się polaryzacja elektryczna w określonych
-warunkach termodynamicznych. Praktyczne wykorzystanie ferroelektryków wynika z możliwości przełączania kierunku polaryzacji
-po przyłożeniu pola elektrycznego. W metalach indukowane są prądy elektronowe, które ekranują pole elektryczne 
-i dlatego lokalizacja elektronów jest warunkiem koniecznym występowania makroskopowej polaryzacji elektrycznej.  
-W izolatorach elektrony nie mogą poruszać się swobodnie w krysztale, natomiast biorą udział w prądach polaryzacji, 
-powiązanych z lokalną wartością polaryzacji elektrycznej.  
-W ferroelektrykach ważną role odgrywają wiązania kowalencyjne i hybrydyzacja między różnymi stanami elektronowymi 
-umożliwiająca transfer ładunku między jonami.
-Najbardziej podstawowy mechanizm tworzenia się fazy ferroelektrycznej związany jest ze strukturalnym przejściem fazowym. 
-W fazie paraelektrycznej, występującej zwykle w wyższych temperaturach, sieć krystaliczna posiada symetrię centrosymetryczną,
-w której średnia polaryzacja $\bm{P}=0$. Aby powstała spontaniczna polaryzacja, musi zajść transformacja układu
-do struktury bez centrum symetrii, czyli takiej, która nie jest niezmiennicza wzlędem operacji ($\bm{r}\rightarrow -\bm{r}$).
-To jest warunek konieczny występowania fazy ferroelektrycznej, gdzie $\bm{P}\neq 0$.
+Ferroelectrics belong to a separate group of insulators in which electric polarization spontaneously appears under specific
+thermodynamic conditions. The practical use of ferroelectrics stems from the possibility of switching the direction of polarization
+after applying an electric field. In metals, electronic currents are induced that screen the electric field 
+and therefore electron localization is a necessary condition for the occurrence of macroscopic electric polarization.  
+In insulators, electrons cannot move freely in the crystal, but they participate in polarization currents, 
+related to the local value of electric polarization.  
+In ferroelectrics, covalent bonds and hybridization between different electronic states play an important role, 
+enabling charge transfer between ions.
+The most basic mechanism for the formation of the ferroelectric phase is associated with a structural phase transition. 
+In the paraelectric phase, which usually occurs at higher temperatures, the crystal lattice has centrosymmetric symmetry,
+in which the average polarization $\bm{P}=0$. For spontaneous polarization to arise, there must be a transformation of the system
+to a structure without a center of symmetry, that is, one that is not invariant with respect to the operation ($\bm{r}\rightarrow -\bm{r}$).
+This is a necessary condition for the occurrence of the ferroelectric phase, where $\bm{P}\neq 0$.
 
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=1]{BaTiO3.pdf}
-\caption{Deformacja sieci krystalicznej ferroelektryka o strukturze perowskitu ABO$_3$.}
+\caption{Deformation of the crystal lattice of a ferroelectric with perovskite structure ABO$_3$.}
 \label{fig:batio3}
 \end{figure}
 
-Przykładem ferroelektryków są materiały o strukturze perowskitu ABO$_3$, pokazanej na rysunku (\ref{fig:batio3}).
-Do tej grupy należy tytanian baru BaTiO$_3$ i wiele innych tlenków zawierajacych metale przejściowe.
-W narożach komórki znajdują się kationy A, natomiast znajdujący się w środku kation B otoczony jest oktaedrem anionów O.
-W wysokich temperaturach kryształ posiada centrosymetryczną symetrię regularną. Przy obniżaniu temperatury w materiale pojawia się
-niestabilność sieci, związana z wystepowaniem miękkiego modu fononowego, którego energia dąży do zera przy zbliżaniu się do przejścia fazowego.
-Wychylenia atomów w miękkim modzie, pokazane schematycznie na rysunku (\ref{fig:batio3}), prowadzą do statycznej 
-deformacji sieci poniżej temperatury krytycznej. W strukturze tetragonalnej złamana jest symetria centrosymetryczna 
-i pojawia się niezerowa polaryzacja elektryczna, której żródłem jest względne przesunięcie anionów (O),
-względem kationów (A i B). Zmiana polaryzacji spowodowana jest nie tylko sztywnym przesunięciem ładunków zlokalizowanych na jonach,
-ale również, jak to zostało wyjaśnione w poprzednich rozdziałach, przepływem prądów elektronowych wzdłuż wiązań kowalencyjnych. 
+An example of ferroelectrics are materials with the perovskite structure ABO$_3$, shown in Figure (\ref{fig:batio3}).
+This group includes barium titanate BaTiO$_3$ and many other oxides containing transition metals.
+At the corners of the cell are cations A, while the cation B located in the center is surrounded by an octahedron of anions O.
+At high temperatures, the crystal has centrosymmetric cubic symmetry. Upon lowering the temperature, lattice instability appears in the material, associated with the occurrence of a soft phonon mode whose energy approaches zero as the phase transition is approached.
+Atomic displacements in the soft mode, shown schematically in Figure (\ref{fig:batio3}), lead to static 
+lattice deformation below the critical temperature. In the tetragonal structure, centrosymmetric symmetry is broken 
+and nonzero electric polarization appears, whose source is the relative displacement of anions (O)
+relative to cations (A and B). The change in polarization is caused not only by the rigid displacement of charges localized on ions,
+but also, as explained in previous chapters, by the flow of electronic currents along covalent bonds. 
  
-Wartość polaryzacji elektrycznej w ferroelektrykach można wyliczyć startując ze stanu początkowego ($\lambda=0$), który odpowiada położeniom jonów w strukturze 
-centrosymetrycznej ($\bm{P}=0$).
-Wtedy zmiana polaryzacji (\ref{pol3}), indukowana przysunięciem jonów do położeń w strukturze niecentrosymetrycznej,
-odpowiada wartości spontanicznej polaryzacji, która pojawia się w wyniku przejścia fazowego.
-Wartość polaryzacji wyliczona dla ferroelektryka KNbO$_3$ wynosi 0.35 C/m$^2$~\cite{resta1993}
-i bardzo dobrze zgadza się z wartością wyznaczoną eksperymentalnie 0.37 C/m$^2$. 
+The value of electric polarization in ferroelectrics can be calculated starting from the initial state ($\lambda=0$), which corresponds to ion positions in the centrosymmetric structure ($\bm{P}=0$).
+Then the change in polarization (\ref{pol3}), induced by displacing ions to positions in the non-centrosymmetric structure,
+corresponds to the value of spontaneous polarization that appears as a result of the phase transition.
+The value of polarization calculated for the ferroelectric KNbO$_3$ is 0.35 C/m$^2$~\cite{resta1993}
+and agrees very well with the experimentally determined value of 0.37 C/m$^2$. 
  
-W ferroelektrykach występują szczególnie duże wartości ładunków efektywnych, często znacznie przewyższające ładunki statyczne jonów. 
-Przykładowo w strukturze regularnej BaTiO$_3$ ładunki efektywne jonów znajdujacych się w czterech nierównoważnych położeniach przyjmują wartości: 
-$Z^*_\text{Ba}=2.75$, $Z^*_\text{Ti}=7.06$, $Z^*_\text{O1}=-5.83$ i $Z^*_\text{O2}=-2.11$~\cite{zhong1994}.
-Znacznie podwyższone wartości ładunków efektywnych jonów Ti i O1 wynikają z silnej hybrydyzacji między stanami $3d$ i $2p$ 
-w wiązaniu kowalencyjnym Ti-O1. Zmiana odległości między tymi jonami generuje transfer ładunku (prąd polaryzacji)
-i zmianę polaryzacji zgodnie ze wzorem (\ref{delP}). Całkowita zmiana polaryzacji składa się z części jonowej, zależnej od ładunków statycznych~(\ref{pol4}),
-i części elektronowej, która powoduje zwiększenie wartości ładunków efektywnych.
-Duże ładunki efektywne powodują, że rozszczepienie LO-TO przyjmuje bardzo duże wartości w ferroelektrykach~\cite{zhong1994}.
+In ferroelectrics, particularly large values of effective charges occur, often significantly exceeding the static charges of ions. 
+For example, in the cubic structure of BaTiO$_3$, the effective charges of ions located at four inequivalent positions take the values: 
+$Z^*_\text{Ba}=2.75$, $Z^*_\text{Ti}=7.06$, $Z^*_\text{O1}=-5.83$, and $Z^*_\text{O2}=-2.11$~\cite{zhong1994}.
+The significantly elevated values of effective charges of Ti and O1 ions result from strong hybridization between $3d$ and $2p$ states 
+in the covalent Ti-O1 bond. A change in the distance between these ions generates charge transfer (polarization current)
+and a change in polarization according to formula (\ref{delP}). The total change in polarization consists of the ionic part, dependent on static charges~(\ref{pol4}),
+and the electronic part, which causes an increase in the value of effective charges.
+Large effective charges cause the LO-TO splitting to take very large values in ferroelectrics~\cite{zhong1994}.
 
  
 \chapter{Oddziaływanie van der Waalsa}
