@@ -742,12 +742,14 @@ that define the edges of the conventional cells is shown.
 System & Lattice constants & Angles & Bravais lattices\\
 \hline
 cubic & $a=b=c$ & $\alpha=\beta=\gamma=90^{\degree}$ &  P, F, I \\ 
-tetragonal & $a=b\ne c$ & $\alpha=\beta=\gamma=90^{\degree}$ &  P, I \\  
-orthorhombic & $a\ne b\ne c$ & $\alpha=\beta=\gamma=90^{\degree}$ &  P, F, C, I \\ 
-hexagonal &  $a=b\ne c$ & $\alpha=\beta=90^{\degree}$, $\gamma=120^{\degree}$ &  P  \\
-trigonal & $a=b\ne c$ & $\alpha=\beta=90^{\degree}$, $\gamma=120^{\degree}$ &  P \\
-monoclinic & $a=b\ne c$ & $\alpha=\gamma=90^{\degree}$, $\beta\ne 90^{\degree}$ & P, C \\ 
-triclinic & $a\ne b\ne c$ & $\alpha\ne \beta\ne \gamma\ne 90^{\degree}$ & P \\ \hline
+% **[EDITORIAL]**: Line 745 - Inconsistent use of "ne" - should use proper \neq symbol throughout for consistency; also missing space in some table cells
+tetragonal & $a=b\neq c$ & $\alpha=\beta=\gamma=90^{\degree}$ &  P, I \\  
+% **[EDITORIAL]**: Continuing table consistency - use \neq throughout for clarity
+orthorhombic & $a\neq b\neq c$ & $\alpha=\beta=\gamma=90^{\degree}$ &  P, F, C, I \\ 
+hexagonal &  $a=b\neq c$ & $\alpha=\beta=90^{\degree}$, $\gamma=120^{\degree}$ &  P  \\
+trigonal & $a=b\neq c$ & $\alpha=\beta=90^{\degree}$, $\gamma=120^{\degree}$ &  P \\
+monoclinic & $a=b\neq c$ & $\alpha=\gamma=90^{\degree}$, $\beta\neq 90^{\degree}$ & P, C \\ 
+triclinic & $a\neq b\neq c$ & $\alpha\neq \beta\neq \gamma\neq 90^{\degree}$ & P \\ \hline
 \end{tabular}
 \end{center}
 \end{table}
@@ -1077,7 +1079,8 @@ of the ground state.
 
 \section{Kohn-Sham Equation}
 
-The Kohn-Sham theorems allow us to rigorously relate the ground state electron density
+% **[EDITORIAL]**: Line 1082 - "Kohn-Sham theorems" should be "Hohenberg-Kohn theorems" (the theorems were established by Hohenberg & Kohn; Kohn-Sham developed the equations)
+The Hohenberg-Kohn theorems allow us to rigorously relate the ground state electron density
 to the Schr\"{o}dinger equation for a system of interacting electrons, described by the Hamiltonian (\ref{hamil}).
 In practice, it is not possible to directly solve the Schr\"{o}dinger equation and determine many-body wave functions.
 Density functional theory allows us to replace the many-body equation with a new equation, called the Kohn-Sham equation, which has
@@ -1093,7 +1096,8 @@ n(\bm{r})=\sum_{i,\sigma} f_{i\sigma}|\psi_i^{\sigma}(\bm{r})|^2,
 where for simplicity the index $i$ determines both the state number $j$ and the wave vector $\bm{k}$, and $f_{i\sigma}$ are occupation numbers
 of states, which in the general case may take fractional values, e.g., according to the Fermi-Dirac distribution.
 We also assume that the elementary charge $e=1$, which means that the charge density is identical to the electron density.
-The Kohn-Sham theorems ensure that the effective potential $V_{eff}$ is uniquely
+% **[EDITORIAL]**: Line 1098 - Clarify reference: "Kohn-Sham theorems" should be "Hohenberg-Kohn theorems" (the theorems establishing uniqueness; Kohn-Sham equations come later)
+The Hohenberg-Kohn theorems ensure that the effective potential $V_{eff}$ is uniquely
 determined by the electron density, as well as that the total energy functional reaches
 a minimum for the ground state electron density.
 Therefore, we can determine the ground state of the system if we know the energy functional and can
@@ -3671,7 +3675,8 @@ Using the second quantization formalism, we write the Hamiltonian of a system of
 in the general form
 %
 \begin{equation}
-H=\int d^3r \psi^\dagger(\bm{r},t) h_0(\bm{r}) \psi(\bm{r},t) +\frac{1}{2}\int d^3rd^3r' \psi^\dagger(\bm{r},t)\psi^\dagger(\bm{r}',t)v(\bm{r}-\bm{r}') \psi^\dagger(\bm{r}',t)\psi^\dagger(\bm{r},t),
+% **[EDITORIAL]**: Line 3678 - Formula error: The interaction term should have annihilation operators \psi (not \psi^\dagger) in the rightmost two positions; correct form should be: \psi^\dagger(\bm{r},t)\psi^\dagger(\bm{r}',t)v(\bm{r}-\bm{r}') \psi(\bm{r}',t)\psi(\bm{r},t)
+H=\int d^3r \psi^\dagger(\bm{r},t) h_0(\bm{r}) \psi(\bm{r},t) +\frac{1}{2}\int d^3rd^3r' \psi^\dagger(\bm{r},t)\psi^\dagger(\bm{r}',t)v(\bm{r}-\bm{r}') \psi(\bm{r}',t)\psi(\bm{r},t),
 \end{equation}
 %  
 where $h_0(x)$ describes the kinetic energy and the interaction of electrons with an external field, $v(\bm{r}-\bm{r}')$ is
