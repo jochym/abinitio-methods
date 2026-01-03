@@ -3046,14 +3046,14 @@ under the influence of an applied local potential \cite{coco1,coco2}.
 The second parameter $J$, called the Hund exchange energy, depends much less weakly on the type of material and often its atomic value (\ref{HundJ}) is used. 
 
 
-\chapter{Izolatory i półprzewodniki}
+\chapter{Insulators and semiconductors}
 \label{sec:insulators}
 
-\section{Przerwa energetyczna}
+\section{Energy gap}
 \label{sec:bandgap}
 
-Fundamentalna przerwa energetyczna zdefiniowana jest jako różnica między energią jonizacji ($I$), czyli procesu usunięcia elektronu z danego materiału, 
-a powinowactwem elektronowym ($A$), czyli energią uzyskaną z dodania elektronu
+The fundamental energy gap is defined as the difference between the ionization energy ($I$), i.e., the process of removing an electron from a given material, 
+and the electron affinity ($A$), i.e., the energy obtained from adding an electron
 %
 \begin{eqnarray}
 E_g=I-A&=&[E(N-1)-E(N)]-[E(N)-E(N+1)] \nonumber \\ 
@@ -3061,89 +3061,89 @@ E_g=I-A&=&[E(N-1)-E(N)]-[E(N)-E(N+1)] \nonumber \\
 \label{energygap}       
 \end{eqnarray}
 %
-gdzie $E(N)$, $E(N-1)$ i $E(N+1)$ to energie całkowite wyznaczone kolejno dla układu neutralnego składającego się z $N$ elektronów oraz
-układów z odjętym i dodanym elektronem. Każda z tych energii może być wyznaczona jako energia stanu podstawowego układu z odpowiednią ilością
-elektronów. Wartość przerwy możemy również zapisać używając energii stanów Kohna-Shama 
+where $E(N)$, $E(N-1)$, and $E(N+1)$ are the total energies determined respectively for the neutral system consisting of $N$ electrons and
+systems with a removed and added electron. Each of these energies can be determined as the ground state energy of the system with the appropriate number
+of electrons. The gap value can also be expressed using Kohn-Sham state energies 
 %
 \begin{equation}
 E_g=E(N+1)-E(N)-[E(N)-E(N-1)]=\varepsilon_{N+1}(N+1)-\varepsilon_N(N),
 \label{truegap}
 \end{equation}
 %
-gdzie $\varepsilon_N(N)$ jest energią najwyższego poziomu pasma walencyjnego w układzie z $N$ elektronami,
-a $\varepsilon_{N+1}(N+1)$ energią najniższego stanu pasma przewodnictwa w układzie z $N+1$ elektronami.
-Czyli wartość przerwy energetycznej jest teoretycznie osiągalna w ramach DFT, 
-pod warunkiem, że znana jest dokladna zależność $E(N)$. Stosując funkcjonały LDA i GGA możemy otrzymać ze wzoru (\ref{truegap}) jedynie przybliżone wartości przerwy fundamentalnej. 
+where $\varepsilon_N(N)$ is the energy of the highest level of the valence band in the system with $N$ electrons,
+and $\varepsilon_{N+1}(N+1)$ is the energy of the lowest state of the conduction band in the system with $N+1$ electrons.
+Thus, the value of the energy gap is theoretically attainable within DFT, 
+provided that the exact dependence $E(N)$ is known. Using the LDA and GGA functionals, we can obtain from formula (\ref{truegap}) only approximate values of the fundamental gap. 
    
-Zwykle wykonujemy obliczenia dla układu z ustaloną liczbą elektronów $N$ i otrzymujemy przerwę w spektrum energetycznym Kohna-Shama, 
-która wynosi
+Usually, we perform calculations for a system with a fixed number of electrons $N$ and obtain a gap in the Kohn-Sham energy spectrum, 
+which is
 %
 \begin{equation}
 \Delta_{KS}=\varepsilon_{N+1}(N)-\varepsilon_N(N).
 \label{ksgap}
 \end{equation}
 %
-Porównując wzory (\ref{truegap}) i (\ref{ksgap}) dostajemy związek między tymi dwiema przerwami
+Comparing formulas (\ref{truegap}) and (\ref{ksgap}), we obtain the relationship between these two gaps
 %
 \begin{equation}
 E_g=\Delta_{KS}+\varepsilon_{N+1}(N+1)-\varepsilon_{N+1}(N)=\Delta_{KS}+\Delta_{xc},
 \end{equation}
 %
-gdzie różnica między nimi $\Delta_{xc}$ wynika ze zmiany nachylenia liniowej funkcji $E(N)$ przy całkowitej liczbie elektronów \cite{pardew82}.
-Ta nieciągłość ma swoje źródło w potencjale wymienno-korelacyjnym, którego pochodna zmienia się skokowo przy zmianie ilości elektronów
+where the difference between them $\Delta_{xc}$ results from the change in the slope of the linear function $E(N)$ at integer electron numbers \cite{pardew82}.
+This discontinuity has its origin in the exchange-correlation potential, whose derivative changes abruptly when the number of electrons changes
 %
 \begin{equation}
 \Delta_{xc}=\frac{\delta E_{xc}[n]}{\delta n(\bm{r})}|_{N+\delta}-\frac{\delta E_{xc}[n]}{\delta n(\bm{r})}|_{N-\delta},
 \label{deltaxc}
 \end{equation}
 %
-gdzie pochodne funkcjonalne wyznaczone są dla gęstości elektronów $n(\bm{r})$, których całki po całej przestrzeni równe są $N+\delta$ i $N-\delta$, w granicy $\delta\rightarrow 0$. 
+where the functional derivatives are determined for electron densities $n(\bm{r})$, whose integrals over the entire space are equal to $N+\delta$ and $N-\delta$, in the limit $\delta\rightarrow 0$. 
 
-Występowanie tej nieciągłości jest podstawową cechą DFT, ale w stosowanych przybliżeniach LDA i GGA, które charakteryzują się analityczną zależnością
-energii od gęstości elektronowej, te nieciągłości nie występują. Przybliżony charakter energii stanów jednocząstkowych,
-z których wyznaczana jest wartość $\Delta_{KS}$, w połączeniu z brakiem nieciągłości powoduje, że przerwy energetyczne wyznaczone w przybliżeniu LDA są średnio zaniżone o $40\%$. W GGA te wartości są zwykle poprawione, ale również znacznie odbiegają od wartości eksperymentalnych. 
+The occurrence of this discontinuity is a fundamental feature of DFT, but in the LDA and GGA approximations, which are characterized by an analytical dependence
+of energy on electron density, these discontinuities do not occur. The approximate character of the single-particle state energies,
+from which the value of $\Delta_{KS}$ is determined, combined with the lack of discontinuity, causes the energy gaps determined in the LDA approximation to be on average underestimated by $40\%$. In GGA, these values are usually corrected, but also significantly deviate from experimental values. 
 
-\section{Izolatory pasmowe i półprzewodniki}
+\section{Band insulators and semiconductors}
 
-W większości półprzewodników i izolatorów przerwa energetyczna wynika z istnienia całkowicie zapełnionych pasm walencyjnych
-i pustych pasm przewodzących. Rozróżnienie między półprzewodnikami i izolatorami nie jest jednoznacznie określone.
-Zwykle półprzewodniki mają mniejszą przerwę energetyczną i ich przewodnictwo elektryczne wykazuje znaczną zależność
-od temperatury w wyniku występowania indukowanych termicznie nośników prądu w paśmie przewodnictwa.
-W tych materiałach korelacje elektronowe zwykle nie są silne, ale mimo tego wyznaczana w ramach standardowych przybliżeń DFT 
-przerwa energetyczna jest znacznie zaniżona. Wynika to z braku uwzglednienia efektów wielociałowych, które występują
-przy wzbudzaniu elektronu z pasma walencyjnego do pasma przewodnictwa. Przykładem jest oddziaływanie elektron-dziura
-wystepujace dla stanów wzbudzonych.
-W przypadku tych materiałów, metoda LDA+U nie jest skuteczna i lepiej nadają się metody SIC i funkcjonały hybrydowe,
-jak również metody wielociałowe typu GW. 
-W metodzie SIC, energia całkowita zależy od obsadzenia orbitali atomowych, co daje możliwość odtworzenie nieciągłości
-pochodnych funkcjonału wymienno-korelacyjnego (\ref{deltaxc}) i poprawienia wartości przerwy energetycznej.
-SIC daje dobre wyniki dla izolatorów z dużą przerwa takich, jak kryształy gazów szlachetnych \cite{PZ}, czy kryształy jonowe. Przykładowo dla NaCl przerwa energetyczna wynosi $E_g^{SIC}=9.2$~eV \cite{norman83}, co dobrze zgadza się z wartością eksperymentalną $E_g^{exp}=8.97$~eV.  
+In most semiconductors and insulators, the energy gap results from the existence of completely filled valence bands
+and empty conduction bands. The distinction between semiconductors and insulators is not unambiguously defined.
+Usually, semiconductors have a smaller energy gap and their electrical conductivity shows a significant dependence
+on temperature due to the occurrence of thermally induced current carriers in the conduction band.
+In these materials, electronic correlations are usually not strong, but despite this, the energy gap determined within standard DFT approximations
+is significantly underestimated. This results from the lack of inclusion of many-body effects that occur
+when exciting an electron from the valence band to the conduction band. An example is the electron-hole interaction
+occurring for excited states.
+In the case of these materials, the LDA+U method is not effective and SIC methods and hybrid functionals are more suitable,
+as well as many-body methods of the GW type.
+In the SIC method, the total energy depends on the occupation of atomic orbitals, which provides the possibility of reproducing the discontinuity
+of the derivatives of the exchange-correlation functional (\ref{deltaxc}) and improving the value of the energy gap.
+SIC gives good results for insulators with a large gap such as noble gas crystals \cite{PZ} or ionic crystals. For example, for NaCl the energy gap is $E_g^{SIC}=9.2$~eV \cite{norman83}, which agrees well with the experimental value $E_g^{exp}=8.97$~eV.  
 
-Funkcjonały hybrydowe, które częściowo uwzlędniają dokladną wartość oddziaływania wymiennego i przez to redukują błąd samooddziaływania elektronów, 
-również poprawiają wartość przerwy energetycznej. Na rysunku~\ref{fig:gaphyb} porównano eksperymentalne wartości przerwy energetycznej
-z wyliczonymi w ramach czterech funkcjonałów hybrydowych dla wybranej grupy półprzewodników i tlenków metali przejściowych (FeO, CoO, NiO, MnO, and VO$_2$)~\cite{Gap-hyb}. Dwa z tych funkcjonałów zawierają 20 \% dokładnej wartości energii wymiany (B3PW91 i B3LYP), a dwa pozostałe 25 \% (PBE0 i HSE). Dla wiekszości materiałów 
-z przerwą mniejszą niź 5 eV, zgodność z eksperymentem jest bardzo dobra dla wszystkich funkcjonałów. Jednocześnie widzimy, że wybrane funkcjonały znacznie zaniżają wartości przerwy dla trzech półprzewodników o dużej przerwie (NaCl, LiCl i LiF).
-Dokładna analiza błędów pokazała, że najlepszą zgodność uzyskano dla funkcjonału HSE, który ma tendencję do niewielkiego zaniżania wartości przerwy (średnio o -0.24 eV). Dwa funkcjonały B3PW91 i B3LYP lekko zawyżają przerwę (średnie błedy wynoszą 0.14 eV i 0.13 eV). Największe odstępstwo obserwujemy dla funkcjonału PBE0, który zawyża wartość przerwy średnio o 0.43 eV.
+Hybrid functionals, which partially include the exact value of exchange interaction and thereby reduce the electron self-interaction error, 
+also improve the value of the energy gap. Figure~\ref{fig:gaphyb} compares experimental energy gap values
+with those calculated using four hybrid functionals for a selected group of semiconductors and transition metal oxides (FeO, CoO, NiO, MnO, and VO$_2$)~\cite{Gap-hyb}. Two of these functionals contain 20\% of the exact exchange energy value (B3PW91 and B3LYP), and the other two 25\% (PBE0 and HSE). For most materials 
+with a gap smaller than 5 eV, the agreement with experiment is very good for all functionals. At the same time, we see that the selected functionals significantly underestimate the gap values for three semiconductors with a large gap (NaCl, LiCl, and LiF).
+Detailed error analysis showed that the best agreement was obtained for the HSE functional, which has a tendency to slightly underestimate the gap value (on average by -0.24 eV). Two functionals B3PW91 and B3LYP slightly overestimate the gap (average errors are 0.14 eV and 0.13 eV). The largest deviation is observed for the PBE0 functional, which overestimates the gap value by an average of 0.43 eV.
 
 \begin{figure}[t!]
 \centering
 \includegraphics[scale=0.5]{gap-hyb.pdf}
-\caption{Porównanie eksperymentalnych wartości przerwy energetycznej z obliczonymi dla różnych funkcjonałów hybrydowych. Rysunek z pracy \cite{Gap-hyb}.}
+\caption{Comparison of experimental energy gap values with those calculated for different hybrid functionals. Figure from \cite{Gap-hyb}.}
 \label{fig:gaphyb}
 \end{figure}
 
-W tabeli~\ref{gap} zebrane są wartości przerwy energetycznej dla wybranych materiałów, wyliczone różnymi metodami
-i porównane z danymi eksperymentalnymi. LDA i GGA we wszystkich przypadkach znacznie zaniżają wartość przerwy.
-Dotyczy to zarówno półprzewodników, szczególnie germanu, gdzie przerwa jest równa zeru, jak i izolatorów.
-Duże rozbieżności w porównaniu do eksperymentu widzimy dla trzech ostatnich materiałów, zaliczanych do izolatorów Motta.
-Zastosowanie funkcjonału hybrydowego HSE poprawia wartości przerwy i dla większości półprzewodników zgodność z eksperymentem jest bardzo dobra.
-Dla izolatorów, ta zgodność jest lepsza lub gorsza w zależności od materiału.
-W tabeli~\ref{gap} pokazano również wyniki otrzymane w ramach metody GW i jej uproszczonej wersji G$_0$W$_0$, które również dają
-lepsze wartości przerwy. Metoda GW, która uwzlędnia oddziaływania wielociałowe w ramach rozwinięcia perturbacyjnego, będzie tematem jednego z
-kolejnych rozdziałów. 
+Table~\ref{gap} presents energy gap values for selected materials, calculated using different methods
+and compared with experimental data. LDA and GGA in all cases significantly underestimate the gap value.
+This applies to both semiconductors, especially germanium, where the gap is equal to zero, and insulators.
+Large discrepancies compared to experiment are seen for the last three materials, classified as Mott insulators.
+Application of the HSE hybrid functional improves the gap values and for most semiconductors the agreement with experiment is very good.
+For insulators, this agreement is better or worse depending on the material.
+Table~\ref{gap} also shows results obtained using the GW method and its simplified version G$_0$W$_0$, which also give
+better gap values. The GW method, which includes many-body interactions within a perturbative expansion, will be the subject of one of
+the following chapters. 
 
 \begin{table}[h!]
-\caption{Wartości przerwy energetycznej wyliczone różnymi metodami i porównane z danymi eksperymentalnymi.}
+\caption{Energy gap values calculated using different methods and compared with experimental data.}
 \label{gap}
 \begin{center}
 \begin{tabular}{|c|c|c|c|c|c|c|}
@@ -3168,51 +3168,51 @@ kolejnych rozdziałów.
 \end{center}
 \end{table}
 
-\section{Izolatory Motta}
+\section{Mott insulators}
 
-Szczególną klasę materiałów stanowią izolatory Motta, których własności elektronowe wynikają z silnych oddziaływaniań kulombowskich miedzy elektronami.
-W tym przypadku wielkość charakteryzująca nieciągłość wyliczana w ramach standardowych przybliżeń $\Delta_{KS}$ jest równe zeru 
-lub jest bardzo małą wielkością. Przerwa energetyczna wynika zasadniczo z nieciągłości funkcjonału energii ($\Delta_{xc}>0$), powstającej przy zmianie obsadzenia stanów orbitalnych. 
-Ta nieciągła zmiana energii jest proporcjonalna do energii oddziaływania kulombowskiego $U$. Dla stanów $d$ w metalach przejściowych parametr $U$ można zdefiniować
-jako energię związaną z transferem elektronu między dwoma atomami z początkowym obsadzeniem $d^n$,
-który prowadzi do zwiększenia ilości elektronów na jednym atomie $d^{n+1}$ i zmniejszenia na drugim $d^{n-1}$
+A special class of materials are Mott insulators, whose electronic properties result from strong Coulomb interactions between electrons.
+In this case, the characteristic quantity describing the discontinuity calculated within standard approximations $\Delta_{KS}$ is equal to zero 
+or is a very small quantity. The energy gap essentially results from the discontinuity of the energy functional ($\Delta_{xc}>0$), arising from changes in orbital state occupation. 
+This discontinuous energy change is proportional to the Coulomb interaction energy $U$. For $d$ states in transition metals, the parameter $U$ can be defined
+as the energy associated with electron transfer between two atoms with initial occupation $d^n$,
+which leads to an increase in the number of electrons on one atom $d^{n+1}$ and a decrease on the other $d^{n-1}$
 %
 \begin{equation}
 U=E(d^{n+1})+E(d^{n-1})-2E(d^n),
 \end{equation} 
 %
-gdzie $E(d^n)$ jest całkowitą energią układu, w którym pojedynczy atom posiada obsadzenie $d^n$.
-Ta relacja oznacza, że sama przerwa energetyczna dana wzorem (\ref{energygap}) powinna być liniową funkcją $U$.
-Potwierdzają to obliczenia przeprowadzone w ramach metody LDA+U.
+where $E(d^n)$ is the total energy of the system in which a single atom has occupation $d^n$.
+This relation means that the energy gap itself given by formula (\ref{energygap}) should be a linear function of $U$.
+This is confirmed by calculations performed using the LDA+U method.
 
-Jako przykład omówię wyniki obliczeń gestości stanów elektronowych dla izolatora Motta Fe$_2$SiO$_4$, otrzymane metodą GGA+U \cite{Mariana}.
-Na rysunku 6.2 pokazane sa wyniki dla stanu antyferromagnetycznego (AFM).
-Dla $U=0$ dostajemy nieprawidłowy stan metaliczny ($\Delta_{KS}=0$) z energią Fermiego przecinającą pasmo $t_{2g}$. 
-Pasmo to obsadzone jest przez elektrony z mniejszościowym kierunkiem spinów (kierunek przeciwny do momentu magnetycznego danego atomu). 
-Obliczenia dla $U=4.5$ eV dają prawidłowy stan elektronowy z przerwą energetyczną równą około 2 eV,
-która rozdziela pasmo $t_{2g}$ na dwie części: obsadzone dolne pasmo Hubbarda i nieobsadzone górne pasmo Hubbarda.
+As an example, I will discuss the results of calculations of electronic density of states for the Mott insulator Fe$_2$SiO$_4$, obtained by the GGA+U method \cite{Mariana}.
+Figure 6.2 shows the results for the antiferromagnetic (AFM) state.
+For $U=0$ we get an incorrect metallic state ($\Delta_{KS}=0$) with the Fermi energy crossing the $t_{2g}$ band. 
+This band is occupied by electrons with the minority spin direction (direction opposite to the magnetic moment of the given atom). 
+Calculations for $U=4.5$ eV give the correct electronic state with an energy gap equal to about 2 eV,
+which separates the $t_{2g}$ band into two parts: the occupied lower Hubbard band and the unoccupied upper Hubbard band.
 
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=0.21]{Fe2SiO4-2.pdf}
-\caption{Gęstość stanów elektronowych w Fe$_2$SiO$_4$ dla $U=0$ (górny panel) i dla $U=4.5$~eV (dolny panel). Rysunek z pracy \cite{Mariana}.}
+\caption{Electronic density of states in Fe$_2$SiO$_4$ for $U=0$ (upper panel) and for $U=4.5$~eV (lower panel). Figure from \cite{Mariana}.}
 \label{fig:mott}
 \end{figure}
 
 \begin{figure}[t!]
 \centering
 \includegraphics[scale=0.18]{Fe2SiO4-1.pdf}
-\caption{Zależność przerwy energetycznej od parametru oddziaływania kulombowskiego $U$ w Fe$_2$SiO$_4$ dla stanu antyferromagnetycznego (czerwone kółka)
-i ferromagnetycznego (niebieskie kwadraty). Rysunek z pracy \cite{Mariana}.}
+\caption{Dependence of the energy gap on the Coulomb interaction parameter $U$ in Fe$_2$SiO$_4$ for the antiferromagnetic state (red circles)
+and ferromagnetic state (blue squares). Figure from \cite{Mariana}.}
 \label{fig:gap}
 \end{figure}
 
-Wartość przerwy energetycznej zależy od dokładnej wartości parametru $U$, co pokazano na rysunku 6.3.
-Dla małych wartości $U\leq 2$ eV, przerwa energetyczna równa jest zeru. Wynika to z kryterium, które mówi, że w izolatorach Motta, 
-niezerowa przerwa tworzy się dla wartości energii oddziaływania kulombowskiego większych od szerokości
-pasma elektronowego, $U>W$. Rzeczywiście, z rysunku 6.2 wynika, że szerokość pasma $t_{2g}$ jest równa z dobrym przybliżeniem $W=2$ eV.
-Gdy energia oddziaływania kulombowskiego $U$ przewyższa $W$, przerwa energetyczna rośnie praktycznie liniowo z jej wartością. 
-Jak widać z rysunku 6.3 wartości przerwy zależą od rodzaju uporządkowania magnetycznego i dla stanu AFM są większe niż dla stanu FM.
+The value of the energy gap depends on the exact value of the parameter $U$, as shown in Figure 6.3.
+For small values $U\leq 2$ eV, the energy gap is equal to zero. This follows from the criterion that states that in Mott insulators, 
+a nonzero gap forms for values of Coulomb interaction energy greater than the width
+of the electronic band, $U>W$. Indeed, from Figure 6.2 it follows that the width of the $t_{2g}$ band is equal with good approximation to $W=2$ eV.
+When the Coulomb interaction energy $U$ exceeds $W$, the energy gap grows practically linearly with its value. 
+As can be seen from Figure 6.3, the gap values depend on the type of magnetic ordering and for the AFM state are larger than for the FM state.
 
 \chapter{Polaryzacja elektryczna}
 
