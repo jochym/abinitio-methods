@@ -37,13 +37,6 @@ jobs:
           latexmk_use_xelatex: false
           latexmk_shell_escape: false
       
-      - name: Upload PDF artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: book-pdf
-          path: book/main.pdf
-          retention-days: 90
-      
       - name: Check PDF was created
         run: |
           if [ -f book/main.pdf ]; then
@@ -53,3 +46,11 @@ jobs:
             echo "✗ PDF was not created"
             exit 1
           fi
+      
+      - name: Upload PDF artifact
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: book-pdf
+          path: book/main.pdf
+          retention-days: 90
