@@ -3647,38 +3647,38 @@ R_{0i}^\text{SCS}=\Big{(}\frac{\alpha_i^\text{SCS}}{\alpha_i}\Big{)}^{\frac{1}{3
 
 %\subsection{Metoda MBD}
 
-\chapter{Efekty wielociałowe i stany wzbudzone}
+\chapter{Many-body effects and excited states}
 
-\section{Funkcje Greena i energia własna}
+\section{Green's functions and self-energy}
 
-Dokładny opis stanów elektronowych wymaga wyjścia poza przybliżenie niezależnych cząstek.   
-Stosując formalizm drugiego kwantowania, zapiszemy hamiltonian układu oddziałujących elektronów 
-w ogólnej formie
+An accurate description of electronic states requires going beyond the independent particle approximation.   
+Using the second quantization formalism, we write the Hamiltonian of a system of interacting electrons 
+in the general form
 %
 \begin{equation}
 H=\int d^3r \psi^\dagger(\bm{r},t) h_0(\bm{r}) \psi(\bm{r},t) +\frac{1}{2}\int d^3rd^3r' \psi^\dagger(\bm{r},t)\psi^\dagger(\bm{r}',t)v(\bm{r}-\bm{r}') \psi^\dagger(\bm{r}',t)\psi^\dagger(\bm{r},t),
 \end{equation}
 %  
-gdzie $h_0(x)$ opisuje energię kinetyczną oraz oddziaływanie elektronów z zewnętrznym polem, $v(\bm{r}-\bm{r}')$ jest
-potencjałem oddziaływania kulombowskiego między elektronami, a $\psi(\bm{r},t)$ jest operatorem pola w obrazie Heisenberga 
+where $h_0(x)$ describes the kinetic energy and the interaction of electrons with an external field, $v(\bm{r}-\bm{r}')$ is
+the Coulomb interaction potential between electrons, and $\psi(\bm{r},t)$ is the field operator in the Heisenberg picture 
 %
 \begin{equation}
 \psi(\bm{r},t)=e^{\frac{i}{\hbar}Ht}\psi(\bm{r})e^{-\frac{i}{\hbar}Ht}.
 \label{field}
 \end{equation}
 %
-Operatory pola $\psi^\dagger(\bm{r})$ i $\psi(\bm{r})$ opisują kreacje i anihilację elektronu w punkcie $\bm{r}$.
+The field operators $\psi^\dagger(\bm{r})$ and $\psi(\bm{r})$ describe the creation and annihilation of an electron at point $\bm{r}$.
 
-Stan podstawowy $|\Phi_N\rangle$ układu $N$ oddziałujących elektronów spełnia równanie 
+The ground state $|\Phi_N\rangle$ of a system of $N$ interacting electrons satisfies the equation 
 %
 \begin{equation}
 H|\Phi_N\rangle=E|\Phi_N\rangle.
 \end{equation}
 %
-Dalej zakładamy, że stan podstawowy jest unormowany $\langle\Phi_N|\Phi_N\rangle=1$.
+Further, we assume that the ground state is normalized $\langle\Phi_N|\Phi_N\rangle=1$.
 
-W kwantowej teorii układów wielu czastek można powiązać spektrum wzbudzeń z jednocząstkowymi funkcjami Greena, 
-zwanymi również propagatorami, które definiujemy
+In the quantum theory of many-particle systems, the excitation spectrum can be related to single-particle Green's functions, 
+also called propagators, which we define
 %
 \begin{equation} 
 iG(x,x')=\langle \Phi_N|T\psi(x)\psi^\dagger(x')|\Phi_N\rangle=\begin{cases}
@@ -3688,39 +3688,39 @@ iG(x,x')=\langle \Phi_N|T\psi(x)\psi^\dagger(x')|\Phi_N\rangle=\begin{cases}
 \label{greenf}                      
 \end{equation}
 % 
-gdzie wprowadzono oznaczenie $x=(\bm{r},t)$, a $T$ jest operatorem uporządkowania w czasie. 
-Funkcja Greena jest amplitudą prawdopodobieństwa propagacji elektronu z punktu $x'$ do punktu $x$ dla $t>t'$ 
-lub dziury z punktu $x$ do $x'$ dla $t'>t$. Te dwa przypadki opisują odpowiednio proces fotoemisji i odwrotnej fotoemisji.
-Funkcje Greena dla elektronów są macierzami ze względu na spinowe stopnie swobody. Dla uproszczenia zapisu pomijamy
-tutaj wskaźniki numerujące stany spinowe.
-Zajomość funkcji Green pozwala wyznaczyć energię stanu podstawowego, wartości oczekiwanego jednocząstkowych operatorów
-w stanie podstawowym oraz jednoelektronowe spektrum wzbudzeń.
-Funkcje Greena spełniaja równanie ruchu
+where we introduced the notation $x=(\bm{r},t)$, and $T$ is the time-ordering operator. 
+The Green's function is the probability amplitude for the propagation of an electron from point $x'$ to point $x$ for $t>t'$ 
+or a hole from point $x$ to $x'$ for $t'>t$. These two cases describe the processes of photoemission and inverse photoemission spectroscopy, respectively.
+Green's functions for electrons are matrices with respect to spin degrees of freedom. For simplicity of notation, we omit
+the indices labeling spin states here.
+Knowledge of the Green's function allows us to determine the ground state energy, expectation values of single-particle operators
+in the ground state, and the single-electron excitation spectrum.
+Green's functions satisfy the equation of motion
 %
 \begin{equation}
 [i\frac{\partial}{\partial t}-H_0(x))]G(x,x')-\int dx''\Sigma(x,x'')G(x'',x')=\delta(x-x'),
 \end{equation}
 %
-gdzie $H_0 =h_0+V_H$ ($V_H$ jest potencjałem Hartree), a $\Sigma$ nosi nazwę energii własnej i opisuje oddziaływania wymienno-korelacyjne.
+where $H_0 =h_0+V_H$ ($V_H$ is the Hartree potential), and $\Sigma$ is called the self-energy and describes exchange-correlation interactions.
 
-Dla układu jednorodnego o objętości $V$, funkcję Greena możemy zapisać w formie transformaty Fouriera
+For a homogeneous system of volume $V$, the Green's function can be written in the form of a Fourier transform
 %
 \begin{equation}
 G(x,x')=\sum_{\bm{k}}\int\frac{d\omega}{2\pi V}e^{i\bm{k}(\bm{r}-\bm{r}')}e^{-i\omega(t-t')}G(\bm{k},\omega).
 \label{fourier}
 \end{equation}
 %
-$G(\bm{k},\omega)$ jest funkcją Greena, która opisuje propagację elektronu o zdefiniowanym wektorze falowym $\bm{k}$.
-Rozważmy na początku układ $N$ nieodziałujących elektronów. Operatory pola można zapisać
+$G(\bm{k},\omega)$ is the Green's function that describes the propagation of an electron with a defined wave vector $\bm{k}$.
+Let us first consider a system of $N$ non-interacting electrons. The field operators can be written as
 %
 \begin{equation}
 \psi(\bm{r})=\frac{1}{V}\sum_{\bm{k}}e^{-i\bm{k}\bm{r}}c_{\bm{k}},
 \label{free}
 \end{equation}
 %
-gdzie $c_{\bm{k}}$ jest operatorem anihilacji electronu, dla którego $c_{\bm{k}}|\Phi_N\rangle=0$.
-Odpowiednio $c^\dagger_{k}$ jest operatorem kreacji elektronu o wektorze falowym $\bm{k}$.
-Można przedefiniować operatory kreacji i anihilacji wprowadzając osobne oznaczenia dla cząstek i dziur
+where $c_{\bm{k}}$ is the electron annihilation operator, for which $c_{\bm{k}}|\Phi_N\rangle=0$.
+Correspondingly, $c^\dagger_{k}$ is the electron creation operator with wave vector $\bm{k}$.
+We can redefine the creation and annihilation operators by introducing separate notations for particles and holes
 %
 \begin{equation}
 c_{\bm{k}}=\begin{cases}
@@ -3728,171 +3728,171 @@ a_{\bm{k}} & k>k_F,\\
 b^\dagger_{-\bm{k}} & k<k_F,\end{cases}
 \end{equation}
 %
-gdzie $k_F$ jest wektorem falowym Fermiego. Hamiltonian w tej reprezentacji przyjmuje postać
+where $k_F$ is the Fermi wave vector. The Hamiltonian in this representation takes the form
 %
 \begin{equation}
 H_0=\sum_{\bm{k}}\hbar\omega_{\bm{k}} c^\dagger_{\bm{k}}c_{\bm{k}}=\sum_{\bm{k}>\bm{k}_F}\hbar\omega_{\bm{k}} a^\dagger_{\bm{k}}a_{\bm{k}}-\sum_{\bm{k}<\bm{k}_F}\hbar\omega_{\bm{k}} b^\dagger_{\bm{k}}b_{\bm{k}}+\sum_{\bm{k}<\bm{k}_F}\hbar\omega_{\bm{k}}.
 \end{equation}
 %
-Wykorzystując wzory (\ref{free}) i (\ref{field}) otrzymujemy zależność dla funkcji Greena swobodnych elektronów
+Using formulas (\ref{free}) and (\ref{field}), we obtain the relation for the Green's function of free electrons
 %
 \begin{equation}
 iG_0(x,x')=\frac{1}{(2\pi)^3}\int d^3k e^{i\bm{k}(\bm{r}-\bm{r}')}e^{-i\omega_{\bm{k}}(t-t')}[\theta(t-t')\theta(k-k_F)-\theta(t'-t)\theta(k_F-k)].
 \end{equation}
 %
-gdzie sumowanie po stanach $\bm{k}$ zostało zamienione na całkę.
-Funkcję schodkową $\theta(t-t')$  można zapisać przy pomocy wzoru
+where the summation over states $\bm{k}$ has been replaced by an integral.
+The step function $\theta(t-t')$ can be written using the formula
 %
 \begin{equation}
 \theta(t-t')=-\int_{-\infty}^{\infty}\frac{d\omega}{2\pi i}\frac{e^{-i\omega(t-t')}}{\omega+i\eta}=\begin{cases}1 & t>t',\\0 & t<t',\end{cases}
 \end{equation}
 % 
-gdzie $\eta$ jest infinitezymalnie małą liczbą. Zastosowanie tego wyrażenie po prostych przekształceniach
-prowadzi do wzoru
+where $\eta$ is an infinitesimally small number. Application of this expression after simple transformations
+leads to the formula
 %
 \begin{equation}
 G_0(x,x')=\frac{1}{(2\pi)^4}\int d^3k e^{i\bm{k}(\bm{r}-\bm{r}')}e^{-i\omega(t-t')}\Big{[}\frac{\theta(k-k_F)}{\omega-\omega_{\bm{k}}+i\eta}+\frac{\theta(k_F-k)}{\omega-\omega_{\bm{k}}-i\eta}\Big{]}.
 \end{equation}
 %
-Porównujące ten wzór z (\ref{fourier}) dostajemy wyrażenie na funkcję Greena swobodnych elektronów
-w przestrzeni pędów
+Comparing this formula with (\ref{fourier}), we obtain the expression for the Green's function of free electrons
+in momentum space
 %
 \begin{equation}
 G_0(\bm{k},\omega)=\frac{\theta(k-k_F)}{\omega-\omega_{\bm{k}}+i\eta}+\frac{\theta(k_F-k)}{\omega-\omega_{\bm{k}}-i\eta},
 \label{G0}
 \end{equation}
 %
-Występujące w tym wzorze dwa wyrazy odpowiadają odpowiednio propagacji elektronu dla wektora falowego $k$
-większego do wektor falowego Fermiego $k_F$ i dziury dla $k<k_F$. 
+The two terms appearing in this formula correspond to the propagation of an electron for wave vector $k$
+greater than the Fermi wave vector $k_F$ and a hole for $k<k_F$. 
 
-Funckję Greena dla oddziałujących elektronów można zapisać w postaci szeregu perturbacyjnego
+The Green's function for interacting electrons can be written as a perturbation series
 %
 \begin{equation}
 G(\bm{k},\omega)=G_0(\bm{k},\omega)+G_0(\bm{k},\omega)\Sigma_{\bm{k}}(\omega)G_0(\bm{k},\omega)+G_0(\bm{k},\omega)\Sigma_{\bm{k}}(\omega) G_0(\bm{k},\omega)\Sigma_{\bm{k}}(\omega) G_0(\bm{k},\omega)+...
 \end{equation}
 %
-gdzie $\Sigma_{\bm{k}}(\omega)$ jest transformatą Fouriera energii własnej. 
-Szereg ten można zapisać w formie równania Dysona
+where $\Sigma_{\bm{k}}(\omega)$ is the Fourier transform of the self-energy. 
+This series can be written in the form of the Dyson equation
 %
 \begin{equation}
 G(\bm{k},\omega)=G_0(\bm{k},\omega)+G_0(\bm{k},\omega)\Sigma_{\bm{k}}(\omega)G(\bm{k},\omega),
 \end{equation}
 %
-lub po przekształceniu
+or after transformation
 %
 \begin{equation}
 \Sigma_{\bm{k}}(\omega)=G_0^{-1}(\bm{k},\omega)-G^{-1}(\bm{k},\omega).
 \end{equation}
 %
-Łącząc ten wzór z wyrażeniem (\ref{G0}) dla swobodnych elektronów ($k>k_F$)
-dostajemu wzór na funkcję Greena
+Combining this formula with expression (\ref{G0}) for free electrons ($k>k_F$),
+we obtain the formula for the Green's function
 %
 \begin{equation}
 G(\bm{k},\omega)=\frac{1}{\omega-\omega_{\bm{k}}-\Sigma_{\bm{k}}(\omega)}.
 \end{equation}
 %
-Z tego wzoru wynika, że jednocząstkowe stany o energii $\omega_{\bm{k}}$ są modyfikowane zarówno
-przez rzeczywistą część energii własnej, która przesuwa wartości energii, jak również przez
-jej część urojoną. 
+From this formula, it follows that single-particle states with energy $\omega_{\bm{k}}$ are modified both
+by the real part of the self-energy, which shifts the energy values, as well as by
+its imaginary part. 
 
-Znając funkcję Greena można wyznaczyć funkcję spektralną, która opisuje widmo energetyczne elektronów w funkcji wektora falowego,
-wyznaczane w pomiarach metodą kątowo-rozdzielczej spektroskopii fotoemisyjnej (ARPES).
-Funkcja spektralna wyznaczana jest części urojonej funkcji Greena
+Knowing the Green's function, we can determine the spectral function, which describes the energy spectrum of electrons as a function of wave vector,
+measured in experiments by angle-resolved photoemission spectroscopy (ARPES).
+The spectral function is determined from the imaginary part of the Green's function
 %
 \begin{equation}
 A_{\bm{k}}(\omega)=\frac{1}{\pi}|\text{Im} G_{\bm{k}}(\omega)|=\frac{1}{\pi}\frac{|\text{Im} \Sigma_{\bm{k}}(\omega)|}{[\omega-\omega_{\bm{k}}-\text{Re} \Sigma_{\bm{k}}(\omega)]^2+[\text{Im} \Sigma_{\bm{k}}(\omega)]^2}.
 \end{equation}
 %
-Dla układu nieoddziałujących elektronów ($\Sigma=0$) funkcja spektralna składa się z delt Diraca w położeniach,
-które odpowiadają energiom $\omega_{\bm{k}}$.
-Część rzeczywista energii własnej powoduje przesunięcie energii elektronów
+For a system of non-interacting electrons ($\Sigma=0$), the spectral function consists of Dirac delta functions at positions
+corresponding to energies $\omega_{\bm{k}}$.
+The real part of the self-energy causes a shift in electron energies
 %
 \begin{equation}
 \varepsilon_{\bm{k}}=\omega_{\bm{k}}+\Sigma_{\bm{k}}(\varepsilon_{\bm{k}}),
 \label{e_k}
 \end{equation}
 %
-natomiast część urojona powoduje poszerzenie pików, co związane jest z redukcją czasu życia stanów elektronowych.
-Jeżeli część urojona powoduje tylko niewielkie zaburzenie, istnieje jednoznaczna relacja między stanami
-elektronów swobodnych i elektronów oddziałujących. Takie stany elektronowe lub dziurowe, które występują blisko energii Fermiego nazywamy {\it kwasicząstkami}.
-Przy zbliżaniu się do poziomu Fermiego czas życia stanów elektronów rośnie ze względu na zmniejszajacą się ilość dostępnych stanów do których elektron
-może się rozproszyć. 
+while the imaginary part causes broadening of the peaks, which is related to the reduction of the lifetime of electronic states.
+If the imaginary part causes only a small perturbation, there is an unambiguous relationship between the states
+of free electrons and interacting electrons. Such electronic or hole states that occur near the Fermi energy are called {\it quasiparticles}.
+When approaching the Fermi level, the lifetime of electron states increases due to the decreasing number of available states to which an electron
+can scatter. 
 
-Blisko energii Fermiego część rzeczywista energii wałsnej zależy liniowo od energii i można ją rozwinąć do liniowego wyrazu
+Near the Fermi energy, the real part of the self-energy depends linearly on energy and can be expanded to the linear term
 %
 \begin{equation}
 \text{Re} \Sigma_{\bm{k}}(\omega)=\text{Re} \Sigma_{\bm{k}}(\omega_{\bm{k}})+(\omega-\omega_{\bm{k}})\frac{\partial\text{Re}\Sigma_{\bm{k}}(\omega)}{\partial\omega}\Big{|}_{\omega=\omega_{\bm{k}}}.
 \end{equation}
 %
-Wprowadzając czynnik renormalizacyjny, który jest miarą charakteryzującą spektrum kwasicząstek
+Introducing the renormalization factor, which is a measure characterizing the quasiparticle spectrum
 %
 \begin{equation}
 Z_{\bm{k}}=\frac{1}{1-\frac{\partial\text{Re}\Sigma_{\bm{k}}(\omega)}{\partial\omega}\Big{|}_{\omega=\omega_{\bm{k}}}}
 \end{equation}
 %
-możemy zapisać wzór na energię (\ref{e_k}) w postaci
+we can write the energy formula (\ref{e_k}) in the form
 %
 \begin{equation}
 \varepsilon_{\bm{k}}=\omega_{\bm{k}}+Z_{\bm{k}}\text{Re}\Sigma_{\bm{k}}(\omega_{\bm{k}}).
 \end{equation}
 %
-Również gęstość spektralną kwasicząstek można przybliżyć wzorem
+The spectral density of quasiparticles can also be approximated by the formula
 %
 \begin{equation}
 A_{\bm{k}}(\omega)=Z_{\bm{k}}\frac{Z_{\bm{k}}\text{Im}\Sigma_{\bm{k}}(\varepsilon_{\bm{k}})}{(\omega-\varepsilon_{\bm{k}})^2+[Z_{\bm{k}}\text{Im}\Sigma_{\bm{k}}(\varepsilon_{\bm{k}})]^2},
 \end{equation}
 % 
-która ma kształt linii Lorentza w położeniu $\varepsilon_{\bm{k}}$, szerokości $Z_{\bm{k}}\text{Im}\Sigma_{\bm{k}}(\varepsilon_{\bm{k}})$
-i amplitudzie $Z_{\bm{k}}$, nazywanej również wagą sprektralna kwasiczastek. $Z_{\bm{k}}$ określa m.in. natężenie (amplitudę) rozpraszania fotoemisyjnego,
-zmianę masy efektywnej kwazicząstek, jak również skok w obsadzeniu stanów na powierzchni Fermiego. 
-Dla układu, w którym część rzeczywista energii własnej nie zależy od energii $Z_{\bm{k}}=1$, ta nieciągłość pokrywa się z rozkładem Fermiego-Diraca dla $T=0$.
-Energie kwasiczastek, które są funkcjami wektorów falowych, określają strukturę pasmową materiału.
-W układach silnie skorelowanych część gęstości spektralnej przekazywana jest do stanów leżących dalej od poziomu Fermiego
-i pojawiają się dodatkowe struktury (satelity), których nie da się zinterpretować jako wzbudzenia kwasicząstek.
+which has the shape of a Lorentzian line at position $\varepsilon_{\bm{k}}$, width $Z_{\bm{k}}\text{Im}\Sigma_{\bm{k}}(\varepsilon_{\bm{k}})$
+and amplitude $Z_{\bm{k}}$, also called the quasiparticle spectral weight. $Z_{\bm{k}}$ determines, among other things, the intensity (amplitude) of photoemission scattering,
+the change in the effective mass of quasiparticles, as well as the discontinuity in occupation at the Fermi surface. 
+For a system where the real part of the self-energy does not depend on energy, $Z_{\bm{k}}=1$, this discontinuity coincides with the Fermi-Dirac distribution at $T=0$.
+Quasiparticle energies, which are functions of wave vectors, determine the band structure of the material.
+In strongly correlated systems, part of the spectral density is transferred to states lying farther from the Fermi level
+and additional structures (satellites) appear that cannot be interpreted as quasiparticle excitations.
 
-\section{Teoria perturbacyjna}
+\section{Perturbation theory}
 
-Podstawowe podejście stosowane w teorii pola opiera się na rozwinięciu perturbacyjnym funkcji Greena~\cite{AGD}.
-Najwygodniejszym jest tutaj obraz oddziaływania, w którym hamiltonian zapisany jest w formie
+The basic approach used in field theory is based on the perturbative expansion of the Green's function~\cite{AGD}.
+The most convenient here is the interaction picture, in which the Hamiltonian is written in the form
 %
 \begin{equation}
 H(t)=H_0+V_\text{I}(t),
 \end{equation}
 %
-gdzie pierwszy wyraz opisuje układ swobodnych elektronów, a drugi jest zależnym od czasu operatorem oddziaływania
+where the first term describes the system of free electrons, and the second is the time-dependent interaction operator
 %
 \begin{equation}
 V_\text{I}(t)=\frac{1}{2}\int d\bm{r}\int d\bm{r}'\psi_\text{I}^\dagger(\bm{r},t)\psi_\text{I}^\dagger(\bm{r}',t)v(\bm{r},\bm{r}')
 \psi_\text{I}(\bm{r}',t)\psi_\text{I}(\bm{r},t).
 \end{equation}
 %
-Występujace w tym wyrażeniu operatory pola otrzymujemy przez transformację
+The field operators appearing in this expression are obtained through the transformation
 %
 \begin{equation}
 \psi_\text{I}(\bm{r},t)=e^{iH_0(t-t_0)}\psi(\bm{r})e^{-iH_0(t-t_0)}.
 \end{equation}
 %
-W obrazie oddziaływania, ewolucja stanów opisana jest zależnością
+In the interaction picture, the evolution of states is described by the relation
 %
 \begin{equation}
 |t\rangle=U_\text{I}(t,t_0)|t_0\rangle,
 \end{equation}
-gdzie operator ewolucji może być zapisany w postaci szeregu
+where the evolution operator can be written as a series
 %
 \begin{equation}
 U_\text{I}=1+\sum_{n=1}^{\infty}\frac{(-1)^n}{n!}\int_{t_0}^tdt_1...\int_{t_0}^tdt_nT\Big{[}V_\text{I}(t_1)...V_\text{I}(t_n)\Big{]}.
 \end{equation}
 %
-Wykorzystując ten operator i wprowadzając oznaczenie $S=U_\text{I}(\infty,-\infty)$
-możemy zapisać funkcję Greena w postaci rozwinięcia
+Using this operator and introducing the notation $S=U_\text{I}(\infty,-\infty)$,
+we can write the Green's function in the form of an expansion
 %
 \begin{equation}
 G(x,x')=-i\frac{\langle\Phi_0|T[\psi(x)\psi^{\dagger}(x')S]|\Phi_0\rangle}{\langle\Phi_0|S|\Phi_0\rangle},
 \end{equation}
 %
-gdzie $|\Phi_0\rangle$ jest stanem podstawowym dla układu nieoddziałujących elektronów opisanego hamiltonianem $H_0$. 
-Występujące w tym szeregu wyrazy można wyrazić przy pomocy funkcji Greena i wyrazów opisujących oddziaływania kulombowskie.
-Prowadzi to do wzoru, który można zapisać w zwartej formie przy pomocy sumy wyznaczników
+where $|\Phi_0\rangle$ is the ground state for the system of non-interacting electrons described by the Hamiltonian $H_0$. 
+The terms appearing in this series can be expressed using the Green's function and terms describing Coulomb interactions.
+This leads to a formula that can be written in compact form using a sum of determinants
 %
 \begin{equation}
 G(x,x')=\sum_{n=0}^\infty i^n\int v(x_1,x_1')...v(x_n,x'_n)\begin{vmatrix}
@@ -3903,22 +3903,22 @@ G_0(x'_n,x') & G_0(x'_n,x')  & \dots & G_0(x'_n,x'^+_n) \\
 \end{vmatrix}.
 \end{equation}
 %  
-Każdy z wyrazów rozwinięcia można otrzymać stosując metodę diagramów Feynmana opisaną szczegółowo w wielu podręcznikach \cite{AGD,FW,martin2}.
+Each term of the expansion can be obtained using the Feynman diagram method described in detail in many textbooks \cite{AGD,FW,martin2}.
 
 
 
 
 
-\section{Metoda GW}
+\section{The GW method}
 \label{sec:gw}
 
-Energię własną można powiązać z funkcją Greena
+The self-energy can be related to the Green's function
 %
 \begin{equation}
 \Sigma(x_1,x_2)=i\int dx_3dx_4 G(x_1,x_3)W(x_1,x_4)\Lambda(x_3,x_2,x_4).
 \end{equation}
 %
-$W$ jest ekranowanym potencjałem kulombowskim
+$W$ is the screened Coulomb potential
 %
 \begin{equation}
 W(x_1,x_2)=\int dx_3\epsilon^{-1}(x_1,x_3)V(\bm{r}_3-\bm{r}_2),
@@ -3928,8 +3928,8 @@ W(x_1,x_2)=\int dx_3\epsilon^{-1}(x_1,x_3)V(\bm{r}_3-\bm{r}_2),
 \epsilon^{-1}(x_1,x_2)=\frac{\delta V(x_1)}{\delta \phi(x_2)},
 \end{equation}
 %
-gdzie $V$ jest sumą potencjału Hartree $V_H$ i potencjału zewnętrznego $\phi$.
-$\Lambda$ jest funkcją wierzchołkową
+where $V$ is the sum of the Hartree potential $V_H$ and the external potential $\phi$.
+$\Lambda$ is the vertex function
 %
 \begin{equation}
 \Lambda(x_1,x_2,x_3) = -\frac{\delta G^{-1}(x_1)}{\delta V(x_3)}.
