@@ -2374,655 +2374,657 @@ In the approach called the atomic sphere approximation (ASA),
 spheres are used that partially overlap and their total volume equals the total volume of the crystal. 
 Application of such an approach is justified only for crystals with close-packed atomic structures.
 
-\chapter{Funkcjonały i potencjały zależne od orbitali}
+\chapter{Orbital-dependent functionals and potentials}
 
-\section{Problemy lokalnych funkcjonałów}
+\section{Problems with local functionals}
 \label{sec:mgga}
 
-Teoria funkcjonału gęstości odniosła wiele spektakularnych sukcesów w badaniach własności ciał stałych.
-Posiada jednak braki, które nie pozwalają opisać poprawnie struktury elektronowej wielu materiałów.
-Te problemy wynikają zasadniczo z przybliżeń stosowanych do wyliczenia energii wymienno-korelacyjnej, 
-której dokładna postać funkcjonalna nie jest znana.  
-Główną zaletą przybliżeń stosowanych w DFT, pozwalająca na obliczenia nawet dla dużych układów, jest lokalny lub kwazilokalny 
-charakter potencjału wymienno-korelacyjnego. Dokładny potencjał jest zwykle nielokalny i zależny jest od funkcji falowych (orbitali), a nie tylko gęstości elektronowej. Przykładem jest dokładna energia oddziaływania wymiennego, która wyliczana jest z orbitali jednocząstkowych w przybliżeniu Hartree-Focka. 
-Standardowe funkcjonały wymienno-korelacyjnych stosowane w DFT nie zależą od rodzaju obsadzonych orbitali. 
-Mówiąc ściślej, nie odróżniają stanów o różnej liczbie kwantowej $m$.
-Wszystkie orbitale traktowane są jednakowo i nie ma możliwości wyróżnienia cech, które decydują o nierównomiernym ich obsadzeniu.
-Taka możliwość często decyduje o charakterze stanu podstawowego i jest szczególnie istotna w układach silnie skorelowanych. 
+Density functional theory has achieved many spectacular successes in the study of solid state properties.
+However, it has deficiencies that prevent the correct description of the electronic structure of many materials.
+These problems arise essentially from the approximations used to calculate the exchange-correlation energy,
+whose exact functional form is not known.
+The main advantage of the approximations used in DFT, allowing calculations even for large systems, is the local or quasilocal
+character of the exchange-correlation potential. The exact potential is usually nonlocal and depends on the wave functions (orbitals), not just the electron density. An example is the exact exchange interaction energy, which is calculated from single-particle orbitals in the Hartree-Fock approximation.
+Standard exchange-correlation functionals used in DFT do not depend on the type of occupied orbitals.
+More precisely, they do not distinguish states with different quantum number $m$.
+All orbitals are treated equally and there is no possibility to distinguish features that determine their unequal occupation.
+This possibility often determines the character of the ground state and is particularly important in strongly correlated systems. 
 
-W przybliżeniach LDA i GGA występują dwa główne problemy, które są ze sobą ściśle powiązane.
-Pierwszym z nich jest brak nieciągłości pochodnej funkcjonalnej energii całkowitej po gęstości elektronowej, która jest równa potencjałowi chemicznemu. 
-Ta nieciągłość jest cechą charakterystyczną funkcjonału wymienno-korelacyjnym, ale występuje również w wyrazie opisującym energię kinetyczną elektronów. 
-Ponieważ nieciągłość potencjału chemicznego powiązana jest z przerwą energetyczną, to jej brak skutkuje zaniżonymi wartościami, a nawet
-zerowaniem się tej wielkości w izolatorach i półprzewodnikach.
-Problem przerwy energetycznej będzie dokładniej omawiany w rozdziale~(\ref{sec:insulators}).
+In the LDA and GGA approximations there are two main problems that are closely related.
+The first is the lack of discontinuity in the derivative of the total energy functional with respect to electron density, which is equal to the chemical potential.
+This discontinuity is a characteristic feature of the exchange-correlation functional, but also appears in the term describing the kinetic energy of electrons.
+Since the discontinuity of the chemical potential is associated with the energy gap, its absence results in underestimated values, and even
+vanishing of this quantity in insulators and semiconductors.
+The problem of the energy gap will be discussed in more detail in chapter~(\ref{sec:insulators}).
 
-Drugim problemem jest występowanie samoodziaływania elektronów, czyli niezerowej energii oddziaływania elektronu 
-z jego własnym polem kulombowskim. Jest to efekt niefizyczny, który wynika z niedokładnego kasowania się występujących w hamiltonianie 
-przyczynków do oddziaływania elektronu z jego własnym polem elektrycznym.   
-W dokładnym opisie ujemny potencjał wymienno-korelacyjny wytwarzany przez każdy elektron powinien dokładnie kasować jego dodatni potencjał Hartree.
-W przypadku przybliżenia Hartree-Focka samoodziaływanie nie występuje, ponieważ oddziaływanie wymienne i Hartree wzajemnie kasują się.
-W przypadku DFT, potencjał Hartree wyliczany jest dokładnie, natomiast potencjał wymienno-korelacyjny jest przybliżony,
-stając się źródłem samooddziaływania. 
-Nawet w przypadku układu jednoelektronowego, energia Hartree nie kasuje się z energią wymienną wyznaczoną w przybliżeniu LDA lub GGA.
-Na przykładzie atomu wodoru, dyskutowanym w rozdziale \ref{sec:GGA}, dobrze widać efekt jaki powodują różnice między wartościami dokładnymi i przybliżonymi.
-Ponieważ wartość bezwględna energii wymiany jest mniejsza niż wartość dokładna, nie kasuje całkowicie dodatniej energii Hartree. 
-Wprawdzie częściowo różnica ta redukowana jest przez niezerową i ujemną energię korelacji, ale pozostaje skończona. 
-Ta dodatkowa energia oddziaływania elektronu z własnym polem elektrycznym może powodować duże błędy w obliczeniach.
-W zależności od rodzaju materiału, samoodziaływanie przyjmuje bardzo różne wartości. Jest ono zaniedbywalnie małe dla rozległych stanów elektronowych,
-zdelokalizowanych w dużym obszarze danego materiału. Dlatego wpływ samoodziaływania na stany elektronowe w prostych metalach, 
-gdzie dominują stany walencyjne typu $s$ i $p$, może być pominięty. 
-W materiałach, w których występują stany elektronowe mające tendencję do lokalizacji (np. stany {\it 3d} i {\it 4f}),
-jest ono szczególnie silne i często prowadzi do wyników jakościowo niezgodnych z eksperymentem.
-W stanach zlokalizowanych, oddziaływanie elektronu z jego własnym polem kulombowskim, które ma charakter odpychający,
-może prowadzić do znacznego wzrostu energii. Zredukowanie tej energie jest możliwe tylko poprzez zwiększenie delokalizacji
-ładunku i poszerzenie pasm elektronowych. Prowadzi to efektywnie do zmniejszenia przerwy energetycznej
-otrzymywanej w obliczeniach dla półprzewodników i izolatorów. W skrajnym przypadku błędy samoodziaływania powodują delokalizację ładunków w stanach $3d$ 
-i zamknięcie przerwy energetycznej, co skutkuje niewłaściwym stanem metalicznym w materiałach, które w rzeczywistości są izolatorami Motta. 
+The second problem is the occurrence of electron self-interaction, i.e., non-zero interaction energy of an electron
+with its own Coulomb field. This is a non-physical effect that results from the imperfect cancellation of the contributions in the Hamiltonian
+to the interaction of an electron with its own electric field.
+In an exact description, the negative exchange-correlation potential produced by each electron should exactly cancel its positive Hartree potential.
+In the case of the Hartree-Fock approximation, self-interaction does not occur because the exchange and Hartree interactions mutually cancel.
+In the case of DFT, the Hartree potential is calculated exactly, while the exchange-correlation potential is approximate,
+becoming the source of self-interaction.
+Even in the case of a one-electron system, the Hartree energy does not cancel with the exchange energy determined in the LDA or GGA approximation.
+Using the example of the hydrogen atom, discussed in chapter \ref{sec:GGA}, one can clearly see the effect caused by differences between exact and approximate values.
+Since the absolute value of the exchange energy is smaller than the exact value, it does not completely cancel the positive Hartree energy.
+Although this difference is partially reduced by the non-zero and negative correlation energy, it remains finite.
+This additional energy of electron interaction with its own electric field can cause large errors in calculations.
+% **[REVIEW NEEDED]**: The term "self-interaction" is consistently translated; verify terminology matches conventions in English DFT literature.
+Depending on the type of material, self-interaction takes very different values. It is negligibly small for extended electronic states,
+delocalized over a large region of a given material. Therefore, the influence of self-interaction on electronic states in simple metals,
+where valence states of type $s$ and $p$ dominate, can be neglected.
+In materials where electronic states tend to localize (e.g., {\it 3d} and {\it 4f} states),
+it is particularly strong and often leads to results qualitatively inconsistent with experiment.
+In localized states, the interaction of an electron with its own Coulomb field, which is repulsive,
+can lead to a significant energy increase. Reduction of this energy is only possible by increasing the delocalization
+of the charge and broadening of the electronic bands. This effectively leads to a reduction of the energy gap
+obtained in calculations for semiconductors and insulators. In extreme cases, self-interaction errors cause charge delocalization in $3d$ states
+and closure of the energy gap, resulting in an incorrect metallic state in materials that are actually Mott insulators.
 
-Problemy te mogą być wyeliminowane lub częściowo zredukowane przy zastosowaniu funkcjonałów zależnych od orbitali elektronowych~\cite{kummel}.
-W kolejnych rozdziałach omawiane są metody, które uwzlędniają zależność orbitalną w funkcjonale wymienno-korelacyjnym
-lub wprowadzają poprawki do energii całkowitej zależne od obsadzenia orbitali.  
+These problems can be eliminated or partially reduced by using functionals dependent on electronic orbitals~\cite{kummel}.
+In the following sections, methods are discussed that take orbital dependence into account in the exchange-correlation functional
+or introduce corrections to the total energy dependent on orbital occupation.  
 
-\section{Funkcjonały OEP}
+\section{OEP functionals}
 \label{sec:mgga}
 
-Podejście nazywane metodą zoptymalizowanego potencjału efektywnego ({\it ang. optimized effective potential} - OEP)  
-zostało zaproponowane prez Sharpa i Hortona w roku 1953, jeszcze zanim powstała teoria funkcjonału gęstości~\cite{Sharp}. 
-Ta metoda zakłada funkcjonalną zależność energii wymienno-korelacyjnej od orbitali $\phi_{j\sigma}$, przy zachowanym lokalnym charakterze potencjału $V^{OEP}_{\sigma}$. Równanie OEP zostało rozwiązane numerycznie po raz pierwszy przez Talmana i Shadwicka~\cite{Talman}. 
-Energię całkowitą Kohna-Shama możemy zapisać jako funkcjonał orbitali
+The approach called the optimized effective potential (OEP) method
+was proposed by Sharp and Horton in 1953, even before density functional theory was developed~\cite{Sharp}.
+% **[REVIEW NEEDED]**: Verify historical accuracy of Sharp-Horton contribution and year.
+This method assumes a functional dependence of the exchange-correlation energy on orbitals $\phi_{j\sigma}$, while maintaining the local character of the potential $V^{OEP}_{\sigma}$. The OEP equation was first solved numerically by Talman and Shadwick~\cite{Talman}.
+The Kohn-Sham total energy can be written as a functional of orbitals
 %
 \begin{equation}
 E[\{\phi_{j\sigma}\}]=T[\{\phi_{j\sigma}\}]+\int d\bm{r} V_{ext}(\bm{r})n(\bm{r})+\frac{1}{2}\int \int d\bm{r} d\bm{r}' \frac{n(\bm{r})n(\bm{r}')}{|\bm{r}-\bm{r}'|}+E_{xc}[\{\phi_{j\sigma}\}].
 \end{equation}
 %
-Metoda OEP ma charakter wariacyjny i opiera się na dwóch równaniach. Pierwsze określa warunek minium (stacjonarności) energii całkowitej
-względem efektywnego potencjału
+The OEP method has a variational character and is based on two equations. The first defines the condition of minimum (stationarity) of the total energy
+with respect to the effective potential
 %
 \begin{equation}
 \frac{\delta E[\{\phi_{j\sigma}\}]}{\delta V^{OEP}_{\sigma}}=0,
 \end{equation} 
 %
-który jest równoważny zasadzie wariacyjne Kohna-Shama $\delta E_\text{tot}/\delta n=0$~\cite{Sahni}.
-Drugie równanie ma postać równania Kohna-Shama z efektywnym potencjałem zależnym od orbitali
+which is equivalent to the Kohn-Sham variational principle $\delta E_\text{tot}/\delta n=0$~\cite{Sahni}.
+The second equation has the form of the Kohn-Sham equation with an effective potential dependent on orbitals
 %
 \begin{equation}
 \Big[-\frac{\hbar^2}{2m}\nabla^2+V^{OEP}_{\sigma}[\{\phi_{j\sigma}\}](\bm{r})\Big]\phi_{j\sigma}(\bm{r})=\varepsilon_{j\sigma}\phi_{j\sigma}(\bm{r}).
 \end{equation}
 %
-Część potencjału opisującą oddziaływanie wymienno-korelacyjne można zapisać w postaci podwójnej całki wykorzystując własności pochodnych funkcjonalnych
+The part of the potential describing the exchange-correlation interaction can be written as a double integral using properties of functional derivatives
 %
 \begin{equation}
 V^{OEP}_{xc\sigma}(\bm{r})=\frac{\delta E_{xc}[\{\phi_{j\sigma}\}]}{\delta n_{\sigma}(\bm{r})}=\sum_{\nu\mu\i}\int\int d\bm{r}' d\bm{r}''\frac{\delta E_{xc}}{\delta \phi_{i\nu}(\bm{r}')}\frac{\delta \phi_{i\nu}(\bm{r}')}{\delta V^{OEP}_{\mu}(\bm{r}'')}\frac{\delta V^{OEP}_{\mu}(\bm{r}'')}{\delta n_{\sigma}(\bm{r})}.
 \label{voep}
 \end{equation}
 %
-Drugą z pochodnych funkcjonalnych pod całką można wyrazić w pierwszym rzędzie rozwinięcia pertubacyjnego 
+The second of the functional derivatives under the integral can be expressed in the first order of perturbation expansion
 %
 \begin{equation}
 \frac{\delta \phi_{i\nu}(\bm{r}')}{\delta V^{OEP}_{\mu}(\bm{r}'')}=\delta_{\nu\mu}\sum_{k\neq i}\frac{\phi^*_{k\mu}(\bm{r}')\phi_{k\mu}(\bm{r}'')}{\varepsilon_{i\mu}-\varepsilon_{k\mu}}\phi_{i\mu}(\bm{r}'')=\delta_{\nu\mu}G^R_{i\mu}(\bm{r}',\bm{r}'')\phi_{i\mu}(\bm{r}''),
 \end{equation}
 %
-gdzie wprowadzono funkcję Greena dla nieodziałujących elektronów
+where we introduced the Green's function for non-interacting electrons
 %
 \begin{equation}
 G^R_{i\mu}(\bm{r}',\bm{r}'')=\sum_{k\neq i}\frac{\phi^*_{k\mu}(\bm{r}')\phi_{k\mu}(\bm{r}'')}{\varepsilon_{i\mu}-\varepsilon_{k\mu}}.
 \label{fgreena}
 \end{equation} 
 %
-Trzecia z pochodnych jest odwrotnością liniowej funkcji odpowiedzi, którą również możemy wyrazić przez funkcję Greena
+The third of the derivatives is the inverse of the linear response function, which we can also express through the Green's function
 %
 \begin{equation}
 \chi_{\sigma}(\bm{r},\bm{r}'')=\delta_{\sigma\mu}\frac{\delta n_{\sigma}(\bm{r})}{\delta V^{OEP}_{\mu}(\bm{r}'')}=\delta_{\sigma\mu}\sum_i G^R_{i\sigma}(\bm{r}'',\bm{r})\phi_{i\sigma}(\bm{r}'')\phi^*_{i\sigma}(\bm{r}).
 \label{vchi}
 \end{equation}
 %
-Mnożąc równanie (\ref{voep}) przez $\chi_{\sigma}(\bm{r}',\bm{r})$, całkując wzlędem $\bm{r}'$ i wykorzystując (\ref{vchi}) dostajemy 
-równanie całkowe metody OEP
+Multiplying equation (\ref{voep}) by $\chi_{\sigma}(\bm{r}',\bm{r})$, integrating with respect to $\bm{r}'$ and using (\ref{vchi}) we obtain
+the integral equation of the OEP method
 %
 \begin{equation}
 \sum_i\int d\bm{r}' \phi^*_{i\sigma}(\bm{r})[V^{OEP}_{xc\sigma}(\bm{r})-u^{OEP}_{xci\sigma}(\bm{r})]G^R_{i\sigma}(\bm{r}',\bm{r})\phi_{i\sigma}(\bm{r}) + c.c.=0,
 \label{oepint}
 \end{equation}
 %
-gdzie
+where
 %
 \begin{equation}
 u^{OEP}_{xci\sigma}(\bm{r})=\frac{1}{\phi^*_{i\sigma}(\bm{r})}\frac{\delta E_{xc}[\{\phi_{j\sigma}\}]}{\delta \phi_{i\sigma}(\bm{r})}.
 \end{equation}
 %
-Jeżeli funkcjonał wymienno-korelacyjny zależy tylko od gęstości, wtedy $u^{OEP}_{xci\sigma}(\bm{r})=V^{OEP}_{xc\sigma}(\bm{r})$ i równanie (\ref{oepint})
-jest automatycznie spełnione.
-W ramach metody OEP, część wymienną można traktować dokładnie, tak jak w przybliżeniu Hartree-Focka, i wtedy potencjał zależny od orbitali
-ma postać
+If the exchange-correlation functional depends only on density, then $u^{OEP}_{xci\sigma}(\bm{r})=V^{OEP}_{xc\sigma}(\bm{r})$ and equation (\ref{oepint})
+is automatically satisfied.
+Within the OEP method, the exchange part can be treated exactly, as in the Hartree-Fock approximation, and then the orbital-dependent potential
+has the form
 %
 \begin{equation}
 u^{OEP}_{xi\sigma}=-\frac{1}{\phi^*_{i\sigma}(\bm{r})}\sum_j \phi^*_{j\sigma}\int d\bm{r}'\frac{\phi^*_{i\sigma}(\bm{r}')\phi_{j\sigma}(\bm{r}')}{|\bm{r}-\bm{r}'|}.
 \end{equation} 
 %
-Ze względu na całkowy charakter równań OEP, wyznaczenie samozgodnych rozwiązań, nawet przy zastosowaniu dodatkowych przybliżeniach, wymaga bardzo czasochłonnych obliczeń~\cite{kummel}. Z tego powodu potencjały OEP rzadko stosowane są w praktyce.
-Znacznie efektywniejsze są potencjały zależne od orbitali omówione w kolejnych rozdziałach. 
+Due to the integral character of the OEP equations, determining self-consistent solutions, even with additional approximations, requires very time-consuming calculations~\cite{kummel}. For this reason, OEP potentials are rarely used in practice.
+Significantly more effective are orbital-dependent potentials discussed in the following sections. 
 
-\section{Korekcja samoodziaływania (SIC)}
+\section{Self-interaction correction (SIC)}
 \label{sec:sic}
 
-W roku 1981, Pardew i Zunger zaproponowali metodę korekcji samoodziaływania ({\it ang. self-interaction correction} - SIC) \cite{PZ}.
-Metoda ta dotyczy stanów zlokalizowanych, więc rozpatrujemy zbiór orbitali $\phi_{\alpha\sigma}(\bm{r})$, gdzie $\alpha$ oznacza numer orbitalu,
-a $\sigma$ kierunek spinu. Oznaczamy gęstość elektronową pojedynczego orbitalu przez 
+In 1981, Perdew and Zunger proposed the self-interaction correction (SIC) method \cite{PZ}.
+This method concerns localized states, so we consider a set of orbitals $\phi_{\alpha\sigma}(\bm{r})$, where $\alpha$ denotes the orbital number,
+and $\sigma$ the spin direction. We denote the electron density of a single orbital by
 %
 \begin{equation}
 n_{\alpha\sigma}(\bm{r})=f_{\alpha\sigma}|\phi_{\alpha\sigma}(\bm{r})|^2,
 \end{equation}
 %
-gdzie liczba $f_{\alpha\sigma}$ określa obsadzenie danego orbitalu. 
-Warunkiem braku samoodziaływania w każdym orbitalu jest kompletne wzajemne kasowanie się energii Hartree danej wzorem (\ref{Hartree}) 
-i energii wymienno-korelacyjnej
+where the number $f_{\alpha\sigma}$ determines the occupation of a given orbital.
+The condition for the absence of self-interaction in each orbital is the complete mutual cancellation of the Hartree energy given by formula (\ref{Hartree})
+and the exchange-correlation energy
 %
 \begin{equation}
 E_H[n_{\alpha\sigma}]+E_{xc}[n_{\alpha\sigma}]=0,
 \label{nosic}
 \end{equation}
 %
-gdzie obydwie energie są funkcjonałami gęstości pojedynczego orbitalu.
-Dla pojedynczego elektronu spełniony jest również warunek kasowania
-się energii Hartree i dokładnej energii wymiany wylicznej w podejściu Hartree-Focka
+where both energies are functionals of the single orbital density.
+For a single electron, the condition of cancellation
+of the Hartree energy and the exact exchange energy calculated in the Hartree-Fock approach is also satisfied
 %
 \begin{equation}
 E_H[n_{\alpha\sigma}]+E_{x}[n_{\alpha\sigma}]=0.
 \end{equation}
 %
-Ponieważ energia korelacji $E_c=E_{xc}-E_{x}$, z tych dwóch warunków wynika, że energia korelacji dla pojedynczego orbitalu musi się zerować
+Since the correlation energy $E_c=E_{xc}-E_{x}$, from these two conditions it follows that the correlation energy for a single orbital must vanish
 %
 \begin{equation}
 E_c[n_{\alpha\sigma}]=0.
 \end{equation}
 %
-Warunki te nie są spełnione dla energii wymienno-korelacyjnej danej wzorami w przybliżeniu LDA (\ref{xclda})
-lub GGA (\ref{xcgga}), co prowadzi do samoodziaływania elektronów. Oznaczmy ogólnie przez $E_{xc}^{DFT}[n_{\uparrow},n_{\downarrow}]$ funkcjonał wymienno-korelacyjny wyznaczonony w jednym z tych przybliżeń. Wtedy wzór na poprawioną energię wymienno-korelacyjną można zapisać w formie
+These conditions are not satisfied for the exchange-correlation energy given by the formulas in the LDA approximation (\ref{xclda})
+or GGA (\ref{xcgga}), which leads to electron self-interaction. Let us denote generally by $E_{xc}^{DFT}[n_{\uparrow},n_{\downarrow}]$ the exchange-correlation functional determined in one of these approximations. Then the formula for the corrected exchange-correlation energy can be written in the form
 %
 \begin{equation}
 E_{xc}^{SIC}[n_{\alpha\sigma}]=E_{xc}^{DFT}[n_{\uparrow},n_{\downarrow}]-\sum_{\alpha\sigma}\delta_{\alpha\sigma},
 \label{xcsic}
 \end{equation}
 %
-gdzie
+where
 %
 \begin{equation}
 \delta_{\alpha\sigma}=E_H[n_{\alpha\sigma}]+E_{xc}^{DFT}[n_{\alpha\sigma}],
 \end{equation}
 %
-a sumowanie jest tylko po zajętych orbitalach $\alpha$.
-Dla dokładnej wartości energii wymienno-korelacyjnej mielibyśmy $\delta_{\alpha\sigma}=0$,
-czyli spełniony byłby warunek (\ref{nosic}). 
-Energia wymienno-korelacyjna zdefiniowana wzorem (\ref{xcsic}) nie jest funkcjonałem gęstości elektronowej,
-tylko funkcjonałem orbitali atomowych. Powoduje to, że również funkcjonał energii całkowitej (\ref{EKS}) staje się zależny od orbitali
+and the summation is only over occupied orbitals $\alpha$.
+For the exact value of the exchange-correlation energy we would have $\delta_{\alpha\sigma}=0$,
+i.e., condition (\ref{nosic}) would be satisfied.
+The exchange-correlation energy defined by formula (\ref{xcsic}) is not a functional of electron density,
+but a functional of atomic orbitals. This causes the total energy functional (\ref{EKS}) to also become dependent on orbitals
 % 
 \begin{equation}
 E^{SIC}[n_{\alpha\sigma}]=\sum_{\alpha\sigma}\langle\phi_{\alpha\sigma}|-\frac{\hbar^2}{2m}\nabla^2|\phi_{\alpha\sigma}\rangle+E_{ext}[n]+E_H[n]+E_{xc}^{SIC}[n_{\alpha\sigma}].
 \label{esic}
 \end{equation}
 % 
-Podobnie, jak w przypadku funkcjonału Kohna-Shama, możemy zastosować metodę wariacyjną do zmninimalizowania tej energię względem
-zbioru orbitali $\phi_{\alpha\sigma}$, przy założonym warunku ortonormalności 
+Similarly, as in the case of the Kohn-Sham functional, we can apply the variational method to minimize this energy with respect to
+the set of orbitals $\phi_{\alpha\sigma}$, assuming the orthonormality condition
 %
 \begin{equation}
 \langle\phi_{\alpha\sigma}|\phi_{\alpha'\sigma'}\rangle=\delta_{\alpha\alpha'}\delta_{\sigma\sigma'}.
 \end{equation}
 %
-Dostajemy wtedy równania jednocząstkowe analogiczne do równań Kohna-Shama
+We then obtain single-particle equations analogous to the Kohn-Sham equations
 %
 \begin{equation}
 [-\frac{\hbar^2}{2m}\nabla^2+V_{eff}(n_{\alpha\sigma},\bm{r})]\phi_{\alpha\sigma}(\bm{r})=\varepsilon_{\alpha\sigma}^{SIC}\phi_{\alpha\sigma}(\bm{r}),
 \label{eqsic}
 \end{equation} 
 %
-z efektywnym potencjałem danym wzorem
+with an effective potential given by the formula
 %
 \begin{equation}
 V_{eff}(n_{\alpha\sigma},\bm{r})=V^{DFT}(\bm{r})-V_H(n_{\alpha\sigma},\bm{r})-V_{xc}(n_{\alpha\sigma},\bm{r}),
 \end{equation}
 %
-gdzie ostatnie dwa wyrazy to korekcja samoodziaływania do efektywnego potencjału elektronowego.
-Podobnie jak w przypadku stanów Kohna-Shama spełniona jest zależność
+where the last two terms are the self-interaction correction to the effective electron potential.
+Similarly to the Kohn-Sham states, the following relation is satisfied
 %
 \begin{equation}
 \varepsilon_{\alpha\sigma}^{SIC}=\frac{\partial E^{SIC}}{\partial f_{\alpha\sigma}}.
 \end{equation}
 
-Równanie (\ref{eqsic}) pozwala wyznaczyć orbitale i energie własne zlokalizowanych stanów elektronowych. 
-Jednak w rzeczywistych materiałach, mamy często doczynienia z współistnieniem stanów zlokalizowanych i zdelokalizowanych, co powoduje, że rozwiązania tego równania nie muszą odpowiadać globalnemu minimum. Pełna optymalizacja funkcji falowych powinna 
-uwzlędniać zarówno stany zlokalizowane (typu Wanniera) i zdelokalizowane (typu Blocha).
-W praktyce polega to na wyznaczeniu różnych możliwych konfiguracji stanów zlokalizowanych i zdelokalizowanych,
-a następnie wybraniu tej o najniższej energii.    
+Equation (\ref{eqsic}) allows determination of orbitals and eigenvalues of localized electronic states.
+However, in real materials, we often deal with coexistence of localized and delocalized states, which means that solutions to this equation may not correspond to the global minimum. Full optimization of wave functions should
+take into account both localized (Wannier-type) and delocalized (Bloch-type) states.
+In practice, this involves determining different possible configurations of localized and delocalized states,
+and then selecting the one with the lowest energy.    
 
 \begin{figure}[h]
 \centering
 \includegraphics[scale=1.2]{rare-earths.pdf}
-\caption{Różnice energii całkowitej dla walencyjności II i III wyliczone dla ziemiach rzadkich (o), porównane z eksperymentem (linia przerywana)
-i wartościami dla związków ziem rzadkich z siarką (+). Rysunek z pracy \cite{RE}.}
+\caption{Total energy differences for valence II and III calculated for rare earths (o), compared with experiment (dashed line)
+and values for rare earth sulfur compounds (+). Figure from ref. \cite{RE}.}
 \label{fig:rare}
 \end{figure}
 
 
-Dobrym przykładem są metale ziem rzadkich, w których występują zarówno stany zlokalizowane ($4f$),
-jak i zdelokalizowane ($5d$ i $6s$). Dodatkowo występują dwa rodzaje elektronów $4f$. Cześć z nich jest zlokalizowana,
-tak jak elektrony rdzenia, mając decydujący wpływ na moment magnetyczny i walencyjność danego atomu. 
-Pozostałe, w wyniku hybrydyzacji ze stanami $5d$ i $6s$, tworzą pasmo elektronowe i biorą udział w wiązaniu metalicznym.
-W ramach tradycyjnych przybliżeń energii wymienno-korelacyjnej nie można opisać prawidłowo tak złożonej
-struktury elektronowej ziem rzadkich. W pracy \cite{RE} zastosowano metodę SIC do wyliczenia obsadzeń
-stanów $4f$ i walencyjności we wszystkich atomach ziem rzadkich (rysunek \ref{fig:rare}).
-Walencyjność zdefiniowana jest jako ilość stanów zdelokalizowanych przypadająca na jeden atom i wyliczana jest ze wzoru
+A good example is rare earth metals, where both localized ($4f$) states occur,
+as well as delocalized ($5d$ and $6s$) states. Additionally, there are two types of $4f$ electrons. Part of them is localized,
+like core electrons, having a decisive influence on the magnetic moment and valence of a given atom.
+The remaining ones, as a result of hybridization with $5d$ and $6s$ states, form an electronic band and participate in metallic bonding.
+Within the framework of traditional approximations of exchange-correlation energy, one cannot correctly describe such a complex
+electronic structure of rare earths. In ref. \cite{RE}, the SIC method was applied to calculate the occupation
+of $4f$ states and valence in all rare earth atoms (figure \ref{fig:rare}).
+Valence is defined as the number of delocalized states per atom and is calculated from the formula
 %
 \begin{equation}
 N_{val}=Z-N_{core}-N_{SIC},
 \end{equation}
 %
-gdzie $Z$ jest liczbą atomową, $N_{core}$ ilością elektronów w rdzeniu i $N_{SIC}$ liczbą stanów zlokalizowanych $4f$,
-dla których odjęto energię samoodziaływania. Dla ziem rzadkich walencyjność przyjmuje dwie możliwe wartości:
-$N_{val}=2$ (atomy dwuwartościowe, II) lub $N_{val}=3$ (atomy trójwartościowe, III).
-Dla tych dwóch przypadków wyliczone różnice ich energii całkowitych $E_{II}-E_{III}$ pokazane są na rysunku \ref{fig:rare}.
-Otrzymane wartości bardzo dobrze zgadzają się z danymi eksperymentalnymi. 
-Jak widać, oprócz Eu i Yb, które są dwuwartościowe, wszystkie pozostałe ziemie rzadkie są trójwartościowe. 
-Podobnie dobrą zgodność z eksperymentem otrzymano dla promieni Wignera-Seitza i stałych sieci kryształów ziem rzadkich \cite{RE}.
+where $Z$ is the atomic number, $N_{core}$ the number of electrons in the core and $N_{SIC}$ the number of localized $4f$ states,
+for which the self-interaction energy was subtracted. For rare earths, valence takes two possible values:
+$N_{val}=2$ (divalent atoms, II) or $N_{val}=3$ (trivalent atoms, III).
+For these two cases, the calculated differences of their total energies $E_{II}-E_{III}$ are shown in figure \ref{fig:rare}.
+The obtained values agree very well with experimental data.
+As can be seen, except for Eu and Yb, which are divalent, all other rare earths are trivalent.
+Similarly good agreement with experiment was obtained for Wigner-Seitz radii and lattice constants of rare earth crystals \cite{RE}.
 
-Ze względu na jawną zależność od orbitali, funkcjonały SIC wykazują nieciągłość pochodnej po gęstości elektronowej.
-Dzięki temu metoda ta znacznie poprawia wartości przerwy energetycznej i momentów magnetycznych
-w układach silnie skorelowanych~\cite{svane1990,temmerman2001}. 
+Due to the explicit dependence on orbitals, SIC functionals exhibit discontinuity of the derivative with respect to electron density.
+Thanks to this, the method significantly improves the values of energy gap and magnetic moments
+in strongly correlated systems~\cite{svane1990,temmerman2001}.
 On the other hand, the SIC does not provide the systamic improvement in description of molecular
 systems~\cite{kummel}.
 
 
-\section{Funkcjonały hybrydowe}
+\section{Hybrid functionals}
 \label{sec:hybrid}
 
-Problem samoodziaływania nie występuje w przybliżeniu Hartree-Focka, gdzie dla każdego elektronu
-jego własne oddziaływanie kulombowskie kasowane jest przez oddziaływanie wymienne.
-Zatem częściowe uwzlędnienie dokładnej wartości energii wymiany w funkcjonale wymienno-korelacyjnym powinno
-zmniejszyć efekt samoodziaływania i w ten sposób poprawić całkowitą energię układu. 
-Takie funkcjonały, w których energia wymiany otrzymana w przybliżeniu LDA lub GGA jest częściowo zastąpiona
-dokładną wartością otrzymaną z metody Hartree-Focka, nazywane są funkcjonałami hybrydowymi.  
-Pierwszy funkcjonał hybrydowych zaproponował Becke w roku 1993 \cite{becke93}, uzasadniając jego postać
-na podstawie tzw. formuły adiabatycznego połączenia ({\it ang. adiabatic connection formula}).
-Rozważmy ogólny hamiltoniana w postaci
+The self-interaction problem does not occur in the Hartree-Fock approximation, where for each electron
+its own Coulomb interaction is canceled by the exchange interaction.
+Therefore, partial inclusion of the exact value of exchange energy in the exchange-correlation functional should
+reduce the self-interaction effect and thus improve the total energy of the system.
+Such functionals, in which the exchange energy obtained in the LDA or GGA approximation is partially replaced by
+the exact value obtained from the Hartree-Fock method, are called hybrid functionals.
+The first hybrid functional was proposed by Becke in 1993 \cite{becke93}, justifying its form
+based on the so-called adiabatic connection formula.
+Let us consider a general Hamiltonian in the form
 %
 \begin{equation}
 H_{\lambda}=T+\lambda V,
 \end{equation}
 %
-gdzie $T$ jest operatorem energii kinetycznej, $V$ jest potencjałem oddziaływania między elektronami, a $\lambda$ jest parametrem, który
-określa siłę tego ddziaływania ($0\leq\lambda\leq 1$). 
-Funkcje falowe $\psi_{\lambda}$ i energie własne $E_{\lambda}$ tego hamiltonianu są zależne od parametru $\lambda$.
-Dla nich spełnione jest równanie
+where $T$ is the kinetic energy operator, $V$ is the interaction potential between electrons, and $\lambda$ is a parameter that
+determines the strength of this interaction ($0\leq\lambda\leq 1$).
+The wave functions $\psi_{\lambda}$ and eigenvalues $E_{\lambda}$ of this Hamiltonian depend on the parameter $\lambda$.
+For them the following equation is satisfied
 %
 \begin{equation}
 \frac{dE_{\lambda}}{d\lambda}=\langle\psi_{\lambda}|V|\psi_{\lambda}\rangle,
 \end{equation} 
 %
-z którego dostajemy
+from which we get
 %
 \begin{equation}
 E_{\lambda=1}=E_{\lambda=0}+\int_0^1 d\lambda \langle\psi_{\lambda}|V|\psi_{\lambda}\rangle.
 \end{equation}
 %
-Energia dla $\lambda=0$ odpowiada energii kinetycznej, natomiast $\lambda=1$ daje energie z pełnym oddziaływaniem elektronowym $V$.
-Ta formuła określa właśnie adiabatyczne połączenie między układem nieoddziałujących i oddziałujących elektronów.
-Po zastosowaniu tej formuły do funkcjonału energii (z pominięciem potencjału zewnętrznego $V_{ext}$) dostajemy 
+The energy for $\lambda=0$ corresponds to the kinetic energy, while $\lambda=1$ gives the energy with full electron interaction $V$.
+This formula defines precisely the adiabatic connection between the system of non-interacting and interacting electrons.
+After applying this formula to the energy functional (omitting the external potential $V_{ext}$) we get
 %
 \begin{equation}
 E[n]=T[n]+\int_0^1 d\lambda \langle\psi_{\lambda}|V|\psi_{\lambda}\rangle.
 \end{equation}
 %
-Biorąc pod uwagę funkcjonał Kohna-Shama (\ref{EKS}), możemy napisać wzór na energię wymienno-korelacyjną w postaci
+Taking into account the Kohn-Sham functional (\ref{EKS}), we can write the formula for exchange-correlation energy in the form
 %
 \begin{equation}
 E_{xc}[n]=\int_0^1 d\lambda \langle\psi_{\lambda}|V|\psi_{\lambda}\rangle-E_H[n]=\int_0^1d\lambda E_{xc,\lambda}[n].
 \label{xcn}
 \end{equation}
 %
-Powyższą całkę można przybliżyć, rozpatrując jedynie wartości końcowe. Dla $\lambda=0$, dostajemy energie wymiany
-w przybliżeniu Hartree-Focka, $E_{xc,0}=E_x^{HF}$. Becke zaproponował, aby dla $\lambda=1$ zastosować jedno z przybliżeń stosowanych w DFT (LDA lub GGA),
-$E_{xc,1}=E_{xc}^{DFT}$, a dla pośrednich wartości $\lambda$ zastosować interpolację liniową
+The above integral can be approximated by considering only the end values. For $\lambda=0$, we get the exchange energy
+in the Hartree-Fock approximation, $E_{xc,0}=E_x^{HF}$. Becke proposed that for $\lambda=1$ one should apply one of the approximations used in DFT (LDA or GGA),
+$E_{xc,1}=E_{xc}^{DFT}$, and for intermediate values of $\lambda$ use linear interpolation
 %  
 \begin{equation}
 E_{xc,\lambda}[n]=(1-\lambda)E_x^{HF}[n]+\lambda E_{xc}^{DFT}[n].
 \end{equation}
 %
-Po wstawieniu tej zależności do (\ref{xcn}) i wyliczeniu całki dostajemy funkcjonał hybrydowy 
+After substituting this dependence into (\ref{xcn}) and calculating the integral we get the hybrid functional
 %
 \begin{equation}
 E_{xc}^{hyb}[n]=\frac{1}{2}E_x^{HF}+\frac{1}{2}E_{xc}^{DFT}[n].
 \label{becke}
 \end{equation} 
 %
-Funkcjonał ten można ulepszyć poprawiając przybliżone całkowanie $E_{xc,\lambda}[n]$.
-Dla dowolnego układu, można znaleźć parametr $b$, który najlepiej opisuje
-energię wymienną
+This functional can be improved by refining the approximate integration of $E_{xc,\lambda}[n]$.
+For an arbitrary system, one can find a parameter $b$ that best describes the
+exchange energy
 %
 \begin{equation}
 E_{xc}^{hyb}[n]=bE_x^{HF}+(1-b)E_{xc}^{DFT}[n].
 \end{equation}
-W praktyce stosuje się funkcjonały, w których liniowo miksowane są tylko dokładna i przybliżona część
-energii wymiennej, a część korelacyjna jest przybliżona w ramach LDA lub GGA.
-Parametr $b$ można wybrać empirycznie przez dofitowanie różnych wielkości, na przykład energii
-atomizacji, do eksperymentalnych wartości dla dużej grupy materiałów.
-Optymalne zgodności otrzymuje się zwykle dla wartości z przedziału $b=[0.15,30]$.
+In practice, functionals are used in which only the exact and approximate parts
+of the exchange energy are linearly mixed, and the correlation part is approximated within LDA or GGA.
+The parameter $b$ can be chosen empirically by fitting different quantities, for example atomization
+energies, to experimental values for a large group of materials.
+Optimal agreement is usually obtained for values from the range $b=[0.15,0.30]$.
 
-Wybór parametru $b$ można dodatkowo uzasadnić stosująć podejście, które zaproponowali Pardew, Ernzerhof i Burke w roku 1996~\cite{PBE0}.  
-Zapisując zależność energii wymienno-korelacyjnej od $\lambda$ w formie rozwinięcia perturbacyjnego Mollera-Plesseta, 
-dostaje się zależność
+The choice of parameter $b$ can be additionally justified using the approach proposed by Perdew, Ernzerhof and Burke in 1996~\cite{PBE0}.
+Writing the dependence of exchange-correlation energy on $\lambda$ in the form of Møller-Plesset perturbation expansion,
+one obtains the dependence
 %
 \begin{equation}
 E_{xc,\lambda}[n]=E_{xc}^{DFT}[n]+(E_x^{HF}[n]-E_x^{DFT}[n])(1-\lambda)^{m-1},
 \end{equation}
 %
-która prowadzi do funkcjonału hybrydowego w postaci
+which leads to the hybrid functional in the form
 %
 \begin{equation}
 E_{xc}^{hyb}[n]=E_{xc}^{DFT}[n]+\frac{1}{m}(E_x^{HF}[n]-E_x^{DFT}[n]).
 \end{equation}
 %
-Dla $m=1$, energia wymiany jest równa dokładnej wartości $E_x^{HF}$. W tym przypadku dodanie przybliżonej wartość energii korelacji $E_c^{DFT}$ 
-poprawia wyniki w porównaniu do przybliżenia Hartree-Focka. Wyniki są jednak gorsze niż w przybliżeniach LDA lub GGA, w których błędy energii wymiany i korelacji mają przeciwne znaki, co powoduję ich częściowe kasowanie się. Przypadek $m=2$ odpowiada funkcjonałowi, który dany jest wzorem~(\ref{becke}). 
-Za optymalny uznano wybór $m=4$~\cite{PBE0}, wskazując na bardzo dobrą zgodnością wyników otrzymanych w ramach teorii perturbacyjnej Mollera-Plesseta czwartego rzędu z danymi eksperymentalnymi \cite{pople89}. Co więcej, w tym przypadku zarówno wartości $E_{xc,\lambda}$ i $E_{xc}^{DFT}$, jak również ich pierwsze oraz drugie pochodne wzajemnie pokrywają się dla $\lambda=1$. Parametr $b$ związany jest z wykładnikiem $m$ prostą zależnością $b=\frac{1}{m}$, co daje $b=0.25$, bliskie wartościom empirycznym.
+For $m=1$, the exchange energy equals the exact value $E_x^{HF}$. In this case, adding the approximate value of correlation energy $E_c^{DFT}$
+improves results compared to the Hartree-Fock approximation. However, the results are worse than in the LDA or GGA approximations, where the errors of exchange and correlation energy have opposite signs, which causes their partial cancellation. The case $m=2$ corresponds to the functional given by formula~(\ref{becke}).
+The optimal choice was recognized as $m=4$~\cite{PBE0}, indicating very good agreement of results obtained within the fourth-order Møller-Plesset perturbation theory with experimental data \cite{pople89}. Moreover, in this case both the values of $E_{xc,\lambda}$ and $E_{xc}^{DFT}$, as well as their first and second derivatives mutually coincide for $\lambda=1$. The parameter $b$ is related to the exponent $m$ by the simple dependence $b=\frac{1}{m}$, which gives $b=0.25$, close to empirical values.
 
-Funkcjonał hybrydowy jest specjalnym przypadkiem funkcjonału zależnego od orbitali, w którym 
-potencjał Kohna-Shama składa się z części lokalnej (kwazilokalnej) i części
-potencjału Focka opisującego dokładną energię wymiany. 
-Oddziaływanie wymienne ma charakter krótkozasięgowy i można uwzględnić wkład od dokładnej wartości jedynie
-w pewnym zakresie odległości. Uwzględniając ten efekt Heyd, Scuseria i Enzerhof (HSE) \cite{HSE} zaproponowali nowy funkcjonał
-w postaci
+The hybrid functional is a special case of an orbital-dependent functional, in which
+the Kohn-Sham potential consists of a local (quasilocal) part and a part
+of the Fock potential describing the exact exchange energy.
+Exchange interaction has a short-range character and one can include the contribution from the exact value only
+within a certain distance range. Taking this effect into account, Heyd, Scuseria and Ernzerhof (HSE) \cite{HSE} proposed a new functional
+in the form
 %
 \begin{equation}
 E_{xc}^{hyb}(\mu) = (1-b)E_{x}^{GGA,SR}(\mu)+bE_x^{HF,SR}(\mu) + E_x^{GGA,LR} + E_c^{GGA},
 \end{equation}
 %
-gdzie $E_x^{GGA,SR}$ i $E_x^{GGA,LR}$ odpowiadają krótkozasięgowemu i długozasięgowemu oddziaływaniu wymiennemu w przybliżeniu GGA,
-$E_x^{HF,SR}$ jest częścią krótkozasięgowego dokladnego oddziaływania wymiennego, a parametr $\mu$
-określa zasięg oddziaływania krótkozasięgowego. .
+where $E_x^{GGA,SR}$ and $E_x^{GGA,LR}$ correspond to short-range and long-range exchange interaction in the GGA approximation,
+$E_x^{HF,SR}$ is the part of the short-range exact exchange interaction, and the parameter $\mu$
+determines the range of short-range interaction.
 
 
-\section{Funkcjonały i potencjały meta-GGA}
+\section{meta-GGA functionals and potentials}
 \label{mgga}
 
 
-Dwa podstawowe przybliżenia stosowane do opisu funkcjonału wymienno-korelacyjnego uwzlędniają tylko gęstość ładunku w danym punkcie
-przestrzeni (LDA) lub dodatkowo jego gradient (GGA). 
-Kolejnym krokiem pozwalającym poprawić ten funkcjonał jest uwzlędnienie jego zależności od gradientu orbitali, czyli 
-części kinetycznej całkowitej energii. 
+The two basic approximations used to describe the exchange-correlation functional only take into account the charge density at a given point
+in space (LDA) or additionally its gradient (GGA).
+The next step to improve this functional is to take into account its dependence on the gradient of orbitals, i.e.,
+the kinetic part of the total energy.
 
 %
 \begin{figure}[h]
 \centering
 \includegraphics[scale=1]{Jacob.jpg}
-\caption{Drabina Jakuba opisująca kolejne poziomy dokładności opisu funkcjonału wymienno-korelacyjnego w DFT.}
+\caption{Jacob's ladder describing successive levels of accuracy in describing the exchange-correlation functional in DFT.}
 \label{fig:jacob}
 \end{figure}
 %
 
-Takie funkcjonały noszą nazwę meta-GGA i zapisywane są w ogólnej postaci
+Such functionals are called meta-GGA and are written in the general form
 %
 \begin{equation}
 E_{xc}[n_{\uparrow},n_{\downarrow}]=\int d\bm{r} n(\bm{r}) \varepsilon_{xc}(n_{\uparrow},n_{\downarrow},\nabla n_{\uparrow},\nabla n_{\downarrow},\tau_{\uparrow},\tau_{\downarrow}),
 \label{metaGGA}
 \end{equation}
 %
-gdzie $\tau_{\sigma}$ jest gęstością energii kinetycznej wyznaczoną dla obsadzonych stanów Kohna-Shama 
+where $\tau_{\sigma}$ is the kinetic energy density determined for occupied Kohn-Sham states
 %
 \begin{equation}
 \tau_{\sigma}(\bm{r})= \frac{1}{2}\sum_i |\nabla \psi_{i\sigma}(\bm{r})|^2,
 \end{equation}
 %
-w jednostkach $\hbar=m_\text{e}=1$. Uzasadnieniem włączenia $\tau_{\sigma}$ do funkcjonału jest występowanie tej wielkości w rozwinięciu Taylora
-uśrednionego sferycznie ładunku wymiennego wokół elektronu~\cite{Becke1998}. Drugą korzystną cecha jest możliwość zredukowania samoodziaływania
-w części korelacyjnej funkcjonału.
+in units $\hbar=m_\text{e}=1$. The justification for including $\tau_{\sigma}$ in the functional is the occurrence of this quantity in the Taylor expansion
+of the spherically averaged exchange charge around an electron~\cite{Becke1998}. The second beneficial feature is the possibility of reducing self-interaction
+in the correlation part of the functional.
 
 
-\subsection{Potencjał Becke-Johnsona}
+\subsection{Becke-Johnson potential}
 
-Becke and Johnson (BJ) zastosowali rozszerzenie potencjału oddziaływania wymiennego Slatera w postaci~\cite{Becke2006}
+Becke and Johnson (BJ) applied an extension of the Slater exchange potential in the form~\cite{Becke2006}
 %
 \begin{equation}
 V^\text{BJ}_{\text{x}\sigma}(\bm{r})=V_{\text{x}\sigma}^\text{Slater}(\bm{r})+\frac{1}{\pi}\sqrt{\frac{5}{12}}\sqrt{\frac{2\tau_{\sigma}(\bm{r})}{n_{\sigma},(\bm{r})}}.
 \label{BJ}
 \end{equation} 
 %
-gdzie omawiany w rozdziale (\ref{sec:HF}) potencjał Slatera dany jest wzorem
+where the Slater potential discussed in chapter (\ref{sec:HF}) is given by the formula
 %
 \begin{equation}
 V_{\text{x}\sigma}^\text{Slater}(\bm{r})=-\frac{e}{2}\int d\mb{r}' \frac{n(\mb{r},\mb{r}')}{|\mb{r}-\mb{r}'|}, 
 \label{SlatPot}
 \end{equation}
 % 
-w którym występuje ładunek wymienny $n(\mb{r},\mb{r}')$ opisany wzorem (\ref{EC}). Potencjał BJ znacznie poprawia energie odziaływania wymiennego
-w porównaniu do przybliżenia LDA i daje wyniki porównywalne z potencjałem OEP~\cite{Becke2006}.  
-Tran i Blaha zaproponowali modyfikację potencjału wymiennego BJ w postaci~\cite{Tran2009}
+where the exchange charge $n(\mb{r},\mb{r}')$ is described by formula (\ref{EC}). The BJ potential significantly improves the exchange interaction energy
+compared to the LDA approximation and gives results comparable to the OEP potential~\cite{Becke2006}.
+Tran and Blaha proposed a modification of the BJ exchange potential in the form~\cite{Tran2009}
 %
 \begin{equation}
 V^\text{mBJ}_{\text{x}\sigma}(\bm{r})=cV^\text{BR}_{\text{x}\sigma}(\bm{r})+(3c-2)\frac{1}{\pi}\sqrt{\frac{5}{12}}\sqrt{\frac{2\tau_{\sigma}(\bm{r})}{n_{\sigma}(\bm{r})}},
 \label{mBJ}
 \end{equation}
 %
-gdzie zamiast potencjału Slatera występuje potencjał Becke-Roussel'a
+where instead of the Slater potential, the Becke-Roussel potential appears
 %
 \begin{equation}
 V^\text{BR}_{\text{x}\sigma}(\bm{r})=-\frac{1}{b_{\sigma}(\bm{r})}(1-e^{-x_{\sigma}(\bm{r})}-\frac{1}{2}x_{\sigma}(\bm{r})e^{-x_{\sigma}(\bm{r})}).
 \end{equation}
 %  
-Wielkość $x_{\sigma}(\bm{r})$ zależy od gęstości elektronowej i jej gradientu oraz od $\tau_{\sigma}(\bm{r})$, natomiast
+The quantity $x_{\sigma}(\bm{r})$ depends on the electron density and its gradient as well as on $\tau_{\sigma}(\bm{r})$, while
 %
 \begin{equation}
 b_{\sigma}(\bm{r})=[\frac{x^3_{\sigma}(\bm{r})e^{-x_{\sigma}(\bm{r})}}{8\pi n_{\sigma}(\bm{r})}]^{\frac{1}{3}}.       
 \end{equation}
 %
-Parametr $c$ wyraża się następującym wzorem
+The parameter $c$ is expressed by the following formula
 %
 \begin{equation}
 c=\alpha+\beta[\frac{1}{V_\text{cell}}\int d\bm{r}'\frac{|\nabla n(\bm{r}')|}{n(\bm{r}')}]^{\frac{1}{2}},
 \end{equation}
 %
-gdzie $\alpha$ i $\beta$ wyznaczone są tak, aby zminimalizować odstępstwa wyliczanych przerw energetycznych
-od wartości eksperymentalnych dla dużej grupy materiałów.
-Potencjał mBJ (\ref{mBJ}) przechodzi w potencjał BJ (\ref{BJ}) dla $c=1$ oraz dobrze
-przybliża potencjał wymienny LDA dla stałej gęstości elektronowej dany wzorem (\ref{Vex}),
-niezależnie od wartości parametru $c$.
-W porównaniu do przybliżeń LDA lub GGA, obliczenia z potencjałem mBJ znacznie poprawiają wartości 
-przerwy energetycznej w gazach szlachetnych, półprzewodnikach i izolatorach~\cite{Tran2009}.
-Wartości te są porównywalne z wynikami otrzymanymi przy zastosowaniu funkcjonałów hybrydowych lub metody GW,
-które wymagają bardzo czasochłonnych obliczeń.
-Ponieważ w tym podejściu poprawiany jest potencjał wymienny, a nie funkcjonał wymienny, nie można go zastosować
-do optymalizacji położeń atomowych i stałych sieci krystalicznej.  
+where $\alpha$ and $\beta$ are determined to minimize deviations of calculated energy gaps
+from experimental values for a large group of materials.
+The mBJ potential (\ref{mBJ}) reduces to the BJ potential (\ref{BJ}) for $c=1$ and approximates well
+the LDA exchange potential for constant electron density given by formula (\ref{Vex}),
+independently of the value of parameter $c$.
+Compared to the LDA or GGA approximations, calculations with the mBJ potential significantly improve the values
+of the energy gap in noble gases, semiconductors and insulators~\cite{Tran2009}.
+These values are comparable to results obtained using hybrid functionals or the GW method,
+which require very time-consuming calculations.
+Since in this approach the exchange potential is improved, not the exchange functional, it cannot be applied
+to optimize atomic positions and crystal lattice constants.  
   
 
-\subsection{Funkcja lokalizacji elektronów (ELF)}
+\subsection{Electron localization function (ELF)}
 
-Funkcjonały meta-GGA używają bezwymiarowego parametru 
+meta-GGA functionals use the dimensionless parameter
 %
 \begin{equation}
 \alpha=\frac{\tau-\tau^w}{\tau^{u}},
 \end{equation}
 %
-gdzie $\tau^w$ jest gęstością energii kinetycznej Weizsäckera
+where $\tau^w$ is the Weizsäcker kinetic energy density
 %
 \begin{equation}
 \tau^w=\frac{|\nabla n|^2}{8n},
 \end{equation}
 %
-która określa dokładną wartość $\tau$ dla pojedynczego orbitalu, a $\tau^u$ jest jego wartością dla jednorodnego gazu
+which determines the exact value of $\tau$ for a single orbital, and $\tau^u$ is its value for a homogeneous gas
 %
 \begin{equation}
 \tau^u=\frac{3}{10}\Big{(}\frac{3}{\pi^2}\Big{)}^{\frac{2}{3}}n^{\frac{5}{3}}.
 \end{equation}
 %
-Parametr $\alpha$ wykorzystywany jest do charakteryzacji rozkładu gęstości elektronowej i pozwala odróżnić
-układy z wolnozmienną gestością elektronową, typową dla metali ($\alpha\approx 1$), 
-materiały z wiązaniami kowalencyjnymi między pojedynczymi orbitalami ($\alpha=0$) oraz słabymi wiązaniami niekowalencyjnymi między
-zamkniętymi powłokami atomowymi ($\alpha\rightarrow\infty$).
-Jest on bezpośrednio powiązany z funkcją lokalizacji elektronów ({\it ang. electron localization function} - ELF)~\cite{ELF1}
+The parameter $\alpha$ is used to characterize the electron density distribution and allows distinguishing
+systems with slowly varying electron density, typical for metals ($\alpha\approx 1$),
+materials with covalent bonds between single orbitals ($\alpha=0$) and weak non-covalent bonds between
+closed atomic shells ($\alpha\rightarrow\infty$).
+It is directly related to the electron localization function (ELF)~\cite{ELF1}
 %
 \begin{equation}
 \textrm{ELF} = \frac{1}{1+\alpha^2},
 \end{equation}     
 %
-która przyjmuje wartości z przedziału $[0,1]$ i jest używana do opisu wiązań chemicznych~\cite{ELF2,ELF3}.
-$\text{ELF}=1$ odpowiada idealnej lokalizacji elektronu, a $\text{ELF}=\frac{1}{2}$ jest wartością dla gazu elektronowego.  
+which takes values from the range $[0,1]$ and is used to describe chemical bonds~\cite{ELF2,ELF3}.
+$\text{ELF}=1$ corresponds to ideal electron localization, and $\text{ELF}=\frac{1}{2}$ is the value for an electron gas.  
 
 
-\subsection{Funkcjonał SCAN}
+\subsection{SCAN functional}
 
-W omówionych potencjałach BJ i mBJ zmiania się tylko część opisująca oddziaływanie wymienne, natomiast
-część korelacyjna pozostaje bez zmiany i może być wyznaczona w ramach przybliżeń LDA lub GGA.
-Funkcjonały meta-GGA, których ogólna postać wyraża się wzorem (\ref{metaGGA}), uwzględniają poprawki w części
-wymiennej i korelacyjnej. Zaproponowano kilka wersji funkcjonałów meta-GGA, których nazwy określane są skrótami
-PKZB~\cite{metaGGA}, TPSS~\cite{TPSS}, revTPSS~\cite{revTPSS} lub SCAN~\cite{SCAN}.
-Tutaj omówimy krótko funkcjonał SCAN ({\it ang. strongly contrained and appropriately normed}), który 
-spełnia 17 znanych warunków i norm dla funkcjonału wymienno-korelacyjnego.
-Jednym z nich jest warunek dla współczynnika określającego stosunek energii wymiany do odpowiedniej wartości w LDA, $F_x=E_x/E^{LDA}_x$, który
-nie może przekraczać wartości 1.174. Poprawnie opisuje również układy, dla których dokładne wartości są znane, np. jednorodny gaz elektronowy.  
+In the discussed BJ and mBJ potentials, only the part describing the exchange interaction is changed, while
+the correlation part remains unchanged and can be determined within the LDA or GGA approximations.
+meta-GGA functionals, whose general form is expressed by formula (\ref{metaGGA}), include corrections in both the
+exchange and correlation parts. Several versions of meta-GGA functionals have been proposed, whose names are determined by the acronyms
+PKZB~\cite{metaGGA}, TPSS~\cite{TPSS}, revTPSS~\cite{revTPSS} or SCAN~\cite{SCAN}.
+Here we will briefly discuss the SCAN functional (strongly constrained and appropriately normed), which
+satisfies 17 known conditions and norms for the exchange-correlation functional.
+One of them is the condition for the coefficient determining the ratio of exchange energy to the corresponding value in LDA, $F_x=E_x/E^{LDA}_x$, which
+cannot exceed the value 1.174. It also correctly describes systems for which exact values are known, e.g., the homogeneous electron gas.
 
-Część wymienną funkcjonału można zapisać w postaci
+The exchange part of the functional can be written in the form
 %
 \begin{equation}
 E_x[n]=\int d\bm{r} n(\bm{r}) \varepsilon_x(n)F_x(s,\alpha),
 \end{equation}
 %
-gdzie $\varepsilon_x(n)$ jest energią wymiany dla jednorodnego gazu przypadającą na pojedynczy elektron,
-$\alpha$ jest parametrem zdefiniowanym w poprzednim rozdziale, a $s$ jest bezwymiarowym gradientem gęstości
+where $\varepsilon_x(n)$ is the exchange energy for a homogeneous gas per single electron,
+$\alpha$ is the parameter defined in the previous section, and $s$ is the dimensionless density gradient
 %
 \begin{equation}
 s=\frac{|\nabla n|}{2(3\pi^2)^{1/3}n^{4/3}}.
 \end{equation}
 %
-Rysunek~\ref{fig:Fxs} pokazuje zależność współczynnika $F_x$ od $s$ dla trzech charakterystycznych wartości $\alpha$.
-$F_x$ spełnia odpowiednie warunki zarówno dla małych $s\rightarrow0$, jak i dużych wartości $s\rightarrow\infty$.  
-Dla $\alpha=1$ i małych $s$, $F_x$ pokrywa się z wartościami dla funkcjonału PBE.
-Wartości $F_x$ dla innych wartości $\alpha$ uzyskuje się przez odpowiednią interpolację między $\alpha=0$ i $\alpha=1$ oraz ekstrapolację
-do $\alpha\rightarrow\infty$.
+Figure~\ref{fig:Fxs} shows the dependence of the coefficient $F_x$ on $s$ for three characteristic values of $\alpha$.
+$F_x$ satisfies the appropriate conditions both for small $s\rightarrow0$ and large values $s\rightarrow\infty$.
+For $\alpha=1$ and small $s$, $F_x$ coincides with the values for the PBE functional.
+The values of $F_x$ for other values of $\alpha$ are obtained by appropriate interpolation between $\alpha=0$ and $\alpha=1$ and extrapolation
+to $\alpha\rightarrow\infty$.
 %
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.5]{Fxs.png}
-\caption{Współczynnik $F_x$ w funkcji $s$ dla różnych wartości $\alpha$. Rysunek z pracy \cite{SCAN}.}
+\caption{Coefficient $F_x$ as a function of $s$ for different values of $\alpha$. Figure from ref. \cite{SCAN}.}
 \label{fig:Fxs}
 \end{figure}
 %
 
-Podobnie skonstruowany jest całkowity fukcjonał wymienno-korelacyjny $F_{xc}=F_{x}+F_{c}$, który w granicy
-dużych gęstości niespolaryzowanego gazu przyjmuje wartość energii wymiennej $F_x$.
-Dla małych gęstości funkcjonał spełnia warunek ograniczenia Lieba-Oxforda, $F_{xc}\leq 2.215$.
+Similarly constructed is the total exchange-correlation functional $F_{xc}=F_{x}+F_{c}$, which in the limit
+of high densities of unpolarized gas takes the value of exchange energy $F_x$.
+For low densities the functional satisfies the Lieb-Oxford bound, $F_{xc}\leq 2.215$.
  
 
-\section{Metoda LDA+U}
+\section{LDA+U method}
 \label{sec:ldau}
 
-Metoda LDA+U zaproponowana została przez Anisimova, Zaanena i Andersena w roku 1991~\cite{anisimov}.
-Jednym z pierwszych jej zastosowań było wyliczenie struktury elektronowej dla nadprzewodnika wysokotemperaturowego La$_2$CuO$_4$~\cite{czyzyk}.
-Metoda ta polega na połączeniu podejścia DFT z modelem Hubbarda, który stosowany jest od lat sześćdziesiątych ubiegłego wieku do opisu układów silnie skorelowanych elektronów~\cite{hubbard}. Zacznę od omówienia tego modelu. 
+The LDA+U method was proposed by Anisimov, Zaanen and Andersen in 1991~\cite{anisimov}.
+One of its first applications was the calculation of electronic structure for the high-temperature superconductor La$_2$CuO$_4$~\cite{czyzyk}.
+This method consists of combining the DFT approach with the Hubbard model, which has been used since the 1960s to describe strongly correlated electron systems~\cite{hubbard}. I will start by discussing this model.
 
-W najbardziej tradycyjnym podejściu, stany elektronowe w krysztale dzielimy na dwie grupy: stany zlokalizowane, które znajdują się w obrębie rdzenia atomowego i posiadają cechy orbitali atomowych oraz stany zdelokalizowane, które rozciągają się w całej przestrzeni kryształu.
-O własnościach transportowych danego materiału decydują głównie elektrony należące do drugiej grupy.
-Natomiast jeżeli chodzi o własności magnetyczne, to zarówno elektrony zlokalizowane, jak i wędrowne mogą oddziaływać wymiennie
-i decydować o rodzaju uporządkowania magnetycznego. W pierwszym przypadku mówimy o zlokalizowanych momentach magnetycznych, 
-których oddziaływanie można opisać w ramach modelu Heisenberga. W drugim mamy doczynienia z magnetyzmem pasmowym, który wynika
-z oddziaływania między mobilnymi elektronami walencyjnymi, które można opisać przy pomocy funkcji Blocha.
+In the most traditional approach, electronic states in a crystal are divided into two groups: localized states, which are located within the atomic core and possess features of atomic orbitals, and delocalized states, which extend throughout the entire crystal space.
+The transport properties of a given material are mainly determined by electrons belonging to the second group.
+As for magnetic properties, both localized and itinerant electrons can interact by exchange
+and determine the type of magnetic ordering. In the first case we speak of localized magnetic moments,
+whose interaction can be described within the framework of the Heisenberg model. In the second case we deal with band magnetism, which results
+from the interaction between mobile valence electrons, which can be described using Bloch functions.
 
-Występują również stany elektronowe, które posiadają cechy obydwu tych grup. Stany te tworzą pasma, zachowując jednocześnie
-cechy orbitali atomowych. Ruch elektronów w takiej sytuacji polega na przeskokach między lokalnymi orbitali i odpowiadajace im pasma są znacznie węższe od
-typowych pasm metalicznych. Żródłem takiego zachowania są efekty korelacyjne, które uniemożliwiają swobodny przepływ elektronów w krysztale.
-Najlepszym przykładem są stany należące do niezapełnionej powłoki $3d$ w metalach przejściowych.
-Zgodnie z zakazem Pauliego, w każdym orbitalu mogą znajdować się tylko dwa elektrony z przeciwnymi kierunkami spinu. 
-Jeżeli występuje silne, lokalne oddziaływanie kulombowskie między ładunkami, to stany kwantowe, w których dwa elektrony   
-znajdują się w tym samym orbitalu są niekorzystne energetycznie. Zatem ruch elektronu jest bardzo utrudniony i dla odpowiednio dużego oddziaływania kulombowskiego
-elektrony zostają zlokalizowane. Materiały, w których występuje taki mechanizm lokalizacji to izolatory Motta.
+There are also electronic states that possess features of both these groups. These states form bands while maintaining
+features of atomic orbitals. Electron motion in such a situation consists of hopping between local orbitals and the corresponding bands are much narrower than
+typical metallic bands. The source of such behavior is correlation effects that prevent free flow of electrons in the crystal.
+The best example is states belonging to the unfilled $3d$ shell in transition metals.
+According to the Pauli exclusion principle, each orbital can contain only two electrons with opposite spin directions.
+If there is strong, local Coulomb interaction between charges, then quantum states in which two electrons
+are in the same orbital are energetically unfavorable. Therefore, electron motion is very difficult and for sufficiently large Coulomb interaction
+electrons become localized. Materials in which such a localization mechanism occurs are Mott insulators.
 
-Hubbard zaproponował model do opisu stanów elektronowych, które posiadają cechy zlokalizowanych orbitali atomowych,
-wynikające z korelacji elektronowych~\cite{hubbard}.
-Jest to przykład  modelu ciasnego wiązania z orbitalami Wanniera, który opisany jest w rozdziale~\ref{sec:wannier}. 
-W najprostszym przypadku rozważamy pojedyncze orbitale typu $s$, zlokalizowane w węzłach atomowych. Silne korelacje elektronów znajdujących
-się w tym samym orbitalu można uwzględnić dodają do hamiltonianu lokalne oddziaływanie kulombowskie o ustalonej energii $U$. 
-Hamiltonian modelu Hubbarda zapisujemy stosując formalizm drugiego kwantowania
+Hubbard proposed a model to describe electronic states that possess features of localized atomic orbitals,
+resulting from electron correlations~\cite{hubbard}.
+This is an example of a tight-binding model with Wannier orbitals, which is described in chapter~\ref{sec:wannier}.
+In the simplest case, we consider single $s$-type orbitals, localized at atomic sites. Strong correlations of electrons located
+in the same orbital can be accounted for by adding to the Hamiltonian a local Coulomb interaction of fixed energy $U$.
+The Hubbard model Hamiltonian is written using second quantization formalism
 %
 \begin{equation}
 H=\sum_{i,j,\sigma}t_{ij}c^{\dagger}_{i\sigma}c_{j\sigma}+U\sum_i n_{i\uparrow}n_{i\downarrow},
 \label{hubbard}
 \end{equation}
 %
-gdzie $c^{\dagger}_{i\sigma}$ i $c_{i\sigma}$ to operatory kreacji i anihilacji elektronu ze spinem $\sigma$ w zlokalizowanym orbitalu Wanniera $w(\bm{r}-\bm{R}_i)$,
-a całki przeskoku dane są wzorem
+where $c^{\dagger}_{i\sigma}$ and $c_{i\sigma}$ are creation and annihilation operators of an electron with spin $\sigma$ in the localized Wannier orbital $w(\bm{r}-\bm{R}_i)$,
+and the hopping integrals are given by the formula
 %
 \begin{equation}
 t_{ij}=\int d\bm{r} w^*(\bm{r}-\bm{R}_i)H_0w(\bm{r}-\bm{R}_j).
 \end{equation}
 %
-$H_0$ jest jednocząstkowym hamiltonianem złożonym z energii kinetycznej i efektywnego potencjału atomowego. 
-Najczęście uwzlędnia się tylko całki przeskoku między najbliższymi sąsiadami. 
-Operator liczby cząstek ze spinem $\sigma$ na węźle $i$ dany jest wyrażeniem $n_{i\sigma}=c^{\dagger}_{i\sigma}c_{i\sigma}$.
-Energię oddziaływania kulombowskiego dwóch elektronów w tym samym orbitalu można wyliczyć ze wzoru
+$H_0$ is the single-particle Hamiltonian composed of kinetic energy and effective atomic potential.
+Most often only hopping integrals between nearest neighbors are taken into account.
+The particle number operator with spin $\sigma$ at site $i$ is given by the expression $n_{i\sigma}=c^{\dagger}_{i\sigma}c_{i\sigma}$.
+The Coulomb interaction energy of two electrons in the same orbital can be calculated from the formula
 %
 \begin{equation}
 U=\int d\bm{r}d\bm{r}' |w(\bm{r}-\bm{R}_i)|^2\frac{e^2}{|\bm{r}-\bm{r}'|}|w(\bm{r}-\bm{R}_i)|^2.
 \end{equation}
 %
-Jeżeli wykonamy transformatę Fouriera operatorów kreacji i anihilacji,
-pierwszy wyraz hamiltonianu (\ref{hubbard}) przyjmie postać $\sum_{\bm{k}\sigma}\varepsilon_{\bm{k}}n_{\bm{k}\sigma}$,
-gdzie $\varepsilon_{\bm{k}}$ opisuje strukturę pasmową w modelu ciasnego wiązania,
-a $n_{\bm{k}\sigma}=c^{\dagger}_{\bm{k}\sigma}c_{\bm{k}\sigma}$ jest operatorem liczby obsadzeń w stanie $\bm{k}$ i spinie $\sigma$.
+If we perform the Fourier transform of the creation and annihilation operators,
+the first term of the Hamiltonian (\ref{hubbard}) takes the form $\sum_{\bm{k}\sigma}\varepsilon_{\bm{k}}n_{\bm{k}\sigma}$,
+where $\varepsilon_{\bm{k}}$ describes the band structure in the tight-binding model,
+and $n_{\bm{k}\sigma}=c^{\dagger}_{\bm{k}\sigma}c_{\bm{k}\sigma}$ is the occupation number operator in state $\bm{k}$ and spin $\sigma$.
 
-Zaproponowano kilka sformułowań metody LDA+U \cite{anisimov,orbital1,dudarev}, które różnią się opisem lokalnych 
-oddziaływań eletronowych. Ogólny schemat używany do wyliczenia całkowitej energii ma postać
+Several formulations of the LDA+U method have been proposed \cite{anisimov,orbital1,dudarev}, which differ in the description of local
+electronic interactions. The general scheme used to calculate the total energy has the form
 %
 \begin{equation}
 E_\text{tot}=E_\text{DFT}+E_U-E_\text{dc},
 \label{eldau}
 \end{equation}
 %
-gdzie $E_\text{DFT}$ jest energią układu otrzymaną w ramach metody DFT (w przybliżeniu LDA lub GGA), $E_U$ jest energią lokalnych oddziaływań elektronowych,
-a $E_\text{dc}$ odpowiada energii oddziaływań kulombowskich w przybliżeniu średniego pola.
-Ten ostatni wyraz jest konieczny, aby odjąć przybliżoną energię oddziaływań elektronowych, która uwzlędniona jest w $E_\text{DFT}$.
-W pracy \cite{orbital1} zaproponowano uogólnioną postać energii $E_U$, która uwzglądnia orbitalną zależność oddziaływań elektronowych
+where $E_\text{DFT}$ is the energy of the system obtained within the DFT method (in the LDA or GGA approximation), $E_U$ is the energy of local electronic interactions,
+and $E_\text{dc}$ corresponds to the Coulomb interaction energy in the mean field approximation.
+This last term is necessary to subtract the approximate electron interaction energy, which is included in $E_\text{DFT}$.
+In ref. \cite{orbital1}, a generalized form of energy $E_U$ was proposed, which takes into account the orbital dependence of electronic interactions
 %
 \begin{multline}
 E_U=\frac{1}{2}\sum_{i,\{m\},\sigma}[\langle m,m''|V_{ee}|m',m'''\rangle n_{i\sigma}^{mm'}n_{i-\sigma}^{m''m'''}
 \\+(\langle m,m''|V_{ee}|m',m'''\rangle - \langle m,m''|V_{ee}|m''',m'\rangle  )n_{i\sigma}^{mm'}n_{i\sigma}^{m''m'''}],
 \end{multline}  
 %
-gdzie $i$ numeruje węzły sieci,  $\{m\}=(m, m',m'', m''')$ są magnetycznymi liczbami kwantowymi,
-a elementy macierzowe oddziaływania kulombowskiego dane są wzorem
+where $i$ numbers the lattice sites, $\{m\}=(m, m',m'', m''')$ are magnetic quantum numbers,
+and the matrix elements of the Coulomb interaction are given by the formula
 %
 \begin{equation}
 \langle m,m''|V_{ee}|m',m'''\rangle=\int d\bm{r} \int \bm{r}' \phi_{lm}^*(\bm{r})\phi_{lm'}(\bm{r})\frac{e^2}{|\bm{r}-\bm{r}'|}\phi_{lm''}^*(\bm{r}')\phi_{lm'''}(\bm{r}').
 \label{integral}
 \end{equation}
 %
-Występujące pod całką atomowe funkcje falowe określone są dla orbitalnej liczby kwantowej $l$, która definiują zakres magnetycznych liczb kwantowych $-l\le \{m\} \le l$. Liczby obsadzeń orbitali atomowych tworzą tensor drugiego rzędu, którego elementy wyznaczane są przez rzutowanie funkcji falowych Kohna-Shama $\psi_{\bm{k}j}^{\sigma}$ na orbitale atomowe
+The atomic wave functions appearing under the integral are determined for the orbital quantum number $l$, which defines the range of magnetic quantum numbers $-l\le \{m\} \le l$. The occupation numbers of atomic orbitals form a second-rank tensor, whose elements are determined by projecting the Kohn-Sham wave functions $\psi_{\bm{k}j}^{\sigma}$ onto atomic orbitals
 %
 \begin{equation}
 n_{i\sigma}^{mm'}=\sum_{\bm{k},j} f_{\bm{k}j}^{\sigma}\langle\psi_{\bm{k}j}^{\sigma}|\phi_{lm'}\rangle\langle\phi_{lm}|\psi_{\bm{k}j}\rangle, 
 \end{equation}
 %
-gdzie współczynniki $f_{\bm{k}j}^{\sigma}$ okreśkaja obsadzenia stanów $j$ z wektorem falowym $\bm{k}$ i spinie $\sigma$.
-Całkę (\ref{integral}) można przedstawić w postaci sumy iloczynów części kątowej i radialnej 
+where the coefficients $f_{\bm{k}j}^{\sigma}$ determine the occupation of states $j$ with wave vector $\bm{k}$ and spin $\sigma$.
+The integral (\ref{integral}) can be represented as a sum of products of angular and radial parts
 %
 \begin{equation}
 \langle m,m''|V_{ee}|m',m'''\rangle=\sum_p a_p(m,m',m'',m''')F^p,
 \label{vee}
 \end{equation}
 %
-gdzie $p$ jest liczbą parzystą z przedziału $0\le p \le 2l$. Część kątowa $a_p$ wyliczana jest przy pomocy iloczynów współczynników Clebsha-Gordana 
+where $p$ is an even number from the range $0\le p \le 2l$. The angular part $a_p$ is calculated using products of Clebsch-Gordan coefficients
 %
 \begin{equation}
 a_p(m,m',m'',m''')=\frac{4\pi}{2p+1}\sum_{q=-p}^p \langle lm|Y_{pq}|lm'\rangle\langle lm''|Y_{pq}^*|lm'''\rangle.
 \end{equation}
 %
-$F^p$ nazywane są całkami Slatera i wyznaczane są ze wzoru
+$F^p$ are called Slater integrals and are determined from the formula
 %
 \begin{equation}
 F^p=e^2\int d\bm{r}\int d\bm{r}' r^2 r'^2 R_{nl}^2(\bm{r})\frac{r_1^p}{r_2^{p+1}} R_{nl}^2(\bm{r}'),
 \end{equation}
 %
-gdzie $R_{nl}(\bm{r})$ są częścią radialną atomu funkcji falowej. 
-Dla stanów $d$ potrzebne są trzy całki Slatera $F^0$, $F^2$ i $F^4$, a dla stanów $f$ dodatkowo $F^6$, aby wyznaczyć elementy macierzowe 
-potencjału kulombowskiego (\ref{vee}).
-Efektywne parametry, które określają lokalne oddziaływanie kulombowskie ($U$) i wymienne ($J$), można wyrazić przy pomocy całek Slatera
+where $R_{nl}(\bm{r})$ is the radial part of the atomic wave function.
+For $d$ states, three Slater integrals $F^0$, $F^2$ and $F^4$ are needed, and for $f$ states additionally $F^6$, to determine the matrix elements
+of the Coulomb potential (\ref{vee}).
+Effective parameters that determine the local Coulomb ($U$) and exchange ($J$) interactions can be expressed using Slater integrals
 %
 \begin{eqnarray}
 U&=&\frac{1}{(2l+1)^2}\sum_{m.m'} \langle m,m'|V_{ee}|m,m'\rangle=F^0,\\
@@ -3030,18 +3032,18 @@ J&=&\frac{1}{2l(2l+1)}\sum_{m\ne m'} \langle m,m'|V_{ee}|m',m\rangle=\frac{F^2+F
 \label{HundJ}
 \end{eqnarray} 
 %
-Wykorzystując te parametry, możemy zapisać ostatni wyraz we wzorze (\ref{eldau}) w następującej formie
+Using these parameters, we can write the last term in formula (\ref{eldau}) in the following form
 %
 \begin{equation}
 E_{dc}=\frac{1}{2}\Big[\sum_i Un_i(n_i-1)-J[n_{i\uparrow}(n_{i\uparrow}-1)+n_{i\downarrow}(n_{i\downarrow}-1)]\Big],
 \end{equation}
 %
-gdzie $n_{i\sigma}=\Tr(n_{i\sigma}^{mm'})$ i $n_i=n_{i\uparrow}+n_{i\downarrow}$ jest całkowitym obsadzeniem orbitali w węźle $i$.
-Tak wyznaczone parametry $U$ i $J$ odnoszą sie do izolowanych atomów. Efektywne wartości parametru kulombowskiego $U$,
-stosowane dla danego rodzaju atomu, uwzględniaja efekty ekranowania elektronowego i zależą od rodzaju materiału.
-Można go wyznaczyć w ramach metody odpowiedzi liniowej poprzez wyliczenie zmiany obsadzenia stanów elektronowych na wybranym atomie
-pod wpływem przyłożonego lokalnego potencjału \cite{coco1,coco2}.
-Drugi z parametrów $J$, nazywany energią wymiany Hunda, znacznie słabiej zależy od rodzaju materiału i często stosowana jest jego wartość atomowa (\ref{HundJ}). 
+where $n_{i\sigma}=\Tr(n_{i\sigma}^{mm'})$ and $n_i=n_{i\uparrow}+n_{i\downarrow}$ is the total occupation of orbitals at site $i$.
+The parameters $U$ and $J$ determined in this way refer to isolated atoms. Effective values of the Coulomb parameter $U$,
+used for a given type of atom, take into account electron screening effects and depend on the type of material.
+It can be determined within the linear response method by calculating the change in electronic state occupation at a selected atom
+under the influence of an applied local potential \cite{coco1,coco2}.
+The second parameter $J$, called the Hund exchange energy, depends much less weakly on the type of material and often its atomic value (\ref{HundJ}) is used. 
 
 
 \chapter{Izolatory i półprzewodniki}
