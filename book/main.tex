@@ -693,13 +693,11 @@ The set of points defined by this formula is called a Bravais lattice. Similarly
 can be defined for any dimension $d$ by choosing an appropriate number of basis vectors: $\bm{a}_1,\bm{a}_2,...,\bm{a}_d$. 
 With each Bravais lattice point, one can associate a set of atoms called the basis. The smallest region of the crystal
 that, when translated by all lattice translations, fills the entire space is called the primitive cell. 
-% **[REVIEW NEEDED]**: "fills the entire space" - verify if "entire volume" is preferred per author's style preference
 The primitive cell contains exactly one Bravais lattice point and is usually built on the primitive translation vectors of the lattice.
 There exists a special type of primitive cell called the Wigner-Seitz cell, which is the region containing all points in space 
 that are closer to a given lattice point than to any other. 
 Often, instead of the primitive cell, the conventional cell is used, which is built on different basis vectors
 and whose symmetry is the same as the symmetry of the entire crystal.
-% **[REVIEW NEEDED]**: "conventional cell" vs. "unit cell" - verify preferred terminology for "komórka elementarna"
 The volume of the conventional cell is an integer multiple of the volume of the primitive cell.
 In simple structures (without face-centering or body-centering), the conventional cell coincides
 with the primitive cell. The differences between various types of cells can be illustrated using the example
@@ -997,8 +995,7 @@ which is calculated as a sum over the first Brillouin zone
 \end{equation}
 %
 where $N_k$ is the number of $\bm{k}$ vectors in the first Brillouin zone.
-The total density of states equals the sum of both spin components, $\rho(E)=\rho_{\uparrow}(E)+\rho_{\downarrow}(E)$.
-% **[REVIEW NEEDED]**: "equals" vs. "is the same as" - verify author's preference for consistency
+The total density of states is the sum of both spin components, $\rho(E)=\rho_{\uparrow}(E)+\rho_{\downarrow}(E)$.
 When calculating the density of states, instead of the Monkhorst-Pack mesh, the tetrahedron method is often used.
 It consists of dividing the entire Brillouin zone into tetrahedra and calculating the energies of states at points $\bm{k}$ that
 correspond to the vertices of the tetrahedra. Energies between these points are determined using linear interpolation.
