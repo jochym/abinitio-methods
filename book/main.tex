@@ -1244,7 +1244,6 @@ For example, the correlation energy in the Perdew-Zunger parametrization \cite{P
 \subsection{Generalized Gradient Approximation (GGA)}
 \label{sec:GGA}
 
-% **[REVIEW NEEDED]**: Verify technical terminology for gradient expansion and sum rules
 Including local density changes through expansion of the exchange-correlation energy in a series of density gradients
 was already proposed in the 1965 work of Kohn and Sham \cite{kohn65}. However, this approach does not satisfy sum rules and breaks down for most atomic systems,
 in which electron density changes are usually very large.
@@ -1345,7 +1344,6 @@ A=\frac{\beta}{\gamma}[\exp\{-\epsilon_c/(\gamma\phi^3e^2/a_0)\}-1]^{-1}.
 \end{equation}
 
 
-% **[REVIEW NEEDED]**: Check the translation of comparison statements about energy accuracy
 Table \ref{EXC} compares the values of exchange and correlation energies in the LDA and PBE approximations
 with exact values determined for several selected atoms. The absolute values of exchange energy are greater
 by about an order of magnitude than the correlation energy. In LDA, the exchange energy is underestimated on average by $10\%$, and the correlation energy is significantly overestimated,
@@ -1377,7 +1375,6 @@ at the level of $\sim 1\%$. The correlation energy in the hydrogen atom is signi
 and for the helium atom it is very well reproduced. In the other cases shown in Table \ref{EXC}, it is smaller
 than the exact value by a few percent.
 
-% **[REVIEW NEEDED]**: Verify the explanation of LDA vs GGA performance differences
 The GGA functional in the limit of zero gradients, i.e., for a homogeneous electron gas, is equivalent to the LDA approximation.
 This means that for inhomogeneous systems it should always give better results than LDA. However, this is not the case, which results
 from the fact that for some systems the partial cancellation of exchange and correlation energy errors is greater in LDA than in GGA.
