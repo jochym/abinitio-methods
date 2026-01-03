@@ -1016,226 +1016,224 @@ interactions.
 
 
 
-\chapter{Teoria funkcjonału gęstości}
+\chapter{Density Functional Theory}
 
-\section{Twierdzenia Hohenberga-Kohna}
+\section{Hohenberg-Kohn Theorems}
 
-Większość nowoczesnych metod obliczeniowych stosowanych do badania własności materiałów opiera się na teorii funkcjonału gestości ({\it ang. density functional theory} - DFT), która została sformułowana w pracach Hohenberga i Kohna \cite{kohn64}
-oraz Kohna i Shama \cite{kohn65}. Obecnie, DFT stosowana jest powszechnie do wyliczania struktury elektronowej,
-optymalizacji sieci krystalicznej, badania własności elastycznych i dynamiki sieci oraz wielu innych własności materiałowych.
-Jest praktycznie jedyną metodą umożliwiającą obliczenia kwantowo-mechaniczne dla układów zawierających setki,
-a nawet tysiące atomów.  
-Podobnie jak w opisie oddziaływania wymiennego zaproponowanym przez Slatera~\cite{slater51}
-i w teorii Thomasa-Fermiego~\cite{thomas,fermi1927,dirac} podstawową wielkością jest tutaj gęstość elektronowa zdefiniowana w każdym punkcie materiału $n(\bm{r})$.
-Główną ideą tego podejścia jest możliwość zastąpienie dokładnej funkcji falowej, układem stanów jednocząstkowych w efektywnym potencjale elektronowym, który
-daje taką samą gęstość elektronową jak opis wieloelektronowy.
-Takie podejście umożliwia wykorzystania dokładnej informacji o oddziaływaniach wymiennych i korelacyjnych
-otrzymanych dla jednorodnego gazu elektronowego do badania niejednorodnych układów atomowych.
+Most modern computational methods used to study material properties are based on density functional theory (DFT), which was formulated in the works of Hohenberg and Kohn \cite{kohn64}
+and Kohn and Sham \cite{kohn65}. Currently, DFT is widely used for calculating electronic structure,
+optimizing crystal lattices, studying elastic properties and lattice dynamics, and many other material properties.
+It is practically the only method enabling quantum-mechanical calculations for systems containing hundreds,
+or even thousands of atoms.
+Similarly to the description of exchange interactions proposed by Slater~\cite{slater51}
+and in Thomas-Fermi theory~\cite{thomas,fermi1927,dirac}, the fundamental quantity here is the electron density defined at each point in the material $n(\bm{r})$.
+The main idea of this approach is the possibility of replacing the exact wave function with a system of single-particle states in an effective electronic potential, which
+gives the same electron density as the many-electron description.
+This approach enables the use of exact information about exchange and correlation interactions
+obtained for the homogeneous electron gas to study inhomogeneous atomic systems.
 
-Praca Hohenberga i Kohna \cite{kohn64} zawiera dwa fundamentalne twierdzenia, które
-dotyczą relacji między gęstością elektronową $n(\bm{r})$, zewnętrznym potencjałem $V_{ext}(\bm{r})$ 
-oraz energią całkowitą $E[n]$, która jest funkcjonałem gęstości elektronowej. Zależność funkcjonalna oznacza, że dla dowolnego rozkładu 
-elektronów w całej przestrzeni $n(\bm{r})$ można jednoznacznie wyznaczyć energię całkowitą 
-układu $E[n]$. Zapiszmy hamiltonian układu oddziałujących elektronów
-w ogólnej formie
+The work of Hohenberg and Kohn \cite{kohn64} contains two fundamental theorems that
+concern the relationship between the electron density $n(\bm{r})$, external potential $V_{ext}(\bm{r})$,
+and total energy $E[n]$, which is a functional of the electron density. A functional dependence means that for any distribution
+of electrons in the entire space $n(\bm{r})$, one can uniquely determine the total energy
+of the system $E[n]$. Let us write the Hamiltonian of the system of interacting electrons
+in general form
 
 \begin{equation}
 H=-\frac{\hbar^2}{2m}\sum_{i}\nabla_i^2+V_\text{ext}(\bm{r})+\frac{1}{2}\sum_{i\neq j}\frac{e^2}{|\bm{r}_i-\bm{r}_j|}.
 \label{hamil}
 \end{equation}
 %
-Twierdzenia Hohenberga-Kohna można sformułować następująco: 
+The Hohenberg-Kohn theorems can be formulated as follows:
 
-{\bf Twierdzenie I:} 
-Zewnętrzny potencjał układu oddziałujących elektronów $V_\text{ext}$ jest jednoznacznie określony (z dokładnością do stałej wartości) 
-przez gęstość elektronową w stanie podstawowym $n_0(\mb{r})$.
+{\bf Theorem I:}
+The external potential of a system of interacting electrons $V_\text{ext}$ is uniquely determined (up to an additive constant)
+by the ground state electron density $n_0(\mb{r})$.
 
-{\bf Twierdzenie II:}
-Dla ustalonego potencjału zewnętrznego $V_\text{ext}(\bm{r})$, funkcjonał energii $E[n]$ osiąga
-minimalną wartość $E_0$ dla gęstości elektronowej w stanie podstawowym $n_0(\bm{r})$.
+{\bf Theorem II:}
+For a fixed external potential $V_\text{ext}(\bm{r})$, the energy functional $E[n]$ reaches
+its minimum value $E_0$ for the ground state electron density $n_0(\bm{r})$.
 
-Z twierdzeń tych wynikają następujace wnioski. Ponieważ hamiltonian jest jednoznacznie określony (z dokładnościa do stałej)
-przez $n_0(\bm{r})$, funkcje falowe wszystkich stanów elektronowych,
-jak również wszystkie własności układu są całkowicie zdeterminowane przez gęstość elektronową w stanie podstawowym.
-Znajomość funkcjonału energii $E[n]$ jest wystarczająca do wyznaczenia energii i gęstości elektronowej
-stanu podstawowego. 
+From these theorems follow the following conclusions. Since the Hamiltonian is uniquely determined (up to a constant)
+by $n_0(\bm{r})$, the wave functions of all electronic states,
+as well as all properties of the system are completely determined by the ground state electron density.
+Knowledge of the energy functional $E[n]$ is sufficient to determine the energy and electron density
+of the ground state. 
 
-\section{Równanie Kohna-Shama}
+\section{Kohn-Sham Equation}
 
-Twierdzenia Kohna-Shama pozwalają w sposób ścisły powiązać gestość elektronową w stanie podstawowym
-z równaniem Schr\"{o}dingera dla układu oddziałujacych elektronów, opisanego hamiltonianem (\ref{hamil}).
-W praktyce nie jest możliwe bezpośrednie rozwiązanie równania Schr\"{o}dingera i wyznaczenie wielociałowych funkcji falowych.
-Teoria funkcjonału gęstości pozwala zastąpić równanie wielociałowe nowym równaniem, nazywanym równaniem Kohna-Shama, które ma
-taką postać jak dla nieoddziałujących cząstek znajdujacych się w efektywnym polu $V_{eff}$.
-Znając jednoelektronowe rozwiązania równania Kohna-Shama $\psi_i^{\sigma}(\bm{r})$, zależne od położenia i spinu, 
-możemy wyznaczyć gęstość elektronową w każdym punkcie
+The Kohn-Sham theorems allow us to rigorously relate the ground state electron density
+to the Schr\"{o}dinger equation for a system of interacting electrons, described by the Hamiltonian (\ref{hamil}).
+In practice, it is not possible to directly solve the Schr\"{o}dinger equation and determine many-body wave functions.
+Density functional theory allows us to replace the many-body equation with a new equation, called the Kohn-Sham equation, which has
+the form of an equation for non-interacting particles in an effective field $V_{eff}$.
+Knowing the single-electron solutions of the Kohn-Sham equation $\psi_i^{\sigma}(\bm{r})$, dependent on position and spin,
+we can determine the electron density at each point
 %
 \begin{equation}
 n(\bm{r})=\sum_{i,\sigma} f_{i\sigma}|\psi_i^{\sigma}(\bm{r})|^2,
 \label{density}
 \end{equation}
 %
-gdzie dla uproszczenia indeks $i$ określa zarówno numer stanu $j$, jak i wektor falowy $\bm{k}$, a $f_{i\sigma}$ są liczbami obsadzeń
-stanów, które w ogólnym przypadku mogą przyjmować ułamkowe wartości, np. zgodnie z rozkładem Fermiego-Diraca.
-Przyjmujemy również, że ładunek elementarny $e=1$, co oznacza, że gęstość ładunku jest tożsama z gęstością elektronową. 
-Twierdzenia Kohna-Shama zapewniają nam, że efektywny potencjał $V_{eff}$ jest jednoznacznie
-określony przez gęstość elektronową, jak również, że funkcjonał energii całkowitej osiąga
-minimum dla gęstości elektronowej w stanie podstawowym.
-Zatem stan podstawowy układu możemy wyznaczyć jeżeli znamy funkcjonał energii i potrafimy
-znaleźć jego minimum. Ogólnie możemy zapisać ten funkcjał w postaci 
+where for simplicity the index $i$ determines both the state number $j$ and the wave vector $\bm{k}$, and $f_{i\sigma}$ are occupation numbers
+of states, which in the general case may take fractional values, e.g., according to the Fermi-Dirac distribution.
+We also assume that the elementary charge $e=1$, which means that the charge density is identical to the electron density.
+The Kohn-Sham theorems ensure that the effective potential $V_{eff}$ is uniquely
+determined by the electron density, as well as that the total energy functional reaches
+a minimum for the ground state electron density.
+Therefore, we can determine the ground state of the system if we know the energy functional and can
+find its minimum. In general, we can write this functional in the form
 %
 \begin{equation}
 E[n]=T[n] + E_\text{ext}[n] + E_\text{H}[n] + E_\text{xc}[n],
 \label{EKS}
 \end{equation}
 %
-gdzie $T[n]$ jest energią kinetyczną nieoddziałujących elektronów
+where $T[n]$ is the kinetic energy of non-interacting electrons
 %
 \begin{equation}
 T[n]=-\frac{\hbar^2}{2m}\sum_{i,\sigma} \int d\bm{r} \psi^{\sigma *}_i(\bm{r})\nabla_i^2 \psi^{\sigma}_i(\bm{r}),
 \end{equation}
 %
-$E_\text{ext}[n]$ jest energią oddziaływania z potencjałem zewnętrznym
+$E_\text{ext}[n]$ is the interaction energy with the external potential
 %
 \begin{equation}
 E_\text{ext}[n]=\int d\bm{r} V_\text{ext}(\bm{r}) n(\bm{r}),
 \end{equation}
 %
-$E_\text{H}[n]$ jest energią Hartree dana wzorem (\ref{Hartree}) i $E_\text{xc}[n]$ zawiera wszystkie pozostałe oddziaływania,
-czyli oddziaływanie wymienne i korelacje elektronowe, jak również różnicę między energią kinetyczną układu
-oddziałujących i nieoddziałujących elektronów. W skrócie ten wyraz nazywany jest funkcjonałem wymienno-korelacyjnym.
+$E_\text{H}[n]$ is the Hartree energy given by formula (\ref{Hartree}), and $E_\text{xc}[n]$ contains all remaining interactions,
+i.e., exchange interaction and electron correlations, as well as the difference between the kinetic energy of the system
+of interacting and non-interacting electrons. In short, this term is called the exchange-correlation functional.
 
-Możemy teraz zastosować podejście wariacyjne uwzględniając warunek ortonormalności
-orbitali Kohna-Shama: $\langle\psi_i^{\sigma *}|\psi_j^{\sigma'}\rangle = \delta_{ij}\delta_{\sigma\sigma'}$
-i wprowadzając mnożniki Lagrange'a
+We can now apply the variational approach taking into account the orthonormality condition
+of Kohn-Sham orbitals: $\langle\psi_i^{\sigma *}|\psi_j^{\sigma'}\rangle = \delta_{ij}\delta_{\sigma\sigma'}$
+and introducing Lagrange multipliers
 %
 \begin{equation}
 \frac{\delta}{\delta\psi_i^{\sigma *}}(E[n]-\sum_{i,\sigma}\varepsilon_{i\sigma}[\int d\bm{r} \psi_i^{\sigma *}(\bm {r})\psi_i^{\sigma}(\bm{r})-1]) = 0.
 \label{delta}
 \end{equation}
 %
-Wstawiając funkcjonał energii w postaci (\ref{EKS}) do (\ref{delta}) otrzymujemy 
+Substituting the energy functional in the form (\ref{EKS}) into (\ref{delta}), we obtain
 %
 \begin{equation}
 \frac{\delta T[n]}{\delta \psi_i^{\sigma *}}+\frac{\delta}{\delta n}(\int d\bm{r} V_{ext}(\bm{r}) n(\bm{r}) + E_H[n] + E_{xc}[n])\frac{\delta n}{\delta \psi_i^{\sigma *}}-\varepsilon_{i\sigma} \frac{\delta}{\delta\psi_i^{\sigma *}}\sum_{j,\sigma'}\int d\bm{r} \psi_j^{\sigma' *}\psi_j^{\sigma}=0,
 \end{equation}
 %
-gdzie zastosowalismy wzór na pochodna funkcji złozonej:
-% 
+where we applied the formula for the derivative of a composite function:
+%
 \begin{equation}
-\frac{\delta}{\delta \psi_i^{\sigma *}}=\frac{\delta}{\delta n}\frac{\delta n}{\delta \psi_i^{\sigma *}}. 
+\frac{\delta}{\delta \psi_i^{\sigma *}}=\frac{\delta}{\delta n}\frac{\delta n}{\delta \psi_i^{\sigma *}}.
 \end{equation}
 %
-Wykonując pochodne wariacyjne dostajemy równanie Kohna-Shama
+Performing the variational derivatives, we obtain the Kohn-Sham equation
 %
 \begin{equation}
 [-\frac{\hbar^2\nabla_i^2}{2m}+V_{KS}(\bm{r})]\psi_i^{\sigma}(\bm{r})=\varepsilon_{i\sigma}\psi_i^{\sigma}(\bm{r}),
 \end{equation}
 %
-które ma postać jednocząstkowego równania Schr\"{o}dingera z potencjałem Kohna-Shama złożonym z trzech wyrazów
+which has the form of a single-particle Schr\"{o}dinger equation with the Kohn-Sham potential composed of three terms
 %
 \begin{equation}
 V_{KS}(\bm{r})=V_{ext}(\bm{r})+V_H(\bm{r})+V_{xc}(\bm{r})=V_{ext}(\bm{r})+\int d\bm{r'} \frac{n(\mb{r}')}{|\bm{r}-\bm{r'}|}+\frac{\delta E_{xc}[n]}{\delta n}.
 \label{VKS}
 \end{equation}
 %
-W potencjale tym nieznana jest dokładnie energia wymienno-korelacyjna, która musi być przybliżana
-odpowiednimi metodami, które będą omówione w kolejnych rozdziałach.
-Znając spektrum energetyczne rozwiązań równania Kohna-Shama, energię stanu podstawowego można wyrazić w postaci
+In this potential, the exchange-correlation energy is not known exactly and must be approximated
+by appropriate methods, which will be discussed in subsequent chapters.
+Knowing the energy spectrum of solutions to the Kohn-Sham equation, the ground state energy can be expressed in the form
 %
 \begin{equation}
 E[n,f_i]=\sum_{i\sigma}f_{i\sigma} \varepsilon_{i\sigma} - \int d\bm{r} n(\bm{r})V_{KS}(\bm{r}) + \int d\bm{r} V_{ext}(\bm{r}) n(\bm{r}) + E_H[n] + E_{xc}[n].
-\end{equation} 
+\end{equation}
 %
-Funkcje jednoelektronowe i energie stanów Kohna-Shama $\varepsilon_{i\sigma}$ nie mają jednoznacznej interpretacji fizycznej.
-Można je jednak powiązać ze zmianą energii całkowitej przy zmianie obsadzenia stanów
+The single-electron functions and energies of Kohn-Sham states $\varepsilon_{i\sigma}$ do not have an unambiguous physical interpretation.
+However, they can be related to the change in total energy upon changing the occupation of states
 %
 \begin{equation}
 \frac{\partial E}{\partial f_{i\sigma}}=\Big(\frac{\partial E}{\partial f_{i\sigma}}\Big)_n+\int d\bm{r} \frac{\delta E}{\delta n}\frac{\partial n}{\partial f_{i\sigma}}.
 \label{janak}
-\end{equation} 
+\end{equation}
 %
-Drugi wyraz po prawej stronie równania zeruje się dla stanu podstawowego ($\delta E/\delta n=0$),
-co prowadzi do wzoru
+The second term on the right side of the equation vanishes for the ground state ($\delta E/\delta n=0$),
+which leads to the formula
 %
 \begin{equation}
 \varepsilon_{i\sigma}=\frac{\partial E}{\partial f_{i\sigma}},
 \end{equation}
 %
-który nazywany jest twierdzeniem Janaka \cite{janak}.
-Zastosowanie tego wzoru do najwyższego obsadzonego stanu elektronowego daje energię jonizacji, czyli energię potrzebną do usunięcia pojedynczego elektronu 
-z danego układu atomowego. 
+which is called Janak's theorem \cite{janak}.
+Application of this formula to the highest occupied electronic state gives the ionization energy, i.e., the energy required to remove a single electron
+from a given atomic system. 
 
 
+\section{Exchange-Correlation Functional}
 
-\section{Funkcjonał wymienno-korelacyjny}
+\subsection{Local Density Approximation (LDA)}
 
-\subsection{Przybliżenie lokalnej gęstości (LDA)}
-
-Funkcjonał wymienno-korelacyjny $E_{xc}$ i odpowiadający mu potencjał $V_{xc}$ nie są znane dokładnie i w ramach teorii
-funkcjonału gęstości muszą być opisywane w przybliżony sposób.
-Najprostszym podejściem jest przybliżenie lokalnej gęstości ({\it ang. local density approximation} - LDA).
-W przybliżeniu LDA przyjmujemy, że energia wymienno-korelacyjna w każdym punkcie przestrzeni, gdzie gęstość elektronowa wynosi $n(\mb{r})$,
-równa jest energii wymienno-korelacyjnej jednorodnego gazu elektronowego o tej samej gęstości, $n=n(\mb{r})$.
-Funkcjonał wymienno-korelacyjny może być wtedy zapisany w postaci
+The exchange-correlation functional $E_{xc}$ and the corresponding potential $V_{xc}$ are not known exactly and within the framework of density functional theory must be described in an approximate manner.
+The simplest approach is the local density approximation (LDA).
+In the LDA approximation, we assume that the exchange-correlation energy at each point in space, where the electron density is $n(\mb{r})$,
+is equal to the exchange-correlation energy of a homogeneous electron gas with the same density, $n=n(\mb{r})$.
+The exchange-correlation functional can then be written in the form
 %
 \begin{equation}
 E_{xc}[n]=\int d\mb{r} n(\mb{r}) \varepsilon_{xc}(n),
 \end{equation}
 %
-gdzie $\varepsilon_{xc}(n)$ jest energią wymienno-korelacyjną przypadającą na pojedynczy elektron w jednorodnym gazie elektronowym o gestości $n$.
-Można ją zapisać jako sumę części wymiennej i korelacyjnej, $\varepsilon_{xc}(n)=\varepsilon_x(n)+\varepsilon_c(n)$.   
-Przybliżenie LDA jest dokładne w granicy wolno zmieniającej się gęstości, co odpowiada warunkowi
+where $\varepsilon_{xc}(n)$ is the exchange-correlation energy per electron in a homogeneous electron gas with density $n$.
+It can be written as the sum of exchange and correlation parts, $\varepsilon_{xc}(n)=\varepsilon_x(n)+\varepsilon_c(n)$.
+The LDA approximation is exact in the limit of slowly varying density, which corresponds to the condition
 %
 \begin{equation}
 \frac{q}{k_F}\ll 1,
-\end{equation} 
+\end{equation}
 %
-gdzie $q$ jest miarą niejednorodności układu
+where $q$ is a measure of the system's inhomogeneity
 %
 \begin{equation}
 q=\frac{|\nabla k_F|}{2k_F},
 \end{equation}
 %
-a $k_F$ odpowiada wektorowi falowemu Fermiego dla gazu jednorodnego, który w punkcie o lokalnej gęstości $n(\bm{r})$ dany jest wzorem
+and $k_F$ corresponds to the Fermi wave vector for a homogeneous gas, which at a point with local density $n(\bm{r})$ is given by the formula
 %
 \begin{equation}
 k_F=[3\pi^2n(\bm{r})]^{1/3}.
-\end{equation} 
+\end{equation}
 %
 
-Można łatwo uogólnić to przybliżenie do układów z polaryzacją spinową. Wtedy energia wymienno-korelacyjna jest funkcjonałem
-gęstości spinów skierowanych do góry $n_{\uparrow}$ i w dół $n_{\downarrow}$
+This approximation can be easily generalized to systems with spin polarization. Then the exchange-correlation energy is a functional
+of the spin-up density $n_{\uparrow}$ and spin-down density $n_{\downarrow}$
 %
 \begin{equation}
 E_{xc}[n^{\uparrow},n^{\downarrow}]=\int d\bm{r} n(\mb{r}) \varepsilon_{xc}(n_{\uparrow},n_{\downarrow}).
 \label{xclda}
 \end{equation}
 %
-To uogólnienie nazywane jest czasem przybliżeniem lokalnej gestości spinowej ({\it ang. local spin density} - LSD).
-Potencjał wymienno-korelacyjny zależny od spinu $\sigma$ w tym przybliżeniu określony jest przez zależność
+This generalization is sometimes called the local spin density (LSD) approximation.
+The spin-dependent exchange-correlation potential for spin $\sigma$ in this approximation is determined by the relation
 %
 \begin{equation}
 V^{\sigma}_{xc}=\frac{\delta E_{xc}}{\delta n_{\sigma}}=\varepsilon_{xc}+n_{\sigma}\frac{\partial \varepsilon_{xc}}{\partial n_{\sigma}}.
 \end{equation}
 %
-Zgodnie ze wzorem (\ref{exchange}), część wymienna dana jest wzorem
+According to formula (\ref{exchange}), the exchange part is given by the formula
 %
 \begin{equation}
 \varepsilon_x(n_{\sigma})=-\frac{3}{4}\Big(\frac{3}{\pi}\Big)^{\frac{1}{3}}n_{\sigma}^\frac{1}{3},
 \end{equation}
 %
-co prowadzi do potencjału wymiennego w formie 
+which leads to the exchange potential in the form
 %
 \begin{equation}
-V^{\sigma}_x=-\Big(\frac{3}{\pi}\Big)^{\frac{1}{3}}n_{\sigma}^\frac{1}{3}. 
+V^{\sigma}_x=-\Big(\frac{3}{\pi}\Big)^{\frac{1}{3}}n_{\sigma}^\frac{1}{3}.
 \label{Vex}
 \end{equation}
 %
-Część korelacyjna może być wyznaczona bardzo dokładnie numerycznie metodą kwantowego Monte Carlo \cite{CeperleyAlder80}. 
-W praktyce stosuje się odpowiednie wyrażenia analityczne dofitowane do wyników numerycznych, które określają zależność energii korelacji 
-od gęstości elektronowej \cite{PZ,VWN}. 
-Przykładowo energia korelacji w parametryzacji Pardew-Zungera \cite{PZ} ma postać
+The correlation part can be determined very accurately numerically using the quantum Monte Carlo method \cite{CeperleyAlder80}.
+In practice, appropriate analytical expressions are used that are fitted to numerical results, which determine the dependence of correlation energy
+on electron density \cite{PZ,VWN}.
+For example, the correlation energy in the Perdew-Zunger parametrization \cite{PZ} has the form
 %
 \begin{eqnarray}
 \varepsilon_c(r_s)&=&-0.048+0.031 \ln(r_s) -0.0116 r_s+0.002r_s \ln(r_s), \quad r_s<1  \\
@@ -1243,123 +1241,122 @@ Przykładowo energia korelacji w parametryzacji Pardew-Zungera \cite{PZ} ma post
 \end{eqnarray}
 %
 
-\subsection{Uogólnione przybliżenie gradientowe (GGA)}
+\subsection{Generalized Gradient Approximation (GGA)}
 \label{sec:GGA}
 
-Uwzględnienie lokalnych zmian gęstości poprzez rozwinięcie energii wymienno-korelacyjnej w szereg gradientów gęstości
-zaproponowano już w pracy Kohna i Shama z 1965 roku \cite{kohn65}. Podejście to jednak nie spełnia reguł sum i załamuje się dla większości układów atomowych, 
-w których zmiany gęstości elektronowej sa przeważnie bardzo duże.
-Zaproponowane zostało nowe podejście zwane uogólnionym przybliżeniem gradientowym ({\it ang. generalized gradient approximation} - GGA),
-gdzie energia wymienno-korelacyjna jest funkcjonałem gęstości elektronowej i jej gradientów \cite{Langreth83,Pardew86,Becke88}. 
-W ogólnej formie dla układu spolaryzowanego spinowo może być zapisana w formie
+Including local density changes through expansion of the exchange-correlation energy in a series of density gradients
+was already proposed in the 1965 work of Kohn and Sham \cite{kohn65}. However, this approach does not satisfy sum rules and breaks down for most atomic systems,
+in which electron density changes are usually very large.
+A new approach called the generalized gradient approximation (GGA) was proposed,
+where the exchange-correlation energy is a functional of the electron density and its gradients \cite{Langreth83,Pardew86,Becke88}.
+In the general form for a spin-polarized system, it can be written as
 %
 \begin{equation}
-E_{xc}[n_{\uparrow},n_{\downarrow}]=\int d\mb{r} f(n_{\uparrow},n_{\downarrow},\nabla n_{\uparrow},\nabla n_{\downarrow}) 
+E_{xc}[n_{\uparrow},n_{\downarrow}]=\int d\mb{r} f(n_{\uparrow},n_{\downarrow},\nabla n_{\uparrow},\nabla n_{\downarrow})
 \label{xcgga}
 \end{equation}
 %
-Część wymienną tego funkcjonału dla układu bez polaryzacji spinowej można zapisać w postaci
+The exchange part of this functional for a system without spin polarization can be written as
 %
 \begin{equation}
 E_x[n]=\int d\mb{r} n \varepsilon_x(n) F_x(s),
 \end{equation}
 %
-gdzie $s=|\nabla n|/2k_Fn$ jest przeskalowanym (bezwymiarowym) gradientem gęstości elektronowej. Rozszerzenie na układy z polaryzacja spinową uzyskuje się stosując następujący wzór,
-który spełniony jest dla dokładnej energii wymiennej
+where $s=|\nabla n|/2k_Fn$ is the scaled (dimensionless) gradient of the electron density. Extension to systems with spin polarization is obtained using the following formula,
+which is satisfied for the exact exchange energy
 %
 \begin{equation}
 E_x[n^{\uparrow},n^{\downarrow}]=\frac{1}{2}(E_x[2n^{\uparrow}]+E_x[2n^{\downarrow}]).
 \end{equation}
 %
-Wiele form funkcji $F_x(s)$ zostało zaproponawych, w tym te najczęściej stosowane, które opisane są w pracach: A. D. Becke (Becke88) \cite{Becke88}, 
-J. P. Perdew i Y. Wang (PW91) \cite{PW91} i  J. P. Perdew, K. Burke, and M. Ernzerhof (PBE) \cite{PBE}.
-Jako przykład omówię funkcjonał PBE, który ma prostą postać i dobrze zdefiniowane warunki graniczne  
-które musi spełniać funkcja $F_x(s)$:
+Many forms of the function $F_x(s)$ have been proposed, including the most commonly used ones, which are described in the works: A. D. Becke (Becke88) \cite{Becke88},
+J. P. Perdew and Y. Wang (PW91) \cite{PW91}, and J. P. Perdew, K. Burke, and M. Ernzerhof (PBE) \cite{PBE}.
+As an example, I will discuss the PBE functional, which has a simple form and well-defined boundary conditions
+that the function $F_x(s)$ must satisfy:
 
 \begin{enumerate}
 
-\item{W granicy małych wartości gradientu ($s\rightarrow0$)
-spełniony jest warunek
+\item{In the limit of small gradient values ($s\rightarrow0$),
+the condition is satisfied
 %
 \begin{equation}
 F_x(s)\rightarrow 1+\mu s^2,
 \end{equation}
 %
-gdzie $\mu =0.219$. Warunek ten zapewnia właściwe zachowanie się odpowiedzi liniowej jednorodnego gazu
-elektronów (liniowe przyczynki od energii wymiany i korelacji kasują się).}
+where $\mu =0.219$. This condition ensures the proper behavior of the linear response of the homogeneous electron gas (linear contributions from exchange and correlation energies cancel).}
 
-\item{Dla dużych wartości gradientu ($s\rightarrow\infty$) funkcja ograniczona jest od góry $F_x(s)\leq 1.804$.}
+\item{For large gradient values ($s\rightarrow\infty$), the function is bounded from above $F_x(s)\leq 1.804$.}
 
-Funkcja, która spełnia te warunki ma postać
+The function that satisfies these conditions has the form
 %
 \begin{equation}
 F_x(s)=1+\kappa-\frac{\kappa}{1+\frac{\mu s^2}{\kappa}},
-\end{equation} 
+\end{equation}
 %
-gdzie $\kappa=0.804$.
+where $\kappa=0.804$.
 \end{enumerate}
 
-Część korelacyjną można zapisać w ogólnej formie
+The correlation part can be written in the general form
 %
 \begin{equation}
 E_c[n^{\uparrow},n^{\downarrow}]=\int d\mb{r} n [\epsilon_c(r_s,\zeta)+H(r_s,\zeta,t)],
 \end{equation}
 %
-gdzie $\zeta=(n^{\uparrow}-n^{\downarrow})/n$ jest względną polaryzacją spinową, $t=|\nabla n|/2\phi k_s n$ jest bezwymiarowym gradientem,
-$\phi=\sqrt{(1+\zeta)^{2/3}+(1-\zeta)^{2/3})}/2$ jest spinową funkcją skalującą i $k_s=\sqrt{4k_F/\pi a_0}$ wektorem ekranowania Thomasa-Fermiego.
-Funkcja $H$ spełnia następujące warunki:
+where $\zeta=(n^{\uparrow}-n^{\downarrow})/n$ is the relative spin polarization, $t=|\nabla n|/2\phi k_s n$ is the dimensionless gradient,
+$\phi=\sqrt{(1+\zeta)^{2/3}+(1-\zeta)^{2/3})}/2$ is the spin scaling function, and $k_s=\sqrt{4k_F/\pi a_0}$ is the Thomas-Fermi screening vector.
+The function $H$ satisfies the following conditions:
 
 \begin{enumerate}
-\item{Dla małych gradientów ($t\rightarrow 0$) funkcja dana jest wyrazem rozwinięcia drugiego rzędu
+\item{For small gradients ($t\rightarrow 0$), the function is given by the second-order expansion term
 %
 \begin{equation}
 H\rightarrow \frac{e^2}{a_0}\beta\phi^3 t^2,
 \end{equation}
 %
-gdzie $\beta=0.067$.}
-\item{Przy szybko zmieniających się gęstościach ($t\rightarrow \infty$) energia korelacji znika
-co spełnione jest przy warunku
+where $\beta=0.067$.}
+\item{For rapidly varying densities ($t\rightarrow \infty$), the correlation energy vanishes,
+which is satisfied by the condition
 %
 \begin{equation}
 H\rightarrow -\epsilon_c.
 \end{equation}}
 %
-\item{W granicy dużych gęstości ($r_s\rightarrow 0$) energia korelacji dąży do stałej wartości.
-Funkcja $H$ musi kasować logarytmiczną osobliwość w $\epsilon_c$
+\item{In the limit of high densities ($r_s\rightarrow 0$), the correlation energy approaches a constant value.
+The function $H$ must cancel the logarithmic singularity in $\epsilon_c$
 %
 \begin{equation}
 H\rightarrow \frac{e^2}{a_0}\gamma\phi^3 \ln t^2,
 \end{equation}
 %
-gdzie $\gamma=0.031$.}
+where $\gamma=0.031$.}
 \end{enumerate}
 
-Warunki te spełnia funkcja w postaci
+These conditions are satisfied by the function in the form
 %
 \begin{equation}
 H=\frac{e^2}{a_0}\gamma\phi^3\ln[1+\frac{\beta}{\gamma}t^2\frac{1+At^2}{1+At^2+A^2t^4}],
 \end{equation}
 %
-gdzie 
+where
 %
 \begin{equation}
 A=\frac{\beta}{\gamma}[\exp\{-\epsilon_c/(\gamma\phi^3e^2/a_0)\}-1]^{-1}.
 \end{equation}
 
 
-W tabeli \ref{EXC} porównane są wartości energii wymiany i korelacji w przybliżeniu LDA i PBE
-z wartościami dokładnymi wyznaczonymi dla kilku wybranych atomów. Wartości bezwzględne energii wymiany są większe
-o około rząd wielkości od energii korelacji. W LDA, energia wymiany jest zaniżona średnio o $10\%$, a energia korelacji jest znacznie zawyżona,
-nawet powyżej $100\%$, w porównaniu do wartości dokładnych. Ze względu na przeciwne znaki odchyleń od wartości dokładnych, błędy energii wymiany 
-i korelacji w przybliżeniu LDA częściowo kasują się. 
+Table \ref{EXC} compares the values of exchange and correlation energies in the LDA and PBE approximations
+with exact values determined for several selected atoms. The absolute values of exchange energy are greater
+by about an order of magnitude than the correlation energy. In LDA, the exchange energy is underestimated on average by $10\%$, and the correlation energy is significantly overestimated,
+even above $100\%$, compared to exact values. Due to the opposite signs of deviations from exact values, the errors of exchange
+and correlation energies in the LDA approximation partially cancel.
 
 \begin{table}[h!]
-\caption{Porównanie energii wymiennej i korelacyjnej uzyskanych w kilku przybliżeniach z wartościami dokładnymi dla kilku wybranych atomów.}
+\caption{Comparison of exchange and correlation energies obtained in several approximations with exact values for several selected atoms.}
 \label{EXC}
 \begin{center}
 \begin{tabular}{|c|c|c|c|c|c|c|}
 \hline
- & \multicolumn{2}{c|}{LDA} & \multicolumn{2}{c|}{PBE} & \multicolumn{2}{c|}{Dokładna wartość} \\ \hline
+ & \multicolumn{2}{c|}{LDA} & \multicolumn{2}{c|}{PBE} & \multicolumn{2}{c|}{Exact value} \\ \hline
 Atom& $E_x$ & $E_c$ & $E_x$ & $E_c$  & $E_x$  & $E_c$ \\
 \hline
   H & -0.2680 & -0.0222 &  -0.3059 & -0.0060 & -0.3125 & 0.0000\\
@@ -1371,102 +1368,102 @@ Atom& $E_x$ & $E_c$ & $E_x$ & $E_c$  & $E_x$  & $E_c$ \\
 \end{center}
 \end{table}
 
-Te duże różnice w energii wymiany i korelacji wynikają z nieuwzględnienia wpływu lokalnych zmian 
-gęstości elektronowej, które są charakterystyczne dla atomów i molekuł \cite{Pardew92}.  
-W przybliżeniu GGA, wartości obydwóch energii poprawiają się. Energia wymiany jest w dalszym ciągu zaniżona, ale tylko
-na poziomie $\sim 1\%$. Energia korelacji w atomie wodoru jest znacznie zredukowana w porównaniu do LDA,
-a dla atomu helu jest bardzo dobrze odtworzona. W pozostałych przypadkach pokazanych w tabeli \ref{EXC} jest mniejsza
-od wartości dokładnej o kilka procent.
+These large differences in exchange and correlation energies result from neglecting the influence of local changes
+in electron density, which are characteristic of atoms and molecules \cite{Pardew92}.
+In the GGA approximation, the values of both energies improve. The exchange energy is still underestimated, but only
+at the level of $\sim 1\%$. The correlation energy in the hydrogen atom is significantly reduced compared to LDA,
+and for the helium atom it is very well reproduced. In the other cases shown in Table \ref{EXC}, it is smaller
+than the exact value by a few percent.
 
-Funkcjonał GGA w granicy zerowych gradientów, czyli dla jednorodnego gazu elektronowego, jest równoważny przybliżeniu LDA.
-Oznacza to, że dla niejednorodnych układów powinień dawać zawsze wyniki lepsze niż LDA. Tak się jednak nie dzieje, a wynika
-to z faktu, że dla niektórych układów częściowe redukowanie się błedów energii wymiany i korelacji jest większe w LDA niż w GGA.
-Przykładem są metale szlachetne (Ag, Au, Pt), dla których stałe sieci wyznaczone w LDA bardzo dobrze zgadzają się
-z eksperymentem, a w GGA są zawyżone. Większe wartości stałej sieci w przybliżeniu GGA wynikają z zaniżonej energii kohezji kryształów.
-LDA zwykle daje zawyżone wartości energii kohezji i zaniżone wartości stałych sieci. 
-Dla układów magnetycznych, czyli z otwartymi powłokami $d$ lub $f$, przybliżenie GGA daje zwykle lepsze wyniki niż LDA.
-Klasycznym przykładem jest żelazo, dla którego stanem podstawowym w przybliżeniu LDA jest struktura centrowana powierzchniowo ($fcc$) 
-z uporządkowaniem antyferromagnetycznym, a GGA daje poprawny wynik, czyli strukturę centrowaną objętościowo ($bcc$) z uporządkowaniem ferromagnetycznym.
+The GGA functional in the limit of zero gradients, i.e., for a homogeneous electron gas, is equivalent to the LDA approximation.
+This means that for inhomogeneous systems it should always give better results than LDA. However, this is not the case, which results
+from the fact that for some systems the partial cancellation of exchange and correlation energy errors is greater in LDA than in GGA.
+Examples are noble metals (Ag, Au, Pt), for which lattice constants determined in LDA agree very well
+with experiment, while in GGA they are overestimated. Larger lattice constant values in the GGA approximation result from underestimated cohesive energies of crystals.
+LDA usually gives overestimated values of cohesive energies and underestimated values of lattice constants.
+For magnetic systems, i.e., those with open $d$ or $f$ shells, the GGA approximation usually gives better results than LDA.
+A classic example is iron, for which the ground state in the LDA approximation is a face-centered cubic ($fcc$) structure
+with antiferromagnetic ordering, while GGA gives the correct result, i.e., a body-centered cubic ($bcc$) structure with ferromagnetic ordering.
 
-\section{Procedura iteracyjna}
+\section{Iterative Procedure}
 
-Równania Kohna-Shama (KS) rozwiązywane są metodą iteracyjną, której kolejne kroki przedstawione są na rysunku \ref{fig:diagram}.
-Ogólnie stosowane procedury pozwalają zminimalizować funkcjonał energii całkowitej przy zadanych położeniach atomów,
-jak również wyznaczyć położenia atomów i parametry sieci krystalicznej, które odpowiadają minimum energii całkowitej
-układu. Najpierw ustalamy początkowe położenia atomów, które można przyjąć na przykład na podstawie
-danych z eksperymentu dyfrakcyjnego. Przy ustalonych położeniach atomowych przyjmuje się początkowy
-rozkład gęstości elektronowej $n_0(\bm{r})$, dla którego wylicza się potencjał ze wzoru (\ref{VKS}).
-Dla tego potencjału rozwiązuje się równania KS i wyznacza jednoelektronowe funkcje falowe
-w odpowiedni wybranej bazie funkcyjnej. 
+The Kohn-Sham (KS) equations are solved by an iterative method, whose successive steps are shown in Figure \ref{fig:diagram}.
+Generally used procedures allow minimization of the total energy functional for given atomic positions,
+as well as determination of atomic positions and crystal lattice parameters that correspond to the minimum of the total energy
+of the system. First, we establish initial atomic positions, which can be taken, for example, from
+diffraction experiment data. With fixed atomic positions, an initial
+electron density distribution $n_0(\bm{r})$ is assumed, for which the potential is calculated from formula (\ref{VKS}).
+For this potential, the KS equations are solved and single-electron wave functions are determined
+in an appropriately chosen functional basis.
 
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.45]{diagram.pdf}
-\caption{Schemat interacyjnej procedury rozwiązywania równań Kohna-Sham.}
+\caption{Schematic of the iterative procedure for solving the Kohn-Sham equations.}
 \label{fig:diagram}
 \end{figure}
 
-Rozwiązywanie równań KS dla atomów w ciele stałym jest złożonym problemem i będzie dyskutowane w kolejnych rozdziałach.
-Znając funkcje falowe i energie własne równania KS wyznacza się gęstość elektronową w każdym punkcie przestrzeni 
-z zależności (\ref{density}) i całkowitą energię układu. 
-Nowy rozkład gęstości pozwala ponownie wyznaczyć potencjał KS i rozwiązać równania KS. Dostajemy nowy rozkład gęstości i zmienioną
-energię całkowitą. Jeżeli ta energia pokrywa się z energią w poprzednim
-kroku lub te energie różnią sie o małą wielkość (zdefiniowaną na początku obliczeń) to oznacza, że 
-otrzymaliśmy prawidłowo zbiegnięty rozkład gęstości. Zakończona jest w ten sposób pętla elektronowa, 
-która daje rozwiązanie równań KS i minimalną energię całkowitą przy zadanych położeniach atomowych.
+Solving the KS equations for atoms in a solid is a complex problem and will be discussed in subsequent chapters.
+Knowing the wave functions and eigenvalues of the KS equation, the electron density at each point in space is determined
+from relation (\ref{density}) and the total energy of the system.
+The new density distribution allows us to recalculate the KS potential and solve the KS equations. We obtain a new density distribution and modified
+total energy. If this energy coincides with the energy in the previous
+step or these energies differ by a small amount (defined at the beginning of the calculations), it means that
+we have obtained a properly converged density distribution. This completes the electronic loop,
+which gives the solution of the KS equations and the minimum total energy for given atomic positions.
 
-Procedurę minimalizacji można przyspieszyć wykorzystując odpowiednio gęstości elektronowe
-w każdym kroku iteracyjnym. W najprostszym podejściu początkową wartość gęstości elektronowej $n^p_{i+1}$ w kroku $i+1$ 
-można wyznaczyć jako liniową poprawkę do gęstości z poprzedniego kroku
+The minimization procedure can be accelerated by appropriately using electron densities
+at each iterative step. In the simplest approach, the initial value of the electron density $n^p_{i+1}$ in step $i+1$
+can be determined as a linear correction to the density from the previous step
 %
 \begin{equation}
 n^p_{i+1}=n^p_i+\alpha(n^k_i-n^p_i),
 \label{mixing}
 \end{equation}
-% 
-gdzie $\alpha$ jest współczynnikiem liniowym, $n^p_i$ i $n^k_i$ są początkową i końcową wartością gęstości w kroku $i$.
-Stała wartość współczynnika $\alpha$ nie daje optymalnej szybkości zbieżności.
-W najczęściej stosowanej metodzie Broydena, współczynnik liniowy wyznaczany jest z jakobianu układu $J_i$,
-który optymalizowany jest w każdym kroku iteracji, $\alpha=-J^{-1}_i$.
+%
+where $\alpha$ is a linear coefficient, $n^p_i$ and $n^k_i$ are the initial and final values of density in step $i$.
+A constant value of the coefficient $\alpha$ does not give optimal convergence speed.
+In the most commonly used Broyden method, the linear coefficient is determined from the Jacobian of the system $J_i$,
+which is optimized at each iteration step, $\alpha=-J^{-1}_i$.
 
-Aby zoptymalizować układ ze względu na położenia atomowe należy odpowiednio przesuwać
-atomy w nowe położenia, tak aby całkowita energia obniżała się w kolejnych krokach. 
-Wykorzystuje się do tego bardzo efektywną metodę sprzężonego gradientu ({\it ang. conjugate gradient}),
-która jest również metodą iteracyjną (pętla jonowa).
-W każdym kroku tej procedury wykonuje się pełną optymalizację elektronową, aby wyznaczyć rozkład gęstości elektronowej 
-i energię układu dla aktualnego położenia atomów. Wyznaczona gęstość końcowa jest używana do wyznaczenia
-gęstości startowej w kolejnym kroku pętli jonowej według formuły (\ref{mixing}).
-Warunkiem zbieżności jest osiągnięcie stanu o minimalnej energii ze względu na położenia atomów
-i parametry sieci krystalicznej. Według najczęściej przyjmowanego kryterium zbieżność jest osiągnięta jeżeli różnice energii 
-całkowitej w dwóch kolejnych krokach jonowych jest mniejsza od zadanej na początku wartości.
+To optimize the system with respect to atomic positions, atoms should be appropriately moved
+to new positions so that the total energy decreases in subsequent steps.
+The very effective conjugate gradient method is used for this,
+which is also an iterative method (ionic loop).
+In each step of this procedure, a complete electronic optimization is performed to determine the electron density distribution
+and the system energy for the current atomic positions. The determined final density is used to determine
+the starting density in the next step of the ionic loop according to formula (\ref{mixing}).
+The convergence condition is reaching a state of minimum energy with respect to atomic positions
+and crystal lattice parameters. According to the most commonly adopted criterion, convergence is achieved if the difference in total energy
+in two consecutive ionic steps is less than the value specified at the beginning.
 
-Stan podstawowy otrzymany w wyniku procedury minimalizacyjnej powinien spełniać warunki stanu równowagi badanego materiału.
-Warunki te są następujące: 
+The ground state obtained as a result of the minimization procedure should satisfy the equilibrium conditions of the studied material.
+These conditions are as follows:
 
 \begin{enumerate}
 {\item
-Całkowita siła działająca na każdy atom zeruje się.
-Siły działające na atomy można wyznaczyć stosując twierdzenie Hellmanna-Feynmana \cite{Hellmann,Feynman}, 
-które mówi, że siła działająca na atom $i$ równa jest pochodnej energii całkowitej po położeniu
-tego atomu wziętej ze znakiem przeciwnym
+The total force acting on each atom vanishes.
+Forces acting on atoms can be determined using the Hellmann-Feynman theorem \cite{Hellmann,Feynman},
+which states that the force acting on atom $i$ is equal to the derivative of the total energy with respect to the position
+of that atom taken with the opposite sign
 %
 \begin{equation}
 \bm{F_i}=-\frac{\partial E_{tot}}{\partial\bm{R_i}}.
 \end{equation}
 %
-Zgodnie z tym wzorem, w stanie podstawowym, który odpowiada minimum energii, wszystkie siły $\bm{F_i}$ są równe zeru.
-Wartości sił stanowią często dodatkowe kryterium zbieżności układu w procedurze optymalizacyjnej:
-zbieżność jest osiągnięta jeżeli największa siła działająca na atomy jest mniejsza od zadanej wartości.}
+According to this formula, in the ground state, which corresponds to an energy minimum, all forces $\bm{F_i}$ are equal to zero.
+The values of forces often constitute an additional convergence criterion of the system in the optimization procedure:
+convergence is achieved if the largest force acting on atoms is less than a specified value.}
 
-{\item Makroskopowe naprężenia w układzie równe jest naprężeniu wywołanym ciśnieniem zewnętrznym.
-Średni tensor naprężeń określony jest przez pochodną energii całkowitej po tensorze deformacji 
+{\item The macroscopic stress in the system is equal to the stress caused by external pressure.
+The average stress tensor is determined by the derivative of the total energy with respect to the strain tensor
 %
 \begin{equation}
 \sigma_{\alpha\beta}=-\frac{1}{V}\frac{\partial E}{\partial u_{\alpha\beta}}.
 \end{equation}
-gdzie $V$ jest objętością układu. Tensor deformacji jest symetrycznym tensorem pochodnych wektora przesunięcia
-$\bm{u}=\bm{r}-\bm{r'}$ po położeniu $\bm{r}$.
-Przy kompresji hydrostatycznej, ciśnienie wiąże się z tensorem naprężeń zależnością $P=-\frac{1}{2}\sum_{\alpha}\sigma_{\alpha\alpha}$.}
+where $V$ is the volume of the system. The strain tensor is a symmetric tensor of derivatives of the displacement vector
+$\bm{u}=\bm{r}-\bm{r'}$ with respect to position $\bm{r}$.
+Under hydrostatic compression, the pressure is related to the stress tensor by $P=-\frac{1}{2}\sum_{\alpha}\sigma_{\alpha\alpha}$.}
 \end{enumerate}
 
 
