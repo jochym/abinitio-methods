@@ -1468,148 +1468,148 @@ Under hydrostatic compression, the pressure is related to the stress tensor by $
 
 
 
-\chapter{Metody wyznaczania struktury elektronowej}
+\chapter{Methods for determining electronic structure}
 
-\section{Ogólna charakterystyka}
+\section{General characteristics}
 
-Najważniejsze metody wyliczania struktury pasmowej oparte są na teorii DFT i polegają na
-wyznaczaniu jednocząstkowych funkcji falowych poprzez rozwiązanie równań Kohna-Shama
-lub podobnych równań zawierających efektywny potencjał elektronowy.  
-Podstawowym elementem odróżniającym poszczególne metody jest wybór funkcji bazowych, 
-które służą do rozwinięcia funkcji falowych w całym obszarze kryształu lub w poszczególnych jego częściach. 
-Najbardziej naturalną bazą w periodycznym krysztale są fale płaskie i obliczenia w tej bazie są bardzo efektywne oraz łatwe do implementacji. 
-Niestety, nie nadają sie do opisu elektronów w całym obszarze kryształu i wszystkich stanów elektronowych.
-Elektrony, które znajdują się najbliżej jąder atomowych i obsadzają najniższe stany energetyczne 
-wchodzą w skład rdzenia atomowego ({\it ang. atomic core}).
-W obszarze rdzeni atomowych, potencjał elektryczny jest silnie przyciągający i zbliżony jest do potencjału atomowego.
-Przez to stany elektronowe znajdujące się blisko jądra atomowego, zachowują sie podobnie do orbitali atomowych, czyli 
-silnie oscylują i zmieniają swój znak. Oznacza to również, że energia kinetyczna elektronów w tym obszarze jest duża.
-Funkcje falowe stanów rdzenia sa silnie zlokalizowane i szybko zanikają z odległością. 
-W tym przypadku znacznie lepszą zbieżność uzyskuje się stosując bazę zlokalizowanych funkcji, np. harmoniki sferyczne.
-Funkcja falowa elektronów walencyjnych zachowuje się odmiennie w obszarze rdzeni atomowych i w obszarze międzywęzłowym.
-Schematycznie potencjał periodyczny i funkcja falowa elektronów walencyjnych pokazana jest na rysunku \ref{fig:bloch}.
-W obszarze rdzeni, zaznaczonych kółkami o promieniu $r_c$, funkcja falowa, podobnie jak w przypadku stanów rdzenia,
-zmienia się bardzo szybko.
-W obszarze miedzywęzłowym ($r>r_c$), potencjał i gęstość elektronowa zmieniają się wolno w funkcji położenia. 
-Również funkcja falowa elektronów walencyjnych w tym obszarze jest wolnozmienna i 
-w tym przypadku można uzyskać szybką zbieżność w rozwinięciu na fale płaskie. 
+The most important methods for calculating band structure are based on DFT theory and rely on
+determining single-particle wave functions by solving the Kohn-Sham equations
+or similar equations containing an effective electronic potential.  
+The fundamental element distinguishing different methods is the choice of basis functions, 
+which are used to expand the wave functions throughout the entire crystal volume or in its individual parts. 
+The most natural basis in a periodic crystal consists of plane waves, and calculations in this basis are very efficient and easy to implement. 
+Unfortunately, they are not suitable for describing electrons throughout the entire crystal volume and all electronic states.
+Electrons that are located closest to atomic nuclei and occupy the lowest energy states 
+are part of the atomic core.
+In the region of atomic cores, the electric potential is strongly attractive and similar to the atomic potential.
+As a result, electronic states located close to the atomic nucleus behave similarly to atomic orbitals, that is 
+they strongly oscillate and change sign. This also means that the kinetic energy of electrons in this region is large.
+The wave functions of core states are strongly localized and decay rapidly with distance. 
+In this case, much better convergence is achieved using a basis of localized functions, such as spherical harmonics.
+The wave function of valence electrons behaves differently in the region of atomic cores and in the interstitial region.
+The periodic potential and wave function of valence electrons are shown schematically in Figure \ref{fig:bloch}.
+In the core regions, marked by circles with radius $r_c$, the wave function, similarly to core states,
+changes very rapidly.
+In the interstitial region ($r>r_c$), the potential and electron density vary slowly as a function of position. 
+The wave function of valence electrons in this region is also slowly varying, and 
+in this case rapid convergence can be achieved in the expansion in plane waves. 
 
 
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=0.5]{crystal.pdf}
-\caption{Potencjał periodyczny i funkcja falowa elektronów walencyjnych.}
+\caption{Periodic potential and wave function of valence electrons.}
 \label{fig:bloch}
 \end{figure}
 
 \newpage
 
-Najważniejsze metody wyznaczania struktury pasmowej można podzielić na trzy główne grupy:
+The most important methods for determining band structure can be divided into three main groups:
 
 
 \begin{enumerate}
-\item{{\bf Pseudopotencjały.} Jest to grupa metod, która ogranicza ilość elektronów i rozwiązania równania Kohna-Shama tylko do stanów walencyjnych. 
-Ma to uzasadnienie wynikające z charakteru stanów rdzenia, które są silnie zlokalizowane blisko jądra atomowego i nie biorą udziału w wiązaniach atomowych.
-Przez to najważniejsze własności materiałów zdeterminowane są przez zachowanie elektronów walencyjnych. 
-W metodzie pseudopotencjału stosuje się rozwinięcie funkcji falowej w bazie fal płaskich. Aby zachować jednolity opis funkcji falowej w całym obszarze kryształu, stosuje się w tych metodach przybliżony potencjał działający na elektrony walencyjne w obszarze rdzenia atomowego, który nazywany jest pseudopotencjałem. 
-Dla elektronów walencyjnych wyznacza się pseudofunkcję falową, która jest rozwiązaniem jednocząstkowego równania Schr\"{o}dingera z odpowiednim pseudopotencjałem. W obszarze międzywęzłowym jest ona równa dokładnej funcji falowej, a w obszarze rdzenia jest wolnozmienną funkcją bez oscylacji i miejsc
-zerowych. Najdokładniejsze obliczenia w tej grupie metod stosują pseudopotencjały ultramiękkie i potencjały typu PAW.}
-\item{{\bf Zlokalizowane orbitale.} W tym podejściu funkcję falową elektronów zapisujemy w bazie orbitali zlokalizowanych na poszczególnych
-atomach. W najprostszym przybliżeniu ciasnego wiązania jedynymi istotnymi parametrami są elementy macierzowe Hamiltonianu, które
-opisują przekrywanie się lokalnych orbitali lub funkcji Wanniera. W dokładniejszych obliczeniach jako bazę stosuje się funkcje Gaussa
-lub orbitale Slatera.}
-\item{{\bf Stowarzyszone fale i atomowe sfery}. Ta grupa obejmuje metody obliczeniowe, które bazują na ogólnej zasadzie podziału
-kryształu na dwa obszary. Pierwszy obszar zawiera rdzenie atomowe, w których funkcje falowe zachowują cechy orbitali atomowych i drugi obszar między atomami,
-gdzie elektrony walencyjne opisane są wolnozmienną funkcją falową. W każdym z dwóch charakterystycznych obszarów stosuje się
-rozwinięcia funkcji falowej w różnych bazach funkcyjnych. Obszar rdzenia atomowego definiuje wartość promienia $r_c$. Funkcje falowe
-otrzymane dla odległości mniejszych i wiekszych od $r_c$ muszą spełniać odpowiednie warunki ciągłości na granicy rdzenia atomowego.}
+\item{{\bf Pseudopotentials.} This is a group of methods that limits the number of electrons and solutions of the Kohn-Sham equation to valence states only. 
+This is justified by the nature of core states, which are strongly localized near the atomic nucleus and do not participate in atomic bonding.
+Therefore, the most important properties of materials are determined by the behavior of valence electrons. 
+In the pseudopotential method, the wave function is expanded in a basis of plane waves. To maintain a uniform description of the wave function throughout the entire crystal volume, these methods use an approximate potential acting on valence electrons in the atomic core region, which is called the pseudopotential. 
+For valence electrons, a pseudo-wave function is determined, which is a solution of the single-particle Schr\"{o}dinger equation with an appropriate pseudopotential. In the interstitial region it is equal to the exact wave function, while in the core region it is a slowly varying function without oscillations and zero
+crossings. The most accurate calculations in this group of methods use ultrasoft pseudopotentials and PAW-type potentials.}
+\item{{\bf Localized orbitals.} In this approach, the electronic wave function is written in a basis of orbitals localized on individual
+atoms. In the simplest tight-binding approximation, the only significant parameters are the Hamiltonian matrix elements that
+describe the overlap of local orbitals or Wannier functions. In more accurate calculations, Gaussian functions
+or Slater orbitals are used as the basis.}
+\item{{\bf Augmented waves and atomic spheres}. This group includes computational methods that are based on the general principle of dividing
+the crystal into two regions. The first region contains atomic cores, in which wave functions retain the characteristics of atomic orbitals, and the second region between atoms,
+where valence electrons are described by a slowly varying wave function. In each of the two characteristic regions,
+expansions of the wave function in different functional bases are used. The atomic core region defines the value of radius $r_c$. Wave functions
+obtained for distances smaller and larger than $r_c$ must satisfy appropriate continuity conditions at the boundary of the atomic core.}
 
 \end{enumerate}
 
-W kolejnych rozdziałach opisane zostaną metody obliczeniowe należące do tych trzech grup.
+In the following sections, computational methods belonging to these three groups will be described.
   
-\section{Pseudopotencjały}
+\section{Pseudopotentials}
 
-Główną ideę pseudopotencjału ilustruje rysunek \ref{fig:pseudopot}. W obszarze rdzenia atomowego ($r<r_c$) dokładny potencjał $V$ przybliżany
-jest pseudopotencjałem $\tilde{V}$, który ma skończoną wartość dla $r=0$. Odpowiadająca mu pseudofunkcja falowa $\tilde{\psi}$
-ma gładkie zachowanie (bez oscylacji i miejsc zerowych) w tym obszarze. Dla $r>r_c$ pseudopotencjał pokrywa się z dokładnym potencjałem,
-a pseudofunkcja odpowiada dokładnej funkcji falowej $\psi$. Dzięki takiemu przybliżeniu, pseudofunkcja falowa może być rozwinięta
-na fale płaskie w całym obszarze kryształu.   
+The main idea of the pseudopotential is illustrated in Figure \ref{fig:pseudopot}. In the atomic core region ($r<r_c$), the exact potential $V$ is approximated
+by the pseudopotential $\tilde{V}$, which has a finite value at $r=0$. The corresponding pseudo-wave function $\tilde{\psi}$
+has smooth behavior (without oscillations and zero crossings) in this region. For $r>r_c$, the pseudopotential coincides with the exact potential,
+and the pseudo-wave function corresponds to the exact wave function $\psi$. Thanks to this approximation, the pseudo-wave function can be expanded
+in plane waves throughout the entire crystal volume.   
 
   
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=0.1]{pseudopots-new.pdf}
-\caption{Psudopotencjał i pseudofunkcja falowa.}
+\caption{Pseudopotential and pseudo-wave function.}
 \label{fig:pseudopot}
 \end{figure}  
   
-Metoda pseudopotencjału rozwinęła się z podejścia zortogonalizowanych fal płaskich ({\it ang. ortogonalized plane waves} - OPW)
-zaproponowanego przez Herringa w 1940 \cite{herring40}. 
-Można zdefiniować transformację, która prowadzi od dokładnego potencjału do pseudopotencjału, wprowadzając jednocześnie pseudofunkcję falową do opisu elektronów walencyjnych \cite{Antoncik,KP}.
-Wprowadzamy osobne oznaczenia dla stanów walencyjnych $|\psi_v\rangle$ i stanów rdzenia $|\psi_c\rangle$, które są stanami własnymi
-hamiltonianu $H$ z odpowiednimi energiami własnymi $\varepsilon_v$ i $\varepsilon_c$.
-Zakładamy, że dokładna funkcja falowa elektronów walencyjnych może być wyrażona przez gładką funkcję $\tilde{\psi}_v$ (pseudofunkcję),
-która jest ortogonalna do stanów rdzenia
+The pseudopotential method developed from the orthogonalized plane waves (OPW) approach
+proposed by Herring in 1940 \cite{herring40}. 
+One can define a transformation that leads from the exact potential to the pseudopotential, while introducing the pseudo-wave function to describe valence electrons \cite{Antoncik,KP}.
+We introduce separate notations for valence states $|\psi_v\rangle$ and core states $|\psi_c\rangle$, which are eigenstates
+of the Hamiltonian $H$ with corresponding eigenvalues $\varepsilon_v$ and $\varepsilon_c$.
+We assume that the exact wave function of valence electrons can be expressed through a smooth function $\tilde{\psi}_v$ (pseudo-wave function),
+which is orthogonal to the core states
 %
 \begin{equation}
 |\psi_v\rangle =|\tilde{\psi}_v\rangle +\sum_{\alpha,c} a_{\alpha} |\psi_{\alpha c}\rangle,
 \label{OPW}
 \end{equation}
 %
-gdzie sumowanie przebiega po atomach $\alpha$ i stanach rdzenia $c$. 
-Dla uproszczenia zapisu wskaźniki $v$ i $c$ określają zarówno numer stanu, jak i kierunek spinu elektronu.
-Współczynniki rozwinięcia dostajemy z warunku ortogonalności  
+where the summation runs over atoms $\alpha$ and core states $c$. 
+For simplicity of notation, the indices $v$ and $c$ denote both the state number and the electron spin direction.
+The expansion coefficients are obtained from the orthogonality condition  
 %
 \begin{equation}
 a_{\alpha}=-\langle \psi_{\alpha c}|\tilde{\psi}_v\rangle.
 \label{a_alpha}
 \end{equation}
 % 
-W obszarze miedzywęzłowym dokładna funkcja falowa równa jest pseudofunkcji, która może być wyrażona w bazie fal płaskich.
-Wstawiając (\ref{OPW}) do równania $H|\psi_v\rangle=\varepsilon_v|\psi_v\rangle$ otrzymujemy
+In the interstitial region, the exact wave function is equal to the pseudo-wave function, which can be expressed in a plane wave basis.
+Inserting (\ref{OPW}) into the equation $H|\psi_v\rangle=\varepsilon_v|\psi_v\rangle$, we obtain
 %
 \begin{equation}
 H|\tilde{\psi}_v\rangle +\sum_{\alpha,c} a_{\alpha} \varepsilon_{\alpha c} |\psi_{\alpha c}\rangle =
 \varepsilon_v|\tilde{\psi}_v\rangle + \sum_{\alpha c} a_{\alpha} \varepsilon_v|\psi_{\alpha c}\rangle.
 \end{equation}
 %
-Przenosząc drugie równanie na prawą stronę i wykorzystując (\ref{a_alpha}) dostajemy
+Moving the second term to the right side and using (\ref{a_alpha}), we obtain
 %
 \begin{equation}
 (H +\sum_{\alpha,c}(\varepsilon_v - \varepsilon_{\alpha c})|\psi_{\alpha c}\rangle \langle \psi_{\alpha c}|)|\tilde{\psi}_v\rangle =
 \varepsilon_v|\tilde{\psi}_v\rangle.
 \end{equation}
 %
-Dostaliśmy równanie typu Schr\"{o}dingera z dodatkowym potencjałem 
+We have obtained a Schr\"{o}dinger-type equation with an additional potential 
 %
 \begin{equation}
 V^{R}=\sum_{\alpha,c}(\varepsilon_v - \varepsilon_{\alpha c})|\psi_{\alpha c}\rangle \langle \psi_{\alpha c}|.
 \end{equation}
 %
-Jeżeli dodamy to wyrażenie do oryginalnego potencjału $V$ dostaniemy wielkość nazywaną pseudopotencjałem $\tilde{V}=V+V^{R}$.
-W obszarze walencyjnym, pseudopotencjał $\tilde{V}$ pokrywa się z potencjałem $V$.  
-Silnie przyciagający potencjał atomowy w obszarze rdzenia jest znacznie osłabiony przez dodatnią wartość $V^R$.
-To umożliwia zbieżność pseudofunkcji falowej w bazie fal płaskich. 
+If we add this expression to the original potential $V$, we obtain a quantity called the pseudopotential $\tilde{V}=V+V^{R}$.
+In the valence region, the pseudopotential $\tilde{V}$ coincides with the potential $V$.  
+The strongly attractive atomic potential in the core region is significantly weakened by the positive value of $V^R$.
+This enables convergence of the pseudo-wave function in the plane wave basis. 
 
 
-\subsection{Pseudopotencjały zachowujące normę}
+\subsection{Norm-conserving pseudopotentials}
 
-Dobre pseudopotencjały mają charakter uniwersalny. Wygenerowane w określonej configuracji atomowej
-powinny zachowywać się jednakowo dobrze w każdym innym ukladzie atomowym. 
-W roku 1979, Hamann, Schl\"{u}ter i Chiang \cite{HSC} zaproponowali pseudopotencjały zachowujące normę, 
-które spełniały  nastepujące warunki:
+Good pseudopotentials have a universal character. Generated in a specific atomic configuration,
+they should behave equally well in any other atomic arrangement. 
+In 1979, Hamann, Schl\"{u}ter, and Chiang \cite{HSC} proposed norm-conserving pseudopotentials 
+that satisfied the following conditions:
 
 \begin{enumerate}
-{\item Prawdziwa funkcja i pseudofuncja falowa są równe, $\psi_i(r)=\tilde{\psi}_i(r)$, dla $r\geq r_c$.}
-{\item Ich energie własne dla elektronów walencyjnych powinny być równe.}
-{\item Ładunek prawdziwy i pseudoładunek zawarty w obszarze o promieniu $r\geq r_c$ powinny się pokrywać (zachowanie normy)
+{\item The true wave function and pseudo-wave function are equal, $\psi_i(r)=\tilde{\psi}_i(r)$, for $r\geq r_c$.}
+{\item Their eigenvalues for valence electrons should be equal.}
+{\item The true charge and pseudo-charge contained in a region with radius $r\geq r_c$ should coincide (norm conservation)
 %
 \begin{equation}
 \int_0^r dr r^2 |\psi_i(r)|^2=\int_0^r dr r^2 |\tilde{\psi}_i(r)|^2.
 \end{equation}}
 %
-{\item Pochodna logarytmiczna prawdziwej funkcji i pseudofunkcji są równe dla $r\geq r_c$ 
+{\item The logarithmic derivative of the true wave function and pseudo-wave function are equal for $r\geq r_c$ 
 %
 \begin{equation}
 \frac{1}{\psi_i(r)}\frac{d\psi_i(r)}{dr}=\frac{1}{\tilde{\psi}_i(r)}\frac{d\tilde{\psi}_i(r)}{dr}.
@@ -1617,114 +1617,114 @@ które spełniały  nastepujące warunki:
 
 \end{enumerate} 
 %
-Z tych własności wynika również spełnienie warunku równych pochodnych po energii funkcji dokładnej i pseudofunkcji dla $r\geq r_c$,
-co dodatkowo wzmacnia przenośny charakter tych pseudopotencjałów.
-Metody generowania pseudopotencjałów zachowujących normę zostały opisane szczegółowo w wielu pracach \cite{HSC,BHS}.
+From these properties also follows the condition of equal energy derivatives of the exact wave function and pseudo-wave function for $r\geq r_c$,
+which additionally reinforces the transferable character of these pseudopotentials.
+Methods for generating norm-conserving pseudopotentials have been described in detail in many works \cite{HSC,BHS}.
 
-Ponieważ pseudopotencjały w obszarze rdzenia zależą od orbitalnej liczby kwantowej $l$, ich charakter nie jest lokalny.
-Wartość charakterystycznego promienia $r_c$ również zależy od $l$.
-Ogólnie można podzielić cały pseudopotencjał na część lokalną i nielokalną
+Since pseudopotentials in the core region depend on the orbital quantum number $l$, their character is not local.
+The value of the characteristic radius $r_c$ also depends on $l$.
+In general, the entire pseudopotential can be divided into a local and nonlocal part
 %
 \begin{equation}
 V_l(r)=V_{lok}(r)+\delta V_l(r).
 \end{equation}
 %
-Nielokalny charakter dotyczy tylko obszaru rdzenia, więc $\delta V_l(r)=0$ dla $r>r_c$
-i wszystkie dalekozasięgowe efekty zależą tylko od $V_{lok}(r)$.
-Możliwość wyboru promienia $r_c$ daje pewną swobodę przy konstrukcji pseudopotencjałów.
-Dokładniejsze i bardziej uniwersalne pseudopotencjały charakteryzują sie mniejszymi wartościami
-$r_c$. Jednak większa dokładnosć wymaga uwzględnienia większej ilości fal płaskich
-w rozwinięciu pseudofunkcji falowej. Takie pseudopotencjały nazywane są twardymi. Miękkie pseudopotencjały odznaczają się
-większymi wartościami $r_c$, mniejszą ilość fal płaskich i bardziej gładkim charakterem pseudofunkcji falowej. 
+The nonlocal character concerns only the core region, so $\delta V_l(r)=0$ for $r>r_c$
+and all long-range effects depend only on $V_{lok}(r)$.
+The possibility of choosing the radius $r_c$ gives some freedom in the construction of pseudopotentials.
+More accurate and more universal pseudopotentials are characterized by smaller values
+of $r_c$. However, greater accuracy requires including a larger number of plane waves
+in the expansion of the pseudo-wave function. Such pseudopotentials are called hard. Soft pseudopotentials are characterized by
+larger values of $r_c$, a smaller number of plane waves, and a smoother character of the pseudo-wave function. 
 
-\subsection{Pseudopotencjały ultramiękkie}
+\subsection{Ultrasoft pseudopotentials}
 
-W roku 1990, Vanderbilt zaproponował nowy rodzaj pseupotencjałów, nazywane ultramiękkimi ({\it ang. ultrasoft pseudopotentials} - US-PP), które nie zachowują normy \cite{Vanderbilt90}. W tym podejściu, pseudofunkcje falowe spełniają ugólnione równanie własne w postaci
+In 1990, Vanderbilt proposed a new type of pseudopotentials, called ultrasoft pseudopotentials (US-PP), which do not conserve the norm \cite{Vanderbilt90}. In this approach, the pseudo-wave functions satisfy a generalized eigenvalue equation in the form
 %
 \begin{equation}
 H|\tilde{\psi}_i\rangle=\varepsilon_iS|\tilde{\psi}_i\rangle,
 \end{equation}
 %
-gdzie Hamiltonian ma ogólną postać 
+where the Hamiltonian has the general form 
 %
 \begin{equation}
 H=-\frac{\hbar^2}{2m}\nabla^2+V_{lok}+\delta V_{NL}, 
 \end{equation}
-a $S$ jest operatorem przekrywania
+and $S$ is the overlap operator
 %
 \begin{equation}
 S=1+\sum_{i,j} Q_{ij}|\beta_i\rangle\langle\beta_j|,
 \end{equation}
 %
-który określa uogólniony warunek normalizacji pseudofunkcji falowych $\langle\tilde{\psi}_i|S|\tilde{\psi}_j\rangle=\delta_{ij}$.
-Macierz $Q_{ij}$ opisuje różnicę w normalizacji funkcji i pseudofunkcji falowych
+which determines the generalized normalization condition for the pseudo-wave functions $\langle\tilde{\psi}_i|S|\tilde{\psi}_j\rangle=\delta_{ij}$.
+The matrix $Q_{ij}$ describes the difference in normalization of the wave functions and pseudo-wave functions
 %
 \begin{equation}
 Q_{ij}=\int_0^{r_c} dr Q_{ij}(\bm{r})=\int_0^{r_c} dr r^2[\psi_i^*(\bm{r})\psi_j(\bm{r})-\tilde{\psi}_i^*(\bm{r})\tilde{\psi}_j(\bm{r})].
 \end{equation}
 %
-Zbiór lokalnych funkcji falowych
+The set of local wave functions
 %
 \begin{equation}
 |\beta_i\rangle=\sum_j (B^{-1})_{ij}|\chi_j\rangle,
 \end{equation}
 %
-gdzie funkcje 
+where the functions 
 %
 \begin{equation}
 |\chi_j\rangle=(\varepsilon_i+\frac{\hbar^2}{2m}\nabla^2-V_{loc})|\tilde{\psi}_j\rangle
 \end{equation}
 %
-zerują się w obszarze dla $r>r_c$. 
-Nielokalną część speudopotencjału otrzymuje się ze wzoru
+vanish in the region for $r>r_c$. 
+The nonlocal part of the pseudopotential is obtained from the formula
 %
 \begin{equation}
 \delta V_{NL}=\sum_{ij}D_{ij}|\beta_i\rangle\langle\beta_j|,
 \end{equation}
 %
-gdzie $D_{ij}=B_{ij}+\varepsilon_j Q_{ij}$. Całkowitą gęstość elektonów walencyjnych
-w danym punkcie przestrzeni otrzymujemy ze wzoru 
+where $D_{ij}=B_{ij}+\varepsilon_j Q_{ij}$. The total valence electron density
+at a given point in space is obtained from the formula 
 %
 \begin{equation}
 n_v(\bm{r})=\sum_i \tilde{\psi}_i^*(\bm{r})\tilde{\psi}_i(\bm{r})+\sum_{i,j}\sum_k\langle\beta_i|\tilde{\psi}_k\rangle\langle\tilde{\psi}_k|\beta_j\rangle Q_{ij}(\bm{r}),
 \end{equation}
 % 
-gdzie wyraz jest poprawką wynikającą z niezachowania normy przez pseudofunkcje falowe.
+where the second term is a correction resulting from the non-conservation of the norm by the pseudo-wave functions.
 
 
 \begin{figure}[h]
 \centering
 \includegraphics[scale=1]{usp.pdf}
-\caption{Porównanie dokładnej funkcji falowej $2p$ dla tlenu (linia ciągła) z pseudofunkcją zachowującą normę (linia kropkowana)
-i pseudofunkcją otrzymaną dla pseudopotancjału ultramiękkiego (linia przerywana). Rysunek z pracy \cite{Vanderbilt90}.}
+\caption{Comparison of the exact $2p$ wave function for oxygen (solid line) with a norm-conserving pseudo-wave function (dotted line)
+and a pseudo-wave function obtained for an ultrasoft pseudopotential (dashed line). Figure from \cite{Vanderbilt90}.}
 \label{fig:ups}
 \end{figure}
 
-Na rysunku \ref{fig:ups} pokazana jest dokładna funkcja falowa dla orbitalu $2p$ w tlenie oraz dwie pseudofunkcje otrzymane dla pseudopotencjału zachowujacego normę i pseudopotencjału ultramiękkiego. Promień obcięcia jest wyraźnie większy dla pseudopotencjału ultramiękkiego ($r_c\approx1.5$ a.u.) niż dla zachowującego normę ($r_c\approx0.5$ a.u.).
+Figure \ref{fig:ups} shows the exact wave function for the $2p$ orbital in oxygen and two pseudo-wave functions obtained for a norm-conserving pseudopotential and an ultrasoft pseudopotential. The cutoff radius is clearly larger for the ultrasoft pseudopotential ($r_c\approx1.5$ a.u.) than for the norm-conserving one ($r_c\approx0.5$ a.u.).
 
-\subsection{Metoda PAW}
+\subsection{PAW method}
 
-Omówione metody pseudopotencjałów pozwalaja efektywnie wyliczać wiele wielkości fizycznych bazując na pseudofukcjach falowych.
-W wielu przypadkach dokładniejsze obliczenia wymagają znajomości funkcji falowych elektronów walencyjnych
-również w obszarze rdzenia atomowego.
-W roku 1994, Bl\"{o}chl zaproponował nową metodę PAW ({\it ang. projector augmented-wave}),
-która łączy efektywność pseudopotencjałów i dokładność obliczeń porównywalną z metodami pełnego potencjału \cite{Blochl}. 
-Do opisu elektronów walencyjnych podejście to wykorzystuje również pseudofunkcje falowe $\tilde{\psi}_v$, które rozwijane są na fale płaskie i 
-w obszarze międzywęzłowym pokrywają sie z funkcjami dokładnymi $\psi_v$.
-Główną zaletą tej metody jest możliwość wyznaczenia dokładnej funkcji falowej poprzez transformację liniową pseudofukcji falowej
+The discussed pseudopotential methods allow efficient calculation of many physical quantities based on pseudo-wave functions.
+In many cases, more accurate calculations require knowledge of the wave functions of valence electrons
+also in the atomic core region.
+In 1994, Bl\"{o}chl proposed a new method, PAW (projector augmented-wave),
+which combines the efficiency of pseudopotentials with calculation accuracy comparable to all-electron methods \cite{Blochl}. 
+To describe valence electrons, this approach also uses pseudo-wave functions $\tilde{\psi}_v$, which are expanded in plane waves and 
+in the interstitial region coincide with the exact functions $\psi_v$.
+The main advantage of this method is the possibility of determining the exact wave function through a linear transformation of the pseudo-wave function
 %
 \begin{equation}
 |\psi_v\rangle=\mathcal{T}|\tilde{\psi}_v\rangle.
 \end{equation}
 % 
-Operator liniowy $\mathcal{T}$ działa w obszarach otoczonych sferą o promieniu $r_c$ wokół atomów w położeniach $\bm{R}_m$
+The linear operator $\mathcal{T}$ acts in regions enclosed by a sphere of radius $r_c$ around atoms at positions $\bm{R}_m$
 %
 \begin{equation}
 \mathcal{T}=1+\sum_m \mathcal{T}_m.
 \label{operator}
 \end{equation}
 % 
-Dokładna funkcja falowa i pseudofukcja rozwinięte są w obszarze atomowym na funkcje parcjalne $|\phi_m\rangle$ i $|\tilde{\phi}_m\rangle$
+The exact wave function and pseudo-wave function are expanded in the atomic region into partial waves $|\phi_m\rangle$ and $|\tilde{\phi}_m\rangle$
 %
 \begin{eqnarray}
 |\psi_v\rangle=\sum_m c_m |\phi_m\rangle, \label{eq1}\\
@@ -1732,41 +1732,41 @@ Dokładna funkcja falowa i pseudofukcja rozwinięte są w obszarze atomowym na f
 \label{eq2}
 \end{eqnarray}
 %
-gdzie w obydwóch sumach występują te same współczynniki rozwinięcia $c_m$. Zatem te lokalne funkcje powiązane są tą samą
-transformacją
+where the same expansion coefficients $c_m$ appear in both sums. Therefore, these local functions are related by the same
+transformation
 %
 \begin{equation}
 |\phi_m\rangle=(1+\sum_m \mathcal{T}_m)|\tilde{\phi}_m\rangle.
 \end{equation}
 %
-Funkcje $|\phi_m\rangle$ są rozwiązaniami równania Schr\"{o}dingera dla dokładnego potencjału atomowego, które odpowiadają energiom $\varepsilon_m$
-i są ortogonalne do stanów rdzenia. Wskaźnik $m$ określa jednocześnie położenia atomów $\bm{R}$ i zbiór liczb kwantowych orbitali atomowych.
-Każdej parcjalnej funkcji dokładnej odpowiada jedna pseudofunkcja $|\tilde{\phi}_m\rangle$, z którą pokrywa się poza sferą o promieniu $r_c$.
-Oba rodzaje funkcji parcjalnych są funkcjami radialnymi, zdefiniowanymi na logarytmicznej siatce radialnej, przemnożonymi przez
-harmoniki sferyczne. 
+The functions $|\phi_m\rangle$ are solutions of the Schr\"{o}dinger equation for the exact atomic potential, corresponding to energies $\varepsilon_m$
+and orthogonal to core states. The index $m$ simultaneously determines the positions of atoms $\bm{R}$ and the set of quantum numbers of atomic orbitals.
+Each exact partial wave corresponds to one pseudo-wave function $|\tilde{\phi}_m\rangle$, with which it coincides outside a sphere of radius $r_c$.
+Both types of partial functions are radial functions, defined on a logarithmic radial grid, multiplied by
+spherical harmonics. 
 
-Odejmując stronami (\ref{eq1}) i (\ref{eq2}) dostajemy równanie
+Subtracting (\ref{eq1}) and (\ref{eq2}) term by term, we obtain
 %
 \begin{equation}
 |\psi_v\rangle=|\tilde{\psi}_v\rangle-\sum_m c_m |\tilde{\phi}_m\rangle + \sum_m c_m |\phi_m\rangle.
 \label{psiv}
 \end{equation}
 % 
-Aby operator $\mathcal{T}$ był liniowy współczynniki $c_m$ muszą być liniowymi funkcjonałami pseudofunkcji falowej $|\tilde{\psi}_v\rangle$
+For the operator $\mathcal{T}$ to be linear, the coefficients $c_m$ must be linear functionals of the pseudo-wave function $|\tilde{\psi}_v\rangle$
 %
 \begin{equation}
 c_m=\langle\tilde{p}_m|\tilde{\psi}_v\rangle,
 \label{coef}
 \end{equation}
 %
-gdzie $\langle\tilde{p}_m|$ są funkcjami rzutowymi dualnymi względem funkcji parcjalnych 
+where $\langle\tilde{p}_m|$ are projector functions dual to the partial waves 
 $\langle\tilde{p}_m|\tilde{\phi}_n\rangle=\delta_{m,n}$.
-Dla każdej funkcji $|\tilde{\phi}_m\rangle$ mamy jedną funkcja rzutową $\langle\tilde{p}_m|$
-i dla nich spełniony jest warunek $\sum_m |\tilde{\phi}_m\rangle\langle\tilde{p}_m|=1$.
-Funkcje rzutowe są funkcjami radialnymi pomnożonymi przez harmoniki sferyczny, a następnie przetransformowane do bazy fal płaskich.
-Są przypisane do położeń atomów, ale nie zależą od potencjału atomowego.
+For each function $|\tilde{\phi}_m\rangle$ we have one projector function $\langle\tilde{p}_m|$
+and for them the condition $\sum_m |\tilde{\phi}_m\rangle\langle\tilde{p}_m|=1$ is satisfied.
+The projector functions are radial functions multiplied by spherical harmonics, and then transformed to the plane wave basis.
+They are assigned to atomic positions but do not depend on the atomic potential.
 %
-Wstawiając (\ref{coef}) do (\ref{psiv}) otrzymujemy
+Inserting (\ref{coef}) into (\ref{psiv}) we obtain
 %
 \begin{equation}
 |\psi_v\rangle=|\tilde{\psi}_v\rangle+\sum_m (|\phi_m\rangle-|\tilde{\phi}_m\rangle)\langle\tilde{p}_m|)\tilde{\psi}_v\rangle
@@ -1774,43 +1774,43 @@ Wstawiając (\ref{coef}) do (\ref{psiv}) otrzymujemy
 \label{psiv2}
 \end{equation}
 %
-gdzie wyrażenie w nawiasie kwadratowym jest wprowadzonym wcześniej operatorem liniowym
+where the expression in square brackets is the linear operator introduced earlier
 %
 \begin{equation}
 \mathcal{T}=1+\sum_m \mathcal{T}_m=1+\sum_m (|\phi_m\rangle-|\tilde{\phi}_m\rangle)\langle\tilde{p}_m|.
 \end{equation}
 %
 
-Funkcje falowe rdzenia $|\psi_c\rangle$, podobnie do funkcji walencyjnych, są rozłożone na trzy składowe
+The core wave functions $|\psi_c\rangle$, similarly to valence functions, are decomposed into three components
 %
 \begin{equation}
 |\psi_c\rangle=|\tilde{\psi}_c\rangle+|\phi_c\rangle-|\tilde{\phi}_c\rangle,
 \end{equation}
 %
-gdzie kolejne wyrazy odpowiadają pseudofunkcji elektronów rdzenia, która pokrywa się z dokładną funkcją dla $r>r_c$,
-lokalnej (parcjalnej) funkcji rdzenia i lokalnej pseudofukcji rdzenia. Obydwie lokalne funcje wyrażone są jako funkcje radialne
-pomnożone przez harmoniki sferyczne.
+where the successive terms correspond to the pseudo-wave function of core electrons, which coincides with the exact function for $r>r_c$,
+the local (partial) core function, and the local core pseudo-wave function. Both local functions are expressed as radial functions
+multiplied by spherical harmonics.
 
-Średnia z operatora $A$ może być wyznaczona przy pomocy dokładnych funkcji lub pseudofunkcji
+The expectation value of operator $A$ can be determined using exact functions or pseudo-wave functions
 %
 \begin{equation}
 \langle A \rangle = \sum_n f_n \langle \psi_n|A|\psi_n\rangle = \sum_n f_n \langle \tilde{\psi}_n|\tilde{A}|\tilde{\psi}_n\rangle,
 \end{equation}
 % 
-gdzie $f_n$ określa obsadzenie stanu $n$, a $\tilde{A}$ jest pseudooperatorem, który można otrzymać transformując operator $A$
+where $f_n$ determines the occupation of state $n$, and $\tilde{A}$ is a pseudo-operator that can be obtained by transforming operator $A$
 %
 \begin{equation}
 \tilde{A}=\mathcal{T}^{\dagger} A \mathcal{T}= A +\sum_{i,j} |\tilde{p}_i\rangle (\langle \phi_i |A|\phi_j\rangle - \langle \tilde{\phi}_i |A|\tilde{\phi}_j\rangle ) \langle\tilde{p}_j|.
 \end{equation}
 %
-Przykładowo, stosując te wyrażenia do operatora gęstości $n=|\bm{r}\rangle\langle\bm{r}|$,
-możemy wyrazić gęstość elektronową następującym wyrażeniem
+For example, applying these expressions to the density operator $n=|\bm{r}\rangle\langle\bm{r}|$,
+we can express the electron density with the following expression
 %
 \begin{equation}
 n(\bm{r})=\tilde{n}(\bm{r})+n^1(\bm{r})-\tilde{n}^1(\bm{r}),
 \end{equation}
 %
-gdzie
+where
 %
 \begin{equation}
 \tilde{n}(\bm{r})=\sum_n f_n \langle \tilde{\psi}_n|\bm{r}\rangle\langle \bm{r}| \tilde{\psi}_n\rangle=\sum_n f_n |\tilde{\psi_n}(\bm{r})|^2,
@@ -1824,65 +1824,65 @@ n^1(\bm{r})=\sum_{n,i,j} f_n \langle \tilde{\psi}_n|\tilde{p}_i\rangle\langle\ph
 \tilde{n}^1(\bm{r})=\sum_{n,i,j} f_n \langle \tilde{\psi}_n|\tilde{p}_i\rangle\langle\tilde{\phi}_i|\bm{r}\rangle\langle \bm{r}|\tilde{\phi}_j\rangle\langle\tilde{p}_j |\tilde{\psi}_n\rangle.
 \end{equation}
 %
-W powyższych wzorach sumowanie obejmuje zarówno stany walencyjne, jak i stany rdzenia. 
+In the above formulas, the summation includes both valence states and core states. 
 
-Metoda PAW należy obecnie do najdokładniejszych i najbardziej efektywnych metod. Została zaimplementowana
-w takich programach, jak Vienna Ab Initio Simulation Package (VASP) \cite{Vasp,PawVasp} i Quantum Espresso \cite{QE}.
+The PAW method is currently one of the most accurate and efficient methods. It has been implemented
+in programs such as the Vienna Ab Initio Simulation Package (VASP) \cite{Vasp,PawVasp} and Quantum Espresso \cite{QE}.
 
 
-\section{Zlokalizowane orbitale}
+\section{Localized orbitals}
 
-\subsection{Metoda ciasnego wiązania}
+\subsection{Tight-binding method}
 
-W odróżnieniu od metod pseudopotencjału, które wykorzystują bazę fal płaskich, metody opisane w tym rozdziale
-stosują lokalne orbitale, które powiązane są z danymi atomami lub centrowane są w położeniach atomów.
-Opis przy pomocy lokalnych orbitali nadaje się dobrze do układów, gdzie występują zlokalizowane stany
-elektronowe, ale możliwy jest ruch elektronów poprzez przeskoki do sąsiednich atomów.
-Najprostszym opisem takich układów jest model ciasnego wiązania.
-Lokalne orbitale atomowe możemy zapisać w postaci $\phi_{\alpha}(\bm{r}-\bm{R}_{\alpha})$, 
-gdzie wektor $\bm{R}_{\alpha}$ oznacza położenie danego atomu. Wskaźnik $\alpha$ oznacza tutaj wszystkie liczby kwantowe, 
-które charakteryzują dany orbital ($\alpha=n,l,m$). Zakładamy dla uproszczenia, że z danym atomem związny jest tylko
-jeden orbital, ale model ciasnego wiązania można łatwo uogólnić na dowolną liczbę orbitali.
-Hamiltonian możemy zapisać jako
+In contrast to pseudopotential methods, which use a plane wave basis, the methods described in this section
+employ local orbitals that are associated with given atoms or centered at atomic positions.
+The description using local orbitals is well suited to systems where localized electronic
+states occur, but electron motion is possible through hops to neighboring atoms.
+The simplest description of such systems is the tight-binding model.
+Local atomic orbitals can be written as $\phi_{\alpha}(\bm{r}-\bm{R}_{\alpha})$, 
+where the vector $\bm{R}_{\alpha}$ denotes the position of a given atom. The index $\alpha$ here denotes all quantum numbers 
+that characterize a given orbital ($\alpha=n,l,m$). For simplicity, we assume that only
+one orbital is associated with a given atom, but the tight-binding model can easily be generalized to any number of orbitals.
+The Hamiltonian can be written as
 %
 \begin{equation}
 H=-\frac{\hbar^2}{2m}\nabla^2+\sum_{\alpha}V_{\alpha}(\bm{r}-\bm{R}_{\alpha}),
 \end{equation}
 %
-gdzie $V_{\alpha}$ jest potencjałem atomowym wokół położenia $\bm{R}_{\alpha}$.
-Elementy macierzowe hamiltonianu możemy wyznaczyć ze wzoru
+where $V_{\alpha}$ is the atomic potential around position $\bm{R}_{\alpha}$.
+The matrix elements of the Hamiltonian can be determined from the formula
 %
 \begin{equation}
 H_{\alpha\beta}=\int d\bm{r} \phi_{\alpha}^*(\bm{r}-\bm{R}_{\alpha})H\phi_{\beta}(\bm{r}-\bm{R}_{\beta}).
 \label{matrix}
 \end{equation}
 % 
-Ponieważ orbitale atomowe należące do różnych atomów nie są wzajemnie ortogonalne
-wprowadza się również macierz przekrywania
+Since atomic orbitals belonging to different atoms are not mutually orthogonal,
+an overlap matrix is also introduced
 %
 \begin{equation}
 S_{\alpha\beta}=\int d\bm{r} \phi_{\alpha}^*(\bm{r}-\bm{R}_{\alpha})\phi_{\beta}(\bm{r}-\bm{R}_{\beta}).
 \end{equation}
 %
-Elementy diagonalne hamiltonianu $\varepsilon_{\alpha}=H_{\alpha\alpha}$ określają lokalną energię elektronu w danym orbitalu $\alpha$.
-Natomiast elementy pozadiagonalne $t_{\alpha\beta}=H_{\alpha\beta}$ nazywane są całkami przeskoku i określają prawdopodobieństwo
-przeskoku elektronu między dwoma atomami.
+The diagonal elements of the Hamiltonian $\varepsilon_{\alpha}=H_{\alpha\alpha}$ determine the local energy of the electron in a given orbital $\alpha$.
+The off-diagonal elements $t_{\alpha\beta}=H_{\alpha\beta}$ are called hopping integrals and determine the probability
+of electron hopping between two atoms.
 
-Aby przetransformować elementy macierzowe hamiltonianu i macierzy $S$ do przestrzeni odwrotnej
-wprowadzamy bazę, która odpowiada wektorom falowym $\bm{k}$
+To transform the matrix elements of the Hamiltonian and matrix $S$ to reciprocal space,
+we introduce a basis that corresponds to wave vectors $\bm{k}$
 %
 \begin{equation}
 \phi_{\bm{k}\alpha}(\bm{r})=A_{\alpha\bm{k}}\sum_n e^{i\bm{k}\bm{T}_n}\phi_{\alpha}[\bm{r}-(\bm{R}_{\alpha}+\bm{T}_n)],
 \end{equation}
 %
-gdzie $A_{\bm{k}\alpha}$ są czynnikami normalizacji, a $\bm{T}_n$ są wektorami translacji sieci krystalicznej.
-W tej bazie możemy zapisać funkcję falową, która spełnia twierdzenie Blocha
+where $A_{\bm{k}\alpha}$ are normalization factors, and $\bm{T}_n$ are translation vectors of the crystal lattice.
+In this basis, we can write the wave function that satisfies Bloch's theorem
 %
 \begin{equation}
 \psi_{\bm{k}i}=\sum_{\alpha} c_{i\alpha} \phi_{\bm{k}\alpha}(\bm{r}),
 \end{equation}
 %
-oraz elementy macierzowe hamiltonianu i macierzy $S$
+as well as matrix elements of the Hamiltonian and matrix $S$
 %
 \begin{equation}
 H_{\alpha\beta}(\bm{k})=\int d\bm{r} \phi_{\alpha\bm{k}}^*(\bm{r})H\phi_{\beta\bm{k}}(\bm{r})=\sum_n e^{i\bm{k}\bm{T}_n} H_{\alpha\beta},
@@ -1892,338 +1892,337 @@ H_{\alpha\beta}(\bm{k})=\int d\bm{r} \phi_{\alpha\bm{k}}^*(\bm{r})H\phi_{\beta\b
 S_{\alpha\beta}(\bm{k})=\int d\bm{r} \phi_{\alpha\bm{k}}^*(\bm{r})\phi_{\beta\bm{k}}(\bm{r})=\sum_n e^{i\bm{k}\bm{T}_n} S_{\alpha\beta}.
 \end{equation}
 %
-Równanie na energie własne $\varepsilon_i(\bm{k})$ i współczynniki rozwinięcia funkcji falowej $c_{i,\alpha}(\bm{k})$ przyjmuje postać
+The equation for eigenvalues $\varepsilon_i(\bm{k})$ and expansion coefficients of the wave function $c_{i,\alpha}(\bm{k})$ takes the form
 %
 \begin{equation}
 \sum_{\beta}[H_{\alpha\beta}(\bm{k})-\varepsilon_i(\bm{k})S_{\alpha\beta}(\bm{k})]c_{i\beta}(\bm{k})=0.
 \label{ham_loc} 
 \end{equation}
 %
-Dla orbitali wzajemnie ortogonalnych, mamy $S_{\alpha\beta}=\delta_{\alpha\beta}$ i równanie (\ref{ham_loc})
-przyjmuje postać taką samą jak równanie w bazie fal płaskich (\ref{ham_rec}).
+For mutually orthogonal orbitals, we have $S_{\alpha\beta}=\delta_{\alpha\beta}$ and equation (\ref{ham_loc})
+takes the same form as the equation in the plane wave basis (\ref{ham_rec}).
 
-\subsection{Funkcje Wanniera}
+\subsection{Wannier functions}
 \label{sec:wannier}
 
-W metodzie ciasnego wiązania często wykorzystuje się bazę funkcji Waniera, które są zlokalizowanymi funkcjami, 
-centrowanymi na położeniach atomowych $\bm{R}_n$. 
-Funkcja Wanniera zdefiniowana jest jako transformata Fouriera funkcji Blocha powiązanej z danym pasmem $j$
+In the tight-binding method, a basis of Wannier functions is often used, which are localized functions 
+centered at atomic positions $\bm{R}_n$. 
+The Wannier function is defined as the Fourier transform of the Bloch function associated with a given band $j$
 %
 \begin{equation}
 w_j(\bm{r}-\bm{R}_n)=\frac{1}{\sqrt{N}}\sum_{\bm{k}}e^{-i\bm{k}\bm{R}_n}\psi_{\bm{k}j}(\bm{r}). 
 \end{equation}
 %
-Spełniona jest również transformata odwrotna, która pozwala wyrazić funkcje Blocha przez funkcje
-Wanniera
+The inverse transform is also satisfied, which allows expressing Bloch functions through Wannier
+functions
 %
 \begin{equation}
 \psi_{\bm{k}j}(\bm{r})=\frac{1}{\sqrt{N}}\sum_n e^{i\bm{k}\bm{R}_n} w_j(\bm{r}-\bm{R}_n).
 \end{equation}
 %
-Funkcje Wanniera dla różnych położeń atomowych są ortogonalne
+Wannier functions for different atomic positions are orthogonal
 %
 \begin{multline}
 \int d\bm{r} w_j^*(\bm{r}-\bm{R}_n)w_j(\bm{r}-\bm{R}_m)=\frac{1}{N}\sum_{\bm{k},\bm{k}'}\int d\bm{r}e^{i(\bm{k}\bm{R}_n-\bm{k}'\bm{R}_m)}\psi_{\bm{k}j}(\bm{r})\psi_{\bm{k}'j}(\bm{r}) \\
 =\frac{1}{N}\sum_{\bm{k}}e^{i\bm{k}(\bm{R}_n-\bm{R}_m)}=\delta_{mn},
 \end{multline}
 %
-gdzie wykorzystaliśmy ortogonalność funkcji Blocha. Spełniony jest również warunek zupełności
+where we used the orthogonality of Bloch functions. The completeness condition is also satisfied
 %
 \begin{equation}
 \sum_n w_j^*(\bm{r}-\bm{R}_n)w_j(\bm{r}'-\bm{R}_n)=\delta^3(\bm{r}-\bm{r}').
 \end{equation}
-Zatem funkcje Wanniera tworzą zbiór zlokalizowanych funkcji bazowych.
-Energie pasma $j$ dla funkcji Blocha w tej bazie może być wyznaczona ze wzoru
+Thus, Wannier functions form a set of localized basis functions.
+The energy of band $j$ for Bloch functions in this basis can be determined from the formula
 %
 \begin{equation}
 \varepsilon_{\bm{k}j}=\int d\bm{r} \psi_{\bm{k}j}^*(\bm{r})H\psi_{\bm{k}j}(\bm{r})
 =\frac{1}{N}\int d\bm{r}\sum_n w_j^*(\bm{r}-\bm{R}_n)e^{-i\bm{k}\bm{R}_n}H\sum_m w_j(\bm{r}-\bm{R}_m)e^{i\bm{k}\bm{R}_m}.
 \end{equation}
 %
-Sumowanie po wskaźnikach $n$ i $m$ możemy rozdzielić na dwa wyrazy dla $n=m$ i $n\neq m$
+The summation over indices $n$ and $m$ can be separated into two terms for $n=m$ and $n\neq m$
 %
 \begin{multline}
 \varepsilon_{\bm{k}j}=\frac{1}{N}\sum_n\int d\bm{r} w_j^*(\bm{r}-\bm{R}_n)Hw_j(\bm{r}-\bm{R}_n)
 \\ +\frac{1}{N}\sum_{n\neq m}e^{i\bm{k}(\bm{R}_m-\bm{R}_n)}\int d\bm{r} w_j^*(\bm{r}-\bm{R}_n)Hw_j(\bm{r}-\bm{R}_m).
 \end{multline}
 %
-Wykorzystując oznaczenia, które wprowadziliśmy dla elementów macierzowych hamiltonianu (\ref{matrix})
-dostajemy
+Using the notation we introduced for the Hamiltonian matrix elements (\ref{matrix})
+we obtain
 %
 \begin{equation}
 \varepsilon_{\bm{k}j}=\frac{1}{N}\sum_n \varepsilon_n+\frac{1}{N}\sum_{n\neq m}e^{i\bm{k}(\bm{R}_m-\bm{R}_n)}t_{nm}.
 \end{equation}
 %
-Wzór ten pozwala wyznaczyć strukturę pasmową w ramach metody ciasnego wiązania.
-Jeżeli ograniczymy się do modelu jednopasmowego i do przeskoków tylko między najbliższymi sąsiadami
-możemy dostać uproszczony model z jednym parametrem przeskoku $t$.
-Dla prostej struktury kubicznej dostajemy
+This formula allows determining the band structure within the tight-binding method.
+If we limit ourselves to a single-band model and to hops only between nearest neighbors,
+we can obtain a simplified model with a single hopping parameter $t$.
+For a simple cubic structure, we obtain
 %
 \begin{equation}
 \varepsilon_{\bm{k}j}=\varepsilon_0+\frac{t}{N}\sum_{n}e^{i\bm{k}(\bm{R}_{n+1}-\bm{R}_n)}=\varepsilon_0+2t(cosk_xa+cosk_ya+cosk_za).
 \label{band}
 \end{equation}
 %
-gdzie $a$ jest stałą sieci, a $\varepsilon_0$ jest energią elektronu zlokalizowanego w stanie atomowym.
-Szerokość pasma w tym przybliżeniu dana jest wzorem $w=2z|t|$, gdzie $z$ jest liczbą najbliższych sąsiadów.  
+where $a$ is the lattice constant, and $\varepsilon_0$ is the energy of an electron localized in an atomic state.
+The bandwidth in this approximation is given by the formula $w=2z|t|$, where $z$ is the number of nearest neighbors.  
 
-Metoda ciasnego wiązania, która wykorzystuje bazę orbitali atomowych lub funkcji Wanniera,
-często wykorzystywana jest w obliczeniach modelowych. W ramach tego podejścia można łatwo uwzględnić lokalne oddziaływania
-kulombowskie lub oddziaływania parujące w modelach nadprzewodników wysokotemperaturowych.
-Lokalne energie i całki przeskoku mogą być wyznaczone przez dofitowanie struktury elektronowej
-z modelu ciasnego wiązania do wyników eksperymentalnych lub do struktury pasmowej wyznaczonej z obliczeń DFT.
-W tym drugim przypadku stosuje się najczęściej bazę maksymalnie zlokalizowanych funkcji Wanniera.
-Wykorzystuje się swobodę wyboru fazy dla funkcji Blocha, którą możemy przemnożyć przez czynnik $e^{i\theta(\bm{k})}$,
-gdzie $\theta(\bm{k})$ jest dowolną funkcją rzeczywistą, bez wpływu na energie stanów elektronowych. 
-Taki czynnik ma jednak wpływ na kształt funkcji Wanniera, w szczególności na ich zasięg przestrzenny. 
-Można tak dobrać czynnik fazowy, aby funkcja Wanniera $w_i(\bm{r}-\bm{R}_n)$ zlokalizowana była
-wokół punktu $\bm{R}_n$ i szybko zanikała z odległością. 
+The tight-binding method, which uses a basis of atomic orbitals or Wannier functions,
+is often used in model calculations. Within this approach, local Coulomb
+interactions or pairing interactions in high-temperature superconductor models can easily be included.
+Local energies and hopping integrals can be determined by fitting the electronic structure
+from the tight-binding model to experimental results or to the band structure determined from DFT calculations.
+In the latter case, a basis of maximally localized Wannier functions is most often used.
+The freedom to choose the phase for Bloch functions is utilized, which can be multiplied by a factor $e^{i\theta(\bm{k})}$,
+where $\theta(\bm{k})$ is an arbitrary real function, without affecting the energies of electronic states. 
+However, such a factor affects the shape of Wannier functions, particularly their spatial extent. 
+The phase factor can be chosen so that the Wannier function $w_i(\bm{r}-\bm{R}_n)$ is localized
+around point $\bm{R}_n$ and decays rapidly with distance. 
 
 \begin{figure}[h]
 \centering
 \includegraphics[scale=1]{FeSe.pdf}
-\caption{Porównanie struktury pasmowej otrzymanej w ramach modelu ciasnego wiązania i obliczeń DFT dla {\bf a.} CeCoIn$_5$ i {\bf b.} FeSe.
-Rysunek z pracy \cite{FeSe}.}
+\caption{Comparison of band structures obtained within the tight-binding model and DFT calculations for {\bf a.} CeCoIn$_5$ and {\bf b.} FeSe.
+Figure from \cite{FeSe}.}
 \label{fig:fese}
 \end{figure}
 
-Na rysunku \ref{fig:fese} pokazano przykłady struktur pasmowych dla dwóch związków, CeCoIn$_5$ i FeSe, wyliczonych w modelu ciasnego wiązania z bazą
-maksymalnie zlokalizowanych funkcji Wanniera. 
-Parametry modelu wyznaczono przez dofitowanie energii stanów elektronowych, dla każdego wektora falowego $\bm{k}$, 
-do struktur pasmowych otrzymanych w ramach obliczeń DFT \cite{FeSe}.
-Obliczenia wykonano programem Quantum Espresso \cite{QE}, stosując funkcjonał GGA \cite{PW91} w ramach metody PAW \cite{Blochl}.  
-Wyznaczone modele ciasnego wiązania zostały następnie wykorzystane do wyliczenia podatności tworzenia par Coopera
-i zbadania własności nadprzewodzących obydwóch materiałów \cite{FeSe}.
+Figure \ref{fig:fese} shows examples of band structures for two compounds, CeCoIn$_5$ and FeSe, calculated in the tight-binding model with a basis
+of maximally localized Wannier functions. 
+The model parameters were determined by fitting the electronic state energies, for each wave vector $\bm{k}$, 
+to the band structures obtained from DFT calculations \cite{FeSe}.
+The calculations were performed with the Quantum Espresso program \cite{QE}, using the GGA functional \cite{PW91} within the PAW method \cite{Blochl}.  
+The determined tight-binding models were then used to calculate the susceptibility to Cooper pair formation
+and investigate the superconducting properties of both materials \cite{FeSe}.
  
 
-\subsection{Funkcje Gaussa}
+\subsection{Gaussian functions}
 
-Lokalne orbitale można również wykorzystać jako bazę do rozwiniecia funkcji falowej w ramach samozgodnej procedury rozwiązywania równań Kohna-Shama.
-Jeżeli funkcjami bazowymi są orbitale atomowe mówimy o metodzie liniowych kombinacji orbitali atomowych ({\it ang. linear combination
-of atomic orbitals} - LCAO). Zwykle jednak stosuje się atomo-podobne orbitale, których postać funkcyjna ułatwia implementację
-i przyspiesza obliczenia. Do najczęściej stosowanych należą orbitale typu Slatera \cite{STO1,STO2} i funkcje typu Gaussa (gaussiany) \cite{GTO}.
-Te drugie są szczególnie wygodne ponieważ całki z funkcji Gaussa można wyliczyć analitycznie.
-Naturalną reprezentacją dla gaussianów jest układ współrzędnych biegunowych, ale wygodniejszy do wyznaczania elementów macierzowych hamiltonianu jest układ kartezjański, w którym te funkcje mają postać
+Local orbitals can also be used as a basis for expanding the wave function within the self-consistent procedure for solving the Kohn-Sham equations.
+If the basis functions are atomic orbitals, we speak of the linear combination of atomic orbitals (LCAO) method. Usually, however, atom-like orbitals are used, whose functional form facilitates implementation
+and speeds up calculations. The most commonly used are Slater-type orbitals \cite{STO1,STO2} and Gaussian-type functions (Gaussians) \cite{GTO}.
+The latter are particularly convenient because integrals of Gaussian functions can be calculated analytically.
+The natural representation for Gaussians is the polar coordinate system, but more convenient for determining Hamiltonian matrix elements is the Cartesian system, in which these functions have the form
 %
 \begin{equation}
 G_{ijk}(\bm{r},\alpha,\bm{R}_n)=N(x-x_n)^i(y-y_n)^j(z-z_n)^ke^{-\alpha (\bm{r}-\bm{R}_n)^2},
 \end{equation}
 %
-gdzie $\alpha$ jest parametrem wariacyjnym, który umożliwia optymalizację bazy dla konkretnych atomów, $\bm{R}_n=(x_n,y_n,z_n)$ jest wektorem określającym centrowanie danej funkcji, a $N$ jest czynnikiem normalizacyjnym.
-Spełniona jest ponadto zależność $l=i+j+k$, gdzie $l$ jest orbitalną liczbą kwantową.
-W wyniku iloczynu dwóch fukcji typu $s$ ($l=0$) centrowanych w punktach $\bm{R}_n$ i $\bm{R}_m$ dostajemy
+where $\alpha$ is a variational parameter that enables basis optimization for specific atoms, $\bm{R}_n=(x_n,y_n,z_n)$ is a vector determining the center of a given function, and $N$ is a normalization factor.
+Additionally, the relation $l=i+j+k$ is satisfied, where $l$ is the orbital quantum number.
+The product of two functions of type $s$ ($l=0$) centered at points $\bm{R}_n$ and $\bm{R}_m$ gives
 %
 \begin{equation}
 G_s(\bm{r},\alpha,\bm{R}_n)G_s(\bm{r},\beta,\bm{R}_m)=e^{-\gamma(\bm{R}_n-\bm{R}_m)^2}G_s(\bm{r},\kappa,\bm{R}_p),
 \end{equation}
 %
-gdzie 
+where 
 %
 \begin{equation}
 \kappa=\alpha+\beta, \quad \gamma=\frac{\alpha\beta}{\alpha+\beta}, \quad \bm{R}_p=\frac{\alpha\bm{R}_n+\beta\bm{R}_m}{\alpha+\beta},
 \end{equation}
 %
-gdzie $\bm{R}_p$ jest wektorem centrowania wynikowej funkcji Gaussa.
-W ogólnym przypadku iloczyn dwóch gaussianów można zapisać w formie
+where $\bm{R}_p$ is the center vector of the resulting Gaussian function.
+In the general case, the product of two Gaussians can be written in the form
 %
 \begin{multline}
 G_{i_1j_1k_1}(\bm{r},\alpha,\bm{R}_n)G_{i_2j_2k_2}(\bm{r},\beta,\bm{R}_m) = Ne^{-\gamma(\bm{R}_n-\bm{R}_m)^2}e^{-\kappa(\bm{r}-\bm{R}_p)^2} \\
 \times (x-x_n)^{i_1}(x-x_m)^{i_2}(y-y_n)^{j_1}(y-y_m)^{j_2}(z-z_n)^{k_1}(z-z_m)^{k_2}.
 \end{multline}
 %
-Te wzory pokazują, ze iloczyn funkcji Gaussa jest również funkcją Gaussa. Jest to główna zaleta tej bazy umożliwiająca
-analityczne wyliczenie złożonych całek zawierajacych kilka funkcji bazowych i w ten sposób znaczne przyspieszenie rachunków.
-W odróżnieniu od metod wykorzystujących fale płaskie, metoda funkcji Gaussa wymaga odpowiedniego wybrania funkcji bazowych
-dla danego układu atomowego. Metoda ta stosowana jest głównie przez chemików, a najbardziej popularnym programem jest GAUSSIAN.
-Głównym twórca tego programu jest John Pople, który w roku 1998 otrzymał wspólnie z Walterem Kohnem Nagrodę Nobla w dziedzinie chemii.
+These formulas show that the product of Gaussian functions is also a Gaussian function. This is the main advantage of this basis, enabling
+analytical calculation of complex integrals containing several basis functions and thus significant acceleration of calculations.
+In contrast to methods using plane waves, the Gaussian function method requires appropriate selection of basis functions
+for a given atomic system. This method is used mainly by chemists, and the most popular program is GAUSSIAN.
+The main creator of this program is John Pople, who in 1998 received the Nobel Prize in Chemistry together with Walter Kohn.
 
-\section{Stowarzyszone fale i atomowe sfery}
+\section{Augmented waves and atomic spheres}
 
-Ostatnia grupa metod obliczeniowych łączy główne cechy dwóch poprzednich: pseudopotencjałów i lokalnych orbitali. 
-Do rozwinięcia funkcji falowych stosowane są dwie różne bazy w zależności od położenia w krysztale.
-Wokół rdzeni atomowych naturalnym wyborem sa lokalne funkcje, które można otrzymać z rozwiązania
-równania Schr\"{o}dingera w potencjale sferyczno-symetrycznym. W obszarze miedzywezłowym
-stosuje się rozwinięcie w bazie funkcji, które umożliwiają szybką zbieżność rachunków (np. fale płaskie).
-Centralnym problemem stają sie odpowiednie warunki brzegowe, które zapewniają ciągłość funkcji falowej i jej pochodnej 
-na granicy między tymi obszarami.
-Wszystkie metody omawiane w tym rozdziale stosowały na początku uproszczony potencjał typu {\it muffin-tin}, który w obszarze rdzenia
-ma charakter potencjału atomowego, a w obszarze międzywęzłowym jego wartość jest stała.
-Obecnie podejścia te zostały zaimplementowane w ramach procedury samozgodnej i zaliczane są do metod pełnego potencjału. 
+The last group of computational methods combines the main features of the two previous ones: pseudopotentials and local orbitals. 
+Two different bases are used for expanding wave functions depending on the position in the crystal.
+Around atomic cores, the natural choice is local functions, which can be obtained from solving
+the Schr\"{o}dinger equation in a spherically symmetric potential. In the interstitial region,
+an expansion in a basis of functions that enables rapid convergence of calculations is used (e.g., plane waves).
+The central problem becomes appropriate boundary conditions that ensure continuity of the wave function and its derivative 
+at the boundary between these regions.
+All methods discussed in this section initially used a simplified muffin-tin potential, which in the core region
+has the character of an atomic potential, while in the interstitial region its value is constant.
+Currently, these approaches have been implemented within the self-consistent procedure and are classified as all-electron methods. 
 
-\subsection{Metoda KKR}
+\subsection{KKR method}
 
-W dwóch pracach, Korringa \cite{K47} oraz Kohn i Rostoker \cite{KR54} (KKR) zaproponowali metodę, która nazywana jest również metodą funcji Greena
-lub metodą wielokrotnego rozpraszania.
-Pierwsze obliczenia stałych sieci i modułów sztywności wykonano właśnie z wykorzystaniem tej metody \cite{Moruzzi77}. Była to przełomowa praca, która 
-pokazała możliwość zastosowania DFT do badania własności materiałowych.  
+In two works, Korringa \cite{K47} and Kohn and Rostoker \cite{KR54} (KKR) proposed a method that is also called the Green's function method
+or the multiple scattering method.
+The first calculations of lattice constants and elastic moduli were performed using this method \cite{Moruzzi77}. This was a groundbreaking work that 
+showed the possibility of applying DFT to study material properties.  
 
-Podstawową wielkością stosowaną tutaj jest funkcja Greena $G(E,\bm{r},\bm{r}')$, która opisuje propagację elektronu o energii $E$ między punktami $\bm{r}$ i $\bm{r}'$. Proces przemieszczania się elektronu można podzielić na swobodny ruch w obszarze międzywęzłowym i rozpraszanie na sferach atomowych
-w wyniku oddziaływania elektronu z potencjałem rdzenia atomowego.
-Dla elektronu opisanego jednocząstkowym równaniem Schr\"{o}dingera
+The basic quantity used here is the Green's function $G(E,\bm{r},\bm{r}')$, which describes the propagation of an electron with energy $E$ between points $\bm{r}$ and $\bm{r}'$. The process of electron movement can be divided into free motion in the interstitial region and scattering on atomic spheres
+as a result of electron interaction with the atomic core potential.
+For an electron described by the single-particle Schr\"{o}dinger equation
 %
 \begin{equation}
 [-\frac{\hbar^2}{2m}\nabla^2+V(\bm{r})]\psi_i(\bm{r})=\varepsilon_i\psi_i(\bm{r}),
 \end{equation}
 %
-funkcja Greena spełnia równanie
+the Green's function satisfies the equation
 %
 \begin{equation}
 [-\frac{\hbar^2}{2m}\nabla^2+V(\bm{r})-E]G(E,\bm{r}-\bm{r}')=\delta(\bm{r}-\bm{r}'),
 \end{equation}
 %
-które posiada rozwiązanie w formie
+which has a solution in the form
 %
 \begin{equation}
 G(E,\bm{r},\bm{r}')=\sum_i\frac{\psi_i(\bm{r})\psi_i^*(\bm{r}')}{E-\varepsilon_i}.
 \end{equation}
 %
-Dla nieoddziałujących elektronów mamy $V(\bm{r})=0$ i funkcja Greena ma postać
+For non-interacting electrons, we have $V(\bm{r})=0$ and the Green's function has the form
 %
 \begin{equation}
 G_0(E,|\bm{r}-\bm{r}'|)= \frac{m}{2\pi\hbar^2}\frac{e^{ik_0|\bm{r}-\bm{r}'|}}{|\bm{r}-\bm{r}'|},
 \end{equation}
 %
-gdzie $k_0=\frac{\sqrt{2mE}}{\hbar}$.
+where $k_0=\frac{\sqrt{2mE}}{\hbar}$.
 
-Funkcja Greena dla elektronu oddziałującego z siecią atomową może być zapisana w postaci rozwinięcia
+The Green's function for an electron interacting with the atomic lattice can be written as an expansion
 %
 \begin{equation}
 G=G_0+G_0tG_0+G_0tG_0tG_0+...=G_0+G_0tG,
 \end{equation}
 %
-które prowadzi do zależności
+which leads to the relation
 %
 \begin{equation}
 G=(G_0^{-1}-t)^{-1},
 \end{equation}
 %
-gdzie $t$ jest macierzą rozpraszania elektronów na pojedynczych atomach sieci krystalicznej.
-Można wprowadzić również macierz całkowitego, wielokrotnego rozpraszania elektronów $T$, która zdefiniowana jest wzorem
+where $t$ is the scattering matrix for electrons on individual atoms of the crystal lattice.
+One can also introduce the total multiple scattering matrix for electrons $T$, which is defined by the formula
 %
 \begin{equation}
 G=G_0+G_0TG_0=G_0+G_0(t+tG_0T)G_0,
 \end{equation}
 %
-z którego dostajemy
+from which we obtain
 %
 \begin{equation}
 T=(t^{-1}-G_0)^{-1}.
 \end{equation}
 %
-Stany stacjonarne, które odpowiadają rozwiązaniom równania Schr\'{o}dingera, są biegunami macierzy $T$
-i mogą być wyznaczone jako miejsca zerowe wyznacznika
+Stationary states, which correspond to solutions of the Schr\'{o}dinger equation, are poles of the matrix $T$
+and can be determined as zeros of the determinant
 %
 \begin{equation}
 \det(t^{-1}-G_0)=0.
 \end{equation}
 %
-Równanie to dostarcza rozwiązania problemu wielokrotnego rozpraszania elektronów w przybliżeniu potencjału {\it muffin-tin}.
-Pełna informacja o rozpraszaniu elektronu na pojedynczej sferze atomowej zawarta jest w macierzy rozpraszania $t_l(E)$, 
-która zależy tylko od energii stanu elektronowego $E$ i orbitalnego krętu $l$.
-Korzystając z teorii rozpraszania, można wyrazić macierz rozpraszania jako funkcję przesunięcia fazy funkcji falowej $\eta_l(E)$
+This equation provides a solution to the problem of multiple scattering of electrons in the muffin-tin potential approximation.
+Complete information about electron scattering on a single atomic sphere is contained in the scattering matrix $t_l(E)$, 
+which depends only on the energy of the electronic state $E$ and the orbital angular momentum $l$.
+Using scattering theory, one can express the scattering matrix as a function of the phase shift of the wave function $\eta_l(E)$
 %
 \begin{equation}
 t_l(E)=-\frac{1}{k_0}e^{i\eta_l(E)}\sin(\eta_l(E)).
 \label{fshift}
 \end{equation} 
 %
-Funkcja Greena $G_0$ zależy tylko od geometrii sieci krystalicznej i energii $E$.
-Wykorzystując rozwinięcie fal płaskich w bazie harmonik sferycznych, funcję Greena
-możemy zapisać w formie
+The Green's function $G_0$ depends only on the crystal lattice geometry and energy $E$.
+Using the expansion of plane waves in the basis of spherical harmonics, the Green's function
+can be written in the form
 %
 \begin{equation}
 G_0(E,|\bm{r}-\bm{r}'|)=\sum_{L,L'} i^lj_l(k_0r)Y_L(\hat{\bm{r}})B_{LL'}(E,\bm{R}-\bm{R}')(-i)^{l'}j_{l'}(k_0r')Y^*_{L'}(\hat{\bm{r}}'),
 \end{equation} 
 %
-gdzie $j_l(k_0r)$ są funkcjami Bessela, $B_{LL'}$ są stałymi struktury KKR i $L=\{l,m\}$.
-Wektory położenia $\bm{r}$ i $\bm{r}'$ odnoszą się do dwóch sfer atomowych, których środki
-określają wektory $\bm{R}$ i $\bm{R}'$. Przy założeniu, że rozpraszanie w każdym węźle atomowym jest takie samo,
-co odpowiada sieci złożonej z jednego rodzaju atomów, możemy wprowadzić zależność stałych struktury od wektora falowego
+where $j_l(k_0r)$ are Bessel functions, $B_{LL'}$ are the KKR structure constants, and $L=\{l,m\}$.
+The position vectors $\bm{r}$ and $\bm{r}'$ refer to two atomic spheres whose centers
+are determined by vectors $\bm{R}$ and $\bm{R}'$. Assuming that scattering at each atomic site is the same,
+which corresponds to a lattice composed of one type of atom, we can introduce the dependence of structure constants on the wave vector
 % 
 \begin{equation}
 B_{LL'}(E_{\bm{k}},\bm{k})=\sum_{m} B_{LL'}(E_{\bm{k}},\bm{T}_m)e^{-i\bm{k}\bm{T}_m},
 \end{equation}
 %
-gdzie $\bm{T}_m$ są wektorami translacji sieci krystalicznej, a energie $E_{\bm{k}}$
-są rozwiązaniami równania
+where $\bm{T}_m$ are translation vectors of the crystal lattice, and the energies $E_{\bm{k}}$
+are solutions of the equation
 %
 \begin{equation}
 \det[t_l^{-1}(E_{\bm{k}})\delta_{LL'}-B_{LL'}(E_{\bm{k}},\bm{k})]=0.
 \end{equation}
 %
-Korzystając z wyrażenia (\ref{fshift}) dostajemy podstawowe równania na strukturę pasmową w metodzie KKR
+Using expression (\ref{fshift}), we obtain the basic equation for band structure in the KKR method
 %
 \begin{equation}
 \sum_{L'}[B_{LL'}(E_{\bm{k}},\bm{k})+k_0\cot(\eta_l(E_{\bm{k}}))\delta_{LL'}]a_{L'}(\bm{k})=0.
 \label{KKR}
 \end{equation}
 %
-Rozwiązania tego równania pozwalają nam wyznaczyć funkcje falowe wewnątrz sfer atomowych
+Solutions of this equation allow us to determine wave functions inside atomic spheres
 %
 \begin{equation}
 \psi_{\bm{k}}(\bm{r})=\sum_{L'}a_{L'}(\bm{k})u_l(r,E_{\bm{k}})Y_L(\hat{\bm{r}}),
 \end{equation}
 %
-gdzie $u_l(r,E_{\bm{k}})$ są rozwiązaniami równania radialnego wewnątrz sfery, umówionego dokładnie w następnym rozdziale.
-Funkcje falowe w obszarze międzywęzłowym są rozwiązaniami następującego równania całkowego
+where $u_l(r,E_{\bm{k}})$ are solutions of the radial equation inside the sphere, discussed in detail in the next section.
+Wave functions in the interstitial region are solutions of the following integral equation
 %
 \begin{equation}
 \psi_{\bm{k}}(\bm{r})=-\int d\bm{r}'G_0(E_{\bm{k}},|\bm{r}-\bm{r}'|)V(\bm{r}')\psi_{\bm{k}}(\bm{r}').
 \end{equation} 
 %
-Funkcje falowe w obydwóch obszarach muszą spełniać warunki brzegowe na każdej sferze atomowej. 
+Wave functions in both regions must satisfy boundary conditions on each atomic sphere. 
 
-W ogólnym przypadku macierz rozpraszania zależy od położenia atomu $t_l(E,\bm{R})$
-i równanie na funkcje Greena przyjmuje postać
+In the general case, the scattering matrix depends on the atomic position $t_l(E,\bm{R})$
+and the equation for the Green's function takes the form
 %
 \begin{equation}
 [G_{LL'}(E,\bm{R},\bm{R}')]^{-1}=\Big[[B_{LL'}(E,\bm{R}-\bm{R}')]^{-1}-t_l(E,\bm{R})\delta_{\bm{R}\bm{R}'}\delta_{LL'}]\Big],
 \end{equation}
 %
-a stany stacjonarne otrzymujemy z warunku
+and stationary states are obtained from the condition
 %
 \begin{equation}
 \det\Big[t_l^{-1}(E,\bm{R})\delta_{\bm{R}\bm{R}'}\delta_{LL'}-B_{LL'}(E,\bm{R}-\bm{R}')\Big]=0.
 \end{equation}
 
-Funkcja Greena pozwala wyznaczyć różne wielkości fizycznych. Na przykład, część urojona funkcji Greena zwiazana jest z lokalną gęstością stanów 
+The Green's function allows determining various physical quantities. For example, the imaginary part of the Green's function is related to the local density of states 
 %
 \begin{equation}
 n_L(E,\bm{R})=-\frac{1}{\pi}\operatorname{Im}G_{LL}(E+i\delta,\bm{R}).
 \end{equation}
 %
-Podobnie część urojona transformaty Fouriera funkcji Green daje nam gęstość spektralną,
-czyli gęstość stanów elektronowych dla danej energii i wektora falowego
+Similarly, the imaginary part of the Fourier transform of the Green's function gives us the spectral density,
+i.e., the density of electronic states for a given energy and wave vector
 %
 \begin{equation}
 n_L(E,\bm{k})=-\frac{1}{\pi}\operatorname{Im}G_{LL}(E+i\delta,\bm{k}).
 \end{equation}
 %
 
-Metoda funkcji Greena umożliwia wprowadzenie efektywnego (koherentnego) potencjału, który łączy własności dwóch różnych atomów.
-Jest to przybliżenie koherentnego potencjału ({\it ang. coherent potential approximation} - CPA), które stosowane jest do badania
-stopów metalicznych lub układów domieszkowanych \cite{CPA1,CPA2}.
-Metoda polega na uśrednieniu własności rozpraszania dwóch atomów umieszczonych w pobliżu efektywnego potencjału.
-Warunek równoważności średniej ważonej po obydwóch atomach i efektywnego potencjału prowadzi do zespolonego,
-zależnego od energii potencjału CPA. 
+The Green's function method enables the introduction of an effective (coherent) potential that combines the properties of two different atoms.
+This is the coherent potential approximation (CPA), which is used to study
+metallic alloys or doped systems \cite{CPA1,CPA2}.
+The method consists of averaging the scattering properties of two atoms placed near an effective potential.
+The condition of equivalence between the weighted average over both atoms and the effective potential leads to a complex,
+energy-dependent CPA potential. 
 
 
-\subsection{Metoda LAPW}
+\subsection{LAPW method}
 
-Metoda zlinearyzowanych stowarzyszonych fal płaskich ({\it ang. linearized augmented plane wave} - LAPW)
-jest modyfikacją oryginalnego podejścia rozszerzonych fal płaskich (APW) zaproponowanego przez Slatera w roku 1937 \cite{slater37}.
-Podobnie jak w metodzie pseudopotencjału, cały kryształ podzielony jest na obszary wewnątrz sfer otaczających atomy ($r<r_c$)
-i obszar międzywęzłowy ($r>r_c$). Funkcje falowe w otoczeniu jądra atomowego charakteryzują sie dużą zmiennością i
-w przybliżeniu maja kształt sferyczny. Z tego względu naturalnym wyborem bazy sa funkcje radialne, będące rozwiązaniami równania Schr\"{o}dingera z
-potencjałem sferycznie symetrycznym. W obszarze więdzywęzłowym, gdzie potencjał zmienia sie bardzo wolno, rozwiązania
-funkcji falowej rozwijane są w bazie fal płaskich. Funkcję falową w metodzie APW można
-zapisać w postaci
+The linearized augmented plane wave (LAPW) method
+is a modification of the original augmented plane wave (APW) approach proposed by Slater in 1937 \cite{slater37}.
+Similarly to the pseudopotential method, the entire crystal is divided into regions inside spheres surrounding atoms ($r<r_c$)
+and the interstitial region ($r>r_c$). Wave functions in the vicinity of the atomic nucleus are characterized by high variability and
+approximately have a spherical shape. For this reason, the natural choice of basis is radial functions, which are solutions of the Schr\"{o}dinger equation with
+a spherically symmetric potential. In the interstitial region, where the potential changes very slowly, solutions
+of the wave function are expanded in a plane wave basis. The wave function in the APW method can be
+written as
 %
 \begin{equation}
 \psi_{\bm{k}j}(\bm{r})=\sum_{\bm{G}}c_{\bm{G}j}\phi_{\bm{k}+\bm{G}}(\bm{r}),
 \end{equation}
 %
-gdzie $\bm{G}$ oznaczają wektory sieci odwrotnej. Funkcje bazowe mogą być zapisane w formie 
+where $\bm{G}$ denotes reciprocal lattice vectors. The basis functions can be written in the form 
 %
 \begin{equation} 
 \phi_{\bm{k}+\bm{G}}(\bm{r})=\begin{cases}
@@ -2233,56 +2232,56 @@ gdzie $\bm{G}$ oznaczają wektory sieci odwrotnej. Funkcje bazowe mogą być zap
 \label{APWbase}                      
 \end{equation}
 %
-gdzie $A_{lm}$ są współczynnikami rozwinięcia, $Y_{lm}(\theta,\varphi)$ są harmonikami sferycznymi i $u_l(r,E_l)$ są rozwiązaniami równania
+where $A_{lm}$ are expansion coefficients, $Y_{lm}(\theta,\varphi)$ are spherical harmonics, and $u_l(r,E_l)$ are solutions of the equation
 %
 \begin{equation}
 [-\frac{d^2}{dx^2}+\frac{l(l+1)}{r^2}+V(r)-E_l]ru_l(r,E_l)=0,
 \label{radial}
 \end{equation}
 %
-gdzie $V(r)$ jest potencjałem wewnątrz sfery, a $E_l$ pełni rolę parametru i niekoniecznie jest to energia własna. 
-W przybliżeniu potencjału {\it muffin-tin} (MT), w obszarze atomowym jest on sferycznie
-symetryczny ($V(\bm{r})=V(r)$), a w obszarze międzywezłowym ma wartość stałą ($V(\bm{r})=V_0$) lub zero. Wtedy funkcje falowe $\psi(\bm{r})$ mogą być wyrażone przez rozwiazania równania Schr\"{o}dingera w poszczególnych obszarach kryształu, odpowiednio przez harmoniki sferyczne wokół atomów i fale płaskie między atomami. 
-Współczynniki $A_{lm}$ wyznacza się tak, aby spełniony był warunek ciągłości funkcji falowej na granicy sfery (warunek ciągłości pierwszych pochodnych nie jest spełniony). w ten sposób współczynniki $A_{lm}$ stają się zależne od vectora falowego.  
-Współczynniki $c_{\bm{G}}$ i liczby $E_l$ są parametrami wariacyjnymi metody APW. Rozwiązania, które numerowane są wektorami $\bm{G}$, składające sie z pojedynczych fal płaskich w obszarze miedzywęzłowym i dopasowane do nich rozwiązania radialne wewnątrz sfery nazywane są stowarzyszonymi falami płaskimi.
+where $V(r)$ is the potential inside the sphere, and $E_l$ plays the role of a parameter and is not necessarily an eigenvalue. 
+In the muffin-tin (MT) potential approximation, in the atomic region it is spherically
+symmetric ($V(\bm{r})=V(r)$), while in the interstitial region it has a constant value ($V(\bm{r})=V_0$) or zero. Then wave functions $\psi(\bm{r})$ can be expressed through solutions of the Schr\"{o}dinger equation in individual regions of the crystal, respectively through spherical harmonics around atoms and plane waves between atoms. 
+The coefficients $A_{lm}$ are determined so that the continuity condition of the wave function at the sphere boundary is satisfied (the continuity condition for first derivatives is not satisfied). In this way, the coefficients $A_{lm}$ become dependent on the wave vector.  
+The coefficients $c_{\bm{G}}$ and numbers $E_l$ are variational parameters of the APW method. Solutions, which are numbered by vectors $\bm{G}$, consisting of single plane waves in the interstitial region and radial solutions matched to them inside the sphere, are called augmented plane waves.
 
-Funkcje bazowe wewnątrz sfery zależą od energii $E_l$, co powoduje, że odpowiednie równanie własne na funkcje falowe jest nieliniowe. Jest to główny problem
-podejścia APW, uniemożliwiający łatwe rozszerzenie stosowalności tej metody na dowolne potencjały. W szczególności potencjały wyznaczane metodą samozgodną w ramach teorii funkcjonału gęstość.
-Rozwiązaniem tego problemu była zaproponowana przez Andersena w roku 1975 linearyzacja równań APW, która prowadzi do metody LAPW \cite{Andersen75}.
-W tym podejściu, modyfikuje się funkcje bazowe wewnątrz sfery do postaci
+The basis functions inside the sphere depend on energy $E_l$, which causes the corresponding eigenvalue equation for wave functions to be nonlinear. This is the main problem
+of the APW approach, preventing easy extension of the applicability of this method to arbitrary potentials. In particular, potentials determined by the self-consistent method within density functional theory.
+The solution to this problem was the linearization of APW equations proposed by Andersen in 1975, which leads to the LAPW method \cite{Andersen75}.
+In this approach, the basis functions inside the sphere are modified to the form
 %
 \begin{equation}
 \phi_{\bm{k}+\bm{G}}(\bm{r})=\sum_{lm}[A_{lm}(\bm{k}+\bm{G})u_l(r,E_l)Y_{lm}(\theta,\varphi)+B_{lm}(\bm{k}+\bm{G})\dot{u}_l(r,E_l)Y_{lm}(\theta,\varphi)],
 \end{equation}    
 %
-gdzie współczynniki rozwinięcia $A_{lm}$ i $B_{lm}$ wyznacza się z warunku ciągłości funkcji falowej i jej pochodnej na sferze, a pochodna $\dot{u}_l(r,E_l)=\partial u_l/\partial E$ spełnia równanie
+where the expansion coefficients $A_{lm}$ and $B_{lm}$ are determined from the continuity condition of the wave function and its derivative on the sphere, and the derivative $\dot{u}_l(r,E_l)=\partial u_l/\partial E$ satisfies the equation
 %
 \begin{equation}
 [-\frac{d^2}{dx^2}+\frac{l(l+1)}{r^2}+V(r)-E_l]r\dot{u}_l(r,E_l)=ru_l(r,E_l).
 \end{equation}
-Dodatkowo narzuca sie warunek normalizacji funkcji $u_l$
+Additionally, the normalization condition for the function $u_l$ is imposed
 %
 \begin{equation}
 \int_0^{r_c}dr[ru_l(r,E_l)]^2=1,
 \end{equation}
 %
-oraz ortogonalności funkcji $u_l$ i $\dot{u}_l$
+as well as the orthogonality of functions $u_l$ and $\dot{u}_l$
 %
 \begin{equation}
 \int_0^{r_c}drr^2u_l(r,E_l)\dot{u}_l(r.E_l)=0.
 \end{equation}
 
-Znajomość gradientu $\dot{u}_l$ umożliwia wyznaczenie funkcji radialnej dla danej energii pasma $\varepsilon$, 
-uwzlędniając poprawkę liniową
+Knowledge of the gradient $\dot{u}_l$ enables determination of the radial function for a given band energy $\varepsilon$, 
+taking into account the linear correction
 %
 \begin{equation}
 u_l(r,\varepsilon)=u_l(r,E_l)+(\varepsilon-E_l)\dot{u}_l(r,E_l)+O((\varepsilon-E_l)^2),
 \end{equation}
 %
-gdzie $O((\varepsilon-E_l)^2)$ oznacza błąd, który jest rzędu kwadratu różnicy tych dwóch energii.
+where $O((\varepsilon-E_l)^2)$ denotes an error that is of the order of the square of the difference between these two energies.
 
-W ramach procedury samozgodnej, pełny potencjał wyliczany jest w obydwóch obszarach kryształu,
-stosując rozwinięcia w odpowiednich bazach
+Within the self-consistent procedure, the full potential is calculated in both regions of the crystal,
+using expansions in appropriate bases
 %
 \begin{equation} 
 V(\bm{r})=\begin{cases}
@@ -2292,51 +2291,51 @@ V(\bm{r})=\begin{cases}
 \label{fullpot}                       
 \end{equation}
 %
-Podobnie wylicza się gęstość ładunku wewnątrz sfery korzystając ze współczynników rozwinięcia funkcji falowych
-w bazie harmonic sferycznych oraz w obszarze międzywęzłowym w bazie fal płaskich.
+Similarly, the charge density is calculated inside the sphere using the expansion coefficients of wave functions
+in the spherical harmonics basis and in the interstitial region in the plane wave basis.
 
-W odróżnieniu od metody pseudopetcjału, gdzie uwzględniane są tylko elektrony walencyjne, w metodzie LAPW wyznaczane są
-zarówno stany walencyjne, jak i stany rdzenia.
-Ponieważ funkcje falowe stanów rdzenia sa zlokalizowane blisko jądra atomowego, wylicza się je stosując tylko 
-potencjał centrosymetryczny. Jeżeli zasięg funkcji falowej stanu rdzenia przekracza granicę strefy atomowej,
-stosuje się gładkie przedłużenie potencjału centrosymetrycznego poza tę granice. 
-Do wyznaczenia stanów rdzenia stosuje sie podejście w pełni relatywistyczne,
-czyli rozwiązuje się równanie Diraca, zamiast równania Schr\"{o}dingera (\ref{radial}). 
-Stany walencyjne wyznaczone są dla pełnego potencjału w całym obszarze kryształu.
+In contrast to the pseudopotential method, where only valence electrons are considered, in the LAPW method both
+valence states and core states are determined.
+Since the wave functions of core states are localized close to the atomic nucleus, they are calculated using only 
+the centrally symmetric potential. If the range of the core state wave function exceeds the boundary of the atomic zone,
+a smooth extension of the centrally symmetric potential beyond this boundary is used. 
+To determine core states, a fully relativistic approach is used,
+i.e., the Dirac equation is solved instead of the Schr\"{o}dinger equation (\ref{radial}). 
+Valence states are determined for the full potential throughout the entire crystal volume.
 
-W niektórych materiałach występują również stany elektronowe, mające wspólne cechy stanów rdzenia i walencyjnych, które nazywane są
-pseudordzeniowymi. Przykładem są wysoko położone i wzlędnie rozległe stany $5d$ w metalach ziem rzadkich.
-Występowanie tych stanów wymaga modyfikacji metody LAPW. W standardowej wersji, baza konstruowana
-jest tak, aby jak najdokładniej opisać stany elektronowe bliskie energii $E_l$
-i zwykle wybiera się tę wartość blisko środka pasma walencyjnego.
-Jeżeli występują dodatkowe stany w innym zakresie energii, wybór wartości $E_l$ nie jest oczywisty. 
-Najlepszym podejściem do opisu stanów pseudordzeniowych jest rozszerzenie bazy przez wprowadzenie dodatkowych 
-lokalnych orbitali (LO), które mieszczą się wewnątrz atomowej sfery. Ta modyfikacja nazywa się metodą APW+LO \cite{singh91}. 
-Ponieważ istnieje swoboda wyboru bazy, pochodną funkcji radialnej $\dot{u}_l$ usuwa sie z głównej bazy i dołacza do LO.
-Zatem całkowita baza w tym podejściu składa się z oryginalnej bazy APW (\ref{APWbase})  
-i dodatkowych orbitali w formie
+In some materials, there also exist electronic states having common features of core and valence states, which are called
+semi-core states. An example is the high-lying and relatively extended $5d$ states in rare earth metals.
+The occurrence of these states requires modification of the LAPW method. In the standard version, the basis is constructed
+to describe as accurately as possible electronic states close to energy $E_l$,
+and usually this value is chosen close to the center of the valence band.
+If additional states occur in a different energy range, the choice of $E_l$ value is not obvious. 
+The best approach to describe semi-core states is to extend the basis by introducing additional 
+local orbitals (LO) that fit within the atomic sphere. This modification is called the APW+LO method \cite{singh91}. 
+Since there is freedom in choosing the basis, the derivative of the radial function $\dot{u}_l$ is removed from the main basis and attached to LO.
+Thus, the total basis in this approach consists of the original APW basis (\ref{APWbase})  
+and additional orbitals in the form
 %
 \begin{equation}
 \chi^{lo}_L(\bm{r})=[a^{lo}_{lm}u_l(r,E_l)+b^{lo}_{lm}\dot{u}_l(r,E_l)]Y(\theta,\varphi),
 \end{equation}
 %
-gdzie $r<r_c$, a współczynniki $a^{lo}_{lm}$ i $b^{lo}_{lm}$ są tak dobrane, aby LO
-znikały na sferze. Liczba orbitalna ograniczona jest w tym przypadku do wartości, które odpowiadają 
-fizycznym stanom kwantowym ($l\le 3$). W odróżnieniu od LAPW, w metodzie APW+LO nie ma ograniczenia na
-wartości pochodnych funkcji bazowych na sferze atomowej. 
+where $r<r_c$, and the coefficients $a^{lo}_{lm}$ and $b^{lo}_{lm}$ are chosen so that the LO
+vanishes on the sphere. The orbital quantum number is limited in this case to values corresponding to 
+physical quantum states ($l\le 3$). In contrast to LAPW, in the APW+LO method there is no restriction on
+the values of derivatives of basis functions on the atomic sphere. 
   
 
-\subsection{Metoda LMTO}
+\subsection{LMTO method}
 
-W metodzie zlinearyzowanych orbitali {\it muffin-tin} ({\it ang. linearized muffin-tin orbitals} - LMTO)
-również wprowadza się podział kryształu na obszary wewnątrz sfer atomowych i obszar miedzywęzłowy.
-Funkcja falowa odpowiadająca energii $\varepsilon$ może być zapisana w ogólnej formie 
+In the linearized muffin-tin orbitals (LMTO) method,
+the crystal is also divided into regions inside atomic spheres and the interstitial region.
+The wave function corresponding to energy $\varepsilon$ can be written in the general form 
 %
 \begin{equation}
 \psi_{\bm{k}}(\varepsilon,\bm{r})=\sum_{lm} a_{lm}(\bm{k}) \phi_{lm}(\varepsilon,\kappa,\bm{r}),
 \end{equation}
 %
-gdzie funkcje bazowe w poszczególnych obszarach mają postać
+where the basis functions in individual regions have the form
 %
 \begin{equation}
 \phi_{lm}(\varepsilon,\kappa,\bm{r})=i^lY_{lm}(\theta,\phi)\begin{cases}
@@ -2345,35 +2344,35 @@ gdzie funkcje bazowe w poszczególnych obszarach mają postać
              \end{cases}    
 \end{equation}
 %
-Funkcja $J_l(\kappa,r)$ jest tak skonstruowana, aby funkcje bazowe wewnątrz sfery nie zależały od energii, 
-czyli spełnione było równanie
+The function $J_l(\kappa,r)$ is constructed so that the basis functions inside the sphere do not depend on energy, 
+i.e., the equation is satisfied
 %
 \begin{equation}
 \frac{d}{d\varepsilon}\phi_{lm}(\varepsilon,\kappa,\bm{r})=i^lY_{lm}[\dot{u}_l(\varepsilon,r) +\kappa\frac{d}{d\varepsilon} cot(\eta_l(\varepsilon))J_l(\kappa,r)]=0
 \end{equation}
 %
-dla energii $\varepsilon=E_{\nu}$ odpowiadającej średniej energii danego orbitalu LMTO.
-Ten warunek prowadzi do wzoru
+for energy $\varepsilon=E_{\nu}$ corresponding to the average energy of a given LMTO orbital.
+This condition leads to the formula
 %
 \begin{equation}
 J_l(\kappa,r)=-\frac{\dot{u}_l(E_{\nu},r)}{\kappa\frac{d}{d\varepsilon}cot(\eta_l(E_{\nu}))}.
 \end{equation}
 %
-W obszarze międzywęzłowym funkcje bazowe centrowane w położeniu danej sfery $\bm{R}$ otrzymuje się przez rozwinięcie na funkcji $J_l$
-powiązane z sąsiednimi sferami w położeniach $\bm{R}'$
+In the interstitial region, basis functions centered at the position of a given sphere $\bm{R}$ are obtained by expansion in functions $J_l$
+associated with neighboring spheres at positions $\bm{R}'$
 %
 \begin{equation}
 N_l(\kappa,\bm{r}-\bm{R})=4\pi\sum_{l',l''}C_{l',l'',l'''}n^*_{l''}(\kappa,\bm{R}-\bm{R'})J_{l'}(\kappa,\bm{r}-\bm{R}').
 \end{equation}
 %
-Taka konstrukcja powoduje, że funkcje LMTO są kombinacją liniową funkcji $u_l$ i $\dot{u}_l$ wewnątrz danej sfery
-i są gładko przedłużane do obszaru międzywęzłowego, łącząc się w sposób ciagły z funkcjami $\dot{u}_l$ z każdej
-sąsiedniej sfery.
+This construction causes LMTO functions to be a linear combination of functions $u_l$ and $\dot{u}_l$ inside a given sphere
+and to be smoothly extended to the interstitial region, joining continuously with functions $\dot{u}_l$ from each
+neighboring sphere.
 
-Metodę LMTO można uprościć poprzez pominięcie obszaru międzywęzłowego i ograniczenie się do optymalizacji funkcji falowych tylko wewnątrz sfer.
-W podejściu nazywanym przybliżeniem atomowych sfer ({\it ang. atomic sphere approximation} - ASA)
-stosuje się sfery, które częściowo na siebie nachodzą i ich sumaryczna objętość równa się całkowitej objetości kryształu. 
-Zastoswanie takiego podejścia ma uzasadnienie jedynie dla kryształów z gęstym upakowaniem atomów.
+The LMTO method can be simplified by omitting the interstitial region and limiting oneself to optimization of wave functions only inside spheres.
+In the approach called the atomic sphere approximation (ASA),
+spheres are used that partially overlap and their total volume equals the total volume of the crystal. 
+Application of such an approach is justified only for crystals with close-packed atomic structures.
 
 \chapter{Funkcjonały i potencjały zależne od orbitali}
 
