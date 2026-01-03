@@ -15,6 +15,8 @@
 \usepackage[left=2cm,right=2cm,top=3cm,bottom=3cm]{geometry}
 \DeclareMathOperator{\Tr}{Tr}
 
+% **[EDITORIAL]**: Mathematical notation - The manuscript uses both \mb (defined as \bm) and direct \bm commands for bold math. For consistency, consider using only one convention throughout. The \mb macro is convenient but \bm is more standard and immediately recognizable.
+
 
 \begin{document}
 
@@ -40,6 +42,8 @@
 
 \chapter*{Introduction}
 \addcontentsline{toc}{chapter}{Introduction}  
+
+% **[EDITORIAL]**: Introduction - Overall structure: Excellent historical overview. Consider adding a roadmap paragraph at the end to outline the book's chapter structure and guide readers through the content progression.
 
 % **[EDITORIAL]**: Line 45 - "enabled to explain the basis properties" - should be "enabled explanation of the basic properties" (grammar: "enabled to" is incorrect; "basis" should be "basic")
 First principles calculation methods, also called {\it ab initio} methods, are based on the laws of quantum mechanics.
@@ -167,6 +171,8 @@ of electronic states, which are not available within DFT calculations.
 The quantum Monte Carlo method itself is currently being developed very intensively and is used for calculations
 of the electronic structure of molecules and crystalline systems.
 
+
+% **[EDITORIAL]**: Transition to Chapter 1 - Consider adding a brief transitional sentence here to connect the introduction's historical overview with Chapter 1's detailed treatment of electron interactions.
 
 \chapter{Electron interactions}
 
@@ -310,6 +316,8 @@ in a reasonable computational time.
 
 \section{Hartree-Fock equation}
 \label{sec:HF}
+
+% **[EDITORIAL]**: Section organization - This section introduces a complex mathematical formalism. Consider adding a brief introductory paragraph before Eq. (\ref{slater}) that explains the physical motivation for the Slater determinant form and its advantages over the simpler Hartree approximation.
 
 % **[REVIEW NEEDED]**: Slater determinant and Hartree-Fock approximation terminology
 One of the first methods used to describe molecular systems is the Hartree-Fock approximation \cite{hartree28,fock30,slater30}. In this approach, the wave function of a system of $N$ electrons has the form of a Slater determinant
@@ -690,6 +698,8 @@ The correlation energy of the electron gas was most accurately determined numeri
 by the quantum Monte Carlo (QMC) method \cite{CeperleyAlder80}. 
 
 
+% **[EDITORIAL]**: Chapter 2 transition - Good organization moving from electron interactions to crystal structures. The chapter opening is clear and direct. Consider briefly connecting to Chapter 1 by mentioning how periodic structures affect the electron interactions discussed previously.
+
 \chapter{Electronic states in crystals}
 
 \section{Crystal lattice}
@@ -720,6 +730,8 @@ of a two-dimensional lattice. Figure \ref{fig:bravais} shows a centered rectangu
 and $\bm{b}_p$ marked, which define the primitive cell, shown in the figure in two variants. The Wigner-Seitz cell is shown
 on the right side. The conventional cell is determined by two basis vectors $\bm{a}_e$ and $\bm{b}_e$.
 In two dimensions, there are five types of Bravais lattices in total: oblique, rectangular, centered rectangular, hexagonal, and square.
+
+% **[EDITORIAL]**: Figure references - Ensure all figures are properly referenced and that captions are sufficiently descriptive for standalone understanding. Consider adding more detailed figure captions that explain the physical significance of what is shown.
 
 \begin{figure}[h]
 \centering
@@ -3964,6 +3976,8 @@ $\Lambda$ is the vertex function
 %\section{Kwantowe Monte Carlo (QMC)}
 %\label{sec:qmc}
 
+% **[EDITORIAL]**: Commented sections - Two Polish section titles remain commented out: "Dynamical mean-field theory (DMFT)" and "Quantum Monte Carlo (QMC)". Consider either developing these sections or removing the commented placeholders to maintain a clean manuscript.
+
 %\bibliographystyle{acm}
 %\bibliography{biblio.bib}
 
@@ -4246,6 +4260,8 @@ calculations with van der Waals corrections}, J. Phys. Chem. A {\bf 114}, 11814 
 \bibitem{martin2} R. M. Martin, L. Reining, and D. M. Ceperley, {\it Interacting Electrons. Theory and Computational Approaches},  Cambridge University Press, 2016.                        
                                           
 \end{document}
+
+% **[EDITORIAL]**: Overall manuscript assessment - This is a comprehensive and well-structured academic textbook on ab initio methods in solid state physics. The translation from Polish to English is generally accurate with good technical terminology. Key strengths: (1) Clear logical progression from basic quantum mechanics to advanced many-body methods, (2) Appropriate mathematical rigor for PhD-level students, (3) Good integration of historical context with modern computational approaches, (4) Comprehensive coverage spanning DFT, pseudopotentials, and advanced functionals. Areas for enhancement: (1) Add transitional paragraphs between major sections, (2) Expand figure captions for standalone clarity, (3) Consider adding worked examples or problem sets at chapter ends, (4) Review mathematical notation consistency (\mb vs \bm), (5) Complete or remove commented placeholder sections (DMFT, QMC). The manuscript successfully balances theoretical foundations with practical computational methods, making it suitable for its intended audience of computational physics PhD candidates.
 		     
 
 
