@@ -3458,184 +3458,184 @@ and the electronic part, which causes an increase in the value of effective char
 Large effective charges cause the LO-TO splitting to take very large values in ferroelectrics~\cite{zhong1994}.
 
  
-\chapter{Oddziaływanie van der Waalsa}
+\chapter{Van der Waals interactions}
 \label{sec:vdw}
 
-\section{Podstawowe własności}
+\section{Basic properties}
 
-Oddziaływanie van der Waalsa (vdW) nazywane również dyspersyjnym jest efektem korelacji elektronowych, które nie są uwzględnione
-w standardowych funkcjonałach wymienno-korelacyjnych.
-Jest to oddziaływanie przyciągające odgrywające ważną role w kryształach molekularnych, takich jak
-kryształy gazów szlachetnych, w których atomy mają zamknięte powłoki elektronowe,
-oraz materiały składające się z neutralnych cząsteczek. 
-Ważne jest też w układach biologicznych, np. ma duży wpływ na prawidłowy kształt i działanie białek.
-Żródłem tego oddziaływania są fluktacje kwantowe dipola elektrycznego na jednym atomie (molekule), które indukują dipol elektryczny na innym atomie (molekule).
-Wzajemne oddziaływanie tych dipoli prowadzi do słabego przyciągania atomów lub molekuł. 
-W klasycznym opisie, pole elektryczne wytworze przez moment dipolowy $p_1$ w odległości $R$ można wyrazić wzorem 
+Van der Waals (vdW) interaction, also called dispersive interaction, is an effect of electronic correlations that are not included
+in standard exchange-correlation functionals.
+It is an attractive interaction playing an important role in molecular crystals, such as
+crystals of noble gases, in which atoms have closed electron shells,
+as well as materials consisting of neutral molecules.
+It is also important in biological systems, e.g., having a large influence on the proper shape and function of proteins.
+The source of this interaction is quantum fluctuations of the electric dipole on one atom (molecule), which induce an electric dipole on another atom (molecule).
+The mutual interaction of these dipoles leads to weak attraction of atoms or molecules. 
+In the classical description, the electric field created by the dipole moment $p_1$ at distance $R$ can be expressed by the formula 
 %
 \begin{equation}
 E=\frac{p_1}{R^3}.
 \end{equation}
 % 
-Jeżeli pole elektryczne oddziałuje na cząsteczkę o polaryzowalności $\alpha$ to indukuje moment dipolowy
+If the electric field acts on a molecule with polarizability $\alpha$ then it induces a dipole moment
 %
 \begin{equation}
 p_2=\frac{\alpha p_1}{R^3}.
 \end{equation}
 %
-Średnia energia oddziaływania tych dwóch dipoli wynosi
+The average interaction energy of these two dipoles is
 %
 \begin{equation}
 U=-\frac{\alpha p_1^2}{R^6}.
 \end{equation}
 %
-Uwzglednienie korelacji elektronowych w ramach teorii perturbacyjneje prowadzi do takiej samej zależność oddziaływania 
-od odległości $\sim R^{-6}$, ale poprawne wyznaczenie polaryzowalności i siły oddziaływania wymaga wyjścia poza najprostsze 
-przybliżenie faz przypadkowych ({\it ang. random-phase approximation} - RPA).   
+Accounting for electronic correlations within perturbation theory leads to the same dependence of the interaction
+on distance $\sim R^{-6}$, but correct determination of polarizability and interaction strength requires going beyond the simplest
+random-phase approximation (RPA).   
  
-\section{Poprawki do funkcjonału energii}
+\section{Energy functional corrections}
  
-\subsection{Metody D2 i D3}  
+\subsection{D2 and D3 methods}  
  
-W obliczeniach DFT można uwzlędnić przybliżoną wartość energii oddziaływania vdW jako poprawkę do całkowitej energii układu
+In DFT calculations, one can include the approximate value of the vdW interaction energy as a correction to the total energy of the system
 %
 \begin{equation}
 E_\text{tot}=E_\text{KS}+E_\text{vdW}
 \end{equation}
 %
-gdzie $E_\text{KS}$ jest wyznaczonym w procedurze samozgodnej funkcjonałem Kohna-Shama.
-W takim podejściu oddziaływanie vdW nie wpływa bezpośrednio na strukturę elektronową, 
-jedynie poprzez modyfikację odległości między atomami.
+where $E_\text{KS}$ is the Kohn-Sham functional determined in the self-consistent procedure.
+In this approach, vdW interaction does not directly affect the electronic structure,
+only through modification of distances between atoms.
  
-W wersji, którą zaproponował Grimme~\cite{grimme2004,grimme2006}, zależność energii vdW od odległości między atomami $R_{ij}$
-ma postać
+In the version proposed by Grimme~\cite{grimme2004,grimme2006}, the dependence of vdW energy on the distance between atoms $R_{ij}$
+has the form
 %
 \begin{equation}
 E_\text{vdW}=-\frac{1}{2}\sum_{i,j}f_\text{d}(R_{ij})\frac{C_{6ij}}{R_{ij}^6},
 \end{equation}
 % 
-gdzie $f_\text{d}$ jest funkcją tłumiącą, która określa asymptotyczne zachowanie dla $R_{ij}\rightarrow 0$  
-i wyklucza podwójne uzwględnianie efektów korelacyjnych przy pośrednich odległościach.
-Jej rolą jest zapewnienie, że oddziaływanie vdW ograniczone jest do odległości większych niż 
-długości typowych wiązań, poprawnie opisywanych w ramach standardowych funkcjonałów.
-Współczynniki dyspersyjne $C_{6ij}$ zdefiniowane są dla każdej pary atomów
-jako średnie geometryczne parametrów atomowych
+where $f_\text{d}$ is a damping function, which determines the asymptotic behavior for $R_{ij}\rightarrow 0$
+and excludes double counting of correlation effects at intermediate distances.
+Its role is to ensure that vdW interaction is limited to distances larger than
+the lengths of typical bonds, correctly described within standard functionals.
+The dispersion coefficients $C_{6ij}$ are defined for each pair of atoms
+as geometric means of atomic parameters
 %
 \begin{equation}
 C_{6ij}=\sqrt{C_{6i}C_{6j}}.
 \end{equation}
 %
-Dla każdego atomu określa się parametr $C_6=0.05NI_\text{p}\alpha$, gdzie $I_\text{p}$ jest potencjałem jonizującym, $\alpha$ jest
-statyczną polaryzowalnościa dipolową, a $N=2, 10, 18, 36, 54$ dla kolejnych rzędów układu okresowego pierwiastków.  
-Współczynnik skalujący wyznaczonony jest tak, aby zreprodukować odległości międzyatomowe i energie wiązania
-w odpowiedniej grupie pierwiastków. Funkcję tłumiącą można zapisać w formie \cite{grimme2006}
+For each atom, the parameter $C_6=0.05NI_\text{p}\alpha$ is determined, where $I_\text{p}$ is the ionization potential, $\alpha$ is
+the static dipole polarizability, and $N=2, 10, 18, 36, 54$ for consecutive rows of the periodic table of elements.
+The scaling coefficient is determined so as to reproduce interatomic distances and binding energies
+in the corresponding group of elements. The damping function can be written in the form \cite{grimme2006}
 %
 \begin{equation}
 f_\text{d}(R_{ij})=\frac{s_6}{1+e^{-d(R_{ij}/R_{0ij}-1)}},
 \label{damping}
 \end{equation}
 %
-gdzie $s_6$ jest współczynnikiem określonym dla danego funkcjonału DFT, np. $s_6=0.75$ dla PBE,
-$d$ jest współczynnikim tłumienia, którego typowa wartość wynosi 20, a $R_{0ij}=R_{0i}+R_{0j}$ jest promieniem odcięcia
-i wyraża się sumą promieni vdW dla danych atomów. 
-Parametry $C_{6i}$ i $R_{0i}$ są zdefiniowane dla wszystkch atomów i nie zależą od rodzaju materiału. 
-Dodatkowo w obliczeniach określa się maksymalny zasięg oddziaływania vdW. 
-Opisany schemat (DFT-D2) umożliwia poprawienie wyliczanych sił i odległości międzyatomowych w kryształach gazów szlachetnych oraz
-układach molekularnych~\cite{bucko2010}. Oddziaływanie vdW odgrywa również ważną rolę w materiałach warstwowych,
-dla których standardowe obliczenia DFT dają zwykle zaniżoną wartość siły wiążącej między warstwami. 
-Przykładowo, stała sieci $c$ w graficie, której wartość w przybliżeniu PBE ($c=8.84$~\AA)
-jest znacznie zawyżona w porównaniu do wartości eksperymentalnej ($6.71$~\AA), wyliczona z poprawką D2 wynosi $6.45$~\AA~\cite{bucko2010}.     
+where $s_6$ is a coefficient determined for a given DFT functional, e.g., $s_6=0.75$ for PBE,
+$d$ is the damping coefficient, whose typical value is 20, and $R_{0ij}=R_{0i}+R_{0j}$ is the cutoff radius
+and is expressed as the sum of vdW radii for the given atoms.
+The parameters $C_{6i}$ and $R_{0i}$ are defined for all atoms and do not depend on the type of material.
+Additionally, in calculations, the maximum range of vdW interaction is determined.
+The described scheme (DFT-D2) enables improvement of calculated forces and interatomic distances in crystals of noble gases and
+molecular systems~\cite{bucko2010}. The vdW interaction also plays an important role in layered materials,
+for which standard DFT calculations usually give an underestimated value of the binding force between layers.
+For example, the lattice constant $c$ in graphite, whose value in the PBE approximation ($c=8.84$~\AA)
+is significantly overestimated compared to the experimental value ($6.71$~\AA), calculated with the D2 correction is $6.45$~\AA~\cite{bucko2010}.     
 
-W kolejnym podejściu (D3), Grimme uwzględnił dodatkowo drugi wyraz w wzorze na energię oddziaływania proporcjonalny do $R^{-8}$~\cite{grimme2010}
+In the next approach (D3), Grimme additionally included a second term in the interaction energy formula proportional to $R^{-8}$~\cite{grimme2010}
 %
 \begin{equation}
 E_\text{vdW}=-\frac{1}{2}\sum_{i,j}[f_{\text{d},6}(R_{ij})\frac{C_{6ij}}{R_{ij}^6}+f_{\text{d},8}(R_{ij})\frac{C_{8ij}}{R_{ij}^8}].
 \end{equation}
 %
-Współczynniki dyspersyjne $C_{6ij}$ wyznaczane są ze wzoru Casimira-Poldera 
+The dispersion coefficients $C_{6ij}$ are determined from the Casimir-Polder formula 
 %
 \begin{equation}
 C_{6ij}=\frac{3}{\pi} \int d\omega \alpha_i(\omega)\alpha_j(\omega), 
 \label{CP}
 \end{equation}
 %
-gdzie $\alpha_i(\omega)$ jest średnią polaryzowalnością dipolową dla atomu $i$.
-Współczynniki $C_{8ij}$ wyliczane są z zależności $C_{8ij}=3C_{6ij}\sqrt{Q_iQ_j}$, gdzie $Q_i=s\sqrt{Z_i}\langle r^4\rangle_i/\langle r^2\rangle_i$.
-Funkcje tłumiące mają postać
+where $\alpha_i(\omega)$ is the average dipole polarizability for atom $i$.
+The coefficients $C_{8ij}$ are calculated from the relation $C_{8ij}=3C_{6ij}\sqrt{Q_iQ_j}$, where $Q_i=s\sqrt{Z_i}\langle r^4\rangle_i/\langle r^2\rangle_i$.
+The damping functions have the form
 %
 \begin{equation}
 f_{\text{d},n}(R_{ij})=\frac{s_n}{1+6(R_{ij}/(s_{R,n}R_{0ij}))^{-\alpha_n}}.
 \end{equation}
 %
-W tym wzorze optymalizowane są parametry $s_6$, $s_8$ i $s_{R,6}$, a pozostałe mają ustalone wartości ($s_{R,8}=1$, $\alpha_6=14$, $\alpha_8=16$). 
-Alternatywnie można zastosować funkcję tłumiącą Becke-Johnsona (BJ) w postaci
+In this formula, the parameters $s_6$, $s_8$, and $s_{R,6}$ are optimized, while the others have fixed values ($s_{R,8}=1$, $\alpha_6=14$, $\alpha_8=16$).
+Alternatively, the Becke-Johnson (BJ) damping function can be applied in the form
 %
 \begin{equation}
 f_{\text{d},n}(R_{ij})=\frac{s_nR_{ij}^n}{R_{ij}^n+(a_1R_{0ij}+a_2)^n},
 \end{equation}
 %
-gdzie $s_n$, $a_1$ i $a_2$ sa parametrami dopasowania. Promień odcięcia można wyznaczyć znając współczynniki dyspersyjne
-$R_{0ij}=\sqrt{C_{8ij}/C_{6ij}}$. Analiza porównawcza przeprowadzona dla dużej grupy materiałów
-pokazała niewielki wpływ rodzaju funkcji tłumiącej na wyliczone odległości między atomami i trochę lepszą dokładność 
-przy zastosowaniu funkcji BJ do własności termodynamicznych~\cite{grimme2011}. 
+where $s_n$, $a_1$, and $a_2$ are fitting parameters. The cutoff radius can be determined knowing the dispersion coefficients
+$R_{0ij}=\sqrt{C_{8ij}/C_{6ij}}$. Comparative analysis performed for a large group of materials
+showed a small influence of the type of damping function on calculated distances between atoms and slightly better accuracy
+when using the BJ function for thermodynamic properties~\cite{grimme2011}. 
 
-\subsection{Metoda TS}
+\subsection{TS method}
 
-W metodzie zaproponowanej przez Tkatchenko i Schefflera (TS)~\cite{tkatchenko2009} bierze się pod uwagę tylko wyraz proporcjonalny do $R^{-6}$, ale
-uwzględnia się zależność współczynników dyspersyjnych i promienia odcięcią od gęstości ładunku.
-Wprowdzamy przybliżoną zależność polaryzowalności od częstości
+In the method proposed by Tkatchenko and Scheffler (TS)~\cite{tkatchenko2009}, only the term proportional to $R^{-6}$ is taken into account, but
+the dependence of dispersion coefficients and cutoff radius on charge density is considered.
+We introduce an approximate dependence of polarizability on frequency
 %
 \begin{equation}
 \alpha_i(\omega)=\frac{\alpha^0_i}{1-(\omega/\eta_i)^2},
 \label{alpha}
 \end{equation}
 %
-gdzie $\alpha^0_i$ jest statyczną polaryzowalnością i $\eta_i$ jest efektywną częstością dla atomu $i$.
-Po wstawieniu (\ref{alpha}) do (\ref{CP}) otrzymujemy formułę Londona
+where $\alpha^0_i$ is the static polarizability and $\eta_i$ is the effective frequency for atom $i$.
+After substituting (\ref{alpha}) into (\ref{CP}) we obtain the London formula
 %
 \begin{equation}
 C_{6ij}=\frac{3\eta_i\eta_j}{2(\eta_i+\eta_j)}\alpha_i^0\alpha_j^0.
 \end{equation}
 %
-Dla jednakowych atomów ($i=j$) otrzymujemy wzór
+For identical atoms ($i=j$) we obtain the formula
 %
 \begin{equation}
 \eta_i=\frac{4C_{6i}}{3(\alpha_i^0)^2},
 \end{equation}
 %
-który prowadzi do zależności
+which leads to the relation
 %
 \begin{equation}
 C_{6ij}=\frac{2C_{6i}C_{6j}}{\frac{\alpha^0_j}{\alpha^0_i}C_{6i}+\frac{\alpha^0_i}{\alpha^0_j}C_{6j}}.
 \end{equation}
 %
-Współczynniki dyspersyjne dla poszczególnych atomów znajdujących się wewnątrz cząsteczek lub ciał stałych
-wyznacza się z wartości dla izolowanych atomów używając następującej formuły $C_{6i}=\nu_i^2C^{free}_{6i}$, gdzie $\nu_i$
-określa efektywną objętość atomu (podział Hirshfelda)
+The dispersion coefficients for individual atoms located inside molecules or solids
+are determined from the values for isolated atoms using the following formula $C_{6i}=\nu_i^2C^{free}_{6i}$, where $\nu_i$
+determines the effective volume of the atom (Hirshfeld partitioning)
 %
 \begin{equation}
 \nu_i=\frac{V_i^{eff}}{V_i^{free}}=\frac{\int d\bm{r} r^3 w_i(\bm{r}) n(\bm{r})}{\int d\bm{r} r^3 n_i^{free}(\bm{r})},
 \end{equation}
 %
-z wagami Hirshfelda, które wyliczane są dla uśrednionych sferycznie gęstości elektronowych w izolowanych atomach
+with Hirshfeld weights, which are calculated for spherically averaged electron densities in isolated atoms
 %
 \begin{equation}
 w_i(\bm{r})=\frac{n_i^{free}(\bm{r})}{\sum_j n_i^{free}(\bm{r})}.
 \end{equation}
 %
-Podobnie znając wartości polaryzowalności i promieni vdW dla izolowanych atomów, można wyznaczyć te wartości
-dla atomów w cząsteczkach i kryształach: $\alpha_i=\nu_i\alpha^{free}$ i $R_{0i}=\nu_i^{\frac{1}{3}}R_{0i}^{free}$.
-Promienie vdW służą do wyznaczenia promienia odcięcia $R_{0ij}$ i funkcji tłumiacej $f_{\text{d},n}$ (\ref{damping}).
+Similarly, knowing the values of polarizability and vdW radii for isolated atoms, one can determine these values
+for atoms in molecules and crystals: $\alpha_i=\nu_i\alpha^{free}$ and $R_{0i}=\nu_i^{\frac{1}{3}}R_{0i}^{free}$.
+The vdW radii are used to determine the cutoff radius $R_{0ij}$ and the damping function $f_{\text{d},n}$ (\ref{damping}).
 
-W omówionych podejściach zakłada się jedynie oddziaływania dwuciałowe, nie biorąc pod uwagę modyfikacji oddziaływania vdW przez otaczające atomy lub molekuły. 
-W udoskonalonej wersji metody TS uwzglednia się dalekozasięgowe ekranowanie elektryczne w sposób samozgodny ({\it ang. self-consistent screening} - SCS)~\cite{tkatchenko2012}. Odpowiednie równanie samozgodne pozwalające wyznaczyć zmodyfikowaną polaryzowalność ma postać
+In the discussed approaches, only two-body interactions are assumed, not taking into account the modification of vdW interaction by surrounding atoms or molecules.
+In an improved version of the TS method, long-range electrical screening is included in a self-consistent manner (self-consistent screening - SCS)~\cite{tkatchenko2012}. The appropriate self-consistent equation allowing determination of the modified polarizability has the form
 %
 \begin{equation}
 \alpha_i^\text{SCS}(\omega)=\alpha_i(\omega)-\alpha_i(\omega)\sum_{i\neq j}\tau_{ij}\alpha_i^\text{SCS}(\omega),
 \end{equation}
 %
-gdzie $\tau_{ij}$ jest tensorem oddziaływania dipol-dipol. Energię dyspersyjną wyznacza się z tych samych równań co w metodzie TS
-z odpowiednio zmodyfikowanymi współczynnikami dyspersyjnymi i promieniami odcięcia
+where $\tau_{ij}$ is the dipole-dipole interaction tensor. The dispersion energy is determined from the same equations as in the TS method
+with appropriately modified dispersion coefficients and cutoff radii
 %
 \begin{equation}
 C_{6i}=\frac{3}{\pi}\int_0^\infty d\omega[\alpha^\text{SCS}_i(\omega)]^2,
