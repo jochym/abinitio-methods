@@ -675,92 +675,92 @@ The correlation energy of the electron gas was most accurately determined numeri
 by the quantum Monte Carlo (QMC) method \cite{CeperleyAlder80}. 
 
 
-\chapter{Stany elektronowe w krysztale}
+\chapter{Electronic states in crystals}
 
-\section{Sieć krystaliczna}
+\section{Crystal lattice}
 
-Kryształy zbudowane są z atomów lub molekuł ułożonych w periodyczną sieć.
-Trójwymiarową sieć krystaliczną definiujemy jako zbiór punktów, których
-położenia określone są wektorem translacji
+Crystals are built from atoms or molecules arranged in a periodic lattice.
+A three-dimensional crystal lattice is defined as a set of points whose
+positions are given by the translation vector
 %
 \begin{equation}
 \bm{R}_n=n_1\bm{a}_1+n_2\bm{a}_2+n_3\bm{a}_3,
 \label{trans}
 \end{equation}
 %
-gdzie wektory $\bm{a}_i$ nazywamy podstawowymi lub prymitywnymi wektorami translacji, a $n_i$ są liczbami całkowitymi.
-Zbiór punktów zdefiniowanych tym wzorem nazywamy siecią Bravais. Podobnie można zdefiniować sieć Bravais
-dla dowolnego wymiaru $d$ wybierając odpowiednią ilość wektorów bazowych: $\bm{a}_1,\bm{a}_2,...,\bm{a}_d$. 
-Z każdym punktem sieci Bravais można związać zbiór atomów zwanych bazą. Najmniejsza przestrzeń kryształu,
-która po przesunieciu o wszystkie translacje sieciowe wypełni całą przestrzeń nazywamy komórką prymitywną. 
-Komórka prymitywna zawiera dokładnie jeden węzeł sieci Bravais i zwykle zbudowana jest na podstawowych wektorach translacji sieci.
-Istnieje specjalny rodzaj komórki prymitywnej nazywany komórką Wignera-Seitza, która jest przestrzenią zawierającą punkty przestrzeni, 
-które znajdują się bliżej danego punktu sieci niż pozostałych. 
-Często zamiast komórki prymitywnej używa się komórki elementarnej, która zbudowana jest na innych wektorach bazowych
-i jej symetria jest taka sama jak symetria całego kryształu.
-Objętość komórki elementarnej jest całkowitą wielokrotnością objętości komórki prymitywnej.
-W strukturach prostych (bez centrowania powierzchniowego lub przestrzennego), komórka elementarna pokrywa się
-z komórką prymitywną. Różnice między poszczególnymi rodzajami komórek można przedstawić na przykładzie
-sieci dwuwymiarowej. Na rysunku \ref{fig:bravais} pokazana jest struktura centrowana prostokątna z zaznaczonymi dwoma wektorami podstawowaymi $\bm{a}_p$
-i $\bm{b}_p$, które definiują komórkę prymitywną, pokazaną na rysunku w dwóch wariantach. Komórka Wignera-Seitza pokazana
-jest po prawej stronie. Komórka elementarna wyznaczona jest przez dwa wektory bazowe $\bm{a}_e$ i $\bm{b}_e$.
-W dwóch wymiarach mamy w sumie pięć rodzajów sieci Bravais: skośna, prostokątna, prostokatna centrowana, heksagonalna i kwadratowa.
+where the vectors $\bm{a}_i$ are called the fundamental or primitive translation vectors, and $n_i$ are integers.
+The set of points defined by this formula is called a Bravais lattice. Similarly, a Bravais lattice
+can be defined for any dimension $d$ by choosing an appropriate number of basis vectors: $\bm{a}_1,\bm{a}_2,...,\bm{a}_d$. 
+With each Bravais lattice point, one can associate a set of atoms called the basis. The smallest region of the crystal
+that, when translated by all lattice translations, fills the entire space is called the primitive cell. 
+The primitive cell contains exactly one Bravais lattice point and is usually built on the primitive translation vectors of the lattice.
+There exists a special type of primitive cell called the Wigner-Seitz cell, which is the region containing all points in space 
+that are closer to a given lattice point than to any other. 
+Often, instead of the primitive cell, the conventional cell is used, which is built on different basis vectors
+and whose symmetry is the same as the symmetry of the entire crystal.
+The volume of the conventional cell is an integer multiple of the volume of the primitive cell.
+In simple structures (without face-centering or body-centering), the conventional cell coincides
+with the primitive cell. The differences between various types of cells can be illustrated using the example
+of a two-dimensional lattice. Figure \ref{fig:bravais} shows a centered rectangular structure with two primitive vectors $\bm{a}_p$
+and $\bm{b}_p$ marked, which define the primitive cell, shown in the figure in two variants. The Wigner-Seitz cell is shown
+on the right side. The conventional cell is determined by two basis vectors $\bm{a}_e$ and $\bm{b}_e$.
+In two dimensions, there are five types of Bravais lattices in total: oblique, rectangular, centered rectangular, hexagonal, and square.
 
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.4]{lattice.pdf}
-\caption{Dwuwymiarowa sieć periodyczna.}\label{fig:bravais}
+\caption{Two-dimensional periodic lattice.}\label{fig:bravais}
 \end{figure}
 
-W przypadku sieci trójwymiarowych, wszystkie możliwe struktury można podzielić na siedem układów krystalograficznych: 
-regularny, tetragonalny, rombowy, heksagonalny, trygonalny, jednoskośny i trójskośny, którym odpowiada czternaście możliwych sieci Bravais,
-które podzielone są na proste (P), centrowane powierzchniowo (F), centrowane na podstawach (C) i centrowane przestrzennie (I). 
-Wszystkie układy krystalograficzne z odpowiadającymi im sieciami Bravais przedstawione są w tabeli \ref{lattice}.
-Dla każdego układu pokazana jest zalezność między stałymi sieci ($a$, $b$, $c$) oraz kątami między kierunkami ($\alpha$, $\beta$, $\gamma$),
-które definiują krawędzie komórek elementarnych. 
+In the case of three-dimensional lattices, all possible structures can be divided into seven crystal systems: 
+cubic, tetragonal, orthorhombic, hexagonal, trigonal, monoclinic, and triclinic, corresponding to fourteen possible Bravais lattices,
+which are divided into simple (P), face-centered (F), base-centered (C), and body-centered (I). 
+All crystal systems with their corresponding Bravais lattices are presented in Table \ref{lattice}.
+For each system, the relationship between the lattice constants ($a$, $b$, $c$) and the angles between directions ($\alpha$, $\beta$, $\gamma$)
+that define the edges of the conventional cells is shown. 
 
 \begin{table}[h!]
-\caption{Układy krystalograficzne.}\label{lattice}
+\caption{Crystal systems.}\label{lattice}
 \begin{center}
 \begin{tabular}{|c|c|c|c|}
 \hline
-Układ & Stałe sieci & Kąty & Sieci Bravais\\
+System & Lattice constants & Angles & Bravais lattices\\
 \hline
-regularny & $a=b=c$ & $\alpha=\beta=\gamma=90^{\degree}$ &  P, F, I \\ 
-tetragonaly & $a=b\ne c$ & $\alpha=\beta=\gamma=90^{\degree}$ &  P, I \\  
-rombowy & $a\ne b\ne c$ & $\alpha=\beta=\gamma=90^{\degree}$ &  P, F, C, I \\ 
-heksagonalny &  $a=b\ne c$ & $\alpha=\beta=90^{\degree}$, $\gamma=120^{\degree}$ &  P  \\
-trygonalny & $a=b\ne c$ & $\alpha=\beta=90^{\degree}$, $\gamma=120^{\degree}$ &  P \\
-jednoskośny & $a=b\ne c$ & $\alpha=\gamma=90^{\degree}$, $\beta\ne 90^{\degree}$ & P, C \\ 
-trójskośny & $a\ne b\ne c$ & $\alpha\ne \beta\ne \gamma\ne 90^{\degree}$ & P \\ \hline
+cubic & $a=b=c$ & $\alpha=\beta=\gamma=90^{\degree}$ &  P, F, I \\ 
+tetragonal & $a=b\ne c$ & $\alpha=\beta=\gamma=90^{\degree}$ &  P, I \\  
+orthorhombic & $a\ne b\ne c$ & $\alpha=\beta=\gamma=90^{\degree}$ &  P, F, C, I \\ 
+hexagonal &  $a=b\ne c$ & $\alpha=\beta=90^{\degree}$, $\gamma=120^{\degree}$ &  P  \\
+trigonal & $a=b\ne c$ & $\alpha=\beta=90^{\degree}$, $\gamma=120^{\degree}$ &  P \\
+monoclinic & $a=b\ne c$ & $\alpha=\gamma=90^{\degree}$, $\beta\ne 90^{\degree}$ & P, C \\ 
+triclinic & $a\ne b\ne c$ & $\alpha\ne \beta\ne \gamma\ne 90^{\degree}$ & P \\ \hline
 \end{tabular}
 \end{center}
 \end{table}
 
-Zbiór operacji, który pozostawia dany kryształ niezmienionym tworzy grupą przestrzenną.
-Składa się ona z translacji sieci krystalicznej opisanych wzorem (\ref{trans}) oraz symetrii punktowych: inwersji, obrotów i odbić.
-Dodatkowo występują operacje niesymorficzne, które są połączeniem operacji punktowych i ułamkowych translacji.
-Wszystkich grup przestrzennych jest 230, z których 73 to symorficzne i 157 niesymorficzne.
+The set of operations that leaves a given crystal unchanged forms a space group.
+It consists of crystal lattice translations described by formula (\ref{trans}) and point symmetries: inversion, rotations, and reflections.
+Additionally, there are nonsymmorphic operations, which are combinations of point operations and fractional translations.
+There are 230 space groups in total, of which 73 are symmorphic and 157 are nonsymmorphic.
 
-\section{Przestrzeń odwrotna}
+\section{Reciprocal space}
 
-Strukturę elektronową materiału analizuje się najczęściej wykorzystując przestrzeń wektorów falowych $\bm{k}$,
-którą nazywamy przestrzenią odwrotną. Każdej sieci Bravais w przestrzeni rzeczywistej odpowiada sieć punktów
-w przestrzeni odwrotnej zdefiniowana wektorami
+The electronic structure of a material is most often analyzed using the space of wave vectors $\bm{k}$,
+which is called reciprocal space. Each Bravais lattice in real space corresponds to a lattice of points
+in reciprocal space defined by vectors
 %
 \begin{equation}
 \bm{G}_m=m_1\bm{b}_1+m_2\bm{b}_2+m_3\bm{b}_3,
 \end{equation}
 %
-gdzie $m_j$ są liczbami całkowitymi, a $\bm{b}_j$ są wektorami odwrotnymi do wektorów bazowych $\bm{a}_i$,
-czyli spełniają warunek
+where $m_j$ are integers, and $\bm{b}_j$ are vectors reciprocal to the basis vectors $\bm{a}_i$,
+that is, they satisfy the condition
 %
 \begin{equation}
 \bm{a}_i \cdot \bm{b}_j = 2\pi \delta_{ij}.
 \label{orto}
 \end{equation}
 %
-Wektory sieci odwrotnej można wyznaczyć z następujących zależności
+The reciprocal lattice vectors can be determined from the following relations
 %
 \begin{eqnarray}
 \bm{b}_1=\frac{2\pi}{\Omega}\bm{a}_2\times \bm{a}_3, \\
@@ -768,251 +768,251 @@ Wektory sieci odwrotnej można wyznaczyć z następujących zależności
 \bm{b}_3=\frac{2\pi}{\Omega}\bm{a}_1\times \bm{a}_2, 
 \end{eqnarray}
 %
-gdzie $\Omega=\bm{a}_1\cdot(\bm{a}_2\times \bm{a}_3)$ jest objętością komórki prymitywnej.
+where $\Omega=\bm{a}_1\cdot(\bm{a}_2\times \bm{a}_3)$ is the volume of the primitive cell.
 
-W przestrzeni odwrotnej również definiujemy komórkę prymitywną, która najczęściej ma kształt
-komórki Wignera-Seitza i nosi nazwę strefy Brillouina ({ang. Brillouin zone} - BZ).  
-Komórka, która obejmuje punkt $\bm{K}=0$, nazywany punktem $\Gamma$, nosi nazwę pierwszej strefy Brillouina.
-Na rysunku \ref{fig:lattice} pokazane są przykładowe strefy Brillouina dla trzech sieci regularnych. 
+In reciprocal space, we also define a primitive cell, which most often has the shape
+of a Wigner-Seitz cell and is called the Brillouin zone (BZ).  
+The cell that includes the point $\bm{K}=0$, called the $\Gamma$ point, is called the first Brillouin zone.
+Figure \ref{fig:lattice} shows example Brillouin zones for three cubic lattices. 
 
 \begin{figure}[h]
 \centering
 \includegraphics[scale=1.2]{brillouin.pdf}
-\caption{Strefy Brillouina dla sieci regularnych: prostej (P), centrowanej objetościowo (I) i centrowanej przestrzennie (F).}
+\caption{Brillouin zones for cubic lattices: simple (P), body-centered (I), and face-centered (F).}
 \label{fig:lattice}
 \end{figure}
 
 
-\section{Twierdzenie Blocha}
+\section{Bloch's theorem}
 
-W najprostszym opisie elektronów w periodycznym potencjale kryształu $V(\bm{r})$, stany elektronowe opisywane są przez niezależne jednocząstkowe funkcje falowe, bedące rozwiązaniami równania Schr\"{o}dingera w postaci
+In the simplest description of electrons in the periodic potential of a crystal $V(\bm{r})$, electronic states are described by independent single-particle wave functions, which are solutions of the Schr\"{o}dinger equation in the form
 %
 \begin{equation}
 [-\frac{\hbar^2\nabla^2}{2m}+V(\bm{r})]\psi^{\sigma}_{\bm{k}j}(\bm{r})=\varepsilon_{j\sigma}(\bm{k})\psi^{\sigma}_{\bm{k}j}(\bm{r}),
 \label{RS}
 \end{equation}
 %
-gdzie $\bm{k}$ jest wektorem falowym, $\sigma$ określa spin elektronu i indeks $j$ numeruje stany własne hamiltonianu odpowiadajace energiom $\varepsilon_{j\sigma}(\bm{k})$.
-Zgodnie z twierdzeniem Blocha, funkcja falowa elektronów w periodycznym potencjale ma postać
+where $\bm{k}$ is the wave vector, $\sigma$ specifies the electron spin, and the index $j$ numbers the eigenstates of the Hamiltonian corresponding to energies $\varepsilon_{j\sigma}(\bm{k})$.
+According to Bloch's theorem, the wave function of electrons in a periodic potential has the form
 %
 \begin{equation}
 \psi^{\sigma}_{\bm{k}j}(\bm{r})=e^{i\bm{k}\bm{r}}u^{\sigma}_{\bm{k}j}(\bm{r}),
 \end{equation}
 %
-gdzie $u^{\sigma}_{\bm{k}j}(\bm{r})$ jest funkcją periodyczną spełniającą warunek $u^{\sigma}_{\bm{k}j}(\bm{r})=u^{\sigma}_{\bm{k}j}(\bm{r}+\bm{R}_n)$ dla
-każdego wektora traslacji $\bm{R}_n$. Można pokazać, że funkcje Blocha są wektorami własnymi
-operatora translacji
+where $u^{\sigma}_{\bm{k}j}(\bm{r})$ is a periodic function satisfying the condition $u^{\sigma}_{\bm{k}j}(\bm{r})=u^{\sigma}_{\bm{k}j}(\bm{r}+\bm{R}_n)$ for
+each translation vector $\bm{R}_n$. It can be shown that Bloch functions are eigenvectors
+of the translation operator
 %
 \begin{equation}
 \hat{T}_n\psi^{\sigma}_{\bm{k}j}(\bm{r})=\psi^{\sigma}_{\bm{k}j}(\bm{r}+\bm{R}_n)=e^{i\bm{k}(\bm{r}+\bm{R}_n)}u^{\sigma}_{\bm{k}j}(\bm{r}+\bm{R}_n)=e^{i\bm{k}\bm{R}_n}\psi^{\sigma}_{\bm{k}j}(\bm{r}).
 \end{equation}
 %
-Hamiltonian jest niezmienniczy ze względu na działanie operatora translacji,
-co oznacza, że obydwa operatory ze sobą komutują. Funkcje Blocha są zatem również stanami własnymi hamiltonianu,
-co dowodzi prawdziwości twierdzenia Blocha. 
+The Hamiltonian is invariant under the action of the translation operator,
+which means that both operators commute. Bloch functions are therefore also eigenstates of the Hamiltonian,
+which proves the validity of Bloch's theorem. 
 
-Funkcja Blocha określona jest dla wektora falowego $\bm{k}$, który w układach periodycznych jest dobrze zdefiniowaną liczbą kwantową.
-Wektor falowy związany jest z kwazipędem elektronu w stanie $\psi_{\bm{k}j}$
+A Bloch function is defined for the wave vector $\bm{k}$, which in periodic systems is a well-defined quantum number.
+The wave vector is related to the quasimomentum of an electron in state $\psi_{\bm{k}j}$
 %
 \begin{equation}
 \bm{p}=\hbar\bm{k}.
 \end{equation}
 %
-Ponieważ wszystkie własności struktury elektronowej są translacyjnie niezmiennicze 
-ze względu na przesunięcie o dowolny wektor sieci odwrotnej, również kwazipęd nie zależy od takiego przesunięcia.
+Since all properties of the electronic structure are translationally invariant 
+with respect to translation by any reciprocal lattice vector, the quasimomentum also does not depend on such translation.
 
-\section{Fale płaskie}
+\section{Plane waves}
 
-Metody obliczeniowe struktury pasmowej różnią sie między sobą stosowanymi reprezentacjami funkcji falowej.
-Ogólnie możemy zapisać funkcję falową w formie
+Computational methods for band structure differ in the representations of the wave function they employ.
+In general, we can write the wave function in the form
 %
 \begin{equation}
 \psi^{\sigma}_{\bm{k}j}(\bm{r})=\sum_mc^{\sigma}_{jm}(\bm{k})\phi_{\bm{k}m}(\bm{r}),
 \end{equation}
 % 
-gdzie $\phi_{\bm{k}m}(\bm{r})$ są funkcjami bazowymi, a $c^{\sigma}_{jm}(\bm{k})$ to współczynniki rozwinięcia.
-W krysztale, ze względu na periodyczny potencjał, naturalną bazę stanowią fale płaskie. Jeżeli cześć periodyczną funkcji
-Blocha rozwiniemy w tej bazie, funkcja falowa przyjmuje postać
+where $\phi_{\bm{k}m}(\bm{r})$ are basis functions, and $c^{\sigma}_{jm}(\bm{k})$ are expansion coefficients.
+In a crystal, due to the periodic potential, plane waves form a natural basis. If we expand the periodic part of the
+Bloch function in this basis, the wave function takes the form
 %
 \begin{equation}
 \psi^{\sigma}_{\bm{k}j}(\bm{r})=e^{i\bm{k}\bm{r}}\sum_{m} c^{\sigma}_{jm}(\bm{k})e^{i\bm{G_m}\bm{r}}=\sum_{m} c^{\sigma}_{jm}(\bm{k})e^{i(\bm{k}+\bm{G_m})\bm{r}},
 \end{equation}
 % 
-gdzie $\bm{G_m}$ są wektorami sieci odwrotnej. Równanie Schr\"{o}dingera (\ref{RS}) przetransponowane do przestrzeni odwrotnej w bazie
-fal płaskich przyjmuje postać
+where $\bm{G_m}$ are reciprocal lattice vectors. The Schr\"{o}dinger equation (\ref{RS}) transformed to reciprocal space in the plane wave basis
+takes the form
 %
 \begin{equation}
 \sum_{n}H_{mn} c^{\sigma}_{jn}(\bm{k})=\varepsilon_{j\sigma}(\bm{k}) c^{\sigma}_{jm},
 \label{ham_rec}
 \end{equation}
 %
-gdzie elementy macierzowe Hamiltonianu dane są wyrażeniem
+where the matrix elements of the Hamiltonian are given by the expression
 %
 \begin{equation}
 H_{mn}=\frac{\hbar^2}{2m}|\bm{k}+\bm{G_m}|^2\delta_{mm'}+V(\bm{G_m}-\bm{G_n}).
 \end{equation}
 %
-Drugi wyraz jest transformatą Fouriera potencjału elektronowego
+The second term is the Fourier transform of the electronic potential
 %
 \begin{equation}
 V(\bm{G})=\frac{1}{\Omega}\int_{\Omega}\bm{dr}V(\bm{r})e^{-i\bm{Gr}},
 \end{equation}
 %
-gdzie całkowanie przebiega po komórce prymitywnej.
+where the integration is performed over the primitive cell.
 
-\section{Periodyczne warunki brzegowe}
+\section{Periodic boundary conditions}
 
-Podobnie jak dla gazu elektronowego zamkniętego w pojemniku, również dla skończonego kryształu
-możemy wprowadzić periodyczne warunki brzegowe (warunki Borna-Karmana). Załóżmy, że rozmiary kryształu
-określone są przez liczbę komórek prymitywnych w każdym kierunku kryształu $(N_1,N_2,N_3)$.
-Zatem liczby całkowite, które definiują wektory translacyjne sieci (\ref{trans})
-zmieniają się w zakresie $n_i=0,1,2,...,N_i$, gdzie $i=1,2,3$.
-Zakładając, że funkcja falowa na dwóch przeciwległych brzegach układu (w każdym z trzech kierunków) przyjmuje
-takie same wartości i korzystając z twierdzenia Blocha otrzymujemy warunek
+Similarly to the electron gas enclosed in a container, we can also introduce periodic boundary conditions (Born-Karman conditions) for a finite crystal. 
+Let us assume that the size of the crystal
+is determined by the number of primitive cells in each direction of the crystal $(N_1,N_2,N_3)$.
+Thus, the integers that define the lattice translation vectors (\ref{trans})
+vary in the range $n_i=0,1,2,...,N_i$, where $i=1,2,3$.
+Assuming that the wave function on two opposite edges of the system (in each of the three directions) takes
+the same values and using Bloch's theorem, we obtain the condition
 %
 \begin{equation}
 \psi^{\sigma}_{\bm{k}j}(\bm{r})=\psi^{\sigma}_{\bm{k}j}(\bm{r}+N_i\bm{a}_i)=e^{i\bm{k}N_i\bm{a}_i}\psi^{\sigma}_{\bm{k}j}(\bm{r}),
 \label{pwb}
 \end{equation} 
 %
-który spełniony jest gdy 
+which is satisfied when 
 %
 \begin{equation}
 \bm{k}N_i\bm{a}_i=2\pi n_i.
 \end{equation}
 %
-Wykorzystując bazę wektorów prymitywnych sieci odwrotnej ($\bm{b}_1,\bm{b}_2,\bm{b}_3$) oraz biorąc pod uwagę zależność (\ref{orto}), dostajemy zbiór dozwolonych wektorów falowych
+Using the basis of primitive vectors of the reciprocal lattice ($\bm{b}_1,\bm{b}_2,\bm{b}_3$) and taking into account relation (\ref{orto}), we obtain the set of allowed wave vectors
 %
 \begin{equation}
 \bm{k}=\frac{n_1}{N_1}\bm{b}_1+\frac{n_2}{N_2}\bm{b}_2+\frac{n_3}{N_3}\bm{b}_3.
 \label{vectk}
 \end{equation}
 %
-Wektory te określają funkcje falowe Blocha $\psi_{i,\bm{k}}$ i energie stanów $\varepsilon_i(\bm{k})$.
-Skończona ilość dostępnych stanów wynika zatem z ograniczonych rozmiarów kryształu i jest równa ilości komórek prymitywnych w układzie: $N=N_1N_2N_3$.  
-Ze wzoru (\ref{vectk}) wynika również, że dozwolone wektory falowe stanów elektronowych należą do pojedynczej komórki prymitywnej w przestrzeni odwrotnej.
-Najczęściej do analizy stanów elektronowych wybiera się wektory należące do pierwszej strefy Brillouina.
+These vectors determine the Bloch wave functions $\psi_{i,\bm{k}}$ and state energies $\varepsilon_i(\bm{k})$.
+The finite number of available states therefore results from the limited size of the crystal and equals the number of primitive cells in the system: $N=N_1N_2N_3$.  
+From formula (\ref{vectk}) it also follows that the allowed wave vectors of electronic states belong to a single primitive cell in reciprocal space.
+Most often, vectors belonging to the first Brillouin zone are chosen for the analysis of electronic states.
 
-\section{Sumowanie w przestrzeni odwrotnej}
+\section{Summation in reciprocal space}
 
-Wiele wielkości fizycznych wyznaczanych jest jako sumy po punktach w przestrzeni odwrotnej. 
-Przedstawiona powyżej analiza pokazuje, że wystarczy ograniczyć
-sie do wektorów falowych należących do pierwszej strefy Brillouina.
-Dodatkowo, można wykorzystać symetrię kryształu do zmniejszenia ilości punktów, które konieczne
-są do wyznaczenia danej wielkości fizycznej. 
-Oznaczmy operacje punktowe (symorficzne) przez $O_i$, a wektory translacji ułamkowej związane z daną symetrią $O_i$
-przez $\bm{t}_i$. W przestrzeni odwrotnej rozpatrujemy jedynie symorficzne operacje symetrii ponieważ translacje
-ułamkowe nie mają wpływu na przestrzeń odwrotną. Hamiltoniana opisujący kryształ jest niezmienniczy
-względem operacji punktowych: $\bm{r}\rightarrow O_i\bm{r}+\bm{t}_i$ oraz $\bm{k}\rightarrow O_i\bm{k}$.
-Oznacza to, że funkcje falowe otrzymane po tych transformacjach 
+Many physical quantities are determined as sums over points in reciprocal space. 
+The analysis presented above shows that it is sufficient to restrict
+oneself to wave vectors belonging to the first Brillouin zone.
+Additionally, one can use the symmetry of the crystal to reduce the number of points necessary
+to determine a given physical quantity. 
+Let us denote point operations (symmorphic) by $O_i$, and the fractional translation vectors associated with a given symmetry $O_i$
+by $\bm{t}_i$. In reciprocal space, we consider only symmorphic symmetry operations because fractional translations
+have no effect on reciprocal space. The Hamiltonian describing the crystal is invariant
+with respect to point operations: $\bm{r}\rightarrow O_i\bm{r}+\bm{t}_i$ and $\bm{k}\rightarrow O_i\bm{k}$.
+This means that the wave functions obtained after these transformations 
 %
 \begin{equation}
 \psi^{\sigma}_{O_i\bm{k}j}(O_i\bm{r}+\bm{t}_i)=\psi^{\sigma}_{\bm{k}j}(\bm{r}),
 \end{equation}  
 %
-są również funkcjami własnymi hamiltonianu z tą samą energią własną $\varepsilon_{j\sigma}(\bm{k})$.
-Oznacza to, że można ograniczyć sumowanie danej wielkości fizycznej $f(\bm{k})$ do wektorów $\bm{k}$ należących do mniejszego obszaru,
-który nazywany jest nieredukowalną częścią strefy Brillouina ({\it ang. irreducible Brillouin zone} - IBZ). 
-Obszar ten tworzą wektory $\bm{k}$, które są nierównoważne, czyli nie można ich wzajemnie połączyć operacją symetrii punktowej. 
-Wartości w pozostałych punktach dostajemy przez zastosowanie odpowiednich operacji symetrii $f(O_i\bm{k})=f(\bm{k})$.
-Do sumowania wykorzystujemy wagi $w_{\bm{k}}$, które zdefiniowane są jako ilości wektorów $\bm{k}$, powiązanych symetrią punktową 
-z wektorem należącym do IBZ (z uwzglednieniem tego wektora), podzielone przez całkowitą ilość wektorów $N_{\bm{k}}$.
-Przykładowo, wartość średnią wielkości $f$, możemy wyliczyć sumując po punktach należących do IBZ
+are also eigenfunctions of the Hamiltonian with the same eigenvalue $\varepsilon_{j\sigma}(\bm{k})$.
+This means that one can restrict the summation of a given physical quantity $f(\bm{k})$ to vectors $\bm{k}$ belonging to a smaller region,
+which is called the irreducible part of the Brillouin zone (IBZ). 
+This region is formed by vectors $\bm{k}$ that are inequivalent, that is, they cannot be mutually connected by a point symmetry operation. 
+Values at the remaining points are obtained by applying the appropriate symmetry operations $f(O_i\bm{k})=f(\bm{k})$.
+For summation, we use weights $w_{\bm{k}}$, which are defined as the number of vectors $\bm{k}$ related by point symmetry 
+to a vector belonging to the IBZ (including this vector), divided by the total number of vectors $N_{\bm{k}}$.
+For example, the average value of quantity $f$ can be calculated by summing over points belonging to the IBZ
 %
 \begin{equation}
 \bar{f}=\frac{1}{N_{\bm{k}}}\sum_{\bm{k}}^{BZ}f(\bm{k})=\sum_{\bm{k}}^{IBZ}w_{\bm{k}}f(\bm{k}).
 \end{equation}
 %
 
-Przy sumowaniu po przestrzeni odwrotnej można w zasadzie wybrać dowolne punkty należące do IBZ.
-Jednak wykorzystując własności funkcji periodycznych, można tak wybrać wektory $\bm{k}$,
-aby zminimalizować błędy przy obliczaniu sum lub całek.
-Dowolną funkcję periodyczną można rozwinąć przy pomocy transformaty Fouriera
+When summing over reciprocal space, one can in principle choose any points belonging to the IBZ.
+However, using the properties of periodic functions, one can choose vectors $\bm{k}$ in such a way
+as to minimize errors when calculating sums or integrals.
+Any periodic function can be expanded using the Fourier transform
 %
 \begin{equation}
 f(\bm{k})=\sum_n f(\bm{R}_n)e^{i\bm{k}\bm{R}_n},
 \end{equation} 
 %
-gdzie $\bm{R}_n$ są wektorami translacji sieci krystalicznej.
-Zbiór punktów, który jest optymalny do wyliczania sum w przestrzeni odwrotnej, 
-nazywany jest siecią Monkhorsta-Packa \cite{MP}. Wyznacza się go ze  wzoru
+where $\bm{R}_n$ are crystal lattice translation vectors.
+The set of points that is optimal for calculating sums in reciprocal space 
+is called the Monkhorst-Pack mesh \cite{MP}. It is determined from the formula
 %
 \begin{equation}
 \bm{k}(n_1,n_2,n_3)=\sum_i^3 \frac{2n_i-N_i-1}{2N_i}\bm{b}_i,
 \end{equation}
 %
-gdzie liczby $N_1$, $N_2$ i $N_3$ określają ilość punktów $\bm{k}$ w każdym kierunku: $n_i=1,2,...,N_i$.
-Tak zdefiniowane punkty tworzą jednorodną sieć w przestrzeni odwrotnej i charakteryzują się
-tym, że suma wartości periodycznej funkcji, która posiada komponenty Fouriera ograniczone w każdym kierunku do $\bm{R}_n=N_i\bm{a}_i$,
-równa jest dokładnej całce z tej funkcji.  
+where the numbers $N_1$, $N_2$, and $N_3$ specify the number of $\bm{k}$ points in each direction: $n_i=1,2,...,N_i$.
+Points defined in this way form a uniform mesh in reciprocal space and are characterized by
+the fact that the sum of values of a periodic function, which has Fourier components limited in each direction to $\bm{R}_n=N_i\bm{a}_i$,
+equals the exact integral of this function.  
 
-\section{Energia Fermiego}
+\section{Fermi energy}
 
-Wielkości fizyczne, które dotyczą stanu podstawowego, wyliczane są zwykle dla obsadzonych stanów elektronowych.
-Czyli sumowanie w przestrzeni odwrotnej uwzglednia tylko zajęte stany.
-Energia najwyższego obsadzonego stanu określa energię Fermiego ($E_F$).
-W metalach pasma elektronowe przecinają $E_F$ i przy sumowaniu po dyskretnych punktach $\bm{k}$ pojawiają się nieciągłości
-w obsadzeniach stanów. Powoduje to wolniejszą zbieżność ze względu na ilość punktów $\bm{k}$. 
-Można łatwo rozwiązać ten problem przez wprowadznie ciagłej funkcji obsadzania stanów w pobliżu $E_F$.
-Naturalnym wyborem jest zastosowanie funkcji rozkładu Fermiego-Diraca dla skończonej temperatury
+Physical quantities related to the ground state are usually calculated for occupied electronic states.
+That is, the summation in reciprocal space includes only occupied states.
+The energy of the highest occupied state determines the Fermi energy ($E_F$).
+In metals, electronic bands cross $E_F$, and when summing over discrete $\bm{k}$ points, discontinuities appear
+in state occupations. This causes slower convergence with respect to the number of $\bm{k}$ points. 
+This problem can be easily solved by introducing a continuous occupation function for states near $E_F$.
+A natural choice is to use the Fermi-Dirac distribution function for finite temperature
 %
 \begin{equation}
 F(\varepsilon,E_F,T)=[\exp(\frac{\varepsilon-E_F}{kT})+1]^{-1}.
 \end{equation}   
 %
-Dla $T=0$, dostajemy funkcję schodkową, która odpowiada rozkładowi w stanie podstawowym.
-Aby wyznaczyć $E_F$ dla dowolnej temperatury, korzystamy z warunku
+For $T=0$, we obtain a step function that corresponds to the distribution in the ground state.
+To determine $E_F$ for any temperature, we use the condition
 %
 \begin{equation}
 \sum_{\bm{k},j} w_{\bm{k}}F(\varepsilon,E_F,T)=n_{el},
 \end{equation}   
 %
-gdzie $n_{el}$ jest liczbą elektronów, a sumowanie wykonywane jest po wszystkich obsadzonych stanach
-uwzględniając polaryzację spinową.
+where $n_{el}$ is the number of electrons, and the summation is performed over all occupied states
+taking into account spin polarization.
 
 
 
-\section{Struktura pasmowa}
+\section{Band structure}
 
-Zbiór wszystkich stanów elektronowych $\varepsilon_{\bm{k}j}^{\sigma}$ otrzymanych w wyniku diagonalizacji hamiltonianiu 
-dla wektorów falowych $\bm{k}$ tworzy strukturę pasmową danego materiału.
-Dostępne energie stanów elektronowych, które odpowiadają funkcji własnej z indeksem $j$, grupują się w przedziały nazywane pasmami energetycznymi. 
-Rozwiązania równania (\ref{ham_rec}) w funkcji wektora falowego $\bm{k}$ są periodyczne ze względu na przesunięcie o 
-wektor sieci odwrotnej
+The set of all electronic states $\varepsilon_{\bm{k}j}^{\sigma}$ obtained by diagonalization of the Hamiltonian 
+for wave vectors $\bm{k}$ forms the band structure of a given material.
+The available energies of electronic states corresponding to the eigenfunction with index $j$ are grouped into intervals called energy bands. 
+Solutions of equation (\ref{ham_rec}) as a function of the wave vector $\bm{k}$ are periodic with respect to translation by 
+a reciprocal lattice vector
 %
 \begin{equation}
 \varepsilon_{\bm{k}j}^{\sigma}=\varepsilon_{\bm{k}+\bm{G_m}j}^{\sigma}.
 \end{equation}   
 %
-Zatem przy prezentacji struktury pasmowej można ograniczyć się do pierwszej strefy Brillouina. Zwykle prezentuje się tylko stany elektronowe dla wektorów $\bm{k}$ należących do wybranych kierunków i punktów wysokiej symetrii w przestrzeni odwrotnej. Jeżeli energie pasm przyjmują różne wartości dla dwóch kierunków spinu,
-$\varepsilon_{\bm{k}j}^{\uparrow}\ne \varepsilon_{\bm{k}j}^{\downarrow}$, mamy doczynienia z rozszczepieniem spinowym (wymiennym), które związane jest z uporządkowaniem magnetycznym.
+Therefore, when presenting the band structure, one can restrict oneself to the first Brillouin zone. Usually, only electronic states for wave vectors $\bm{k}$ belonging to selected directions and high-symmetry points in reciprocal space are presented. If the band energies take different values for the two spin directions,
+$\varepsilon_{\bm{k}j}^{\uparrow}\ne \varepsilon_{\bm{k}j}^{\downarrow}$, we are dealing with spin (exchange) splitting, which is associated with magnetic ordering.
 
-Ważną wielkością, która charakteryzuje strukturą pasmową jest gęstość stanów elektronowych dla danego kierunku spinu $\rho_{\sigma}(E)$,
-która wyliczana jest jako suma po pierwszej strefie Brillouina
+An important quantity that characterizes the band structure is the density of electronic states for a given spin direction $\rho_{\sigma}(E)$,
+which is calculated as a sum over the first Brillouin zone
 %
 \begin{equation}
 \rho_{\sigma}(E)=\frac{1}{N_k}\sum_{j,\bm{k}}\delta[\varepsilon_{\bm{k}j}^{\sigma}-E],
 \end{equation}
 %
-gdzie $N_k$ jest ilością wektorów $\bm{k}$ w pierwszej strefie Brillouina.
-Całkowita gęstość stanów równa jest sumie obydwóch składowych spinowych, $\rho(E)=\rho_{\uparrow}(E)+\rho_{\downarrow}(E)$.
-Przy wyliczaniu gestości stanów często zamiast sieci Monkhorsta-Packa stosuje się metodę tetraedrów.
-Polega ona na podzieleniu całej strefy Brillouina na tetraedry i wyliczeniu energii stanów w punktach $\bm{k}$, które
-odpowiadają wierzchołkom tetraedrów. Energie pomiędzy tymi punktami wyznacza się stosując interpolację liniową.
+where $N_k$ is the number of $\bm{k}$ vectors in the first Brillouin zone.
+The total density of states is the sum of both spin components, $\rho(E)=\rho_{\uparrow}(E)+\rho_{\downarrow}(E)$.
+When calculating the density of states, instead of the Monkhorst-Pack mesh, the tetrahedron method is often used.
+It consists of dividing the entire Brillouin zone into tetrahedra and calculating the energies of states at points $\bm{k}$ that
+correspond to the vertices of the tetrahedra. Energies between these points are determined using linear interpolation.
 
-Struktura pasmowa decyduje o podstawowych własnościach danego materiału i jest jego wyróżnikiem, pozwalającym zakwalifikować go do określonej grupy materiałów. 
-Trzy podstawowe typy materiałów krystalicznych to metale, półprzewodniki i izolatory.
-Struktura pasmowa metali charakteryzuję się występowaniem powierzchni Fermiego, która odgranicza zajęte stany elektronowe od stanów pustych.
-Zatem w typowych metalach gęstość stanów na poziomie Fermiego jest niezerowa, $\rho(E_F)>0$.
-Tuż powyżej energii Fermiego ($E_F$) znajdują się stany, do których przechodzą elektrony wzbudzone termicznie lub w wyniku oddziaływania z innymi
-elektronami. W półprzewodnikach i izolatorach, powyżej ostatniego zajętego stanu elektronowego, znajduje się przerwa obejmująca
-zakres zabronionych energetycznie stanów.
-Pasmo, które znajduje się tuż poniżej przerwy energetycznej nazywa się pasmem walencyjnym, a to które jest powyżej
-pasmem przewodnictwa.
-Półprzewodniki zwykle charakteryzują się mniejszą przerwa energetyczną ($\sim$1-2 eV) niż izolatory.
-Występują też materiały nazywane półmetalami, w których przerwa energetyczna i $\rho(E_F)$ są równe zeru (np. grafen).
-Odrębną grupę materiałów stanowią izolatory Motta, w których przerwa energetyczna jest wynikiem silnych oddziaływań
-elektronowych.  
+The band structure determines the basic properties of a given material and is its distinguishing feature, allowing it to be classified into a specific group of materials. 
+The three basic types of crystalline materials are metals, semiconductors, and insulators.
+The band structure of metals is characterized by the presence of a Fermi surface, which separates occupied electronic states from empty states.
+Thus, in typical metals, the density of states at the Fermi level is nonzero, $\rho(E_F)>0$.
+Just above the Fermi energy ($E_F$), there are states to which electrons excited thermally or as a result of interaction with other
+electrons transition. In semiconductors and insulators, above the last occupied electronic state, there is a gap covering
+a range of energetically forbidden states.
+The band that is located just below the energy gap is called the valence band, and the one above it
+is the conduction band.
+Semiconductors are usually characterized by a smaller energy gap ($\sim$1-2 eV) than insulators.
+There are also materials called semimetals, in which the energy gap and $\rho(E_F)$ are both zero (e.g., graphene).
+A separate group of materials are Mott insulators, in which the energy gap results from strong electronic
+interactions.  
 
 
 
