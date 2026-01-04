@@ -31,6 +31,28 @@ After a successful build:
 3. Scroll down to the **Artifacts** section
 4. Download the `book-pdf` artifact (will be a .zip file containing main.pdf)
 
+### Accessing build logs for debugging
+
+For every workflow run (successful or failed), LaTeX build logs are automatically uploaded:
+
+1. Go to the **Actions** tab in the GitHub repository
+2. Click on the workflow run you want to debug
+3. Scroll down to the **Artifacts** section
+4. Download the `latex-logs` artifact (will be a .zip file containing log files)
+5. The artifact includes:
+   - `main.log` - Main LaTeX compilation log with detailed error messages
+   - `main.aux` - Auxiliary file with cross-references
+   - `main.out` - Hyperref output file
+   - `main.toc` - Table of contents data
+   - `main.bbl` - Bibliography file (if generated)
+   - `main.blg` - Bibliography log (if generated)
+
+The `main.log` file is especially useful for debugging compilation errors, as it contains:
+- Line numbers where errors occurred
+- Detailed error messages from LaTeX
+- Warnings about missing packages, figures, or references
+- Information about which files were processed
+
 ### Manual triggering
 
 You can manually trigger a build:
@@ -55,16 +77,19 @@ The workflow uses a full TeX Live distribution that includes all required packag
 ### Troubleshooting
 
 If the build fails:
-1. Check the workflow logs in the Actions tab for error messages
-2. Common issues:
+1. Download the `latex-logs` artifact from the Actions tab (see "Accessing build logs" above)
+2. Open `main.log` to see detailed error messages with line numbers
+3. Check the workflow logs in the Actions tab for the summary output
+4. Common issues:
    - Missing figures: Ensure all PDF/PNG files referenced in main.tex are in the book/ directory
-   - LaTeX syntax errors: Check the error log for line numbers
+   - LaTeX syntax errors: Check main.log for the specific line number and error message
    - Missing bibliography: The workflow expects inline bibliography (using `\begin{thebibliography}`)
+   - Package conflicts: Check main.log for package loading errors or conflicts
 
 ### Future enhancements
 
 Possible improvements to consider:
 - Add automatic release creation for tagged versions
-- Generate and upload build logs
 - Cache TeX Live packages for faster builds
 - Add PDF validation/linting
+- Generate HTML or other output formats alongside PDF

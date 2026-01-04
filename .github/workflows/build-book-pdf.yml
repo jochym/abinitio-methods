@@ -54,3 +54,18 @@ jobs:
           name: book-pdf
           path: book/main.pdf
           retention-days: 90
+      
+      - name: Upload LaTeX build logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: latex-logs
+          path: |
+            book/*.log
+            book/*.aux
+            book/*.out
+            book/*.toc
+            book/*.blg
+            book/*.bbl
+          retention-days: 30
+          if-no-files-found: warn
