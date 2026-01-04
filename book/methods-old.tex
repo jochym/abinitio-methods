@@ -1,0 +1,3269 @@
+\documentclass[12pt,a4paper,openany]{book}
+\usepackage{graphicx}
+\usepackage{gensymb}
+\usepackage{longtable}
+\usepackage{epsfig}% Include figure files
+\usepackage{dcolumn}% Align table columns on decimal point
+\usepackage{bm}% bold math
+\usepackage{anysize}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+%\usepackage[polish]{babel}
+\usepackage{amsmath}
+\def\mb{\bm}
+\usepackage[left=2cm,right=2cm,top=3cm,bottom=3cm]{geometry}
+\DeclareMathOperator{\Tr}{Tr}
+
+\usepackage{color}
+\usepackage[urlcolor=blue,colorlinks=true,citecolor=blue,linkcolor=blue,pdfstartview={FitH},bookmarks=false]{hyperref}
+\usepackage{ulem}
+\definecolor{myblue}{rgb}{0.0, 0.5, 0.3}
+\newcommand{\SP}[1]{\textcolor{myblue}{#1}}
+
+\begin{document}
+
+
+\begin{titlepage}
+	\centering
+	{\Large\scshape Przemys\l{}aw Piekarz\par}
+    \vspace{4cm}
+	{\scshape\bfseries\Huge Electronic structure of solids \par}
+	\vspace{1cm}
+	{\scshape\Large Introduction to ab initio methods\par}	
+	\vfill
+	{\scshape\large Department of Computational Materials Science \\ Institute of Nuclear Physics \\ Polish Academy of Sciences\par}
+\end{titlepage}
+
+\newpage
+\thispagestyle{empty}
+%\thispagestyle{plain} % empty
+\mbox{}
+
+\tableofcontents
+
+
+\chapter{Introduction}
+
+First-principles calcution methods, called also {\it ab initio} methods, are based on the laws of quantum mechanics.
+The application of the Schr\"{o}dinger equation~\cite{Schrodinger} to atoms and molecules enabled to explain the basis properties of chemical bonds~\cite{HL,hartree28,mulliken,JC}. 
+Many-electro, such as atoms, molecules and solids, are subject to Fermi-Dirac statistics~\cite{Fermi,Dirac26}, which is a direct consequence of the Pauli exclusion principle~\cite{Pauli25}.
+Application of quantum statistics to a homogeneous electron gas, which is the simplest model of the metallic state,
+made it possible to explain the problems of the classical Drude-Lorentz theory of conductivity.
+ 
+%Teoria pasmowa układów periodycznych, która powstała dzięki pracom Blocha~\cite{Bloch}, Peierlsa~\cite{Peierls} i Wilsona~\cite{Wilson}, wyjaśniła przyczyny znacznych różnic w przewodnictwie elektrycznym materiałów i stworzyła podstawy do podziału wszystkich kryształów na metale, izolatory i półprzewodniki. 
+
+\SP{The band theory of periodic systems, developed thanks to the works of Bloch~\cite{Bloch}, Peierls~\cite{Peierls}, and Wilson~\cite{Wilson}, explained the reasons for significant differences in the electrical conductivity of materials and laid the foundations for classifying all crystals into metals, insulators, and semiconductors.}
+
+
+Oddziaływania wielociałowe występujące w układach elektronowych uniemożliwiają dokładne rozwiązanie
+równania Schr\"{o}dingera i dlatego potrzebne są metody przybliżone.
+Jednym z pierwszych podejść umożliwiającym obliczenia ilościowe było przybliżenie Hartree \cite{hartree28}, 
+gdzie funkcja falowa przedstawiona jest w formie iloczynu funkcji jednocząstkowych.
+W modelu jednocząstkowym, wzajemne oddziaływanie elektronów zostaje zastąpione efektywnym potencjałem,
+w którym porusza się każdy z elektronów. Taki potencjał złożony jest z oddziaływania przyciągającego wytwarzanego przez jądra atomowe i 
+z części odpychającej pochodzącej od pozostałych elektronów.
+Ponieważ elektronowa część potencjału zależy od funkcji falowych, które chcemy wyznaczyć,
+równanie Schr\"{o}dingera musi być rozwiązywane w sposób samouzgodniony.
+Uwzględniając zakaz Pauliego do wieloelektronowej funkcji falowej, która w najprostszej postaci zapisywana
+jest w formie wyznacznika Slatera, można wyprowadzić równanie Hartree-Focka \cite{fock30,slater30,slater51}. 
+W równaniu tym, oprócz zwykłego oddziaływania kulombowskiego, pojawia się nielokalne 
+oddziaływanie wymienne. Jest to oddziaływanie występujące tylko między elektronami z tym samym kierunkiem spinu,
+powodujące efektywnie zmiejszenie odpychania kulombowskiego między elektronami.
+Podejście Hartree-Focka opisuje układy elektronowe w sposób przybliżony ponieważ nie uwzględnia poprawnie korelacji,
+które występują w wieloelektronowym stanie kwantowym \cite{wigner34,GB}.
+Wiąże się to również z niewłaściwym ekranowaniem oddziaływań kulombowskich,
+co prowadzi do znacznie zawyżonych wartości przerwy energetycznej w ciałach stałych.
+Metody rozwijane w oparciu o podejście Hartree-Focka, tzw. metody wielowyznacznikowe, uwzględniają poprawnie korelacje elektronowe, 
+ale wymagają czasochłonnych obliczeń komputerowych. Stosowane są głównie w chemii kwantowej do badania małych układów molekularnych.   
+
+W pierwszych obliczeniach struktury elektronowej metali stosowane były metody, w których niezależne elektrony oddziałują
+z periodycznym potencjałem atomowym.
+W metodzie komórkowej, zaproponowanej przez Wignera i Seitza \cite{wigner33}, potencjał kryształu jest sumą
+sferycznie symetrycznych potencjałów wytwarzanych przez każdy z atomów.
+Korzystając z twierdzenia Blocha, wystarczy znaleźć rozwiązania równania Schr\"{o}dingera
+w pojedynczej komórce prymitywnej, z odpowiednimi warunkami brzegowymi na granicy komórki.  
+W roku 1937, Slater wprowadził metodę stowarzyszonych fal płaskich. W tym podejściu cały kryształ podzielony jest
+na obszary wokół położeń atomowych (określone przez promień sfery atomowej) i pozostałą część miedzywęzłową.
+W każdym  z tych obszarów stosuje się inną postać funkcji falowej. Wewnątrz sfer atomowych potencjał zmienia się szybko i
+funkcje falowe, które zachowują się podobnie do orbitali atomowych, wyliczane są w bazie harmonic sferycznych. 
+Natomiast w obszarze międzywęzłowym, zarówno potencjał, jak i funkcje falowe są wolnozmienne, więc naturalną bazą sa fale płaskie.
+Dodatkowo musi być spelniony warunek ciągłości na granicy obszarów.
+W innym podejściu, zaproponowanym przez Korringa~\cite{K47} oraz Kohna i Rostokera~\cite{KR54},
+wykorzystuje się funkcje Greena i teorię rozpraszania do wyznaczenia stanów elektronowych w krysztale.
+Głównym mankamentem tych metod był przybliżony charakter potencjału elektronowego. 
+Najczęściej stosowano potencjał typu {\it muffin-tin}, który w obszarze rdzenia atomowego ma symetrię sferyczna,
+a poza nim przyjmuje wartość stałą.
+Krokiem naprzód było podejście zortogonalizowanych fal płaskich zaproponowane przez Herringa~\cite{herring40}, które stało się
+podstawą metody pseudopotencjałów~\cite{Antoncik,KP}.
+W tym podejściu dokładny potencjał atomowy zastępuje się przybliżonym pseudopotencjałem, mającym skończoną wartość w obszarze rdzenia atomowego,
+co umożliwia wyliczenie przybliżonej funkcji falowej (pseudofunkcji falowej) w bazie fal płaskich w całym obszarze kryształu.
+ 
+Prawdziwym przełomem było sformułowanie przez Hohenberga, Kohna i Shama teorii funkcjonału gęstości (DFT) \cite{kohn64,kohn65}.
+Podstawowe twierdzenie tej teorii mówi, że całkowita energia danego układu,
+z uwzględnieniem oddziaływania wymiennego i korelacyjnego, jest funkcjonałem
+gęstości elektronowej, która może być wyznaczona przez minimalizację energii stanu podstawowego.
+W praktycznych zastosowaniach, gęstość elektronowa wyznaczana jest z jednocząstkowych funkcji falowych, wyliczanych w sposób
+samouzgodniony poprzez rozwiazanie równań Kohna-Shama. 
+Dokładne wartości potencjału wymienno-korelacyjnego nie są znane i muszą być wyznaczane w ramach znanych przybliżeń.
+Podstawowym podejściem jest przybliżenie lokalnej gęstości (LDA), 
+w którym energia wymiany i korelacji otrzymane są z dokładnych obliczeń dla jednorodnego gazu elektronowego \cite{CeperleyAlder80,PZ,VWN}.
+Kolejnym krokiem było uwzględnienie efektów nielokalnych w ramach uogólnionego przybliżenia gradientowego
+(GGA) \cite{Langreth83,Pardew86,Becke88}.
+Od czasu sformułowania DFT, zaproponowano wiele metod rozwiązywania równań Kohna-Shama, takich jak
+metoda stowarzyszonych fal płaskich \cite{Andersen75}, czy podejścia oparte na pseudopotencjałach \cite{HSC,BHS,Vanderbilt90}.
+W ten sposób, teoria funkcjonału gęstości stała się podstawą do wyliczania struktury elektronowej dla wielu rodzajów materiałów \cite{jones,payne,martin}, 
+a za jej sformułowanie Walter Kohn otrzymał Nagrodę Nobla w dziedzinie chemii w roku 1998.
+
+Istnieją jednak układy, w których przybliżenia stosowane w DFT załamują się i nie potrafią poprawnie
+opisać struktury elektronowej. Zgodnie z klasyczną teorią pasmową, wiele tlenków metali przejściowych, takich jak NiO lub MnO,
+powinno znajdować się w stanie metalicznym, ze względu na częściowe wypełnienie stanów $3d$.
+Materiały te są w rzeczywistości izolatorami, ponieważ silne oddziaływanie kulombowskie w stanach $3d$
+uniemożliwia swobodny ruch elektronów i prowadzi do ich lokalizacji \cite{peierls}.
+W odróznieniu od izolatorów pasmowych, materiały te nazywane są izolatorami Motta \cite{mott}.
+Takie lokalne oddziaływanie elektronów, opisywane w ramach modelu Hubbarda parametrem $U$ \cite{hubbard},
+jest znacznie silniejsze w stanach $d$ i $f$, niż w bardziej rozległych (zdelokalizoanych) stanach $s$ i $p$.
+Struktura elektronowa tlenków metali przejściowych, wyznaczana w ramach obliczeń LDA lub GGA,
+albo nie posiada przerwy (CoO) albo ta przerwa jest znacznie zaniżona (NiO) \cite{terakura}.
+Zbyt mała przerwa energetyczna jest także problemem w obliczeniach dla klasycznych półprzewodników,
+takich jak krzem lub german, co oznacza, że również w tych materiałach potencjał wymienno-korelacyjny nie jest
+dobrze opisany.
+
+Podstawowe przybliżenia stosowane do wyznaczenia energii wymienno-korelacyjnej 
+są źródłem błedów, które prowadzą efektywnie do samooddziaływania elektronów.
+Nawet w przypadku układu jednoelektronowego, np. atom wodoru, dodatnia energia oddziaływania elektrostatycznego (typu Hartree),
+która wyliczana jest dokładnie, nie kasuje się z ujemną energią wymienną wyznaczoną w przybliżeniu LDA lub GGA.
+Ten efekt jest szczególnie silny dla stanów $d$ lub $f$ i prowadzi do niekorzystnego wzrostu energii przy lokalizacji elektronów.
+To jest główną przyczyną niepoprawnego stanu metalicznego lub zbyt małej przerwy energetycznej otrzymywanych
+w obliczeniach dla tlenków metali przejściowych.  
+Zaproponowano metodę korekcji tego efektu (SIC) \cite{PZ}, która polega na bezpośrednim wyliczeniu
+energii samoodziaływania i odjęcia jej od funkcjonału energii całkowitej.
+Metoda ta umożliwia poprawienie struktury elektronowej, ale nie jest łatwa do zaimplementowania w obliczeniach samouzgodnionych.
+Stan elektronowy można również poprawić stosując funkcjonały hybrydowe, w których przybliżona energia wymiany jest częściowo
+zastąpiona dokładną wartością otrzymaną w ramach metody Hartree-Focka \cite{becke93}.
+Wynika to z faktu, że w przybliżeniu Hartree-Focka nie występuje efekt samoodziaływania.
+  
+Potencjał elektronowy dla zlokalizowanych stanów można również poprawić przez dodanie do funkcjonału DFT
+dodatkowego wyrazu proporcjonalnego do energi oddziaływania $U$. Można to zrobić w przybliżeniu średniego
+pola w ramach metody LDA+U \cite{anisimov}. Zastosowanie tej metody do tlenków metali przejściowych \cite{anisimov}
+lub nadprzewodników wysokotemperaturowych \cite{czyzyk} pozwoliło znacznie poprawić ich strukturę elektronową 
+i własności magnetyczne w porównaniu do standardowych obliczeń DFT.
+Również w przypadku innych złożonych materiałów, w których występują oddziaływania między spinowymi, orbitalnymi
+i sieciowymi stopniami swobody to podejście daje jakościowo lepsze wyniki \cite{orbital1,orbital2,orbital3}.
+
+W silnie skorelowanych metalach, jakimi są ziemie rzadkie i aktynowce,
+metoda LDA+U pozwala tylko częściowo uwzględnić efekty związane z lokalizacją elekronów.
+Dobrym przykładem jest kryształ plutonu, gdzie bardzo duża niezgodność wyliczanej teoretycznie
+objetości, a wartością eksperymentalną (około 35 \%) może być skorygowana przy użycie
+realistycznej wartości parametru $U$\cite{Pu-LDAU}.
+Niestety, efekty dynamiczne takie jak fluktuacja momentów magnetycznych w stanie paramagnetycznyn, czy efekt Kondo
+nie mogą być poprawnie opisane na poziomie teorii średniego pola.
+W bardziej zaawansowanej metodzie dynamicznego średniego pola (DMFT), efekty wielociałowe
+są uwzględniane przez rozwiązanie modelu domieszki Andersona w ramach dokładnej diagonalizacji
+lub kwantowego Monte Carlo \cite{Georges}. Rozwiązania zawierają informacje o energii własnej i czasie
+życia stanów elektronowych, które nie są dostępne w ramach obliczeń DFT.
+Sama metoda kwantowego Monte Carlo rozwijana jest obecnie bardzo intensywnie i stosowana jest do obliczeń
+struktury elektronowej molekół i ukladów krystalicznych.
+
+
+
+\chapter{Oddziaływania elektronowe}
+
+\section{Podstawowe własności}
+
+Wiązania międzyatomowe, dzięki którym powstają cząsteczki i ciała stałe, 
+są efektem wzajemnych oddziaływań w układzie elektronów i jąder atomowych.
+Hamiltonian, który opisuje dowolny układ atomów ma postać
+%
+\begin{equation}
+H=-\frac{\hbar^2}{2m}\sum_{i}\nabla_i^2-\sum_{i,j} \frac{Z_{j}e^2}{|\bm{r}_i-\bm{R}_j|}+\frac{1}{2}\sum_{i\neq j}\frac{e^2}{|\bm{r}_i-\bm{r}_j|}
+-\sum_j \frac{\hbar^2}{2M_j}\nabla_j^2 -\frac{1}{2}\sum_{i\neq j} \frac{Z_iZ_je^2}{|\bm{R}_i-\bm{R}_j|},
+\label{hamiltonian}
+\end{equation}
+%
+gdzie $\bm{r}_i$ określają położenia elektronów, $\bm{R_j}$ położenia jąder atomowych, $Z_j$ ładunki jąder, $M_j$ masy jąder i $m$ jest masą elektronu.
+Pierwsze trzy wyrazy opisują odpowiednio energię kinetyczną elektronów, oddziaływanie elektronów z jądrami i oddziaływania
+między elektronami. Ostatnie dwa wyrazy to energia kinetyczna jąder atomowych i oddziaływanie między
+ładunkami jąder. Pełna funkcja falowa złożonego układu elektronów i jąder atomowych $\Psi(\bm{r}_i,\bm{R}_j)$ spełnia równanie Schr\"{o}dingera
+%
+\begin{equation}
+H\Psi(\bm{r}_i,\bm{R}_j) = E\Psi(\bm{r}_i,\bm{R}_j),
+\label{Sch}
+\end{equation}
+%
+gdzie $E$ jest całkowitą energią układu.
+
+Kwantowo-mechaniczny opis kryształu można uprościć wykorzystując duży stosunek masy jadrą atomowego do masy elektronu,
+który dla najlżejszego jądra wodoru wynosi $m_p/m_e=1836$.
+Powoduje to, że energia kinetyczna jąder jest znacznie mniejsza niż energia kinetyczna elektronów i może być pominięta
+przy wyznaczaniu funkcji falowej podukładu elektronowego $\Phi(\bm{r_i},\bm{R_j})$.
+Podejście to nazywa się przybliżeniem adiabatycznym lub przybliżeniem Borna-Oppenheimera \cite{BO}.
+Wprowadzając funkcję falową całego układu w postaci iloczynu funkcji elektronowej i funkcji jąder atomowych $\chi(\bm{R}_j)$
+%
+\begin{equation}
+\Psi(\bm{r}_i,\bm{R}_j) = \Phi(\bm{r}_i,\bm{R}_j)\chi(\bm{R}_j)
+\label{wave}
+\end{equation}
+%
+można rozseparować (\ref{Sch}) na dwa równania 
+%
+\begin{equation}
+(-\frac{\hbar^2}{2m}\sum_{i=1}^N \nabla_i^2-\sum_{i,j} \frac{Z_{j}e^2}{|\bm{r}_i-\bm{R}_j|}+\frac{1}{2}\sum_{i\neq j}
+\frac{e^2}{|\bm{r}_i-\bm{r}_j|})\Phi(\bm{r}_i,\bm{R}_j)=E_n(\bm{R}_j)\Phi(\bm{r}_i,\bm{R}_j),
+\label{Sch-el}
+\end{equation}
+%
+\begin{equation}
+(-\sum_j \frac{\hbar^2}{2M_j} \nabla_j^2 -\sum_{i,j} \frac{Z_iZ_je^2}{|\bm{R}_i-\bm{R}_j|}+E_n(\bm{R}_j))\chi_{n\alpha}(\bm{R}_j)=\varepsilon_{n\alpha}\chi_{n\alpha}(\bm{R}_j).
+\end{equation}
+%
+Pierwsze równanie opisuje funkcje falowe i energie własne $E_n$ układu elektronowego przy ustalonych położeniach jąder atomowych, gdzie $n$ oznacza zdefiniowany zbiór liczb kwantowych stanu elektronowego. Z drugiego równania możemy otrzymać funkcje falowe i energie własne $\varepsilon_{n\alpha}$ związane z ruchem jąder atomowych,
+gdzie $\alpha$ jest kwantową liczbą, która charakteryzuje te wielkości. Energia potencjalna w równaniu opisującym ruch jąder atomowych zależy od wzajemnego oddziaływania między jądrami i od energii podukładu elektronowego $E_n(\bm{R}_j)$. Obie wielkości są funkcją aktualnego położenia wszystkich jąder atomowych.  
+
+Zapiszmy funkcję falową układu $N$ elektronów, przy zadanych położeniach jader atomowych, w formie $\Phi(\bm{r}_1,\bm{r}_2,...,\bm{r}_N)$. 
+Znajomość funcji falowej pozwala wyznaczyć wiele podstawowych wielkości fizycznych dla danego układu. W szczególności gęstość elektronowa w punkcie $\bm{r}$
+dana jest wzorem
+%
+\begin{equation}
+n(\bm{r})=N\int d\bm{r}_2...d\bm{r}_N \Phi^*(\bm{r},\bm{r}_2,...,\bm{r}_N) \Phi(\bm{r},\bm{r}_2,...,\bm{r}_N).
+\end{equation}
+%
+Podstawową własnością elektronowej funkcji falowej jest jej antysymetryczność. Oznacza, że zamiana miejscami dwóch elektronów powoduje zmianę jej znaku
+%
+\begin{equation}
+\Phi(\bm{r}_1,\bm{r}_2,...,\bm{r}_i,...,\bm{r}_j,...,\bm{r}_N)=-\Phi(\bm{r}_1,\bm{r}_2,...,\bm{r}_j,...,\bm{r}_i,...,\bm{r}_N).
+\label{anty}
+\end{equation}
+%
+Ta własność wynika z zakazu Pauliego, który mówi, że dwa fermiony (czyli cząstki o spinie połówkowym) nie mogą znajdować się w tym samym stanie kwantowym - w stanie opisanym takim samym zestawem liczb kwantowych.
+
+Równanie Schr\"{o}dingera (\ref{Sch-el}) zawiera oddziaływania wielociałowe i nie posiada dokładnych rozwiązań analitycznych dla dwóch lub większej ilości elektronów/
+Konieczne jest zastosowanie metod przybliżonych, które pozwalają wyznaczyć funkcje falowe i energie stanów elektronowych. 
+Jako przykład rozważmy prosty układ z dwoma elektronami, jakim jest cząsteczka wodoru H$_2$.
+Hamiltonian tego układu, po uwzlędnieniu przybliżenia Borna-Oppenheimera, przyjmuje postać
+%
+\begin{equation}
+H=-\frac{\hbar^2}{2m}\nabla_1^2-\frac{\hbar^2}{2m}\nabla_2^2-\frac{e^2}{r_{1A}}-\frac{e^2}{r_{1B}}-\frac{e^2}{r_{2A}}-\frac{e^2}{r_{2B}}+\frac{e^2}{r_{12}}+\frac{e^2}{r_{AB}},
+\end{equation}
+%  
+gdzie $r_{1A}$, $r_{1B}$, $r_{2A}$, $r_{1B}$ oznaczają odległości elektronów (1 i 2) od dwóch protonów ($A$ i $B$), $r_{12}$ jest odległością między elektronami
+i $r_{AB}$ odległością miedzy protonami. 
+W roku 1927, Heitler i London zaproponowali funkcję falową w formie \cite{HL}
+%
+\begin{equation}
+\Phi(\bm{r}_1,\bm{r}_2)=N_{\pm}[\psi_A(\bm{r}_1)\psi_B(\bm{r}_2)\pm \psi_B(\bm{r}_1)\psi_A(\bm{r}_2)]\chi_{\sigma},
+\end{equation}
+%
+gdzie $N_{\pm}$ jest czynnikiem normalizacyjnym, $\chi_{\sigma}$ jest częścią spinową funkcji falowej, a cztery funkcje $\psi_{\alpha}(\bm{r})$
+sa orbitalami $1s$ dla stanu podstawowego atomu wodoru
+%
+\begin{equation}
+\psi_{\alpha}(\bm{r})=\frac{1}{\sqrt{\pi a_0^3}}e^{-\frac{|\bm{r}-\bm{r}_{\alpha}|}{a_0}},
+\end{equation}
+gdzie $a_0$ jest promieniem Bohra, a $\bm{r}_{\alpha}$ jest położeniem protonu $\alpha=A$ lub $B$.
+Biorąc pod uwagę warunek antysymetryczności (\ref{anty}), funkcja falowa przyjmuje jedną z dopuszczalnych postaci
+%
+\begin{equation}
+\Phi_S(\bm{r}_1,\bm{r}_2)=N_{+}[\psi_A(\bm{r}_1)\psi_B(\bm{r}_2)+\psi_B(\bm{r}_1)\psi_A(\bm{r}_2)]\frac{1}{\sqrt{2}}(|\uparrow\downarrow\rangle-|\downarrow\uparrow\rangle),
+\end{equation}
+%
+dla całkowitego spinu $S=0$ (stan singletowy), oraz
+%
+\begin{equation}
+\Phi_T(\bm{r}_1,\bm{r}_2)=\begin{cases}
+N_{-}[\psi_A(\bm{r}_1)\psi_B(\bm{r}_2)-\psi_B(\bm{r}_1)\psi_A(\bm{r}_2)]|\uparrow\uparrow\rangle, \\
+N_{-}[\psi_A(\bm{r}_1)\psi_B(\bm{r}_2)-\psi_B(\bm{r}_1)\psi_A(\bm{r}_2)]\frac{1}{\sqrt{2}}(|\uparrow\downarrow\rangle+|\downarrow\uparrow\rangle), \\
+N_{-}[\psi_A(\bm{r}_1)\phi_B(\bm{r}_2)-\psi_B(\bm{r}_1)\psi_A(\bm{r}_2)]|\downarrow\downarrow\rangle, 
+\end{cases}
+\end{equation}
+%
+dla spinu $S=1$ (stan trypletowy). Stanem podstawowym cząsteczki wodoru jest stan singletowy, którego energia
+$E_S$ jest niższa od energii stanu stanu trypletowego $E_T$ dla każdej odległości między protonami $r_{AB}$.
+Stan związany odpowiada minimum energetycznemu $E_S=\langle\Phi_S|H|\Phi_S\rangle$, które dostajemy dla $r_{AB}=0.87$ \AA. Ta odległość jest większa od wartości eksperymentalnej równej 0.74 \AA. Natomiast wyliczona energia dysocjacji cząsteczki na dwa atomy wodoru wynosi $E_d=3.14$ eV i jest mniejsza od energii zmierzonej 4.75 eV. Jest to przykład wiązania kowalencyjnego, w którym dwa elektrony o przeciwnych spinach zostają uwspólnione, co prowadzi
+do obniżenia energii całego układu w porównaniu do sumy energii dwóch osobnych atomów.  
+W odróżnieniu od stanu singletowego, stan trypletowy nie tworzy stanu związanego dwóch atomów wodoru.
+
+Dokładniejsze wartości $r_{AB}=0.74$ \AA\ i $E_d=3.63$ eV otrzymuje się w przybliżeniu Hartree-Focka, które będzie tematem następnego rozdziału.
+Najlepsze wyniki uzyskuje się metodą wariacyjną, w której funkcja falowa zapisana jest w ogólnej formie iloczynu symetrycznej funkcji przestrzennej i antysymetrycznej funkcji spinowej \cite{JC}
+%
+\begin{equation}
+\Phi_S(\bm{r}_1,\bm{r}_2)=\Psi(\bm{r}_1,\bm{r}_2)\chi_0.
+\end{equation} 
+%
+Część przestrzenna funkcji falowej zależy od $M$ parametrów wariacyjnych, $p_1$, $p_2$,..., $p_M$.
+Minimalizując energię układu dla $M=13$ otrzymuje się wartości $E_d=4.70$ eV i $r_{AB}=4.74$ \AA, w bardzo dobrej zgodności z danymi eksperymentalnymi \cite{JC}.   
+
+
+\section{Równanie Hartree-Focka}
+
+Jedną z pierwszych metod zostosowaną do układów molekularnych jest przybliżenie Hartree-Focka \cite{hartree28,fock30,slater30}, w którym funkcja falowa dla $N$ elektronów ma postać wyznacznika Slatera
+%
+\begin{equation}
+\Phi = \frac{1}{\sqrt{N!}} 
+\begin{vmatrix}
+\phi_1(\bm{r}_1,\sigma_1) &  \phi_2(\bm{r}_1,\sigma_1)  & \dots & \phi_N(\bm{r}_1,\sigma_1) \\ 
+\phi_1(\bm{r}_2,\sigma_2) &  \phi_2(\bm{r}_2,\sigma_2)  & \dots & \phi_N(\bm{r}_2,\sigma_2) \\
+\dots                &  \dots                 &       &\dots \\
+\phi_1(\bm{r}_N,\sigma_N) &  \phi_2(\bm{r_N},\sigma_N)  & \dots & \phi_N(\bm{r}_N,\sigma_N) \\
+\end{vmatrix},
+\label{slater}
+\end{equation}
+%
+gdzie funkcje jednoelektronowe są iloczynem części zależnej od położenia $\bm{r}_i$
+i od spinu $\sigma_i$
+%
+\begin{equation}
+\phi_i(\bm{r}_i,\sigma_i)=\psi_i^{\sigma_i}(\bm{r}_i)\xi_i(\sigma_i).
+\end{equation}
+%
+Funkcja falowa zapisana w postaci wyznacznika Slater spełnia podstawowe
+własności układu nieodróżnialnych cząstek.
+Zamiana miejscami dwóch elektronów odpowiada zamianie dwóch kolumn w wyznaczniku, co powoduje
+zmianę znaku funkcji falowej zgodnie z warunkiem antysymetryczności.
+Jeżeli dwa elektrony znajdują się w tym samym stanie kwantowym to dwie kolumny
+są jednakowe i cały wyznacznik się zeruje, co zgodne jest z zakazem Pauliego. 
+
+Rozwiązanie równania Schr\"{o}dingera odpowiada funkcji falowej, dla której średnia
+z hamiltonianu przyjmuje wartość minimalną. Przy założeniu ortonormalności funkcji $\Phi$
+odpowiada to zasadzie wariacyjnej w postaci
+%
+\begin{equation}
+\delta(\langle\Phi|H|\Phi\rangle - E\langle\Phi|\Phi\rangle)=0,
+\label{var}
+\end{equation}
+%
+gdzie symbol $\delta$ oznacza pochodną wariacyjną.
+Wyliczając średnią z hamiltonianu (\ref{hamiltonian}) dla funkcji (\ref{slater}) otrzymujemy
+%
+\begin{equation}
+\langle\Phi|H|\Phi\rangle=\sum_{i,\sigma}\int d\mb{r} \psi_i^{\sigma*}(\mb{r})[-\frac{\hbar^2}{2m}\nabla_i^2+V_Z(\mb{r})]\psi_i^{\sigma}(\mb{r}) 
++E_H+E_x,
+\label{E_HF}
+\end{equation}
+%
+gdzie $V_Z$ jest potencjałem wytwarzanym przez jądra atomowe, a $E_H$ nazywa się energią Hartree 
+%
+\begin{equation}
+E_H=\frac{e^2}{2}\sum_{i,j,\sigma,\sigma'}
+\int d\mb{r} \int d\mb{r}' \frac{\psi_i^{\sigma*}(\mb{r})\psi_j^{\sigma'*}(\mb{r}')\psi_i^{\sigma}(\mb{r})\psi_j^{\sigma'}(\mb{r}')}{|\mb{r}-\mb{r}'|}.
+\end{equation}
+%
+Wprowadzając gęstość ładunkową w punkcie $\mb{r}$
+%
+\begin{equation}
+n(\mb{r})=e\sum_{i,\sigma} |\psi_i^{\sigma}(\mb{r})|^2,
+\label{dens}
+\end{equation}
+%
+możemy zapisać energię Hartree w prostszej formie
+%
+\begin{equation}
+E_H=\frac{1}{2} \int d\mb{r} \int d\mb{r}' \frac{n(\mb{r})n(\mb{r}')}{|\mb{r}-\mb{r}'|}, 
+\label{Hartree}
+\end{equation}
+%
+która odpowiada klasycznej energii oddziaływania kulombowskiego przy zadanym rozkładzie gęstości ładunku elektrycznego. 
+%
+$E_x$ nazywa się energią wymiany i wynosi
+%
+\begin{equation}
+E_x=-\frac{e^2}{2}\sum_{i,j,\sigma,\sigma'}
+\int d\mb{r} \int d\mb{r}' \frac{\psi_i^{\sigma*}(\mb{r})\psi_j^{\sigma*}(\mb{r}')\psi_i^{\sigma}(\mb{r}')\psi_j^{\sigma}(\mb{r})}{|\mb{r}-\mb{r}'|}.
+\label{exc}
+\end{equation}
+%
+Energia wymiany jest wielkością kwantową, która nie ma odpowiednika w fizyce klasycznej. 
+Oddziaływanie wymianne charakteryzują dwie ważne cechy, które są ze sobą ściśle powiązane. 
+Przede wszystkim, oddziaływanie to dotyczy tylko elektronów o takim samym kierunku spinu. 
+Zgodnie z zasadą Pauliego dwa elektrony o tym samym kierunku spinu nie moga mieć takich samych
+pozostałych liczb kwantowych, co wiązałoby się z obsadzeniem tego samego stanu kwantowego. 
+Efektywnie prowadzi to do powiększenia odległości między takimi elektronami i
+obniżenia energii oddziaływania kulombowskiego. Z tego wynika druga cecha
+oddziaływania wymiennego: wartość ujemna energii tego oddziaływania. Można interpretować oddziaływanie wymienne
+jako oddziaływanie kulombowskie elektronu z ładunkiem dodatnim tzw. {\it dziurą wymienną} ({\it ang. exchange hole}),
+która powoduje redukcję gestości ładunku ujemnego wokół każdego elektronu. 
+
+Po zastosowaniu metody wariacyjnej do (\ref{E_HF}) otrzymujemy równanie Hartree-Focka
+%
+\begin{equation}
+[-\frac{\hbar^2}{2m}\nabla_i^2+V_Z(\mb{r})+V_H(\mb{r})]\psi_i^{\sigma}(\mb{r})
+-\frac{e^2}{2}\sum_{j,\sigma}\int d\mb{r}' \frac{\psi_j^{\sigma*}(\mb{r}')\psi_i^{\sigma}(\mb{r}')}{|\mb{r}-\mb{r}'|}\psi_j^{\sigma}(\mb{r})=E\psi_i^{\sigma}(\mb{r}),
+\label{HF}
+\end{equation} 
+%
+gdzie $V_H$ oznacza potencjał Hartree
+%
+\begin{equation}
+V_H(\mb{r})=\int d\mb{r}' \frac{n(\mb{r}')}{|\mb{r}-\mb{r}'|}.
+\end{equation}
+%
+Równanie Hartree-Focka jest równaniem nieliniowymi ponieważ w ostatnim wyrazie Hamiltonianu występuje poszukiwana funkcja falowa.
+Slater zaproponował inną postać równań (\ref{HF}), która
+pozwala lepiej zrozumieć charakter oddziaływania wymiennego \cite{slater51}.
+Mnożąc i dzieląc wyraz wymienny przez $\psi_i^{\sigma}(r)$ otrzymujemy
+%
+\begin{equation}
+[-\frac{\hbar^2}{2m}\nabla_i^2+V_Z(\mb{r})+V_H(\mb{r})
+-\frac{e}{2}\int d\mb{r}' \frac{n(\mb{r},\mb{r}')}{|\mb{r}-\mb{r}'|}]\psi_i^{\sigma}(\mb{r})=E\psi_i^{\sigma}(\mb{r}),
+\label{HFS}
+\end{equation}
+%
+gdzie $n(\mb{r},\mb{r}')$ można interpretować jako gęstość ładunku wymiennego 
+%
+\begin{equation}
+n(\mb{r},\mb{r}')= e\sum_{j,\sigma}\frac{\psi_j^{\sigma*}(\mb{r}')\psi_i^{\sigma}(\mb{r}')\psi_j^{\sigma}(\mb{r})\psi_i^{\sigma*}(\mb{r})}{\psi_i^{\sigma*}(\mb{r})\psi_i^{\sigma}(\mb{r})},
+\label{EC}
+\end{equation}
+%
+która jest funkcją dwóch położeń $\mb{r}$ i $\mb{r}'$ i zależy od stanu kwantowego $i$. Całkowity ładunek dziury wymiennej
+równy jest ładunkowi pojedynczego elektronu, co łatwo pokazać wykonując całkowanie po $\mb{r}'$ i korzystaniu z ortogonalności 
+funkcji falowych
+%
+\begin{equation}
+q=e\sum_{j,\sigma}[\int d\mb{r}'\psi_j^{\sigma*}(\mb{r}')\psi_i^{\sigma}(\mb{r}')]\frac{\psi_j^{\sigma}(\mb{r})}{\psi_i^{\sigma}(\mb{r})}=
+e\sum_{j,\sigma}\delta_{ij}\frac{\psi_j^{\sigma}(\mb{r})}{\psi_i^{\sigma}(\mb{r})}=e.
+\end{equation}
+%
+Biorąc obydwa położenia równe $\bm{r}=\bm{r'}$ otrzymujemy gęstość ładunku wymiennego zgodną ze wzorem (\ref{dens}).
+Powoduje to, że człon opisujący oddziaływanie elektronu z jego własnym polem wymiennym ma taką sama postać jak oddziaływanie
+z potencjałem Hartree, ale przeciwny znak i wzajemnie się kasują. Dzięki tej własności w przybliżeniu Hartree-Focka nie występuje problem oddziaływania elektronu z jego własnym polem ({\it samooddziaływanie, ang. self-interaction}). 
+W formie (\ref{HFS}) równanie Hartree-Focka ma postać jednoelektronowego równania Schr\"{o}dingera z potencjałem wymiennym wytwarzanym
+w miejscu znajdowania się elektronu przez ładunek wymienny. 
+
+Podejście Hartree-Focka jest metodą przybliżoną, zatem wyliczona energia
+i funkcje falowe różnią się od wielkości dokładnych, które odpowiadają rozwiązaniom równania
+Schr\"{o}dingera dla funkcji wieloelektronowej.
+Uwzglednienie korelacji w wieloelektronowej funkcji falowej umożliwia
+dodatkowe obniżenie energii w porównaniu do energii Hartree-Focka.
+Różnica między dokładną wartością energii ($E_{\rm{exact}}$) i energią wyliczoną w przybliżeniu 
+Hartree-Focka ($E_{\rm{HF}}$), nosi nazwę energii korelacji
+%
+\begin{equation}
+E_c=E_{\rm{exact}}-E_{\rm{HF}}.
+\end{equation}
+%
+Energia korelacji wynika z faktu, że również elektrony o przeciwnych
+kierunkach spinów dążą do przestrzennej separacji i
+zmniejszenia energii oddziaływania kulombowskiego.
+Korelacje elektronowe można uwzględnić przez zastosowanie funkcji wielowyznacznikowych,
+w ramach metody oddziaływania konfiguracji ({\it ang. configuration interaction} - CI) \cite{GTO}.
+To podejście pozwala wyznaczyć bardzo dokładnie funkcję falową i energię stanu podstawowego, 
+jednak czas obliczeniowy skaluje się eksponencjalnie z rozmiarem układu,
+więc stosowane jest jedynie do małych układów molekularnych.
+
+\section{Metoda pola samouzgodnionego}
+
+Równania Hartree-Focka najczęściej rozwiązuje się numerycznie stosując metodę pola samouzgodnionego, nazywaną również przybliżeniem średniego pola.
+Przy zadanych położeniach atomów wybieramy początkowe funkcje falowe $\psi_{i0}^{\sigma}$, 
+które przykładowo mogą być orbitalami izolowanych atomów.
+Dla tych funkcji falowych wyliczamy gęstość elektronową $n(\mb{r})$ i potencjał $V(\mb{r})$ 
+w każdym punkcie przestrzeni badanego układu. 
+Dla tak wyliczonego potencjału rozwiązujemy równanie (\ref{HF}) wyznaczając zbiór jednoelektronowych funkcji falowych i energii 
+stanów elektronowych. Wyznaczone funkcje falowe stosujemy do ponownego wyliczenia gęstości elektronów
+i potencjału efektywnego. Procedurę powtarzamy do momentu, gdy otrzymane w kolejnych krokach energie i funkcje falowe
+są jednakowe lub różnią się o niewielką zadaną wielkość. Najczęściej parametrem służącym do badania zbieżności
+rachunku jest całkowita energia układu. Metoda pola samoouzgodnionego zastosowana była po raz pierwszy
+do rozwiązania równania Hartree, które możemy otrzymać z rownania Hartree-Focka po usunięciu
+oddziaływania wymiennego. Równanie Hartree odpowiada funkcji falowej w postaci
+iloczynu niezależnych funkcji jednocząstkowych, czyli opisuje zbiór niezależnych elektronów
+w efektywnym polu elektrostatycznym. Metoda pola samouzgodnionego stosowana jest obecnie w większości 
+metod obliczeniowych struktury elektronowej ciał stałych. 
+
+\section{Gaz elektronowy}
+
+Jednorodny gaz elektronowy jest dobrym przybliżeniem rzeczywistej struktury
+elektronowej prostych metali i jest często wykorzystywany w wielu podstawowych
+metodach obliczeniowych (np. w przybliżeniu lokalnej gęstości).
+Najprostszy model gazu elektronowego składa się z nieoddziałujących cząstek
+zamkniętych w sześcianie o objętości $V=L^3$. Długość elektronowej fali de'Broglie'a
+rozchodzącej się w każdym kierunku musi spełniać warunek periodyczności ($n\lambda=L$),
+co prowadzi to kwantowania wektora falowego w kierunkach $x$, $y$ i $z$
+%
+\begin{equation}
+\mb{k}=(\frac{2\pi n_x}{L},\frac{2\pi n_x}{L},\frac{2\pi n_x}{L}),
+\end{equation}
+%
+gdzie $n_x$, $n_y$, $n_z$ są liczbami całkowitymi.
+Energie i funkcje falowe dyskretnych stanów elektronowych dane są wzorami
+%
+\begin{equation}
+E_k=\frac{\hbar^2 k^2}{2m},
+\end{equation}
+%
+\begin{equation}
+\psi_k(\mb{r})=\frac{1}{\sqrt{V}}e^{i\mb{kr}},
+\label{pw}
+\end{equation}
+%
+Zakładamy, że układ nie jest spolaryzowany magnetycznie i liczba elektronów ze spinami skierowanymi 
+do góry i na dół jest jednakowa, $N_{\uparrow}=N_{\downarrow}=\frac{1}{2}N$.
+Zgodnie z zakazem Pauliego w stanie kwantowym o danym wektorze falowym $\mb{k}$ mogą
+znajdować się maksymalnie dwa elektrony o przeciwnych kierunkach spinu.
+W temperaturze $T=0$ K elektrony obsadzają kolejne stany od najniższego do
+maksymalnej wartości $E_F$ nazywanej energią Fermiego. 
+Całkowita energia układu $N$ elektronów wynosi
+%
+\begin{equation}
+E=2\sum_{k<k_F} E_k = \frac{2V}{(2\pi)^3}\int d\bm{k} \frac{\hbar^2 k^2}{2m} = \frac{V}{(2\pi)^3}\frac{4\pi\hbar^2}{5m} k_F^5, 
+\label{E}
+\end{equation}
+%
+gdzie $(2\pi)^3/V$ jest objętością w przestrzeni odwrotnej przypadającą na jeden stan elektronowy, 
+a $k_F$ jest wektorem falowym Fermiego, który jest promieniem kuli w przestrzeni odwrotnej
+zawierającej zajęte stany elektronowe. W ogólnym przypadku powierzchnia obejmująca zajęte stany elektronowe,
+nazywana powierzchnią Fermiego, może mieć dowolny kształt i składać się z wielu odrębnych części.
+Liczba elektronów znajdująca się w objętości $V$ wyraża się wzorem
+%
+\begin{equation}
+N=\frac{2V}{(2\pi)^3}\int d\bm{k}=\frac{2V}{(2\pi)^3}\frac{4\pi}{3} k_F^3.  
+\label{N}
+\end{equation}
+%
+Dzieląc (\ref{E}) przez (\ref{N}) otrzymujemy średnią energię przypadającą
+na pojedynczy elektron, wyrażoną przez energię Fermiego
+%
+\begin{equation}
+\frac{E}{N}=\frac{3}{5} \frac{\hbar^2 k_F^2}{2m} = \frac{3}{5} E_F.
+\label{EN}
+\end{equation}  
+%
+W przypadku jednorodnego gazu gęstość elektronowa dana jest wyrażeniem
+%
+\begin{equation}
+n = \frac{N}{V} = \frac{k_F^3}{3\pi^2}.
+\label{nkf}
+\end{equation}
+%
+Często używaną wielkością jest objętość kuli w przestrzeni rzeczywistej przypadająca na jeden elektron 
+%
+\begin{equation}
+V_s=\frac{4\pi}{3}r_{s}^3=\frac{1}{n},
+\end{equation}
+%
+gdzie $r_s$ jest jej promieniem
+%
+\begin{equation}
+r_s=(\frac{3}{4\pi n})^{1/3}.
+\end{equation}
+%
+
+Wyliczymy teraz energię gazu elektronowego w przybliżeniu Hartree-Focka.
+Zakładamy, że ładunek dodatni rozłożony jest jednorodnie w całej przestrzeni $V$
+i ma gęstość taką samą jak gaz elektronów. Energia oddziaływania
+elektronów z takim polem kasuje się z energią Hartree i całkowita energia
+elektronu składa się tylko z części kinetycznej i oddziaływania wymiennego.
+Energię wymiany można łatwo wyliczyć przedstawiając potencjał kulombowski
+w postaci transformaty Fouriera
+%
+\begin{equation}
+\frac{1}{|\mb{r}-\mb{r}'|}=4\pi\int \frac{d\mb{q}}{(2\pi)^3}\frac{e^{i\mb{q}(\mb{r}-\mb{r}')}}{q^2},
+\end{equation}
+%
+Wstawiając funkcję falową w postaci (\ref{pw}) do wyrażenia na energię wymiany 
+i wykonując całkowanie otrzymujemy energie stanów jednoelektronowych
+%
+\begin{equation}
+E_k=\frac{\hbar^2 k^2}{2m} - \int_{\mb{k'}<\mb{k_F}} \frac{d\bm{k'}}{(2\pi)^3} \frac{4\pi}{|\mb{k}-\mb{k'}|^2}
+=\frac{\hbar^2 k^2}{2m} - \frac{k_F}{\pi}(1+\frac{k_F^2-k^2}{2kk_F}ln|\frac{k_F+k}{k_F-k}|).
+\end{equation}
+%
+Całkowitą energię układu elektronów dostajemy sumując to wyrażenie po wektorze falowym    
+%
+\begin{equation}
+E=\sum_{k<k_F}[\frac{\hbar^2 k^2}{2m} - \frac{k_F}{\pi}(1+\frac{k_F^2-k^2}{2kk_F}ln|\frac{k_F+k}{k_F-k}|)].
+\end{equation}
+%
+Wykorzystując (\ref{EN}) i zamieniając sumowanie w drugim wyrazie na całkę dostajemy
+%
+\begin{equation}
+E=N(\frac{3}{5}E_F - \frac{3k_F}{4\pi})=N(\frac{3}{5}E_F - \frac{3(3\pi^2n)^{\frac{1}{3}}}{4\pi}),
+\end{equation}
+gdzie skorzystaliśmy ze związku (\ref{nkf}). Energia wymiany przypadająca na jeden elektron wynosi 
+%
+\begin{equation}
+\varepsilon_x=\frac{E_x}{N}=-\frac{3}{4}\Big(\frac{3}{\pi}\Big)^{\frac{1}{3}}n^\frac{1}{3}.
+\label{exchange}
+\end{equation}
+%
+Ten wzór określający zależność energii wymieny od gęstości elektronowej
+wykorzystywany jest w teorii funkcjonału gęstości w ramach przybliżenia lokalnej gęstości.
+
+Dla gazu elektronowego można wyprowadzić wyrażenie opisujące rozkład ładunku dziury wymiennej (\ref{EC}),
+który zależy tylko od odległości $r$
+%
+\begin{equation}
+g^{\sigma}_x(r)=1 - [3\frac{sin(rk_F)-rk_Fcos(rk_F)}{(rk_F)^3}]^2.
+\end{equation}
+%
+Nie jest możliwe wyrażenie energii korelacji dla gazu swobodnych elektronów w postaci 
+funkcji analitycznej gęstości $n$. Pierwszy przybliżony wzór zaproponowałem Wigner \cite{wigner34}
+%
+\begin{equation}
+\varepsilon(r_s)=-\frac{0.44}{r_s+7.8}.
+\end{equation}
+%
+W granicy małych gęstości ($r_s\rightarrow \infty$), electrony tworzą tzw. kryształ Wignera, którego energia korelacji 
+pokrywa się z energią elektrostatyczną zlokalizowanych ładunków punktowych.
+W granicy dużej gęstości ($r_s\rightarrow 0$), Gellmann i Breuckner
+wyprowadzili wzór na gęstość energii korelacji niespolaryzowanego magnetycznie
+gazu elektronów \cite{GB}
+%
+\begin{equation}
+\varepsilon_c (r_s)=0.311\ln(r_s)+r_s(A\ln(r_s)+C)-0.048+... .
+\end{equation}
+%
+Energię korelacji gazu elektronowego najdokładniej wyznaczono numerycznie
+metodą kwantowego Monte Carlo (QMC) \cite{CeperleyAlder80}. 
+
+
+
+\chapter{Stany elektronowe w krysztale}
+
+\section{Sieć krystaliczna}
+
+Kryształy zbudowane są z atomów lub molekuł ułożonych w periodyczną sieć.
+Trójwymiarową sieć krystaliczną definiujemy jako zbiór punktów, których
+położenia określone są wektorem translacji
+%
+\begin{equation}
+\bm{R}_n=n_1\bm{a}_1+n_2\bm{a}_2+n_3\bm{a}_3,
+\label{trans}
+\end{equation}
+%
+gdzie wektory $\bm{a}_i$ nazywamy podstawowymi lub prymitywnymi wektorami translacji, a $n_i$ są liczbami całkowitymi.
+Zbiór punktów zdefiniowanych tym wzorem nazywamy siecią Bravais. Podobnie można zdefiniować sieć Bravais
+dla dowolnego wymiaru $d$ wybierając odpowiednią ilość wektorów bazowych: $\bm{a}_1,\bm{a}_2,...,\bm{a}_d$. 
+Z każdym punktem sieci Bravais można związać zbiór atomów zwanych bazą. Najmniejsza przestrzeń kryształu,
+która po przesunieciu o wszystkie translacje sieciowe wypełni całą przestrzeń nazywamy komórką prymitywną. 
+Komórka prymitywna zawiera dokładnie jeden węzeł sieci Bravais i zwykle zbudowana jest na podstawowych wektorach translacji sieci.
+Istnieje specjalny rodzaj komórki prymitywnej nazywany komórką Wignera-Seitza, która jest przestrzenią zawierającą punkty przestrzeni, 
+które znajdują się bliżej danego punktu sieci niż pozostałych. 
+Często zamiast komórki prymitywnej używa się komórki elementarnej, która zbudowana jest na innych wektorach bazowych
+i jej symetria jest taka sama jak symetria całego kryształu.
+Objętość komórki elementarnej jest całkowitą wielokrotnością objętości komórki prymitywnej.
+W strukturach prostych (bez centrowania powierzchniowego lub przestrzennego), komórka elementarna pokrywa się
+z komórką prymitywną. Różnice między poszczególnymi rodzajami komórek można przedstawić na przykładzie
+sieci dwuwymiarowej. Na rysunku \ref{fig:bravais} pokazana jest struktura centrowana prostokątna z zaznaczonymi dwoma wektorami podstawowaymi $\bm{a}_p$
+i $\bm{b}_p$, które definiują komórkę prymitywną, pokazaną na rysunku w dwóch wariantach. Komórka Wignera-Seitza pokazana
+jest po prawej stronie. Komórka elementarna wyznaczona jest przez dwa wektory bazowe $\bm{a}_e$ i $\bm{b}_e$.
+W dwóch wymiarach mamy w sumie pięć rodzajów sieci Bravais: skośna, prostokątna, prostokatna centrowana, heksagonalna i kwadratowa.
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.4]{lattice.pdf}
+\caption{Dwuwymiarowa sieć periodyczna.}\label{fig:bravais}
+\end{figure}
+
+W przypadku sieci trójwymiarowych, wszystkie możliwe struktury można podzielić na siedem układów krystalograficznych: 
+regularny, tetragonalny, rombowy, heksagonalny, trygonalny, jednoskośny i trójskośny, którym odpowiada czternaście możliwych sieci Bravais,
+które podzielone są na proste (P), centrowane powierzchniowo (F), centrowane na podstawach (C) i centrowane przestrzennie (I). 
+Wszystkie układy krystalograficzne z odpowiadającymi im sieciami Bravais przedstawione są w tabeli \ref{lattice}.
+Dla każdego układu pokazana jest zalezność między stałymi sieci ($a$, $b$, $c$) oraz kątami między kierunkami ($\alpha$, $\beta$, $\gamma$),
+które definiują krawędzie komórek elementarnych. 
+
+\begin{table}[h!]
+\caption{Układy krystalograficzne.}\label{lattice}
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+Układ & Stałe sieci & Kąty & Sieci Bravais\\
+\hline
+regularny & $a=b=c$ & $\alpha=\beta=\gamma=90^{\degree}$ &  P, F, I \\ 
+tetragonaly & $a=b\ne c$ & $\alpha=\beta=\gamma=90^{\degree}$ &  P, I \\  
+rombowy & $a\ne b\ne c$ & $\alpha=\beta=\gamma=90^{\degree}$ &  P, F, C, I \\ 
+heksagonalny &  $a=b\ne c$ & $\alpha=\beta=90^{\degree}$, $\gamma=120^{\degree}$ &  P  \\
+trygonalny & $a=b\ne c$ & $\alpha=\beta=90^{\degree}$, $\gamma=120^{\degree}$ &  P \\
+jednoskośny & $a=b\ne c$ & $\alpha=\gamma=90^{\degree}$, $\beta\ne 90^{\degree}$ & P, C \\ 
+trójskośny & $a\ne b\ne c$ & $\alpha\ne \beta\ne \gamma\ne 90^{\degree}$ & P \\ \hline
+\end{tabular}
+\end{center}
+\end{table}
+
+Zbiór operacji, który pozostawia dany kryształ niezmienionym tworzy grupą przestrzenną.
+Składa się ona z translacji sieci krystalicznej opisanych wzorem (\ref{trans}) oraz symetrii punktowych: inwersji, obrotów i odbić.
+Dodatkowo występują operacje niesymorficzne, które są połączeniem operacji punktowych i ułamkowych translacji.
+Wszystkich grup przestrzennych jest 230, z których 73 to symorficzne i 157 niesymorficzne.
+
+\section{Przestrzeń odwrotna}
+
+Strukturę elektronową materiału analizuje się najczęściej wykorzystując przestrzeń wektorów falowych $\bm{k}$,
+którą nazywamy przestrzenią odwrotną. Każdej sieci Bravais w przestrzeni rzeczywistej odpowiada sieć punktów
+w przestrzeni odwrotnej zdefiniowana wektorami
+%
+\begin{equation}
+\bm{G}_m=m_1\bm{b}_1+m_2\bm{b}_2+m_3\bm{b}_3,
+\end{equation}
+%
+gdzie $m_j$ są liczbami całkowitymi, a $\bm{b}_j$ są wektorami odwrotnymi do wektorów bazowych $\bm{a}_i$,
+czyli spełniają warunek
+%
+\begin{equation}
+\bm{a}_i \cdot \bm{b}_j = 2\pi \delta_{ij}.
+\label{orto}
+\end{equation}
+%
+Wektory sieci odwrotnej można wyznaczyć z następujących zależności
+%
+\begin{eqnarray}
+\bm{b}_1=\frac{2\pi}{\Omega}\bm{a}_2\times \bm{a}_3, \\
+\bm{b}_2=\frac{2\pi}{\Omega}\bm{a}_3\times \bm{a}_1, \\
+\bm{b}_3=\frac{2\pi}{\Omega}\bm{a}_1\times \bm{a}_2, 
+\end{eqnarray}
+%
+gdzie $\Omega=\bm{a}_1\cdot(\bm{a}_2\times \bm{a}_3)$ jest objętością komórki prymitywnej.
+
+W przestrzeni odwrotnej również definiujemy komórkę prymitywną, która najczęściej ma kształt
+komórki Wignera-Seitza i nosi nazwę strefy Brillouina ({ang. Brillouin zone} - BZ).  
+Komórka, która obejmuje punkt $\bm{K}=0$, nazywany punktem $\Gamma$, nosi nazwę pierwszej strefy Brillouina.
+Na rysunku \ref{fig:lattice} pokazane są przykładowe strefy Brillouina dla trzech sieci regularnych. 
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=1.2]{brillouin.pdf}
+\caption{Strefy Brillouina dla sieci regularnych: prostej (P), centrowanej objetościowo (I) i centrowanej przestrzennie (F).}
+\label{fig:lattice}
+\end{figure}
+
+
+\section{Twierdzenie Blocha}
+
+W najprostszym opisie elektronów w periodycznym potencjale kryształu $V(\bm{r})$, stany elektronowe opisywane są przez niezależne jednocząstkowe funkcje falowe, bedące rozwiązaniami równania Schr\"{o}dingera w postaci
+%
+\begin{equation}
+[-\frac{\hbar^2\nabla^2}{2m}+V(\bm{r})]\psi^{\sigma}_{\bm{k}j}(\bm{r})=\varepsilon_{j\sigma}(\bm{k})\psi^{\sigma}_{\bm{k}j}(\bm{r}),
+\label{RS}
+\end{equation}
+%
+gdzie $\bm{k}$ jest wektorem falowym, $\sigma$ określa spin elektronu i indeks $j$ numeruje stany własne hamiltonianu odpowiadajace energiom $\varepsilon_{j\sigma}(\bm{k})$.
+Zgodnie z twierdzeniem Blocha, funkcja falowa elektronów w periodycznym potencjale ma postać
+%
+\begin{equation}
+\psi^{\sigma}_{\bm{k}j}(\bm{r})=e^{i\bm{k}\bm{r}}u^{\sigma}_{\bm{k}j}(\bm{r}),
+\end{equation}
+%
+gdzie $u^{\sigma}_{\bm{k}j}(\bm{r})$ jest funkcją periodyczną spełniającą warunek $u^{\sigma}_{\bm{k}j}(\bm{r})=u^{\sigma}_{\bm{k}j}(\bm{r}+\bm{R}_n)$ dla
+każdego wektora traslacji $\bm{R}_n$. Można pokazać, że funkcje Blocha są wektorami własnymi
+operatora translacji
+%
+\begin{equation}
+\hat{T}_n\psi^{\sigma}_{\bm{k}j}(\bm{r})=\psi^{\sigma}_{\bm{k}j}(\bm{r}+\bm{R}_n)=e^{i\bm{k}(\bm{r}+\bm{R}_n)}u^{\sigma}_{\bm{k}j}(\bm{r}+\bm{R}_n)=e^{i\bm{k}\bm{R}_n}\psi^{\sigma}_{\bm{k}j}(\bm{r}).
+\end{equation}
+%
+Hamiltonian jest niezmienniczy ze względu na działanie operatora translacji,
+co oznacza, że obydwa operatory ze sobą komutują. Funkcje Blocha są zatem również stanami własnymi hamiltonianu,
+co dowodzi prawdziwości twierdzenia Blocha. 
+
+Funkcja Blocha określona jest dla wektora falowego $\bm{k}$, który w układach periodycznych jest dobrze zdefiniowaną liczbą kwantową.
+Wektor falowy związany jest z kwazipędem elektronu w stanie $\psi_{\bm{k}j}$
+%
+\begin{equation}
+\bm{p}=\hbar\bm{k}.
+\end{equation}
+%
+Ponieważ wszystkie własności struktury elektronowej są translacyjnie niezmiennicze 
+ze względu na przesunięcie o dowolny wektor sieci odwrotnej, również kwazipęd nie zależy od takiego przesunięcia.
+
+\section{Fale płaskie}
+
+Metody obliczeniowe struktury pasmowej różnią sie między sobą stosowanymi reprezentacjami funkcji falowej.
+Ogólnie możemy zapisać funkcję falową w formie
+%
+\begin{equation}
+\psi^{\sigma}_{\bm{k}j}(\bm{r})=\sum_mc^{\sigma}_{jm}(\bm{k})\phi_{\bm{k}m}(\bm{r}),
+\end{equation}
+% 
+gdzie $\phi_{\bm{k}m}(\bm{r})$ są funkcjami bazowymi, a $c^{\sigma}_{jm}(\bm{k})$ to współczynniki rozwinięcia.
+W krysztale, ze względu na periodyczny potencjał, naturalną bazę stanowią fale płaskie. Jeżeli cześć periodyczną funkcji
+Blocha rozwiniemy w tej bazie, funkcja falowa przyjmuje postać
+%
+\begin{equation}
+\psi^{\sigma}_{\bm{k}j}(\bm{r})=e^{i\bm{k}\bm{r}}\sum_{m} c^{\sigma}_{jm}(\bm{k})e^{i\bm{G_m}\bm{r}}=\sum_{m} c^{\sigma}_{jm}(\bm{k})e^{i(\bm{k}+\bm{G_m})\bm{r}},
+\end{equation}
+% 
+gdzie $\bm{G_m}$ są wektorami sieci odwrotnej. Równanie Schr\"{o}dingera (\ref{RS}) przetransponowane do przestrzeni odwrotnej w bazie
+fal płaskich przyjmuje postać
+%
+\begin{equation}
+\sum_{n}H_{mn} c^{\sigma}_{jn}(\bm{k})=\varepsilon_{j\sigma}(\bm{k}) c^{\sigma}_{jm},
+\label{ham_rec}
+\end{equation}
+%
+gdzie elementy macierzowe Hamiltonianu dane są wyrażeniem
+%
+\begin{equation}
+H_{mn}=\frac{\hbar^2}{2m}|\bm{k}+\bm{G_m}|^2\delta_{mm'}+V(\bm{G_m}-\bm{G_n}).
+\end{equation}
+%
+Drugi wyraz jest transformatą Fouriera potencjału elektronowego
+%
+\begin{equation}
+V(\bm{G})=\frac{1}{\Omega}\int_{\Omega}\bm{dr}V(\bm{r})e^{-i\bm{Gr}},
+\end{equation}
+%
+gdzie całkowanie przebiega po komórce prymitywnej.
+
+\section{Periodyczne warunki brzegowe}
+
+Podobnie jak dla gazu elektronowego zamkniętego w pojemniku, również dla skończonego kryształu
+możemy wprowadzić periodyczne warunki brzegowe (warunki Borna-Karmana). Załóżmy, że rozmiary kryształu
+określone są przez liczbę komórek prymitywnych w każdym kierunku kryształu $(N_1,N_2,N_3)$.
+Zatem liczby całkowite, które definiują wektory translacyjne sieci (\ref{trans})
+zmieniają się w zakresie $n_i=0,1,2,...,N_i$, gdzie $i=1,2,3$.
+Zakładając, że funkcja falowa na dwóch przeciwległych brzegach układu (w każdym z trzech kierunków) przyjmuje
+takie same wartości i korzystając z twierdzenia Blocha otrzymujemy warunek
+%
+\begin{equation}
+\psi^{\sigma}_{\bm{k}j}(\bm{r})=\psi^{\sigma}_{\bm{k}j}(\bm{r}+N_i\bm{a}_i)=e^{i\bm{k}N_i\bm{a}_i}\psi^{\sigma}_{\bm{k}j}(\bm{r}),
+\label{pwb}
+\end{equation} 
+%
+który spełniony jest gdy 
+%
+\begin{equation}
+\bm{k}N_i\bm{a}_i=2\pi n_i.
+\end{equation}
+%
+Wykorzystując bazę wektorów prymitywnych sieci odwrotnej ($\bm{b}_1,\bm{b}_2,\bm{b}_3$) oraz biorąc pod uwagę zależność (\ref{orto}), dostajemy zbiór dozwolonych wektorów falowych
+%
+\begin{equation}
+\bm{k}=\frac{n_1}{N_1}\bm{b}_1+\frac{n_2}{N_2}\bm{b}_2+\frac{n_3}{N_3}\bm{b}_3.
+\label{vectk}
+\end{equation}
+%
+Wektory te określają funkcje falowe Blocha $\psi_{i,\bm{k}}$ i energie stanów $\varepsilon_i(\bm{k})$.
+Skończona ilość dostępnych stanów wynika zatem z ograniczonych rozmiarów kryształu i jest równa ilości komórek prymitywnych w układzie: $N=N_1N_2N_3$.  
+Ze wzoru (\ref{vectk}) wynika również, że dozwolone wektory falowe stanów elektronowych należą do pojedynczej komórki prymitywnej w przestrzeni odwrotnej.
+Najczęściej do analizy stanów elektronowych wybiera się wektory należące do pierwszej strefy Brillouina.
+
+\section{Sumowanie w przestrzeni odwrotnej}
+
+Wiele wielkości fizycznych wyznaczanych jest jako sumy po punktach w przestrzeni odwrotnej. 
+Przedstawiona powyżej analiza pokazuje, że wystarczy ograniczyć
+sie do wektorów falowych należących do pierwszej strefy Brillouina.
+Dodatkowo, można wykorzystać symetrię kryształu do zmniejszenia ilości punktów, które konieczne
+są do wyznaczenia danej wielkości fizycznej. 
+Oznaczmy operacje punktowe (symorficzne) przez $O_i$, a wektory translacji ułamkowej związane z daną symetrią $O_i$
+przez $\bm{t}_i$. W przestrzeni odwrotnej rozpatrujemy jedynie symorficzne operacje symetrii ponieważ translacje
+ułamkowe nie mają wpływu na przestrzeń odwrotną. Hamiltoniana opisujący kryształ jest niezmienniczy
+względem operacji punktowych: $\bm{r}\rightarrow O_i\bm{r}+\bm{t}_i$ oraz $\bm{k}\rightarrow O_i\bm{k}$.
+Oznacza to, że funkcje falowe otrzymane po tych transformacjach 
+%
+\begin{equation}
+\psi^{\sigma}_{O_i\bm{k}j}(O_i\bm{r}+\bm{t}_i)=\psi^{\sigma}_{\bm{k}j}(\bm{r}),
+\end{equation}  
+%
+są również funkcjami własnymi hamiltonianu z tą samą energią własną $\varepsilon_{j\sigma}(\bm{k})$.
+Oznacza to, że można ograniczyć sumowanie danej wielkości fizycznej $f(\bm{k})$ do wektorów $\bm{k}$ należących do mniejszego obszaru,
+który nazywany jest nieredukowalną częścią strefy Brillouina ({\it ang. irreducible Brillouin zone} - IBZ). 
+Obszar ten tworzą wektory $\bm{k}$, które są nierównoważne, czyli nie można ich wzajemnie połączyć operacją symetrii punktowej. 
+Wartości w pozostałych punktach dostajemy przez zastosowanie odpowiednich operacji symetrii $f(O_i\bm{k})=f(\bm{k})$.
+Do sumowania wykorzystujemy wagi $w_{\bm{k}}$, które zdefiniowane są jako ilości wektorów $\bm{k}$, powiązanych symetrią punktową 
+z wektorem należącym do IBZ (z uwzglednieniem tego wektora), podzielone przez całkowitą ilość wektorów $N_{\bm{k}}$.
+Przykładowo, wartość średnią wielkości $f$, możemy wyliczyć sumując po punktach należących do IBZ
+%
+\begin{equation}
+\bar{f}=\frac{1}{N_{\bm{k}}}\sum_{\bm{k}}^{BZ}f(\bm{k})=\sum_{\bm{k}}^{IBZ}w_{\bm{k}}f(\bm{k}).
+\end{equation}
+%
+
+Przy sumowaniu po przestrzeni odwrotnej można w zasadzie wybrać dowolne punkty należące do IBZ.
+Jednak wykorzystując własności funkcji periodycznych, można tak wybrać wektory $\bm{k}$,
+aby zminimalizować błędy przy obliczaniu sum lub całek.
+Dowolną funkcję periodyczną można rozwinąć przy pomocy transformaty Fouriera
+%
+\begin{equation}
+f(\bm{k})=\sum_n f(\bm{R}_n)e^{i\bm{k}\bm{R}_n},
+\end{equation} 
+%
+gdzie $\bm{R}_n$ są wektorami translacji sieci krystalicznej.
+Zbiór punktów, który jest optymalny do wyliczania sum w przestrzeni odwrotnej, 
+nazywany jest siecią Monkhorsta-Packa \cite{MP}. Wyznacza się go ze  wzoru
+%
+\begin{equation}
+\bm{k}(n_1,n_2,n_3)=\sum_i^3 \frac{2n_i-N_i-1}{2N_i}\bm{b}_i,
+\end{equation}
+%
+gdzie liczby $N_1$, $N_2$ i $N_3$ określają ilość punktów $\bm{k}$ w każdym kierunku: $n_i=1,2,...,N_i$.
+Tak zdefiniowane punkty tworzą jednorodną sieć w przestrzeni odwrotnej i charakteryzują się
+tym, że suma wartości periodycznej funkcji, która posiada komponenty Fouriera ograniczone w każdym kierunku do $\bm{R}_n=N_i\bm{a}_i$,
+równa jest dokładnej całce z tej funkcji.  
+
+\section{Energia Fermiego}
+
+Wielkości fizyczne, które dotyczą stanu podstawowego, wyliczane są zwykle dla obsadzonych stanów elektronowych.
+Czyli sumowanie w przestrzeni odwrotnej uwzglednia tylko zajęte stany.
+Energia najwyższego obsadzonego stanu określa energię Fermiego ($E_F$).
+W metalach pasma elektronowe przecinają $E_F$ i przy sumowaniu po dyskretnych punktach $\bm{k}$ pojawiają się nieciągłości
+w obsadzeniach stanów. Powoduje to wolniejszą zbieżność ze względu na ilość punktów $\bm{k}$. 
+Można łatwo rozwiązać ten problem przez wprowadznie ciagłej funkcji obsadzania stanów w pobliżu $E_F$.
+Naturalnym wyborem jest zastosowanie funkcji rozkładu Fermiego-Diraca dla skończonej temperatury
+%
+\begin{equation}
+F(\varepsilon,E_F,T)=[\exp(\frac{\varepsilon-E_F}{kT})+1]^{-1}.
+\end{equation}   
+%
+Dla $T=0$, dostajemy funkcję schodkową, która odpowiada rozkładowi w stanie podstawowym.
+Aby wyznaczyć $E_F$ dla dowolnej temperatury, korzystamy z warunku
+%
+\begin{equation}
+\sum_{\bm{k},j} w_{\bm{k}}F(\varepsilon,E_F,T)=n_{el},
+\end{equation}   
+%
+gdzie $n_{el}$ jest liczbą elektronów, a sumowanie wykonywane jest po wszystkich obsadzonych stanach
+uwzględniając polaryzację spinową.
+
+
+
+\section{Struktura pasmowa}
+
+Zbiór wszystkich stanów elektronowych $\varepsilon_{\bm{k}j}^{\sigma}$ otrzymanych w wyniku diagonalizacji hamiltonianiu 
+dla wektorów falowych $\bm{k}$ tworzy strukturę pasmową danego materiału.
+Dostępne energie stanów elektronowych, które odpowiadają funkcji własnej z indeksem $j$, grupują się w przedziały nazywane pasmami energetycznymi. 
+Rozwiązania równania (\ref{ham_rec}) w funkcji wektora falowego $\bm{k}$ są periodyczne ze względu na przesunięcie o 
+wektor sieci odwrotnej
+%
+\begin{equation}
+\varepsilon_{\bm{k}j}^{\sigma}=\varepsilon_{\bm{k}+\bm{G_m}j}^{\sigma}.
+\end{equation}   
+%
+Zatem przy prezentacji struktury pasmowej można ograniczyć się do pierwszej strefy Brillouina. Zwykle prezentuje się tylko stany elektronowe dla wektorów $\bm{k}$ należących do wybranych kierunków i punktów wysokiej symetrii w przestrzeni odwrotnej. Jeżeli energie pasm przyjmują różne wartości dla dwóch kierunków spinu,
+$\varepsilon_{\bm{k}j}^{\uparrow}\ne \varepsilon_{\bm{k}j}^{\downarrow}$, mamy doczynienia z rozszczepieniem spinowym (wymiennym), które związane jest z uporządkowaniem magnetycznym.
+
+Ważną wielkością, która charakteryzuje strukturą pasmową jest gęstość stanów elektronowych dla danego kierunku spinu $\rho_{\sigma}(E)$,
+która wyliczana jest jako suma po pierwszej strefie Brillouina
+%
+\begin{equation}
+\rho_{\sigma}(E)=\frac{1}{N_k}\sum_{j,\bm{k}}\delta[\varepsilon_{\bm{k}j}^{\sigma}-E],
+\end{equation}
+%
+gdzie $N_k$ jest ilością wektorów $\bm{k}$ w pierwszej strefie Brillouina.
+Całkowita gęstość stanów równa jest sumie obydwóch składowych spinowych, $\rho(E)=\rho_{\uparrow}(E)+\rho_{\downarrow}(E)$.
+Przy wyliczaniu gestości stanów często zamiast sieci Monkhorsta-Packa stosuje się metodę tetraedrów.
+Polega ona na podzieleniu całej strefy Brillouina na tetraedry i wyliczeniu energii stanów w punktach $\bm{k}$, które
+odpowiadają wierzchołkom tetraedrów. Energie pomiędzy tymi punktami wyznacza się stosując interpolację liniową.
+
+Struktura pasmowa decyduje o podstawowych własnościach danego materiału i jest jego wyróżnikiem, pozwalającym zakwalifikować go do określonej grupy materiałów. 
+Trzy podstawowe typy materiałów krystalicznych to metale, półprzewodniki i izolatory.
+Struktura pasmowa metali charakteryzuję się występowaniem powierzchni Fermiego, która odgranicza zajęte stany elektronowe od stanów pustych.
+Zatem w typowych metalach gęstość stanów na poziomie Fermiego jest niezerowa, $\rho(E_F)>0$.
+Tuż powyżej energii Fermiego ($E_F$) znajdują się stany, do których przechodzą elektrony wzbudzone termicznie lub w wyniku oddziaływania z innymi
+elektronami. W półprzewodnikach i izolatorach, powyżej ostatniego zajętego stanu elektronowego, znajduje się przerwa obejmująca
+zakres zabronionych energetycznie stanów.
+Pasmo, które znajduje się tuż poniżej przerwy energetycznej nazywa się pasmem walencyjnym, a to które jest powyżej
+pasmem przewodnictwa.
+Półprzewodniki zwykle charakteryzują się mniejszą przerwa energetyczną ($\sim$1-2 eV) niż izolatory.
+Występują też materiały nazywane półmetalami, w których przerwa energetyczna i $\rho(E_F)$ są równe zeru (np. grafen).
+Odrębną grupę materiałów stanowią izolatory Motta, w których przerwa energetyczna jest wynikiem silnych oddziaływań
+elektronowych.  
+
+
+
+\chapter{Teoria funkcjonału gęstości}
+
+Większość nowoczesnych metod obliczeniowych stosowanych do badania własności materiałów opiera się na teorii funkcjonału gestości ({\it ang. density functional theory} - DFT), która została sformułowana w pracach Hohenberga i Kohna \cite{kohn64}
+oraz Kohna i Shama \cite{kohn65}. Obecnie, DFT stosowana jest powszechnie do wyliczania struktury elektronowej,
+optymalizacji sieci krystalicznej, badania własności elastycznych i dynamiki sieci oraz wielu innych własności materiałowych.
+Podobnie jak w opisie oddziaływania wymiennego zaproponowanym przez Slatera~\cite{slater51}
+i w teorii Thomasa-Fermiego~\cite{thomas,fermi,dirac} podstawową wielkością jest tutaj gęstość elektronowa zdefiniowana w każdym punkcie materiału $n(\bm{r})$.
+Główną ideą tego podejścia jest mozliwość zastąpienie dokładnej funkcji falowej, układem stanów jednocząstkowych w efektywnym potencjale elektronowym, który
+daje taką samą gęstość elektronową jak opis wieloelektronowy.
+Takie podejście daje możliwość wykorzystania dokładnej informacji o oddziaływaniach wymiennych i korelacyjnych
+otrzymanych dla jednorodnego gazu elektronowego do badania niejednorodnych układów atomowych.
+
+\section{Twierdzenia Hohenberga-Kohna}
+
+Praca Hohenberga i Kohna \cite{kohn64} zawiera dwa fundamentalne twierdzenia, które
+dotyczą relacji między gęstością elektronową $n(\bm{r})$, zewnętrznym potencjałem $V_{ext}(\bm{r})$ 
+oraz energią całkowitą układu elektronów $E[n]$, która jest funkcjonałem 
+gęstości elektronowej. Zależność funkcjonalna oznacza, że dla dowolnego rozkładu 
+elektronów w całej przestrzeni układu $n(\bm{r})$ można jednoznacznie wyznaczyć energię całkowitą 
+układu $E[n]$. Zapiszmy hamiltonian układu oddziałujących elektronów
+w ogólnej formie
+
+\begin{equation}
+H=-\frac{\hbar^2}{2m}\sum_{i}\nabla_i^2+V_{ext}(\bm{r})+\frac{1}{2}\sum_{i\neq j}\frac{e^2}{|\bm{r}_i-\bm{r}_j|}.
+\label{hamil}
+\end{equation}
+%
+Twierdzenia Hohenberga-Kohna można sformułować następująco: 
+
+{\bf Twierdzenie I:} 
+Zewnętrzny potencjał układu oddziałujących elektronów $V_{ext}$ jest jednoznacznie określony (z dokładnością do stałej wartości) 
+przez gęstość elektronową w stanie podstawowym $n_0(\mb{r})$.
+
+{\bf Twierdzenie II:}
+Dla ustalonego potencjału zewnętrznego $V_{ext}(\bm{r})$, funkcjonał energii $E[n]$ osiąga
+minimalną wartość $E_0$ dla gęstości elektronowej w stanie podstawowym $n_0(\bm{r})$.
+
+Z twierdzeń tych wynikają następujace wnioski. Ponieważ hamiltonian jest jednoznacznie określony (z dokładnościa do stałej)
+przez $n_0(\bm{r})$, funkcje falowe wszystkich stanów elektronowych,
+jak również wszystkie własności układu są całkowicie zdeterminowane przez gęstość elektronową w stanie podstawowym.
+Znajomość funkcjonału energii $E[n]$ jest wystarczająca do wyznaczenia dokładnej energii i gęstości elektronowej
+stanu podstawowego. 
+
+\section{Równanie Kohna-Shama}
+
+Twierdzenia Kohna-Shama pozwalają w sposób ścisły powiązać gestość elektronową w stanie podstawowym
+z równaniem Schr\"{o}dingera dla układu oddziałujacych elektronów, opisanego hamiltonianem (\ref{hamil}).
+W praktyce nie jest możliwe bezpośrednie rozwiązanie równania Schr\"{o}dingera i wyznaczenie wielociałowych funkcji falowych.
+Teoria funkcjonału gęstości pozwala zastąpić równanie wielociałowe nowym równaniem, nazywanym równaniem Kohna-Shama, które ma
+taką postać jak dla nieoddziałujących cząstek znajdujacych się w efektywnym polu $V_{eff}$.
+Znając jednoelektronowe rozwiązania równania Kohna-Shama $\psi_i^{\sigma}(\bm{r})$, zależne od położenia i spinu, 
+możemy wyznaczyć gęstość elektronową w każdym punkcie
+%
+\begin{equation}
+n(\bm{r})=\sum_{i,\sigma} f_{i\sigma}|\psi_i^{\sigma}(\bm{r})|^2,
+\label{density}
+\end{equation}
+%
+gdzie dla uproszczenia indeks $i$ określa zarówno numer stanu $j$, jak i wektor falowy $\bm{k}$, a $f_{i\sigma}$ są liczbami obsadzeń
+stanów, które w ogólnym przypadku mogą przyjmować ułamkowe wartości, np. zgodnie z rozkładem Fermiego-Diraca.
+Przyjmujemy również, że ładunek elementarny $e=1$, co oznacza, że gęstość ładunku jest tożsama z gęstością elektronową. 
+Twierdzenia Kohna-Shama zapewniają nam, że efektywny potencjał $V_{eff}$ jest jednoznacznie
+określony przez gęstość elektronową, jak również, że funkcjonał energii całkowitej osiąga
+minimum dla gęstości elektronowej w stanie podstawowym.
+Zatem stan podstawowy układu możemy wyznaczyć jeżeli znamy funkcjonał energii i potrafimy
+znaleźć jego minimum. W postaci ogólnej funkcjonał energii układu elektronów możemy
+zapisać 
+%
+\begin{equation}
+E[n]=T[n] + E_{ext}[n] + E_H[n] + E_{xc}[n],
+\label{EKS}
+\end{equation}
+%
+gdzie $T[n]$ jest energią kinetyczną elektronów
+%
+\begin{equation}
+T[n]=-\frac{\hbar^2}{2m}\sum_{i,\sigma} \int d\bm{r} \psi^{\sigma *}_i(\bm{r})\nabla_i^2 \psi^{\sigma}_i(\bm{r}),
+\end{equation}
+%
+$E_{ext}[n]$ jest energią oddziaływania z potencjałem zewnętrznym
+%
+\begin{equation}
+E_{ext}[n]=\int d\bm{r} V_{ext}(\bm{r}) n(\bm{r}),
+\end{equation}
+%
+$E_H[n]$ jest energią Hartree (\ref{Hartree}) i $E_{xc}[n]$ jest energią wymienno-korelacyjną.
+
+Możemy teraz zastosować podejście wariacyjne uwzględniając warunek ortonormalności
+orbitali Kohna-Shama: $\langle\psi_i^{\sigma *}|\psi_j^{\sigma'}\rangle = \delta_{ij}\delta_{\sigma\sigma'}$
+i wprowadzając mnożniki Lagrange'a
+%
+\begin{equation}
+\frac{\delta}{\delta\psi_i^{\sigma *}}(E[n]-\sum_{i,\sigma}\varepsilon_{i\sigma}[\int d\bm{r} \psi_i^{\sigma *}(\bm {r})\psi_i^{\sigma}(\bm{r})-1]) = 0.
+\label{delta}
+\end{equation}
+%
+Wstawiając funkcjonał energii w postaci (\ref{EKS}) do (\ref{delta}) otrzymujemy 
+%
+\begin{equation}
+\frac{\delta T[n]}{\delta \psi_i^{\sigma *}}+\frac{\delta}{\delta n}(\int d\bm{r} V_{ext}(\bm{r}) n(\bm{r}) + E_H[n] + E_{xc}[n])\frac{\delta n}{\delta \psi_i^{\sigma *}}-\varepsilon_{i\sigma} \frac{\delta}{\delta\psi_i^{\sigma *}}\sum_{j,\sigma'}\int d\bm{r} \psi_j^{\sigma' *}\psi_j^{\sigma}=0,
+\end{equation}
+%
+gdzie zastosowalismy wzór na pochodna funkcji złozonej:
+% 
+\begin{equation}
+\frac{\delta}{\delta \psi_i^{\sigma *}}=\frac{\delta}{\delta n}\frac{\delta n}{\delta \psi_i^{\sigma *}}. 
+\end{equation}
+%
+Wykonując pochodne wariacyjne dostajemy równanie Kohna-Shama
+%
+\begin{equation}
+[-\frac{\hbar^2\nabla_i^2}{2m}+V_{KS}(\bm{r})]\psi_i^{\sigma}(\bm{r})=\varepsilon_{i\sigma}\psi_i^{\sigma}(\bm{r}),
+\end{equation}
+%
+które ma postać jednocząstkowego równania Schr\"{o}dingera z potencjałem Kohna-Shama złożonym z trzech wyrazów
+%
+\begin{equation}
+V_{KS}(\bm{r})=V_{ext}(\bm{r})+V_H(\bm{r})+V_{xc}(\bm{r})=V_{ext}(\bm{r})+\int d\bm{r'} \frac{n(\mb{r}')}{|\bm{r}-\bm{r'}|}+\frac{\delta E_{xc}[n]}{\delta n}.
+\label{VKS}
+\end{equation}
+%
+W potencjale tym nieznana jest dokładnie energia wymienno-korelacyjna, która musi być przybliżana
+odpowiednimi metodami, które będą omówione w kolejnych rozdziałach.
+Znając spektrum energetyczne rozwiązań równania Kohna-Shama, energię stanu podstawowego można wyrazić w postaci
+%
+\begin{equation}
+E[n,f_i]=\sum_{i\sigma}f_{i\sigma} \varepsilon_{i\sigma} - \int d\bm{r} n(\bm{r})V_{KS}(\bm{r}) + \int d\bm{r} V_{ext}(\bm{r}) n(\bm{r}) + E_H[n] + E_{xc}[n].
+\end{equation} 
+%
+Funkcje jednoelektronowe i energie stanów Kohna-Shama $\varepsilon_{i\sigma}$ nie mają jednoznacznej interpretacji fizycznej.
+Można je jednak powiązać ze zmianą energii całkowitej przy zmianie obsadzenia stanów
+%
+\begin{equation}
+\frac{\partial E}{\partial f_{i\sigma}}=\Big(\frac{\partial E}{\partial f_{i\sigma}}\Big)_n+\int d\bm{r} \frac{\delta E}{\delta n}\frac{\partial n}{\partial f_{i\sigma}}.
+\label{janak}
+\end{equation} 
+%
+Drugi wyraz po prawej stronie równania zeruje się dla stanu podstawowego ($\delta E/\delta n=0$),
+co prowadzi do wzoru
+%
+\begin{equation}
+\varepsilon_{i\sigma}=\frac{\partial E}{\partial f_{i\sigma}},
+\end{equation}
+%
+który nazywany jest twierdzeniem Janaka \cite{janak}.
+Zastosowanie tego wzoru do najwyższego obsadzonego stanu elektronowego daje energię jonizacji, czyli energię potrzebną do usunięcia pojedynczego elektronu 
+z danego układu atomowego. 
+
+
+
+\section{Funkcjonał wymienno-korelacyjny}
+
+\subsection{Przybliżenie lokalnej gęstości (LDA)}
+
+Funkcjonał wymienno-korelacyjny $E_{xc}$ i odpowiadający mu potencjał $V_{xc}$ nie są znane dokładnie i w ramach teorii
+funkcjonału gęstości muszą być opisywane w przybliżony sposób.
+Najprostszym podejściem jest przybliżenie lokalnej gęstości ({\it ang. local density approximation} - LDA).
+W przybliżeniu LDA przyjmujemy, że energia wymienno-korelacyjna w każdym punkcie przestrzeni, gdzie gęstość elektronowa wynosi $n(\mb{r})$,
+równa jest energii wymienno-korelacyjnej jednorodnego gazu elektronowego o tej samej gęstości, $n=n(\mb{r})$.
+Funkcjonał wymienno-korelacyjny może być wtedy zapisany w postaci
+%
+\begin{equation}
+E_{xc}[n]=\int d\mb{r} n(\mb{r}) \varepsilon_{xc}(n),
+\end{equation}
+%
+gdzie$\varepsilon_{xc}(n)$ jest energią wymienno-korelacyjną przypadającą na pojedynczy elektron w jednorodnym gazie elektronowym o gestości $n$.
+Można ją zapisać jako sumę części wymiennej i korelacyjnej, $\varepsilon_{xc}(n)=\varepsilon_x(n)+\varepsilon_c(n)$.   
+Przybliżenie LDA jest dokładne w granicy wolno zmieniającej się gęstości, co odpowiada warunkowi
+%
+\begin{equation}
+\frac{q}{k_F}\ll 1,
+\end{equation} 
+%
+gdzie $q$ jest miarą niejednorodności układu
+%
+\begin{equation}
+q=\frac{|\nabla k_F|}{2k_F},
+\end{equation}
+%
+a $k_F$ odpowiada wektorowi falowemu Fermiego dla gazu jednorodnego, który w punkcie o lokalnej gęstości $n(\bm{r})$ dany jest wzorem
+%
+\begin{equation}
+k_F=[3\pi^2n(\bm{r})]^{1/3}.
+\end{equation} 
+%
+
+Można łatwo uogólnić to przybliżenie do układów z polaryzacją spinową. Wtedy energia wymienno-korelacyjna jest funkcjonałem
+gęstości spinów skierowanych do góry $n_{\uparrow}$ i w dół $n_{\downarrow}$
+%
+\begin{equation}
+E_{xc}[n^{\uparrow},n^{\downarrow}]=\int d\bm{r} n(\mb{r}) \varepsilon_{xc}(n_{\uparrow},n_{\downarrow}).
+\label{xclda}
+\end{equation}
+%
+To uogólnienie nazywane jest czasem przybliżeniem lokalnej gestości spinowej ({\it ang. local spin density} - LSD).
+Potencjał wymienno-korelacyjny zależny od spinu $\sigma$ w tym przybliżeniu określony jest przez zależność
+%
+\begin{equation}
+V^{\sigma}_{xc}=\frac{\delta E_{xc}}{\delta n_{\sigma}}=\varepsilon_{xc}+n_{\sigma}\frac{\partial \varepsilon_{xc}}{\partial n_{\sigma}}.
+\end{equation}
+%
+Zgodnie ze wzorem (\ref{exchange}), część wymienna dana jest wzorem
+%
+\begin{equation}
+\varepsilon_x(n_{\sigma})=-\frac{3}{4}\Big(\frac{3}{\pi}\Big)^{\frac{1}{3}}n_{\sigma}^\frac{1}{3},
+\end{equation}
+%
+co prowadzi do potencjału wymiennego w formie 
+%
+\begin{equation}
+V^{\sigma}_x=-\Big(\frac{3}{\pi}\Big)^{\frac{1}{3}}n_{\sigma}^\frac{1}{3}. 
+\end{equation}
+%
+Część korelacyjna może być wyznaczona bardzo dokładnie numerycznie metodą kwantowego Monte Carlo \cite{CeperleyAlder80}. 
+W praktyce stosuje się odpowiednie wyrażenia analityczne dofitowane do wyników numerycznych, które określają zależność energii korelacji 
+od gęstości elektronowej \cite{PZ,VWN}. 
+Przykładowo energia korelacji w parametryzacji Pardew-Zungera \cite{PZ} ma postać
+%
+\begin{eqnarray}
+\varepsilon_c(r_s)&=&-0.048+0.031 \ln(r_s) -0.0116 r_s+0.002r_s \ln(r_s), \quad r_s<1  \\
+             &=&-0.1423/(1+1.0529\sqrt{r_s}+0.3334 r_s), \quad r_s>1.
+\end{eqnarray}
+%
+
+\subsection{Uogólnione przybliżenie gradientowe (GGA)}
+\label{sec:GGA}
+
+Uwzględnienie lokalnych zmian gęstości poprzez rozwinięcie energii wymienno-korelacyjnej w szereg gradientów gęstości
+zaproponowano już w pracy Kohna i Shama z 1965 roku \cite{kohn65}. Podejście to jednak nie spełnia reguł sum i załamuje się dla większości układów atomowych, 
+w których zmiany gęstości elektronowej sa przeważnie bardzo duże.
+Zaproponowane zostało nowe podejście zwane uogólnionym przybliżeniem gradientowym ({\it ang. generalized gradient approximation} - GGA),
+gdzie energia wymienno-korelacyjna jest funkcjonałem gęstości elektronowej i jej gradientów \cite{Langreth83,Pardew86,Becke88}. 
+W ogólnej formie dla układu spolaryzowanego spinowo może być zapisana w formie
+%
+\begin{equation}
+E_{xc}[n_{\uparrow},n_{\downarrow}]=\int d\mb{r} f(n_{\uparrow},n_{\downarrow},\nabla n_{\uparrow},\nabla n_{\downarrow}) 
+\label{xcgga}
+\end{equation}
+%
+Część wymienną tego funkcjonału dla układu bez polaryzacji spinowej można zapisać w postaci
+%
+\begin{equation}
+E_x[n]=\int d\mb{r} n \varepsilon_x(n) F_x(s),
+\end{equation}
+%
+gdzie $s=|\nabla n|/2k_Fn$ jest przeskalowanym (bezwymiarowym) gradientem gęstości elektronowej. Rozszerzenie na układy z polaryzacja spinową uzyskuje się stosując następujący wzór,
+który spełniony jest dla dokładnej energii wymiennej
+%
+\begin{equation}
+E_x[n^{\uparrow},n^{\downarrow}]=\frac{1}{2}(E_x[2n^{\uparrow}]+E_x[2n^{\downarrow}]).
+\end{equation}
+%
+Wiele form funkcji $F_x(s)$ zostało zaproponawych, w tym te najczęściej stosowane, które opisane są w pracach: A. D. Becke (Becke88) \cite{Becke88}, 
+J. P. Perdew i Y. Wang (PW91) \cite{PW91} i  J. P. Perdew, K. Burke, and M. Ernzerhof (PBE) \cite{PBE}.
+Jako przykład omówię funkcjonał PBE, który ma prostą postać i dobrze zdefiniowane warunki graniczne  
+które musi spełniać funkcja $F_x(s)$:
+
+\begin{enumerate}
+
+\item{W granicy małych wartości gradientu ($s\rightarrow0$)
+spełniony jest warunek
+%
+\begin{equation}
+F_x(s)\rightarrow 1+\mu s^2,
+\end{equation}
+%
+gdzie $\mu =0.219$. Warunek ten zapewnia właściwe zachowanie się odpowiedzi liniowej jednorodnego gazu
+elektronów (liniowe przyczynki od energii wymiany i korelacji kasują się).}
+
+\item{Dla dużych wartości gradientu ($s\rightarrow\infty$) funkcja ograniczona jest od góry $F_x(s)\leq 1.804$.}
+
+Funkcja, która spełnia te warunki ma postać
+%
+\begin{equation}
+F_x(s)=1+\kappa-\frac{\kappa}{1+\frac{\mu s^2}{\kappa}},
+\end{equation} 
+%
+gdzie $\kappa=0.804$.
+\end{enumerate}
+
+Część korelacyjną można zapisać w ogólnej formie
+%
+\begin{equation}
+E_c[n^{\uparrow},n^{\downarrow}]=\int d\mb{r} n [\epsilon_c(r_s,\zeta)+H(r_s,\zeta,t)],
+\end{equation}
+%
+gdzie $\zeta=(n^{\uparrow}-n^{\downarrow})/n$ jest względną polaryzacją spinową, $t=|\nabla n|/2\phi k_s n$ jest bezwymiarowym gradientem,
+$\phi=\sqrt{(1+\zeta)^{2/3}+(1-\zeta)^{2/3})}/2$ jest spinową funkcją skalującą i $k_s=\sqrt{4k_F/\pi a_0}$ wektorem ekranowania Thomasa-Fermiego.
+Funkcja $H$ spełnia następujące warunki:
+
+\begin{enumerate}
+\item{Dla małych gradientów ($t\rightarrow 0$) funkcja dana jest wyrazem rozwinięcia drugiego rzędu
+%
+\begin{equation}
+H\rightarrow \frac{e^2}{a_0}\beta\phi^3 t^2,
+\end{equation}
+%
+gdzie $\beta=0.067$.}
+\item{Przy szybko zmieniających się gęstościach ($t\rightarrow \infty$) energia korelacji znika
+co spełnione jest przy warunku
+%
+\begin{equation}
+H\rightarrow -\epsilon_c.
+\end{equation}}
+%
+\item{W granicy dużych gęstości ($r_s\rightarrow 0$) energia korelacji dąży do stałej wartości.
+Funkcja $H$ musi kasować logarytmiczną osobliwość w $\epsilon_c$
+%
+\begin{equation}
+H\rightarrow \frac{e^2}{a_0}\gamma\phi^3 \ln t^2,
+\end{equation}
+%
+gdzie $\gamma=0.031$.}
+\end{enumerate}
+
+Warunki te spełnia funkcja w postaci
+%
+\begin{equation}
+H=\frac{e^2}{a_0}\gamma\phi^3\ln[1+\frac{\beta}{\gamma}t^2\frac{1+At^2}{1+At^2+A^2t^4}],
+\end{equation}
+%
+gdzie 
+%
+\begin{equation}
+A=\frac{\beta}{\gamma}[\exp\{-\epsilon_c/(\gamma\phi^3e^2/a_0)\}-1]^{-1}.
+\end{equation}
+
+
+W tabeli \ref{EXC} porównane są wartości energii wymiany i korelacji w przybliżeniu LDA i PBE
+z wartościami dokładnymi wyznaczonymi dla kilku wybranych atomów. Wartości bezwzględne energii wymiany są większe
+o około rząd wielkości od energii korelacji. W LDA, energia wymiany jest zaniżona średnio o $10\%$, a energia korelacji jest znacznie zawyżona,
+nawet powyżej $100\%$, w porównaniu do wartości dokładnych. Ze względu na przeciwne znaki odchyleń od wartości dokładnych, błędy energii wymiany 
+i korelacji w przybliżeniu LDA częściowo kasują się. 
+
+\begin{table}[h!]
+\caption{Porównanie energii wymiennej i korelacyjnej uzyskanych w kilku przybliżeniach z wartościami dokładnymi dla kilku wybranych atomów.}
+\label{EXC}
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+ & \multicolumn{2}{c|}{LDA} & \multicolumn{2}{c|}{PBE} & \multicolumn{2}{c|}{Dokładna wartość} \\ \hline
+Atom& $E_x$ & $E_c$ & $E_x$ & $E_c$  & $E_x$  & $E_c$ \\
+\hline
+  H & -0.2680 & -0.0222 &  -0.3059 & -0.0060 & -0.3125 & 0.0000\\
+  He & -0.8840 & -0.1125 &  -1.0136 & -0.0420 & -1.0258 & -0.0420\\
+  Be & -2.3124 & -0.2240 &  -2.6358 & -0.0856 & -2.6658 & -0.0950\\
+  N &  -5.9080 & -0.4268 &  -6.5521 & -0.1799 & -6.6044 & -0.1858\\
+  Ne & -11.0335 & -0.7428 &  -12.0667 & -0.3513 & -12.1050 & -0.3939\\ \hline
+\end{tabular}
+\end{center}
+\end{table}
+
+Te duże różnice w energii wymiany i korelacji wynikają z nieuwzględnienia wpływu lokalnych zmian 
+gęstości elektronowej, które są charakterystyczne dla atomów i molekuł \cite{Pardew92}.  
+W przybliżeniu GGA, wartości obydwóch energii poprawiają się. Energia wymiany jest w dalszym ciągu zaniżona, ale tylko
+na poziomie $\sim 1\%$. Energia korelacji w atomie wodoru jest znacznie zredukowana w porównaniu do LDA,
+a dla atomu helu jest bardzo dobrze odtworzona. W pozostałych przypadkach pokazanych w tabeli \ref{EXC} jest mniejsza
+od wartości dokładnej o kilka procent.
+
+Funkcjonał GGA w granicy zerowych gradientów, czyli dla jednorodnego gazu elektronowego, jest równoważny przybliżeniu LDA.
+Oznacza to, że dla niejednorodnych układów powinień dawać zawsze wyniki lepsze niż LDA. Tak się jednak nie dzieje, a wynika
+to z faktu, że dla niektórych układów częściowe redukowanie się błedów energii wymiany i korelacji jest większe w LDA niż w GGA.
+Przykładem są metale szlachetne (Ag, Au, Pt), dla których stałe sieci wyznaczone w LDA bardzo dobrze zgadzają się
+z eksperymentem, a w GGA są zawyżone. Większe wartości stałej sieci w przybliżeniu GGA wynikają z zaniżonej energii kohezji kryształów.
+LDA zwykle daje zawyżone wartości energii kohezji i zaniżone wartości stałych sieci. 
+Dla układów magnetycznych, czyli z otwartymi powłokami $d$ lub $f$, przybliżenie GGA daje zwykle lepsze wyniki niż LDA.
+Klasycznym przykładem jest żelazo, dla którego stanem podstawowym w przybliżeniu LDA jest struktura centrowana powierzchniowo ($fcc$) 
+z uporządkowaniem antyferromagnetycznym, a GGA daje poprawny wynik, czyli strukturę centrowaną objętościowo ($bcc$) z uporządkowaniem ferromagnetycznym.
+
+\section{Procedura iteracyjna}
+
+Równania Kohna-Shama (KS) rozwiązywane są metodą iteracyjną, której kolejne kroki przedstawione są na rysunku \ref{fig:diagram}.
+Ogólnie stosowane procedury pozwalają zminimalizować funkcjonał energii całkowitej przy zadanych położeniach atomów,
+jak również wyznaczyć położenia atomów i parametry sieci krystalicznej, które odpowiadają minimum energii całkowitej
+układu. Najpierw ustalamy początkowe położenia atomów, które można przyjąć na przykład na podstawie
+danych z eksperymentu dyfrakcyjnego. Przy ustalonych położeniach atomowych przyjmuje się początkowy
+rozkład gęstości elektronowej $n_0(\bm{r})$, dla którego wylicza się potencjał ze wzoru (\ref{VKS}).
+Dla tego potencjału rozwiązuje się równania KS i wyznacza jednoelektronowe funkcje falowe
+w odpowiedni wybranej bazie funkcyjnej. 
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.45]{diagram.pdf}
+\caption{Schemat interacyjnej procedury rozwiązywania równań Kohna-Sham.}
+\label{fig:diagram}
+\end{figure}
+
+Rozwiązywanie równań KS dla atomów w ciele stałym jest złożonym problemem i będzie dyskutowane w kolejnych rozdziałach.
+Znając funkcje falowe i energie własne równania KS wyznacza się gęstość elektronową w każdym punkcie przestrzeni 
+z zależności (\ref{density}) i całkowitą energię układu. 
+Nowy rozkład gęstości pozwala ponownie wyznaczyć potencjał KS i rozwiązać równania KS. Dostajemy nowy rozkład gęstości i zmienioną
+energię całkowitą. Jeżeli ta energia pokrywa się z energią w poprzednim
+kroku lub te energie różnią sie o małą wielkość (zdefiniowaną na początku obliczeń) to oznacza, że 
+otrzymaliśmy prawidłowo zbiegnięty rozkład gęstości. Zakończona jest w ten sposób pętla elektronowa, 
+która daje rozwiązanie równań KS i minimalną energię całkowitą przy zadanych położeniach atomowych.
+
+Procedurę minimalizacji można przyspieszyć wykorzystując odpowiednio gęstości elektronowe
+w każdym kroku iteracyjnym. W najprostszym podejściu początkową wartość gęstości elektronowej $n^p_{i+1}$ w kroku $i+1$ 
+można wyznaczyć jako liniową poprawkę do gęstości z poprzedniego kroku
+%
+\begin{equation}
+n^p_{i+1}=n^p_i+\alpha(n^k_i-n^p_i),
+\label{mixing}
+\end{equation}
+% 
+gdzie $\alpha$ jest współczynnikiem liniowym, $n^p_i$ i $n^k_i$ są początkową i końcową wartością gęstości w kroku $i$.
+Stała wartość współczynnika $\alpha$ nie daje optymalnej szybkości zbieżności.
+W najczęściej stosowanej metodzie Broydena, współczynnik liniowy wyznaczany jest z jakobianu układu $J_i$,
+który optymalizowany jest w każdym kroku iteracji, $\alpha=-J^{-1}_i$.
+
+Aby zoptymalizować układ ze względu na położenia atomowe należy odpowiednio przesuwać
+atomy w nowe położenia, tak aby całkowita energia obniżała się w kolejnych krokach. 
+Wykorzystuje się do tego bardzo efektywną metodę sprzężonego gradientu ({\it ang. conjugate gradient}),
+która jest również metodą iteracyjną (pętla jonowa).
+W każdym kroku tej procedury wykonuje się pełną optymalizację elektronową, aby wyznaczyć rozkład gęstości elektronowej 
+i energię układu dla aktualnego położenia atomów. Wyznaczona gęstość końcowa jest używana do wyznaczenia
+gęstości startowej w kolejnym kroku pętli jonowej według formuły (\ref{mixing}).
+Warunkiem zbieżności jest osiągnięcie stanu o minimalnej energii ze względu na położenia atomów
+i parametry sieci krystalicznej. Według najczęściej przyjmowanego kryterium zbieżność jest osiągnięta jeżeli różnice energii 
+całkowitej w dwóch kolejnych krokach jonowych jest mniejsza od zadanej na początku wartości.
+
+Stan podstawowy otrzymany w wyniku procedury minimalizacyjnej powinien spełniać warunki stanu równowagi badanego materiału.
+Warunki te są następujące: 
+
+\begin{enumerate}
+{\item
+Całkowita siła działająca na każdy atom zeruje się.
+Siły działające na atomy można wyznaczyć stosując twierdzenie Hellmanna-Feynmana \cite{Hellmann,Feynman}, 
+które mówi, że siła działająca na atom $i$ równa jest pochodnej energii całkowitej po położeniu
+tego atomu wziętej ze znakiem przeciwnym
+%
+\begin{equation}
+\bm{F_i}=-\frac{\partial E_{tot}}{\partial\bm{R_i}}.
+\end{equation}
+%
+Zgodnie z tym wzorem, w stanie podstawowym, który odpowiada minimum energii, wszystkie siły $\bm{F_i}$ są równe zeru.
+Wartości sił stanowią często dodatkowe kryterium zbieżności układu w procedurze optymalizacyjnej:
+zbieżność jest osiągnięta jeżeli największa siła działająca na atomy jest mniejsza od zadanej wartości.}
+
+{\item Makroskopowe naprężenia w układzie równe jest naprężeniu wywołanym ciśnieniem zewnętrznym.
+Średni tensor naprężeń określony jest przez pochodną energii całkowitej po tensorze deformacji 
+%
+\begin{equation}
+\sigma_{\alpha\beta}=-\frac{1}{V}\frac{\partial E}{\partial u_{\alpha\beta}}.
+\end{equation}
+gdzie $V$ jest objętością układu. Tensor deformacji jest symetrycznym tensorem pochodnych wektora przesunięcia
+$\bm{u}=\bm{r}-\bm{r'}$ po położeniu $\bm{r}$.
+Przy kompresji hydrostatycznej, ciśnienie wiąże się z tensorem naprężeń zależnością $P=-\frac{1}{2}\sum_{\alpha}\sigma_{\alpha\alpha}$.}
+\end{enumerate}
+
+
+
+\chapter{Metody wyznaczania struktury elektronowej}
+
+Najważniejsze metody wyliczania struktury pasmowej oparte są na teorii DFT i polegają na
+wyznaczaniu jednocząstkowych funkcji falowych poprzez rozwiązanie równań Kohna-Shama
+lub podobnych równań zawierających efektywny potencjał elektronowy.  
+Podstawowym elementem odróżniającym poszczególne metody jest wybór funkcji bazowych, 
+które służą do rozwinięcia funkcji falowych w całym obszarze kryształu lub w poszczególnych jego częściach. 
+Najbardziej naturalną bazą w periodycznym krysztale są fale płaskie i obliczenia w tej bazie są bardzo efektywne oraz łatwe do implementacji. 
+Niestety, nie nadają sie do opisu elektronów w całym obszarze kryształu i wszystkich stanów elektronowych.
+Elektrony, które znajdują się najbliżej jąder atomowych i obsadzają najniższe stany energetyczne 
+wchodzą w skład rdzenia atomowego ({\it ang. atomic core}).
+W obszarze rdzeni atomowych, potencjał elektryczny jest silnie przyciągający i zbliżony jest do potencjału atomowego.
+Przez to stany elektronowe znajdujące się blisko jądra atomowego, zachowują sie podobnie do orbitali atomowych, czyli 
+silnie oscylują i zmieniają swój znak. Oznacza to również, że energia kinetyczna elektronów w tym obszarze jest duża.
+Funkcje falowe stanów rdzenia sa silnie zlokalizowane i szybko zanikają z odległością. 
+W tym przypadku znacznie lepszą zbieżność uzyskuje się stosując bazę zlokalizowanych funkcji, np. harmoniki sferyczne.
+Funkcja falowa elektronów walencyjnych zachowuje się odmiennie w obszarze rdzeni atomowych i w obszarze międzywęzłowym.
+Schematycznie potencjał periodyczny i funkcja falowa elektronów walencyjnych pokazana jest na rysunku \ref{fig:bloch}.
+W obszarze rdzeni, zaznaczonych kółkami o promieniu $r_c$, funkcja falowa, podobnie jak w przypadku stanów rdzenia,
+zmienia się bardzo szybko.
+W obszarze miedzywęzłowym ($r>r_c$), potencjał i gęstość elektronowa zmieniają się wolno w funkcji położenia. 
+Również funkcja falowa elektronów walencyjnych w tym obszarze jest wolnozmienna i 
+w tym przypadku można uzyskać szybką zbieżność w rozwinięciu na fale płaskie. 
+
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.5]{crystal.pdf}
+\caption{Potencjał periodyczny i funkcja falowa elektronów walencyjnych.}
+\label{fig:bloch}
+\end{figure}
+
+\newpage
+
+Najważniejsze metody wyznaczania struktury pasmowej można podzielić na trzy główne grupy:
+
+
+\begin{enumerate}
+\item{{\bf Pseudopotencjały.} Jest to grupa metod, która ogranicza ilość elektronów i rozwiązania równania Kohna-Shama tylko do stanów walencyjnych. 
+Ma to uzasadnienie wynikające z charakteru stanów rdzenia, które są silnie zlokalizowane blisko jądra atomowego i nie biorą udziału w wiązaniach atomowych.
+Przez to najważniejsze własności materiałów zdeterminowane są przez zachowanie elektronów walencyjnych. 
+W metodzie pseudopotencjału stosuje się rozwinięcie funkcji falowej w bazie fal płaskich. Aby zachować jednolity opis funkcji falowej w całym obszarze kryształu, stosuje się w tych metodach przybliżony potencjał działający na elektrony walencyjne w obszarze rdzenia atomowego, który nazywany jest pseudopotencjałem. 
+Dla elektronów walencyjnych wyznacza się pseudofunkcję falową, która jest rozwiązaniem jednocząstkowego równania Schr\"{o}dingera z odpowiednim pseudopotencjałem. W obszarze międzywęzłowym jest ona równa dokładnej funcji falowej, a w obszarze rdzenia jest wolnozmienną funkcją bez oscylacji i miejsc
+zerowych. Najdokładniejsze obliczenia w tej grupie metod stosują pseudopotencjały ultramiękkie i potencjały typu PAW.}
+\item{{\bf Zlokalizowane orbitale.} W tym podejściu funkcję falową elektronów zapisujemy w bazie orbitali zlokalizowanych na poszczególnych
+atomach. W najprostszym przybliżeniu ciasnego wiązania jedynymi istotnymi parametrami są elementy macierzowe Hamiltonianu, które
+opisują przekrywanie się lokalnych orbitali lub funkcji Wanniera. W dokładniejszych obliczeniach jako bazę stosuje się funkcje Gaussa
+lub orbitale Slatera.}
+\item{{\bf Stowarzyszone fale i atomowe sfery}. Ta grupa obejmuje metody obliczeniowe, które bazują na ogólnej zasadzie podziału
+kryształu na dwa obszary. Pierwszy obszar zawiera rdzenie atomowe, w których funkcje falowe zachowują cechy orbitali atomowych i drugi obszar między atomami,
+gdzie elektrony walencyjne opisane są wolnozmienną funkcją falową. W każdym z dwóch charakterystycznych obszarów stosuje się
+rozwinięcia funkcji falowej w różnych bazach funkcyjnych. Obszar rdzenia atomowego definiuje wartość promienia $r_c$. Funkcje falowe
+otrzymane dla odległości mniejszych i wiekszych od $r_c$ muszą spełniać odpowiednie warunki ciągłości na granicy rdzenia atomowego.}
+
+\end{enumerate}
+
+W kolejnych rozdziałach opisane zostaną metody obliczeniowe należące do tych trzech grup.
+  
+\section{Pseudopotencjały}
+
+Główną ideę pseudopotencjału ilustruje rysunek \ref{fig:pseudopot}. W obszarze rdzenia atomowego ($r<r_c$) dokładny potencjał $V$ przybliżany
+jest pseudopotencjałem $\tilde{V}$, który ma skończoną wartość dla $r=0$. Odpowiadająca mu pseudofunkcja falowa $\tilde{\psi}$
+ma gładkie zachowanie (bez oscylacji i miejsc zerowych) w tym obszarze. Dla $r>r_c$ pseudopotencjał pokrywa się z dokładnym potencjałem,
+a pseudofunkcja odpowiada dokładnej funkcji falowej $\psi$. Dzięki takiemu przybliżeniu, pseudofunkcja falowa może być rozwinięta
+na fale płaskie w całym obszarze kryształu.   
+
+  
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.1]{pseudopots-new.pdf}
+\caption{Psudopotencjał i pseudofunkcja falowa.}
+\label{fig:pseudopot}
+\end{figure}  
+  
+Metoda pseudopotencjału rozwinęła się z podejścia zortogonalizowanych fal płaskich ({\it ang. ortogonalized plane waves} - OPW)
+zaproponowanego przez Herringa w 1940 \cite{herring40}. 
+Można zdefiniować transformację, która prowadzi od dokładnego potencjału do pseudopotencjału, wprowadzając jednocześnie pseudofunkcję falową do opisu elektronów walencyjnych \cite{Antoncik,KP}.
+Wprowadzamy osobne oznaczenia dla stanów walencyjnych $|\psi_v\rangle$ i stanów rdzenia $|\psi_c\rangle$, które są stanami własnymi
+hamiltonianu $H$ z odpowiednimi energiami własnymi $\varepsilon_v$ i $\varepsilon_c$.
+Zakładamy, że dokładna funkcja falowa elektronów walencyjnych może być wyrażona przez gładką funkcję $\tilde{\psi}_v$ (pseudofunkcję),
+która jest ortogonalna do stanów rdzenia
+%
+\begin{equation}
+|\psi_v\rangle =|\tilde{\psi}_v\rangle +\sum_{\alpha,c} a_{\alpha} |\psi_{\alpha c}\rangle,
+\label{OPW}
+\end{equation}
+%
+gdzie sumowanie przebiega po atomach $\alpha$ i stanach rdzenia $c$. 
+Dla uproszczenia zapisu wskaźniki $v$ i $c$ określają zarówno numer stanu, jak i kierunek spinu elektronu.
+Współczynniki rozwinięcia dostajemy z warunku ortogonalności  
+%
+\begin{equation}
+a_{\alpha}=-\langle \psi_{\alpha c}|\tilde{\psi}_v\rangle.
+\label{a_alpha}
+\end{equation}
+% 
+W obszarze miedzywęzłowym dokładna funkcja falowa równa jest pseudofunkcji, która może być wyrażona w bazie fal płaskich.
+Wstawiając (\ref{OPW}) do równania $H|\psi_v\rangle=\varepsilon_v|\psi_v\rangle$ otrzymujemy
+%
+\begin{equation}
+H|\tilde{\psi}_v\rangle +\sum_{\alpha,c} a_{\alpha} \varepsilon_{\alpha c} |\psi_{\alpha c}\rangle =
+\varepsilon_v|\tilde{\psi}_v\rangle + \sum_{\alpha c} a_{\alpha} \varepsilon_v|\psi_{\alpha c}\rangle.
+\end{equation}
+%
+Przenosząc drugie równanie na prawą stronę i wykorzystując (\ref{a_alpha}) dostajemy
+%
+\begin{equation}
+(H +\sum_{\alpha,c}(\varepsilon_v - \varepsilon_{\alpha c})|\psi_{\alpha c}\rangle \langle \psi_{\alpha c}|)|\tilde{\psi}_v\rangle =
+\varepsilon_v|\tilde{\psi}_v\rangle.
+\end{equation}
+%
+Dostaliśmy równanie typu Schr\"{o}dingera z dodatkowym potencjałem 
+%
+\begin{equation}
+V^{R}=\sum_{\alpha,c}(\varepsilon_v - \varepsilon_{\alpha c})|\psi_{\alpha c}\rangle \langle \psi_{\alpha c}|.
+\end{equation}
+%
+Jeżeli dodamy to wyrażenie do oryginalnego potencjału $V$ dostaniemy wielkość nazywaną pseudopotencjałem $\tilde{V}=V+V^{R}$.
+W obszarze walencyjnym, pseudopotencjał $\tilde{V}$ pokrywa się z potencjałem $V$.  
+Silnie przyciagający potencjał atomowy w obszarze rdzenia jest znacznie osłabiony przez dodatnią wartość $V^R$.
+To umożliwia zbieżność pseudofunkcji falowej w bazie fal płaskich. 
+
+
+\subsection{Pseudopotencjały zachowujące normę}
+
+Dobre pseudopotencjały mają charakter uniwersalny. Wygenerowane w określonej configuracji atomowej
+powinny zachowywać się jednakowo dobrze w każdym innym ukladzie atomowym. 
+W roku 1979, Hamann, Schl\"{u}ter i Chiang \cite{HSC} zaproponowali pseudopotencjały zachowujące normę, 
+które spełniały  nastepujące warunki:
+
+\begin{enumerate}
+{\item Prawdziwa funkcja i pseudofuncja falowa są równe, $\psi_i(r)=\tilde{\psi}_i(r)$, dla $r\geq r_c$.}
+{\item Ich energie własne dla elektronów walencyjnych powinny być równe.}
+{\item Ładunek prawdziwy i pseudoładunek zawarty w obszarze o promieniu $r\geq r_c$ powinny się pokrywać (zachowanie normy)
+%
+\begin{equation}
+\int_0^r dr r^2 |\psi_i(r)|^2=\int_0^r dr r^2 |\tilde{\psi}_i(r)|^2.
+\end{equation}}
+%
+{\item Pochodna logarytmiczna prawdziwej funkcji i pseudofunkcji są równe dla $r\geq r_c$ 
+%
+\begin{equation}
+\frac{1}{\psi_i(r)}\frac{d\psi_i(r)}{dr}=\frac{1}{\tilde{\psi}_i(r)}\frac{d\tilde{\psi}_i(r)}{dr}.
+\end{equation}}
+
+\end{enumerate} 
+%
+Z tych własności wynika również spełnienie warunku równych pochodnych po energii funkcji dokładnej i pseudofunkcji dla $r\geq r_c$,
+co dodatkowo wzmacnia przenośny charakter tych pseudopotencjałów.
+Metody generowania pseudopotencjałów zachowujących normę zostały opisane szczegółowo w wielu pracach \cite{HSC,BHS}.
+
+Ponieważ pseudopotencjały w obszarze rdzenia zależą od orbitalnej liczby kwantowej $l$, ich charakter nie jest lokalny.
+Wartość charakterystycznego promienia $r_c$ również zależy od $l$.
+Ogólnie można podzielić cały pseudopotencjał na część lokalną i nielokalną
+%
+\begin{equation}
+V_l(r)=V_{lok}(r)+\delta V_l(r).
+\end{equation}
+%
+Nielokalny charakter dotyczy tylko obszaru rdzenia, więc $\delta V_l(r)=0$ dla $r>r_c$
+i wszystkie dalekozasięgowe efekty zależą tylko od $V_{lok}(r)$.
+Możliwość wyboru promienia $r_c$ daje pewną swobodę przy konstrukcji pseudopotencjałów.
+Dokładniejsze i bardziej uniwersalne pseudopotencjały charakteryzują sie mniejszymi wartościami
+$r_c$. Jednak większa dokładnosć wymaga uwzględnienia większej ilości fal płaskich
+w rozwinięciu pseudofunkcji falowej. Takie pseudopotencjały nazywane są twardymi. Miękkie pseudopotencjały odznaczają się
+większymi wartościami $r_c$, mniejszą ilość fal płaskich i bardziej gładkim charakterem pseudofunkcji falowej. 
+
+\subsection{Pseudopotencjały ultramiękkie}
+
+W roku 1990, Vanderbilt zaproponował nowy rodzaj pseupotencjałów, nazywane ultramiękkimi ({\it ang. ultrasoft pseudopotentials} - US-PP), które nie zachowują normy \cite{Vanderbilt90}. W tym podejściu, pseudofunkcje falowe spełniają ugólnione równanie własne w postaci
+%
+\begin{equation}
+H|\tilde{\psi}_i\rangle=\varepsilon_iS|\tilde{\psi}_i\rangle,
+\end{equation}
+%
+gdzie Hamiltonian ma ogólną postać 
+%
+\begin{equation}
+H=-\frac{\hbar^2}{2m}\nabla^2+V_{lok}+\delta V_{NL}, 
+\end{equation}
+a $S$ jest operatorem przekrywania
+%
+\begin{equation}
+S=1+\sum_{i,j} Q_{ij}|\beta_i\rangle\langle\beta_j|,
+\end{equation}
+%
+który określa uogólniony warunek normalizacji pseudofunkcji falowych $\langle\tilde{\psi}_i|S|\tilde{\psi}_j\rangle=\delta_{ij}$.
+Macierz $Q_{ij}$ opisuje różnicę w normalizacji funkcji i pseudofunkcji falowych
+%
+\begin{equation}
+Q_{ij}=\int_0^{r_c} dr Q_{ij}(\bm{r})=\int_0^{r_c} dr r^2[\psi_i^*(\bm{r})\psi_j(\bm{r})-\tilde{\psi}_i^*(\bm{r})\tilde{\psi}_j(\bm{r})].
+\end{equation}
+%
+Zbiór lokalnych funkcji falowych
+%
+\begin{equation}
+|\beta_i\rangle=\sum_j (B^{-1})_{ij}|\chi_j\rangle,
+\end{equation}
+%
+gdzie funkcje 
+%
+\begin{equation}
+|\chi_j\rangle=(\varepsilon_i+\frac{\hbar^2}{2m}\nabla^2-V_{loc})|\tilde{\psi}_j\rangle
+\end{equation}
+%
+zerują się w obszarze dla $r>r_c$. 
+Nielokalną część speudopotencjału otrzymuje się ze wzoru
+%
+\begin{equation}
+\delta V_{NL}=\sum_{ij}D_{ij}|\beta_i\rangle\langle\beta_j|,
+\end{equation}
+%
+gdzie $D_{ij}=B_{ij}+\varepsilon_j Q_{ij}$. Całkowitą gęstość elektonów walencyjnych
+w danym punkcie przestrzeni otrzymujemy ze wzoru 
+%
+\begin{equation}
+n_v(\bm{r})=\sum_i \tilde{\psi}_i^*(\bm{r})\tilde{\psi}_i(\bm{r})+\sum_{i,j}\sum_k\langle\beta_i|\tilde{\psi}_k\rangle\langle\tilde{\psi}_k|\beta_j\rangle Q_{ij}(\bm{r}),
+\end{equation}
+% 
+gdzie wyraz jest poprawką wynikającą z niezachowania normy przez pseudofunkcje falowe.
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=1]{usp.pdf}
+\caption{Porównanie dokładnej funkcji falowej $2p$ dla tlenu (linia ciągła) z pseudofunkcją zachowującą normę (linia kropkowana)
+i pseudofunkcją otrzymaną dla pseudopotancjału ultramiękkiego (linia przerywana). Rysunek z pracy \cite{Vanderbilt90}.}
+\label{fig:ups}
+\end{figure}
+
+Na rysunku \ref{fig:ups} pokazana jest dokładna funkcja falowa dla orbitalu $2p$ w tlenie oraz dwie pseudofunkcje otrzymane dla pseudopotencjału zachowujacego normę i pseudopotencjału ultramiękkiego. Promień obcięcia jest wyraźnie większy dla pseudopotencjału ultramiękkiego ($r_c\approx1.5$ a.u.) niż dla zachowującego normę ($r_c\approx0.5$ a.u.).
+
+\subsection{Metoda PAW}
+
+Omówione metody pseudopotencjałów pozwalaja efektywnie wyliczać wiele wielkości fizycznych bazując na pseudofukcjach falowych.
+W wielu przypadkach dokładniejsze obliczenia wymagają znajomości funkcji falowych elektronów walencyjnych
+również w obszarze rdzenia atomowego.
+W roku 1994, Bl\"{o}chl zaproponował nową metodę PAW ({\it ang. projector augmented-wave}),
+która łączy efektywność pseudopotencjałów i dokładność obliczeń porównywalną z metodami pełnego potencjału \cite{Blochl}. 
+Do opisu elektronów walencyjnych podejście to wykorzystuje również pseudofunkcje falowe $\tilde{\psi}_v$, które rozwijane są na fale płaskie i 
+w obszarze międzywęzłowym pokrywają sie z funkcjami dokładnymi $\psi_v$.
+Główną zaletą tej metody jest możliwość wyznaczenia dokładnej funkcji falowej poprzez transformację liniową pseudofukcji falowej
+%
+\begin{equation}
+|\psi_v\rangle=\mathcal{T}|\tilde{\psi}_v\rangle.
+\end{equation}
+% 
+Operator liniowy $\mathcal{T}$ działa w obszarach otoczonych sferą o promieniu $r_c$ wokół atomów w położeniach $\bm{R}_m$
+%
+\begin{equation}
+\mathcal{T}=1+\sum_m \mathcal{T}_m.
+\label{operator}
+\end{equation}
+% 
+Dokładna funkcja falowa i pseudofukcja rozwinięte są w obszarze atomowym na funkcje parcjalne $|\phi_m\rangle$ i $|\tilde{\phi}_m\rangle$
+%
+\begin{eqnarray}
+|\psi_v\rangle=\sum_m c_m |\phi_m\rangle, \label{eq1}\\
+|\tilde{\psi_v}\rangle=\sum_m c_m |\tilde{\phi}_m\rangle,
+\label{eq2}
+\end{eqnarray}
+%
+gdzie w obydwóch sumach występują te same współczynniki rozwinięcia $c_m$. Zatem te lokalne funkcje powiązane są tą samą
+transformacją
+%
+\begin{equation}
+|\phi_m\rangle=(1+\sum_m \mathcal{T}_m)|\tilde{\phi}_m\rangle.
+\end{equation}
+%
+Funkcje $|\phi_m\rangle$ są rozwiązaniami równania Schr\"{o}dingera dla dokładnego potencjału atomowego, które odpowiadają energiom $\varepsilon_m$
+i są ortogonalne do stanów rdzenia. Wskaźnik $m$ określa jednocześnie położenia atomów $\bm{R}$ i zbiór liczb kwantowych orbitali atomowych.
+Każdej parcjalnej funkcji dokładnej odpowiada jedna pseudofunkcja $|\tilde{\phi}_m\rangle$, z którą pokrywa się poza sferą o promieniu $r_c$.
+Oba rodzaje funkcji parcjalnych są funkcjami radialnymi, zdefiniowanymi na logarytmicznej siatce radialnej, przemnożonymi przez
+harmoniki sferyczne. 
+
+Odejmując stronami (\ref{eq1}) i (\ref{eq2}) dostajemy równanie
+%
+\begin{equation}
+|\psi_v\rangle=|\tilde{\psi}_v\rangle-\sum_m c_m |\tilde{\phi}_m\rangle + \sum_m c_m |\phi_m\rangle.
+\label{psiv}
+\end{equation}
+% 
+Aby operator $\mathcal{T}$ był liniowy współczynniki $c_m$ muszą być liniowymi funkcjonałami pseudofunkcji falowej $|\tilde{\psi}_v\rangle$
+%
+\begin{equation}
+c_m=\langle\tilde{p}_m|\tilde{\psi}_v\rangle,
+\label{coef}
+\end{equation}
+%
+gdzie $\langle\tilde{p}_m|$ są funkcjami rzutowymi dualnymi względem funkcji parcjalnych 
+$\langle\tilde{p}_m|\tilde{\phi}_n\rangle=\delta_{m,n}$.
+Dla każdej funkcji $|\tilde{\phi}_m\rangle$ mamy jedną funkcja rzutową $\langle\tilde{p}_m|$
+i dla nich spełniony jest warunek $\sum_m |\tilde{\phi}_m\rangle\langle\tilde{p}_m|=1$.
+Funkcje rzutowe są funkcjami radialnymi pomnożonymi przez harmoniki sferyczny, a następnie przetransformowane do bazy fal płaskich.
+Są przypisane do położeń atomów, ale nie zależą od potencjału atomowego.
+%
+Wstawiając (\ref{coef}) do (\ref{psiv}) otrzymujemy
+%
+\begin{equation}
+|\psi_v\rangle=|\tilde{\psi}_v\rangle+\sum_m (|\phi_m\rangle-|\tilde{\phi}_m\rangle)\langle\tilde{p}_m|)\tilde{\psi}_v\rangle
+=[1+\sum_m (|\phi_m\rangle-|\tilde{\phi}_m\rangle)\langle\tilde{p}_m|]|\tilde{\psi}_v\rangle,
+\label{psiv2}
+\end{equation}
+%
+gdzie wyrażenie w nawiasie kwadratowym jest wprowadzonym wcześniej operatorem liniowym
+%
+\begin{equation}
+\mathcal{T}=1+\sum_m \mathcal{T}_m=1+\sum_m (|\phi_m\rangle-|\tilde{\phi}_m\rangle)\langle\tilde{p}_m|.
+\end{equation}
+%
+
+Funkcje falowe rdzenia $|\psi_c\rangle$, podobnie do funkcji walencyjnych, są rozłożone na trzy składowe
+%
+\begin{equation}
+|\psi_c\rangle=|\tilde{\psi}_c\rangle+|\phi_c\rangle-|\tilde{\phi}_c\rangle,
+\end{equation}
+%
+gdzie kolejne wyrazy odpowiadają pseudofunkcji elektronów rdzenia, która pokrywa się z dokładną funkcją dla $r>r_c$,
+lokalnej (parcjalnej) funkcji rdzenia i lokalnej pseudofukcji rdzenia. Obydwie lokalne funcje wyrażone są jako funkcje radialne
+pomnożone przez harmoniki sferyczne.
+
+Średnia z operatora $A$ może być wyznaczona przy pomocy dokładnych funkcji lub pseudofunkcji
+%
+\begin{equation}
+\langle A \rangle = \sum_n f_n \langle \psi_n|A|\psi_n\rangle = \sum_n f_n \langle \tilde{\psi}_n|\tilde{A}|\tilde{\psi}_n\rangle,
+\end{equation}
+% 
+gdzie $f_n$ określa obsadzenie stanu $n$, a $\tilde{A}$ jest pseudooperatorem, który można otrzymać transformując operator $A$
+%
+\begin{equation}
+\tilde{A}=\mathcal{T}^{\dagger} A \mathcal{T}= A +\sum_{i,j} |\tilde{p}_i\rangle (\langle \phi_i |A|\phi_j\rangle - \langle \tilde{\phi}_i |A|\tilde{\phi}_j\rangle ) \langle\tilde{p}_j|.
+\end{equation}
+%
+Przykładowo, stosując te wyrażenia do operatora gęstości $n=|\bm{r}\rangle\langle\bm{r}|$,
+możemy wyrazić gęstość elektronową następującym wyrażeniem
+%
+\begin{equation}
+n(\bm{r})=\tilde{n}(\bm{r})+n^1(\bm{r})-\tilde{n}^1(\bm{r}),
+\end{equation}
+%
+gdzie
+%
+\begin{equation}
+\tilde{n}(\bm{r})=\sum_n f_n \langle \tilde{\psi}_n|\bm{r}\rangle\langle \bm{r}| \tilde{\psi}_n\rangle=\sum_n f_n |\tilde{\psi_n}(\bm{r})|^2,
+\end{equation}
+%
+\begin{equation}
+n^1(\bm{r})=\sum_{n,i,j} f_n \langle \tilde{\psi}_n|\tilde{p}_i\rangle\langle\phi_i|\bm{r}\rangle\langle \bm{r}|\phi_j\rangle\langle\tilde{p}_j |\tilde{\psi}_n\rangle,
+\end{equation}
+%
+\begin{equation}
+\tilde{n}^1(\bm{r})=\sum_{n,i,j} f_n \langle \tilde{\psi}_n|\tilde{p}_i\rangle\langle\tilde{\phi}_i|\bm{r}\rangle\langle \bm{r}|\tilde{\phi}_j\rangle\langle\tilde{p}_j |\tilde{\psi}_n\rangle.
+\end{equation}
+%
+W powyższych wzorach sumowanie obejmuje zarówno stany walencyjne, jak i stany rdzenia. 
+
+Metoda PAW należy obecnie do najdokładniejszych i najbardziej efektywnych metod. Została zaimplementowana
+w takich programach, jak Vienna Ab Initio Simulation Package (VASP) \cite{Vasp,PawVasp} i Quantum Espresso \cite{QE}.
+
+
+\section{Zlokalizowane orbitale}
+
+\subsection{Metoda ciasnego wiązania}
+
+W odróżnieniu od metod pseudopotencjału, które wykorzystują bazę fal płaskich, metody opisane w tym rozdziale
+stosują lokalne orbitale, które powiązane są z danymi atomami lub centrowane są w położeniach atomów.
+Opis przy pomocy lokalnych orbitali nadaje się dobrze do układów, gdzie występują zlokalizowane stany
+elektronowe, ale możliwy jest ruch elektronów poprzez przeskoki do sąsiednich atomów.
+Najprostszym opisem takich układów jest model ciasnego wiązania.
+Lokalne orbitale atomowe możemy zapisać w postaci $\phi_{\alpha}(\bm{r}-\bm{R}_{\alpha})$, 
+gdzie wektor $\bm{R}_{\alpha}$ oznacza położenie danego atomu. Wskaźnik $\alpha$ oznacza tutaj wszystkie liczby kwantowe, 
+które charakteryzują dany orbital ($\alpha=n,l,m$). Zakładamy dla uproszczenia, że z danym atomem związny jest tylko
+jeden orbital, ale model ciasnego wiązania można łatwo uogólnić na dowolną liczbę orbitali.
+Hamiltonian możemy zapisać jako
+%
+\begin{equation}
+H=-\frac{\hbar^2}{2m}\nabla^2+\sum_{\alpha}V_{\alpha}(\bm{r}-\bm{R}_{\alpha}),
+\end{equation}
+%
+gdzie $V_{\alpha}$ jest potencjałem atomowym wokół położenia $\bm{R}_{\alpha}$.
+Elementy macierzowe hamiltonianu możemy wyznaczyć ze wzoru
+%
+\begin{equation}
+H_{\alpha\beta}=\int d\bm{r} \phi_{\alpha}^*(\bm{r}-\bm{R}_{\alpha})H\phi_{\beta}(\bm{r}-\bm{R}_{\beta}).
+\label{matrix}
+\end{equation}
+% 
+Ponieważ orbitale atomowe należące do różnych atomów nie są wzajemnie ortogonalne
+wprowadza się również macierz przekrywania
+%
+\begin{equation}
+S_{\alpha\beta}=\int d\bm{r} \phi_{\alpha}^*(\bm{r}-\bm{R}_{\alpha})\phi_{\beta}(\bm{r}-\bm{R}_{\beta}).
+\end{equation}
+%
+Elementy diagonalne hamiltonianu $\varepsilon_{\alpha}=H_{\alpha\alpha}$ określają lokalną energię elektronu w danym orbitalu $\alpha$.
+Natomiast elementy pozadiagonalne $t_{\alpha\beta}=H_{\alpha\beta}$ nazywane są całkami przeskoku i określają prawdopodobieństwo
+przeskoku elektronu między dwoma atomami.
+
+Aby przetransformować elementy macierzowe hamiltonianu i macierzy $S$ do przestrzeni odwrotnej
+wprowadzamy bazę, która odpowiada wektorom falowym $\bm{k}$
+%
+\begin{equation}
+\phi_{\bm{k}\alpha}(\bm{r})=A_{\alpha\bm{k}}\sum_n e^{i\bm{k}\bm{T}_n}\phi_{\alpha}[\bm{r}-(\bm{R}_{\alpha}+\bm{T}_n)],
+\end{equation}
+%
+gdzie $A_{\bm{k}\alpha}$ są czynnikami normalizacji, a $\bm{T}_n$ są wektorami translacji sieci krystalicznej.
+W tej bazie możemy zapisać funkcję falową, która spełnia twierdzenie Blocha
+%
+\begin{equation}
+\psi_{\bm{k}i}=\sum_{\alpha} c_{i\alpha} \phi_{\bm{k}\alpha}(\bm{r}),
+\end{equation}
+%
+oraz elementy macierzowe hamiltonianu i macierzy $S$
+%
+\begin{equation}
+H_{\alpha\beta}(\bm{k})=\int d\bm{r} \phi_{\alpha\bm{k}}^*(\bm{r})H\phi_{\beta\bm{k}}(\bm{r})=\sum_n e^{i\bm{k}\bm{T}_n} H_{\alpha\beta},
+\end{equation}
+%
+\begin{equation}
+S_{\alpha\beta}(\bm{k})=\int d\bm{r} \phi_{\alpha\bm{k}}^*(\bm{r})\phi_{\beta\bm{k}}(\bm{r})=\sum_n e^{i\bm{k}\bm{T}_n} S_{\alpha\beta}.
+\end{equation}
+%
+Równanie na energie własne $\varepsilon_i(\bm{k})$ i współczynniki rozwinięcia funkcji falowej $c_{i,\alpha}(\bm{k})$ przyjmuje postać
+%
+\begin{equation}
+\sum_{\beta}[H_{\alpha\beta}(\bm{k})-\varepsilon_i(\bm{k})S_{\alpha\beta}(\bm{k})]c_{i\beta}(\bm{k})=0.
+\label{ham_loc} 
+\end{equation}
+%
+Dla orbitali wzajemnie ortogonalnych, mamy $S_{\alpha\beta}=\delta_{\alpha\beta}$ i równanie (\ref{ham_loc})
+przyjmuje postać taką samą jak równanie w bazie fal płaskich (\ref{ham_rec}).
+
+\subsection{Funkcje Wanniera}
+\label{sec:wannier}
+
+W metodzie ciasnego wiązania często wykorzystuje się bazę funkcji Waniera, które są zlokalizowanymi funkcjami, 
+centrowanymi na położeniach atomowych $\bm{R}_n$. 
+Funkcja Wanniera zdefiniowana jest jako transformata Fouriera funkcji Blocha powiązanej z danym pasmem $j$
+%
+\begin{equation}
+w_j(\bm{r}-\bm{R}_n)=\frac{1}{\sqrt{N}}\sum_{\bm{k}}e^{-i\bm{k}\bm{R}_n}\psi_{\bm{k}j}(\bm{r}). 
+\end{equation}
+%
+Spełniona jest również transformata odwrotna, która pozwala wyrazić funkcje Blocha przez funkcje
+Wanniera
+%
+\begin{equation}
+\psi_{\bm{k}j}(\bm{r})=\frac{1}{\sqrt{N}}\sum_n e^{i\bm{k}\bm{R}_n} w_j(\bm{r}-\bm{R}_n).
+\end{equation}
+%
+Funkcje Wanniera dla różnych położeń atomowych są ortogonalne
+%
+\begin{multline}
+\int d\bm{r} w_j^*(\bm{r}-\bm{R}_n)w_j(\bm{r}-\bm{R}_m)=\frac{1}{N}\sum_{\bm{k},\bm{k}'}\int d\bm{r}e^{i(\bm{k}\bm{R}_n-\bm{k}'\bm{R}_m)}\psi_{\bm{k}j}(\bm{r})\psi_{\bm{k}'j}(\bm{r}) \\
+=\frac{1}{N}\sum_{\bm{k}}e^{i\bm{k}(\bm{R}_n-\bm{R}_m)}=\delta_{mn},
+\end{multline}
+%
+gdzie wykorzystaliśmy ortogonalność funkcji Blocha. Spełniony jest również warunek zupełności
+%
+\begin{equation}
+\sum_n w_j^*(\bm{r}-\bm{R}_n)w_j(\bm{r}'-\bm{R}_n)=\delta^3(\bm{r}-\bm{r}').
+\end{equation}
+Zatem funkcje Wanniera tworzą zbiór zlokalizowanych funkcji bazowych.
+Energie pasma $j$ dla funkcji Blocha w tej bazie może być wyznaczona ze wzoru
+%
+\begin{equation}
+\varepsilon_{\bm{k}j}=\int d\bm{r} \psi_{\bm{k}j}^*(\bm{r})H\psi_{\bm{k}j}(\bm{r})
+=\frac{1}{N}\int d\bm{r}\sum_n w_j^*(\bm{r}-\bm{R}_n)e^{-i\bm{k}\bm{R}_n}H\sum_m w_j(\bm{r}-\bm{R}_m)e^{i\bm{k}\bm{R}_m}.
+\end{equation}
+%
+Sumowanie po wskaźnikach $n$ i $m$ możemy rozdzielić na dwa wyrazy dla $n=m$ i $n\neq m$
+%
+\begin{multline}
+\varepsilon_{\bm{k}j}=\frac{1}{N}\sum_n\int d\bm{r} w_j^*(\bm{r}-\bm{R}_n)Hw_j(\bm{r}-\bm{R}_n)
+\\ +\frac{1}{N}\sum_{n\neq m}e^{i\bm{k}(\bm{R}_m-\bm{R}_n)}\int d\bm{r} w_j^*(\bm{r}-\bm{R}_n)Hw_j(\bm{r}-\bm{R}_m).
+\end{multline}
+%
+Wykorzystując oznaczenia, które wprowadziliśmy dla elementów macierzowych hamiltonianu (\ref{matrix})
+dostajemy
+%
+\begin{equation}
+\varepsilon_{\bm{k}j}=\frac{1}{N}\sum_n \varepsilon_n+\frac{1}{N}\sum_{n\neq m}e^{i\bm{k}(\bm{R}_m-\bm{R}_n)}t_{nm}.
+\end{equation}
+%
+Wzór ten pozwala wyznaczyć strukturę pasmową w ramach metody ciasnego wiązania.
+Jeżeli ograniczymy się do modelu jednopasmowego i do przeskoków tylko między najbliższymi sąsiadami
+możemy dostać uproszczony model z jednym parametrem przeskoku $t$.
+Dla prostej struktury kubicznej dostajemy
+%
+\begin{equation}
+\varepsilon_{\bm{k}j}=\varepsilon_0+\frac{t}{N}\sum_{n}e^{i\bm{k}(\bm{R}_{n+1}-\bm{R}_n)}=\varepsilon_0+2t(cosk_xa+cosk_ya+cosk_za).
+\label{band}
+\end{equation}
+%
+gdzie $a$ jest stałą sieci, a $\varepsilon_0$ jest energią elektronu zlokalizowanego w stanie atomowym.
+Szerokość pasma w tym przybliżeniu dana jest wzorem $w=2z|t|$, gdzie $z$ jest liczbą najbliższych sąsiadów.  
+
+Metoda ciasnego wiązania, która wykorzystuje bazę orbitali atomowych lub funkcji Wanniera,
+często wykorzystywana jest w obliczeniach modelowych. W ramach tego podejścia można łatwo uwzględnić lokalne oddziaływania
+kulombowskie lub oddziaływania parujące w modelach nadprzewodników wysokotemperaturowych.
+Lokalne energie i całki przeskoku mogą być wyznaczone przez dofitowanie struktury elektronowej
+z modelu ciasnego wiązania do wyników eksperymentalnych lub do struktury pasmowej wyznaczonej z obliczeń DFT.
+W tym drugim przypadku stosuje się najczęściej bazę maksymalnie zlokalizowanych funkcji Wanniera.
+Wykorzystuje się swobodę wyboru fazy dla funkcji Blocha, którą możemy przemnożyć przez czynnik $e^{i\theta(\bm{k})}$,
+gdzie $\theta(\bm{k})$ jest dowolną funkcją rzeczywistą, bez wpływu na energie stanów elektronowych. 
+Taki czynnik ma jednak wpływ na kształt funkcji Wanniera, w szczególności na ich zasięg przestrzenny. 
+Można tak dobrać czynnik fazowy, aby funkcja Wanniera $w_i(\bm{r}-\bm{R}_n)$ zlokalizowana była
+wokół punktu $\bm{R}_n$ i szybko zanikała z odległością. 
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=1]{FeSe.pdf}
+\caption{Porównanie struktury pasmowej otrzymanej w ramach modelu ciasnego wiązania i obliczeń DFT dla {\bf a.} CeCoIn$_5$ i {\bf b.} FeSe.
+Rysunek z pracy \cite{FeSe}.}
+\label{fig:fese}
+\end{figure}
+
+Na rysunku \ref{fig:fese} pokazano przykłady struktur pasmowych dla dwóch związków, CeCoIn$_5$ i FeSe, wyliczonych w modelu ciasnego wiązania z bazą
+maksymalnie zlokalizowanych funkcji Wanniera. 
+Parametry modelu wyznaczono przez dofitowanie energii stanów elektronowych, dla każdego wektora falowego $\bm{k}$, 
+do struktur pasmowych otrzymanych w ramach obliczeń DFT \cite{FeSe}.
+Obliczenia wykonano programem Quantum Espresso \cite{QE}, stosując funkcjonał GGA \cite{PW91} w ramach metody PAW \cite{Blochl}.  
+Wyznaczone modele ciasnego wiązania zostały następnie wykorzystane do wyliczenia podatności tworzenia par Coopera
+i zbadania własności nadprzewodzących obydwóch materiałów \cite{FeSe}.
+ 
+
+\subsection{Funkcje Gaussa}
+
+Lokalne orbitale można również wykorzystać jako bazę do rozwiniecia funkcji falowej w ramach samozgodnej procedury rozwiązywania równań Kohna-Shama.
+Jeżeli funkcjami bazowymi są orbitale atomowe mówimy o metodzie liniowych kombinacji orbitali atomowych ({\it ang. linear combination
+of atomic orbitals} - LCAO). Zwykle jednak stosuje się atomo-podobne orbitale, których postać funkcyjna ułatwia implementację
+i przyspiesza obliczenia. Do najczęściej stosowanych należą orbitale typu Slatera \cite{STO1,STO2} i funkcje typu Gaussa (gaussiany) \cite{GTO}.
+Te drugie są szczególnie wygodne ponieważ całki z funkcji Gaussa można wyliczyć analitycznie.
+Naturalną reprezentacją dla gaussianów jest układ współrzędnych biegunowych, ale wygodniejszy do wyznaczania elementów macierzowych hamiltonianu jest układ kartezjański, w którym te funkcje mają postać
+%
+\begin{equation}
+G_{ijk}(\bm{r},\alpha,\bm{R}_n)=N(x-x_n)^i(y-y_n)^j(z-z_n)^ke^{-\alpha (\bm{r}-\bm{R}_n)^2},
+\end{equation}
+%
+gdzie $\alpha$ jest parametrem wariacyjnym, który umożliwia optymalizację bazy dla konkretnych atomów, $\bm{R}_n=(x_n,y_n,z_n)$ jest wektorem określającym centrowanie danej funkcji, a $N$ jest czynnikiem normalizacyjnym.
+Spełniona jest ponadto zależność $l=i+j+k$, gdzie $l$ jest orbitalną liczbą kwantową.
+W wyniku iloczynu dwóch fukcji typu $s$ ($l=0$) centrowanych w punktach $\bm{R}_n$ i $\bm{R}_m$ dostajemy
+%
+\begin{equation}
+G_s(\bm{r},\alpha,\bm{R}_n)G_s(\bm{r},\beta,\bm{R}_m)=e^{-\gamma(\bm{R}_n-\bm{R}_m)^2}G_s(\bm{r},\kappa,\bm{R}_p),
+\end{equation}
+%
+gdzie 
+%
+\begin{equation}
+\kappa=\alpha+\beta, \quad \gamma=\frac{\alpha\beta}{\alpha+\beta}, \quad \bm{R}_p=\frac{\alpha\bm{R}_n+\beta\bm{R}_m}{\alpha+\beta},
+\end{equation}
+%
+gdzie $\bm{R}_p$ jest wektorem centrowania wynikowej funkcji Gaussa.
+W ogólnym przypadku iloczyn dwóch gaussianów można zapisać w formie
+%
+\begin{multline}
+G_{i_1j_1k_1}(\bm{r},\alpha,\bm{R}_n)G_{i_2j_2k_2}(\bm{r},\beta,\bm{R}_m) = Ne^{-\gamma(\bm{R}_n-\bm{R}_m)^2}e^{-\kappa(\bm{r}-\bm{R}_p)^2} \\
+\times (x-x_n)^{i_1}(x-x_m)^{i_2}(y-y_n)^{j_1}(y-y_m)^{j_2}(z-z_n)^{k_1}(z-z_m)^{k_2}.
+\end{multline}
+%
+Te wzory pokazują, ze iloczyn funkcji Gaussa jest również funkcją Gaussa. Jest to główna zaleta tej bazy umożliwiająca
+analityczne wyliczenie złożonych całek zawierajacych kilka funkcji bazowych i w ten sposób znaczne przyspieszenie rachunków.
+W odróżnieniu od metod wykorzystujących fale płaskie, metoda funkcji Gaussa wymaga odpowiedniego wybrania funkcji bazowych
+dla danego układu atomowego. Metoda ta stosowana jest głównie przez chemików, a najbardziej popularnym programem jest GAUSSIAN.
+Głównym twórca tego programu jest John Pople, który w roku 1998 otrzymał wspólnie z Walterem Kohnem Nagrodę Nobla w dziedzinie chemii.
+
+\section{Stowarzyszone fale i atomowe sfery}
+
+Ostatnia grupa metod obliczeniowych łączy główne cechy dwóch poprzednich: pseudopotencjałów i lokalnych orbitali. 
+Do rozwinięcia funkcji falowych stosowane są dwie różne bazy w zależności od położenia w krysztale.
+Wokół rdzeni atomowych naturalnym wyborem sa lokalne funkcje, które można otrzymać z rozwiązania
+równania Schr\"{o}dingera w potencjale sferyczno-symetrycznym. W obszarze miedzywezłowym
+stosuje się rozwinięcie w bazie funkcji, które umożliwiają szybką zbieżność rachunków (np. fale płaskie).
+Centralnym problemem stają sie odpowiednie warunki brzegowe, które zapewniają ciągłość funkcji falowej i jej pochodnej 
+na granicy między tymi obszarami.
+Wszystkie metody omawiane w tym rozdziale stosowały na początku uproszczony potencjał typu {\it muffin-tin}, który w obszarze rdzenia
+ma charakter potencjału atomowego, a w obszarze międzywęzłowym jego wartość jest stała.
+Obecnie podejścia te zostały zaimplementowane w ramach procedury samozgodnej i zaliczane są do metod pełnego potencjału. 
+
+\subsection{Metoda KKR}
+
+W dwóch pracach, Korringa \cite{K47} oraz Kohn i Rostoker \cite{KR54} (KKR) zaproponowali metodę, która nazywana jest również metodą funcji Greena
+lub metodą wielokrotnego rozpraszania.
+Pierwsze obliczenia stałych sieci i modułów sztywności wykonano właśnie z wykorzystaniem tej metody \cite{Moruzzi77}. Była to przełomowa praca, która 
+pokazała możliwość zastosowania DFT do badania własności materiałowych.  
+
+Podstawową wielkością stosowaną tutaj jest funkcja Greena $G(E,\bm{r},\bm{r}')$, która opisuje propagację elektronu o energii $E$ między punktami $\bm{r}$ i $\bm{r}'$. Proces przemieszczania się elektronu można podzielić na swobodny ruch w obszarze międzywęzłowym i rozpraszanie na sferach atomowych
+w wyniku oddziaływania elektronu z potencjałem rdzenia atomowego.
+Dla elektronu opisanego jednocząstkowym równaniem Schr\"{o}dingera
+%
+\begin{equation}
+[-\frac{\hbar^2}{2m}\nabla^2+V(\bm{r})]\psi_i(\bm{r})=\varepsilon_i\psi_i(\bm{r}),
+\end{equation}
+%
+funkcja Greena spełnia równanie
+%
+\begin{equation}
+[-\frac{\hbar^2}{2m}\nabla^2+V(\bm{r})-E]G(E,\bm{r}-\bm{r}')=\delta(\bm{r}-\bm{r}'),
+\end{equation}
+%
+które posiada rozwiązanie w formie
+%
+\begin{equation}
+G(E,\bm{r},\bm{r}')=\sum_i\frac{\psi_i(\bm{r})\psi_i^*(\bm{r}')}{E-\varepsilon_i}.
+\end{equation}
+%
+Dla nieoddziałujących elektronów mamy $V(\bm{r})=0$ i funkcja Greena ma postać
+%
+\begin{equation}
+G_0(E,|\bm{r}-\bm{r}'|)= \frac{m}{2\pi\hbar^2}\frac{e^{ik_0|\bm{r}-\bm{r}'|}}{|\bm{r}-\bm{r}'|},
+\end{equation}
+%
+gdzie $k_0=\frac{\sqrt{2mE}}{\hbar}$.
+
+Funkcja Greena dla elektronu oddziałującego z siecią atomową może być zapisana w postaci rozwinięcia
+%
+\begin{equation}
+G=G_0+G_0tG_0+G_0tG_0tG_0+...=G_0+G_0tG,
+\end{equation}
+%
+które prowadzi do zależności
+%
+\begin{equation}
+G=(G_0^{-1}-t)^{-1},
+\end{equation}
+%
+gdzie $t$ jest macierzą rozpraszania elektronów na pojedynczych atomach sieci krystalicznej.
+Można wprowadzić również macierz całkowitego, wielokrotnego rozpraszania elektronów $T$, która zdefiniowana jest wzorem
+%
+\begin{equation}
+G=G_0+G_0TG_0=G_0+G_0(t+tG_0T)G_0,
+\end{equation}
+%
+z którego dostajemy
+%
+\begin{equation}
+T=(t^{-1}-G_0)^{-1}.
+\end{equation}
+%
+Stany stacjonarne, które odpowiadają rozwiązaniom równania Schr\'{o}dingera, są biegunami macierzy $T$
+i mogą być wyznaczone jako miejsca zerowe wyznacznika
+%
+\begin{equation}
+\det(t^{-1}-G_0)=0.
+\end{equation}
+%
+Równanie to dostarcza rozwiązania problemu wielokrotnego rozpraszania elektronów w przybliżeniu potencjału {\it muffin-tin}.
+Pełna informacja o rozpraszaniu elektronu na pojedynczej sferze atomowej zawarta jest w macierzy rozpraszania $t_l(E)$, 
+która zależy tylko od energii stanu elektronowego $E$ i orbitalnego krętu $l$.
+Korzystając z teorii rozpraszania, można wyrazić macierz rozpraszania jako funkcję przesunięcia fazy funkcji falowej $\eta_l(E)$
+%
+\begin{equation}
+t_l(E)=-\frac{1}{k_0}e^{i\eta_l(E)}\sin(\eta_l(E)).
+\label{fshift}
+\end{equation} 
+%
+Funkcja Greena $G_0$ zależy tylko od geometrii sieci krystalicznej i energii $E$.
+Wykorzystując rozwinięcie fal płaskich w bazie harmonik sferycznych, funcję Greena
+możemy zapisać w formie
+%
+\begin{equation}
+G_0(E,|\bm{r}-\bm{r}'|)=\sum_{L,L'} i^lj_l(k_0r)Y_L(\hat{\bm{r}})B_{LL'}(E,\bm{R}-\bm{R}')(-i)^{l'}j_{l'}(k_0r')Y^*_{L'}(\hat{\bm{r}}'),
+\end{equation} 
+%
+gdzie $j_l(k_0r)$ są funkcjami Bessela, $B_{LL'}$ są stałymi struktury KKR i $L=\{l,m\}$.
+Wektory położenia $\bm{r}$ i $\bm{r}'$ odnoszą się do dwóch sfer atomowych, których środki
+określają wektory $\bm{R}$ i $\bm{R}'$. Przy założeniu, że rozpraszanie w każdym węźle atomowym jest takie samo,
+co odpowiada sieci złożonej z jednego rodzaju atomów, możemy wprowadzić zależność stałych struktury od wektora falowego
+% 
+\begin{equation}
+B_{LL'}(E_{\bm{k}},\bm{k})=\sum_{m} B_{LL'}(E_{\bm{k}},\bm{T}_m)e^{-i\bm{k}\bm{T}_m},
+\end{equation}
+%
+gdzie $\bm{T}_m$ są wektorami translacji sieci krystalicznej, a energie $E_{\bm{k}}$
+są rozwiązaniami równania
+%
+\begin{equation}
+\det[t_l^{-1}(E_{\bm{k}})\delta_{LL'}-B_{LL'}(E_{\bm{k}},\bm{k})]=0.
+\end{equation}
+%
+Korzystając z wyrażenia (\ref{fshift}) dostajemy podstawowe równania na strukturę pasmową w metodzie KKR
+%
+\begin{equation}
+\sum_{L'}[B_{LL'}(E_{\bm{k}},\bm{k})+k_0\cot(\eta_l(E_{\bm{k}}))\delta_{LL'}]a_{L'}(\bm{k})=0.
+\label{KKR}
+\end{equation}
+%
+Rozwiązania tego równania pozwalają nam wyznaczyć funkcje falowe wewnątrz sfer atomowych
+%
+\begin{equation}
+\psi_{\bm{k}}(\bm{r})=\sum_{L'}a_{L'}(\bm{k})u_l(r,E_{\bm{k}})Y_L(\hat{\bm{r}}),
+\end{equation}
+%
+gdzie $u_l(r,E_{\bm{k}})$ są rozwiązaniami równania radialnego wewnątrz sfery, umówionego dokładnie w następnym rozdziale.
+Funkcje falowe w obszarze międzywęzłowym są rozwiązaniami następującego równania całkowego
+%
+\begin{equation}
+\psi_{\bm{k}}(\bm{r})=-\int d\bm{r}'G_0(E_{\bm{k}},|\bm{r}-\bm{r}'|)V(\bm{r}')\psi_{\bm{k}}(\bm{r}').
+\end{equation} 
+%
+Funkcje falowe w obydwóch obszarach muszą spełniać warunki brzegowe na każdej sferze atomowej. 
+
+W ogólnym przypadku macierz rozpraszania zależy od położenia atomu $t_l(E,\bm{R})$
+i równanie na funkcje Greena przyjmuje postać
+%
+\begin{equation}
+[G_{LL'}(E,\bm{R},\bm{R}')]^{-1}=\Big[[B_{LL'}(E,\bm{R}-\bm{R}')]^{-1}-t_l(E,\bm{R})\delta_{\bm{R}\bm{R}'}\delta_{LL'}]\Big],
+\end{equation}
+%
+a stany stacjonarne otrzymujemy z warunku
+%
+\begin{equation}
+\det\Big[t_l^{-1}(E,\bm{R})\delta_{\bm{R}\bm{R}'}\delta_{LL'}-B_{LL'}(E,\bm{R}-\bm{R}')\Big]=0.
+\end{equation}
+
+Funkcja Green pozwala wyznaczyć różne wielkości fizycznych. Na przykład, część urojona funkcji Greena zwiazana jest z lokalną gęstością stanów 
+%
+\begin{equation}
+n_L(E,\bm{R})=-\frac{1}{\pi}\operatorname{Im}G_{LL}(E+i\delta,\bm{R}).
+\end{equation}
+%
+Podobnie część urojona transformaty Fouriera funkcji Green daje nam gęstość spektralną,
+czyli gęstość stanów elektronowych dla danej energii i wektora falowego
+%
+\begin{equation}
+n_L(E,\bm{k})=-\frac{1}{\pi}\operatorname{Im}G_{LL}(E+i\delta,\bm{k}).
+\end{equation}
+%
+
+Metoda funkcji Greena umożliwia wprowadzenie efektywnego (koherentnego) potencjału, który łączy własności dwóch różnych atomów.
+Jest to przybliżenie koherentnego potencjału ({\it ang. coherent potential approximation} - CPA), które stosowane jest do badania
+stopów metalicznych lub układów domieszkowanych \cite{CPA1,CPA2}.
+Metoda polega na uśrednieniu własności rozpraszania dwóch atomów umieszczonych w pobliżu efektywnego potencjału.
+Warunek równoważności średniej ważonej po obydwóch atomach i efektywnego potencjału prowadzi do zespolonego,
+zależnego od energii potencjału CPA. 
+
+
+\subsection{Metoda LAPW}
+
+Metoda zlinearyzowanych stowarzyszonych fal płaskich ({\it ang. linearized augmented plane wave} - LAPW)
+jest modyfikacją oryginalnego podejścia rozszerzonych fal płaskich (APW) zaproponowanego przez Slatera w roku 1937 \cite{slater37}.
+Podobnie jak w metodzie pseudopotencjału, cały kryształ podzielony jest na obszary wewnątrz sfer otaczających atomy ($r<r_c$)
+i obszar międzywęzłowy ($r>r_c$). Funkcje falowe w otoczeniu jądra atomowego charakteryzują sie dużą zmiennością i
+w przybliżeniu maja kształt sferyczny. Z tego względu naturalnym wyborem bazy sa funkcje radialne, będące rozwiązaniami równania Schr\"{o}dingera z
+potencjałem sferycznie symetrycznym. W obszarze więdzywęzłowym, gdzie potencjał zmienia sie bardzo wolno, rozwiązania
+funkcji falowej rozwijane są w bazie fal płaskich. Funkcję falową w metodzie APW można
+zapisać w postaci
+%
+\begin{equation}
+\psi_{\bm{k}j}(\bm{r})=\sum_{\bm{G}}c_{\bm{G}j}\phi_{\bm{k}+\bm{G}}(\bm{r}),
+\end{equation}
+%
+gdzie $\bm{G}$ oznaczają wektory sieci odwrotnej. Funkcje bazowe mogą być zapisane w formie 
+%
+\begin{equation} 
+\phi_{\bm{k}+\bm{G}}(\bm{r})=\begin{cases}
+        e^{i(\bm{k}+\bm{G})\bm{r}} & r>r_c \\
+       \sum_{lm}A_{lm}(\bm{k}+\bm{G})u_l(r,E_l)Y_{lm}(\theta,\varphi) &  r<r_c,
+             \end{cases}    
+\label{APWbase}                      
+\end{equation}
+%
+gdzie $A_{lm}$ są współczynnikami rozwinięcia, $Y_{lm}(\theta,\varphi)$ są harmonikami sferycznymi i $u_l(r,E_l)$ są rozwiązaniami równania
+%
+\begin{equation}
+[-\frac{d^2}{dx^2}+\frac{l(l+1)}{r^2}+V(r)-E_l]ru_l(r,E_l)=0,
+\label{radial}
+\end{equation}
+%
+gdzie $V(r)$ jest potencjałem wewnątrz sfery, a $E_l$ pełni rolę parametru i niekoniecznie jest to energia własna. 
+W przybliżeniu potencjału {\it muffin-tin} (MT), w obszarze atomowym jest on sferycznie
+symetryczny ($V(\bm{r})=V(r)$), a w obszarze międzywezłowym ma wartość stałą ($V(\bm{r})=V_0$) lub zero. Wtedy funkcje falowe $\psi(\bm{r})$ mogą być wyrażone przez rozwiazania równania Schr\"{o}dingera w poszczególnych obszarach kryształu, odpowiednio przez harmoniki sferyczne wokół atomów i fale płaskie między atomami. 
+Współczynniki $A_{lm}$ wyznacza się tak, aby spełniony był warunek ciągłości funkcji falowej na granicy sfery (warunek ciągłości pierwszych pochodnych nie jest spełniony). w ten sposób współczynniki $A_{lm}$ stają się zależne od vectora falowego.  
+Współczynniki $c_{\bm{G}}$ i liczby $E_l$ są parametrami wariacyjnymi metody APW. Rozwiązania, które numerowane są wektorami $\bm{G}$, składające sie z pojedynczych fal płaskich w obszarze miedzywęzłowym i dopasowane do nich rozwiązania radialne wewnątrz sfery nazywane są stowarzyszonymi falami płaskimi.
+
+Funkcje bazowe wewnątrz sfery zależą od energii $E_l$, co powoduje, że odpowiednie równanie własne na funkcje falowe jest nieliniowe. Jest to główny problem
+podejścia APW, uniemożliwiający łatwe rozszerzenie stosowalności tej metody na dowolne potencjały. W szczególności potencjały wyznaczane metodą samozgodną w ramach teorii funkcjonału gęstość.
+Rozwiązaniem tego problemu była zaproponowana przez Andersena w roku 1975 linearyzacja równań APW, która prowadzi do metody LAPW \cite{Andersen75}.
+W tym podejściu, modyfikuje się funkcje bazowe wewnątrz sfery do postaci
+%
+\begin{equation}
+\phi_{\bm{k}+\bm{G}}(\bm{r})=\sum_{lm}[A_{lm}(\bm{k}+\bm{G})u_l(r,E_l)Y_{lm}(\theta,\varphi)+B_{lm}(\bm{k}+\bm{G})\dot{u}_l(r,E_l)Y_{lm}(\theta,\varphi)],
+\end{equation}    
+%
+gdzie współczynniki rozwinięcia $A_{lm}$ i $B_{lm}$ wyznacza się z warunku ciągłości funkcji falowej i jej pochodnej na sferze, a pochodna $\dot{u}_l(r,E_l)=\partial u_l/\partial E$ spełnia równanie
+%
+\begin{equation}
+[-\frac{d^2}{dx^2}+\frac{l(l+1)}{r^2}+V(r)-E_l]r\dot{u}_l(r,E_l)=ru_l(r,E_l).
+\end{equation}
+Dodatkowo narzuca sie warunek normalizacji funkcji $u_l$
+%
+\begin{equation}
+\int_0^{r_c}dr[ru_l(r,E_l)]^2=1,
+\end{equation}
+%
+oraz ortogonalności funkcji $u_l$ i $\dot{u}_l$
+%
+\begin{equation}
+\int_0^{r_c}drr^2u_l(r,E_l)\dot{u}_l(r.E_l)=0.
+\end{equation}
+
+Znajomość gradientu $\dot{u}_l$ umożliwia wyznaczenie funkcji radialnej dla danej energii pasma $\varepsilon$, 
+uwzlędniając poprawkę liniową
+%
+\begin{equation}
+u_l(r,\varepsilon)=u_l(r,E_l)+(\varepsilon-E_l)\dot{u}_l(r,E_l)+O((\varepsilon-E_l)^2),
+\end{equation}
+%
+gdzie $O((\varepsilon-E_l)^2)$ oznacza błąd, który jest rzędu kwadratu różnicy tych dwóch energii.
+
+W ramach procedury samozgodnej, pełny potencjał wyliczany jest w obydwóch obszarach kryształu,
+stosując rozwinięcia w odpowiednich bazach
+%
+\begin{equation} 
+V(\bm{r})=\begin{cases}
+        \sum_{\rm{G}}V_{\bm{G}} e^{i\bm{G}\bm{r}} & r>r_c \\
+       \sum_{lm}V_{lm}Y_{lm}(\theta,\phi) &  r<r_c.
+             \end{cases}   
+\label{fullpot}                       
+\end{equation}
+%
+Podobnie wylicza się gęstość ładunku wewnątrz sfery korzystając ze współczynników rozwinięcia funkcji falowych
+w bazie harmonic sferycznych oraz w obszarze międzywęzłowym w bazie fal płaskich.
+
+W odróżnieniu od metody pseudopetcjału, gdzie uwzględniane są tylko elektrony walencyjne, w metodzie LAPW wyznaczane są
+zarówno stany walencyjne, jak i stany rdzenia.
+Ponieważ funkcje falowe stanów rdzenia sa zlokalizowane blisko jądra atomowego, wylicza się je stosując tylko 
+potencjał centrosymetryczny. Jeżeli zasięg funkcji falowej stanu rdzenia przekracza granicę strefy atomowej,
+stosuje się gładkie przedłużenie potencjału centrosymetrycznego poza tę granice. 
+Do wyznaczenia stanów rdzenia stosuje sie podejście w pełni relatywistyczne,
+czyli rozwiązuje się równanie Diraca, zamiast równania Schr\"{o}dingera (\ref{radial}). 
+Stany walencyjne wyznaczone są dla pełnego potencjału w całym obszarze kryształu.
+
+W niektórych materiałach występują również stany elektronowe, mające wspólne cechy stanów rdzenia i walencyjnych, które nazywane są
+pseudordzeniowymi. Przykładem są wysoko położone i wzlędnie rozległe stany $5d$ w metalach ziem rzadkich.
+Występowanie tych stanów wymaga modyfikacji metody LAPW. W standardowej wersji, baza konstruowana
+jest tak, aby jak najdokładniej opisać stany elektronowe bliskie energii $E_l$
+i zwykle wybiera się tę wartość blisko środka pasma walencyjnego.
+Jeżeli występują dodatkowe stany w innym zakresie energii, wybór wartości $E_l$ nie jest oczywisty. 
+Najlepszym podejściem do opisu stanów pseudordzeniowych jest rozszerzenie bazy przez wprowadzenie dodatkowych 
+lokalnych orbitali (LO), które mieszczą się wewnątrz atomowej sfery. Ta modyfikacja nazywa się metodą APW+LO \cite{singh91}. 
+Ponieważ istnieje swoboda wyboru bazy, pochodną funkcji radialnej $\dot{u}_l$ usuwa sie z głównej bazy i dołacza do LO.
+Zatem całkowita baza w tym podejściu składa się z oryginalnej bazy APW (\ref{APWbase})  
+i dodatkowych orbitali w formie
+%
+\begin{equation}
+\chi^{lo}_L(\bm{r})=[a^{lo}_{lm}u_l(r,E_l)+b^{lo}_{lm}\dot{u}_l(r,E_l)]Y(\theta,\varphi),
+\end{equation}
+%
+gdzie $r<r_c$, a współczynniki $a^{lo}_{lm}$ i $b^{lo}_{lm}$ są tak dobrane, aby LO
+znikały na sferze. Liczba orbitalna ograniczona jest w tym przypadku do wartości, które odpowiadają 
+fizycznym stanom kwantowym ($l\le 3$). W odróżnieniu od LAPW, w metodzie APW+LO nie ma ograniczenia na
+wartości pochodnych funkcji bazowych na sferze atomowej. 
+  
+
+\subsection{Metoda LMTO}
+
+W metodzie zlinearyzowanych orbitali {\it muffin-tin} ({\it ang. linearized muffin-tin orbitals} - LMTO)
+również wprowadza się podział kryształu na obszary wewnątrz sfer atomowych i obszar miedzywęzłowy.
+Funkcja falowa odpowiadająca energii $\varepsilon$ może być zapisana w ogólnej formie 
+%
+\begin{equation}
+\psi_{\bm{k}}(\varepsilon,\bm{r})=\sum_{lm} a_{lm}(\bm{k}) \phi_{lm}(\varepsilon,\kappa,\bm{r}),
+\end{equation}
+%
+gdzie funkcje bazowe w poszczególnych obszarach mają postać
+%
+\begin{equation}
+\phi_{lm}(\varepsilon,\kappa,\bm{r})=i^lY_{lm}(\theta,\phi)\begin{cases}
+        u_l(\varepsilon,r) +\kappa cot(\eta_l(\varepsilon))J_l(\kappa,r) & r<r_c \\
+       \kappa N_l(\kappa,r) &  r>r_c.
+             \end{cases}    
+\end{equation}
+%
+Funkcja $J_l(\kappa,r)$ jest tak skonstruowana, aby funkcje bazowe wewnątrz sfery nie zależały od energii, 
+czyli spełnione było równanie
+%
+\begin{equation}
+\frac{d}{d\varepsilon}\phi_{lm}(\varepsilon,\kappa,\bm{r})=i^lY_{lm}[\dot{u}_l(\varepsilon,r) +\kappa\frac{d}{d\varepsilon} cot(\eta_l(\varepsilon))J_l(\kappa,r)]=0
+\end{equation}
+%
+dla energii $\varepsilon=E_{\nu}$ odpowiadającej średniej energii danego orbitalu LMTO.
+Ten warunek prowadzi do wzoru
+%
+\begin{equation}
+J_l(\kappa,r)=-\frac{\dot{u}_l(E_{\nu},r)}{\kappa\frac{d}{d\varepsilon}cot(\eta_l(E_{\nu}))}.
+\end{equation}
+%
+W obszarze międzywęzłowym funkcje bazowe centrowane w położeniu danej sfery $\bm{R}$ otrzymuje się przez rozwinięcie na funkcji $J_l$
+powiązane z sąsiednimi sferami w położeniach $\bm{R}'$
+%
+\begin{equation}
+N_l(\kappa,\bm{r}-\bm{R})=4\pi\sum_{l',l''}C_{l',l'',l'''}n^*_{l''}(\kappa,\bm{R}-\bm{R'})J_{l'}(\kappa,\bm{r}-\bm{R}').
+\end{equation}
+%
+Taka konstrukcja powoduje, że funkcje LMTO są kombinacją liniową funkcji $u_l$ i $\dot{u}_l$ wewnątrz danej sfery
+i są gładko przedłużane do obszaru międzywęzłowego, łącząc się w sposób ciagły z funkcjami $\dot{u}_l$ z każdej
+sąsiedniej sfery.
+
+Metodę LMTO można uprościć poprzez pominięcie obszaru międzywęzłowego i ograniczenie się do optymalizacji funkcji falowych tylko wewnątrz sfer.
+W podejściu nazywanym przybliżeniem atomowych sfer ({\it ang. atomic sphere approximation} - ASA)
+stosuje się sfery, które częściowo na siebie nachodzą i ich sumaryczna objętość równa się całkowitej objetości kryształu. 
+Zastoswanie takiego podejścia ma uzasadnienie jedynie dla kryształów z gęstym upakowaniem atomów.
+
+\chapter{Poprawki do funkcjonału energii}
+
+Teoria funkcjonału gęstości odniosła wiele spektaklarnych sukcesów w badaniach własności materiałowych.
+Posiada jednak braki, które nie pozwalają opisać poprawnie struktury elektronowej i tych własności, które są konsekwencją wzajemnych oddziaływań elektronowych. 
+Niektóre z tych niedoskonałości wynikają bezpośrednio z przybliżeń stosowanych do wyliczenia energii wymienno-korelacyjnej, 
+której dokładna postać funkcjonalna nie jest znana i prawdopodobnie w ogóle nie istnieje.  
+Do tej grupy należą błedy wynikające z samoodziaływania, czyli niedokładnego zerowania się energii oddziaływania elektronu z jego własnym polem kulombowskim.
+Metoda, która pozwala dokonać korekcji samoodziaływania omówiona będzie w rozdziale~\ref{sec:sic}. 
+Można częściowo zmniejszyć efekt samoodziaływania przez zastosowanie funkcjonału hybrydowego, czyli połączenia energii wymiany wyznaczanej z podejścia Hartree-Focka i 
+przybliżenia stosowango w DFT, co będzie tematem rozdziału~\ref{sec:hybrid}.  
+Drugim ważnym defektem jest brak zależności standardowych funkcjonałów wymienno-korelacyjnych od rodzaju orbitalu. Mówiąc ściślej, 
+stosowane funkcjonały wymienno-korelacyjne nie odróżniają stanów o różnej liczbie kwantowej $m$.
+Wszystkie orbitale traktowane są jednakowo i nie ma możliwości wyróżnienia cech, które decydują o nierównomiernym ich obsadzeniu.
+Taka możliwość często decyduje o charakterze stanu podstawowego i jest szczególnie istotna w układach silnie skorelowanych. 
+Wprowadzenie zależności orbitalnej umożliwia metoda LDA+U, która omówiona będzie w rozdziale~\ref{sec:ldau}.
+Jedną z wielkości, która nie jest poprawnie opisywana w ramach standardowych przyblizeń DFT jest przerwa energetyczna wystepujaca w półprzewodnikach i izolatorach. 
+Problem zaniżonej wartości przerwy energetycznej i metody jej poprawiania omówione będą w rozdziale \ref{sec:gapproblem}.
+
+
+\section{Korekcja samoodziaływania (SIC)}
+\label{sec:sic}
+
+Niedokładności w wartościach energii wymiany i korelacji, wynikające ze stosowania przybliżenia LDA lub GGA, są jednym z głównych źródeł błędów
+w obliczeniach opartych na teorii funkcjonału gęstości. Na przykładzie atomu wodoru, dyskutowanym w rozdziale \ref{sec:GGA}, 
+dobrze widać efekt jaki powodują różnice między wartościami dokładnymi i przybliżonymi.
+Ponieważ wartość bezwględna energii wymiany jest mniejsza niż wartość dokładna, nie kasuje całkowicie dodatniej energii Hartree. 
+Wprawdzie częściowo różnica ta redukowana jest przez niezerową i ujemną energię korelacji, ale pozostaje skończona. 
+Ta dodatkowa energia oddziaływania elektronu z samym sobą jest wielkością niefizyczną i może powodować duże błędy w obliczeniach.
+Samoodziaływanie występuje również w układach wieloelektronowych i przyjmuje bardzo różne wartości
+w zależności od rodzaju materiału. Jest ono zaniedbywalnie małe dla rozległych stanów elektronowych,
+zdelokalizowanych w dużym obszarze danego materiału. Dlatego wpływ samoodziaływania na stany elektronowe w prostych metalach, 
+gdzie dominują stany walencyjne typu $s$ i $p$, może być pominięty. 
+W materiałach, w których występują stany elektronowe mające tendencję do lokalizacji (np. stany {\it 3d} i {\it 4f}),
+jest ono szczególnie silne i często prowadzi do wyników jakościowo niezgodnych z eksperymentem.
+W stanach zlokalizowanych, oddziaływanie elektronu z jego własnym polem kulombowskim, które ma charakter odpychający,
+może prowadzić do znacznego wzrostu energii. Zredukowanie tej energie jest możliwe tylko poprzez zwiększenie delokalizacji
+ładunku i poszerzenie pasm elektronowych. Prowadzi to efektywnie do zmniejszenia przerwy energetycznej
+otrzymywanej w obliczeniach dla półprzewodników i izolatorów. W skrajnym przypadku błędy samoodziaływania powodują delokalizację ładunków w stanach $3d$ 
+i zamknięcie przerwy energetycznej, co skutkuje niewłaściwym stanem metalicznym w materiałach, które w rzeczywistości są izolatorami Motta. 
+
+W roku 1981, Pardew and Zunger zaproponowali metodę korekcji samoodziaływania ({\it ang. self-interaction correction} - SIC) \cite{PZ}.
+Metoda ta dotyczy stanów zlokalizowanych, więc rozpatrujemy zbiór orbitali $\phi_{\alpha\sigma}(\bm{r})$, gdzie $\alpha$ oznacza numer orbitalu,
+a $\sigma$ kierunek spinu. Oznaczamy gęstość elektronową pojedynczego orbitalu przez 
+%
+\begin{equation}
+n_{\alpha\sigma}(\bm{r})=f_{\alpha\sigma}|\phi_{\alpha\sigma}(\bm{r})|^2,
+\end{equation}
+%
+gdzie liczba $f_{\alpha\sigma}$ określa obsadzenie danego orbitalu. 
+Warunkiem braku samoodziaływania w każdym orbitalu jest kompletne wzajemne kasowanie się energii Hartree danej wzorem (\ref{Hartree}) 
+i energii wymienno-korelacyjnej
+%
+\begin{equation}
+E_H[n_{\alpha\sigma}]+E_{xc}[n_{\alpha\sigma}]=0,
+\label{nosic}
+\end{equation}
+%
+gdzie obydwie energie są funkcjonałami gęstości pojedynczego orbitalu.
+Dla pojedynczego elektronu spełniony jest również warunek kasowania
+się energii Hartree i dokładnej energii wymiany wylicznej w podejściu Hartree-Focka
+%
+\begin{equation}
+E_H[n_{\alpha\sigma}]+E_{x}[n_{\alpha\sigma}]=0.
+\end{equation}
+%
+Ponieważ energia korelacji $E_c=E_{xc}-E_{x}$, z tych dwóch warunków wynika, że energia korelacji dla pojedynczego orbitalu musi się zerować
+%
+\begin{equation}
+E_c[n_{\alpha\sigma}]=0.
+\end{equation}
+%
+Warunki te nie są spełnione dla energii wymienno-korelacyjnej danej wzorami w przybliżeniu LDA (\ref{xclda})
+lub GGA (\ref{xcgga}), co prowadzi do samoodziaływania elektronów. Oznaczmy ogólnie przez $E_{xc}^{DFT}[n_{\uparrow},n_{\downarrow}]$ funkcjonał wymienno-korelacyjny wyznaczonony w jednym z tych przybliżeń. Wtedy wzór na poprawioną energię wymienno-korelacyjną można zapisać w formie
+%
+\begin{equation}
+E_{xc}^{SIC}[n_{\alpha\sigma}]=E_{xc}^{DFT}[n_{\uparrow},n_{\downarrow}]-\sum_{\alpha\sigma}\delta_{\alpha\sigma},
+\label{xcsic}
+\end{equation}
+%
+gdzie
+%
+\begin{equation}
+\delta_{\alpha\sigma}=E_H[n_{\alpha\sigma}]+E_{xc}^{DFT}[n_{\alpha\sigma}],
+\end{equation}
+%
+a sumowanie jest tylko po zajętych orbitalach $\alpha$.
+Dla dokładnej wartości energii wymienno-korelacyjnej mielibyśmy $\delta_{\alpha\sigma}=0$,
+czyli spełniony byłby warunek (\ref{nosic}). 
+Energia wymienno-korelacyjna zdefiniowana wzorem (\ref{xcsic}) nie jest funkcjonałem gęstości elektronowej,
+tylko funkcjonałem orbitali atomowych. Powoduje to, że również funkcjonał energii całkowitej (\ref{EKS}) staje się zależny od orbitali
+% 
+\begin{equation}
+E^{SIC}[n_{\alpha\sigma}]=\sum_{\alpha\sigma}\langle\phi_{\alpha\sigma}|-\frac{\hbar^2}{2m}\nabla^2|\phi_{\alpha\sigma}\rangle+E_{ext}[n]+E_H[n]+E_{xc}^{SIC}[n_{\alpha\sigma}].
+\label{esic}
+\end{equation}
+%
+Podobnie, jak w przypadku funkcjonału Kohna-Shama, możemy zastosować metodę wariacyjną do zmninimalizowania tej energię względem
+zbioru orbitali $\phi_{\alpha\sigma}$, przy założonym warunku ortonormalności 
+%
+\begin{equation}
+\langle\phi_{\alpha\sigma}|\phi_{\alpha'\sigma'}\rangle=\delta_{\alpha\alpha'}\delta_{\sigma\sigma'}.
+\end{equation}
+%
+Dostajemy wtedy równania jednocząstkowe analogiczne do równań Kohna-Shama
+%
+\begin{equation}
+[-\frac{\hbar^2}{2m}\nabla^2+V_{eff}(n_{\alpha\sigma},\bm{r})]\phi_{\alpha\sigma}(\bm{r})=\varepsilon_{\alpha\sigma}^{SIC}\phi_{\alpha\sigma}(\bm{r}),
+\label{eqsic}
+\end{equation} 
+%
+z efektywnym potencjałem danym wzorem
+%
+\begin{equation}
+V_{eff}(n_{\alpha\sigma},\bm{r})=V^{DFT}(\bm{r})-V_H(n_{\alpha\sigma},\bm{r})-V_{xc}(n_{\alpha\sigma},\bm{r}),
+\end{equation}
+%
+gdzie ostatnie dwa wyrazy to korekcja samoodziaływania do efektywnego potencjału elektronowego.
+Podobnie jak w przypadku stanów Kohna-Shama spełniona jest zależność
+%
+\begin{equation}
+\varepsilon_{\alpha\sigma}^{SIC}=\frac{\partial E^{SIC}}{\partial f_{\alpha\sigma}}.
+\end{equation}
+
+Równanie (\ref{eqsic}) pozwala wyznaczyć orbitale i energie własne zlokalizowanych stanów elektronowych. 
+Jednak w rzeczywistych materiałach, mamy często doczynienia z współistnieniem stanów zlokalizowanych i zdelokalizowanych, co powoduje, że rozwiązania tego równania nie muszą odpowiadać globalnemu minimum. Pełna optymalizacja funkcji falowych powinna 
+uwzlędniać zarówno stany zlokalizowane (typu Wanniera) i zdelokalizowane (typu Blocha).
+W praktyce polega to na wyznaczeniu różnych możliwych konfiguracji stanów zlokalizowanych i zdelokalizowanych,
+a następnie wybraniu tej o najniższej energii.    
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=1]{rare-earths.pdf}
+\caption{Różnice energii całkowitej dla walencyjności II i III wyliczone dla ziemiach rzadkich (o), porównane z eksperymentem (linia przerywana)
+i wartościami dla związków ziem rzadkich z siarką (+). Rysunek z pracy \cite{RE}.}
+\label{fig:rare}
+\end{figure}
+
+
+Dobrym przykładem są metale ziem rzadkich, w których występują zarówno stany zlokalizowane ($4f$),
+jak i zdelokalizowane ($5d$ i $6s$). Dodatkowo występują dwa rodzaje elektronów $4f$. Cześć z nich jest zlokalizowana,
+tak jak elektrony rdzenia, mając decydujący wpływ na moment magnetyczny i walencyjność danego atomu. 
+Pozostałe, w wyniku hybrydyzacji ze stanami $5d$ i $6s$, tworzą pasmo elektronowe i biorą udział w wiązaniu metalicznym.
+W ramach tradycyjnych przybliżeń energii wymienno-korelacyjnej nie można opisać prawidłowo tak złożonej
+struktury elektronowej ziem rzadkich. W pracy \cite{RE} zastosowano metodę SIC do wyliczenia obsadzeń
+stanów $4f$ i walencyjności we wszystkich atomach ziem rzadkich (rysunek \ref{fig:rare}).
+Walencyjność zdefiniowana jest jako ilość stanów zdelokalizowanych przypadająca na jeden atom i wyliczana jest ze wzoru
+%
+\begin{equation}
+N_{val}=Z-N_{core}-N_{SIC},
+\end{equation}
+%
+gdzie $Z$ jest liczbą atomową, $N_{core}$ ilością elektronów w rdzeniu i $N_{SIC}$ liczbą stanów zlokalizowanych $4f$,
+dla których odjęto energię samoodziaływania. Dla ziem rzadkich walencyjność przyjmuje dwie możliwe wartości:
+$N_{val}=2$ (atomy dwuwartościowe, II) lub $N_{val}=3$ (atomy trójwartościowe, III).
+Dla tych dwóch przypadków wyliczone różnice ich energii całkowitych $E_{II}-E_{III}$ pokazane są na rysunku \ref{fig:rare}.
+Otrzymane wartości bardzo dobrze zgadzają się z danymi eksperymentalnymi. 
+Jak widać, oprócz Eu i Yb, które są dwuwartościowe, wszystkie pozostałe ziemie rzadkie są trójwartościowe. 
+Podobnie dobrą zgodność z eksperymentem otrzymano dla promieni Wignera-Seitza, które decydują o stałej sieci kryształów ziem rzadkich \cite{RE}.
+
+
+\section{Funkcjonały hybrydowe}
+\label{sec:hybrid}
+
+Problem samoodziaływania nie występuje w przybliżeniu Hartree-Focka, gdzie dla każdego elektronu
+jego własne oddziaływanie kulombowskie kasowane jest przez oddziaływanie wymienne.
+Zatem częściowe uwzlędnienie dokładnej wartości energii wymiany w funkcjonale wymienno-korelacyjnym powinno
+zmniejszyć efekt samoodziaływania i w ten sposób poprawić całkowitą energię układu. 
+Takie funkcjonały, w których energia wymiany otrzymana w przybliżeniu LDA lub GGA jest częściowo zastąpiona
+dokładną wartością otrzymaną z metody Hartree-Focka, nazywane są funkcjonałami hybrydowymi.  
+Pierwszy funkcjonał hybrydowych zaproponował Becke w roku 1993 \cite{becke93}, uzasadniając jego postać
+na podstawie tzw. formuły adiabatycznego połączenia ({\it ang. adiabatic connection formula}).
+Rozważmy ogólny hamiltoniana w postaci
+%
+\begin{equation}
+H_{\lambda}=T+\lambda V,
+\end{equation}
+%
+gdzie $T$ jest operatorem energii kinetycznej, $V$ jest potencjałem oddziaływania między elektronami i $\lambda$ jest parametrem, który
+określa siłę tego ddziaływania ($0\leq\lambda\leq 1$). 
+Funkcje falowe $\psi_{\lambda}$ i energie własne $E_{\lambda}$ tego hamiltonianu są zależne od parametru $\lambda$.
+Dla nich spełnione jest równanie
+%
+\begin{equation}
+\frac{dE_{\lambda}}{d\lambda}=\langle\psi_{\lambda}|V|\psi_{\lambda}\rangle,
+\end{equation} 
+%
+z którego dostajemy
+%
+\begin{equation}
+E_{\lambda=1}=E_{\lambda=0}+\int_0^1 d\lambda \langle\psi_{\lambda}|V|\psi_{\lambda}\rangle.
+\end{equation}
+%
+Energia dla $\lambda=0$ odpowiada energii kinetycznej, natomiast $\lambda=1$ daje energie z pełnym oddziaływaniem elektronowym $V$.
+Ta formuła określa właśnie adiabatyczne połączenie między układem nieoddziałujących i oddziałujących elektronów.
+Po zastosowaniu tej formuły do funkcjonału energii (z pominięciem potencjału zewnętrznego $V_{ext}$) dostajemy 
+%
+\begin{equation}
+E[n]=T[n]+\int_0^1 d\lambda \langle\psi_{\lambda}|V|\psi_{\lambda}\rangle.
+\end{equation}
+%
+Biorąc pod uwagę funkcjonał Kohna-Shama (\ref{EKS}), możemy napisać wzór na energię wymienno-korelacyjną w postaci
+%
+\begin{equation}
+E_{xc}[n]=\int_0^1 d\lambda \langle\psi_{\lambda}|V|\psi_{\lambda}\rangle-E_H[n]=\int_0^1d\lambda E_{xc,\lambda}[n].
+\label{xcn}
+\end{equation}
+%
+Powyższą całkę można przybliżyć, rozpatrując jedynie wartości końcowe. Dla $\lambda=0$, dostajemy energie wymiany
+w przybliżeniu Hartree-Focka, $E_{xc,0}=E_x^{HF}$. Becke zaproponował, aby dla $\lambda=1$ zastosować jedno z przybliżeń stosowanych w DFT (LDA lub GGA),
+$E_{xc,1}=E_{xc}^{DFT}$, a dla pośrednich wartości $\lambda$ zastosować interpolację liniową
+%  
+\begin{equation}
+E_{xc,\lambda}[n]=(1-\lambda)E_x^{HF}[n]+\lambda E_{xc}^{DFT}[n].
+\end{equation}
+%
+Po wstawieniu tej zależności do (\ref{xcn}) i wyliczeniu całki dostajemy funkcjonał hybrydowy 
+%
+\begin{equation}
+E_{xc}^{hyb}[n]=\frac{1}{2}E_x^{HF}+\frac{1}{2}E_{xc}^{DFT}[n].
+\label{becke}
+\end{equation} 
+%
+
+Pardew, Ernzerhof i Burke w roku 1996 powiązali zależność energii wymienno-korelacyjnej od $\lambda$ \cite{PBE0} 
+z rozwinięciem perturbacyjnym Mollera-Plesseta i zaproponowali bardziej ogólną formę 
+%
+\begin{equation}
+E_{xc,\lambda}[n]=E_{xc}^{DFT}[n]+(E_x^{HF}[n]-E_x^{DFT}[n])(1-\lambda)^{m-1},
+\end{equation}
+%
+która prowadzi do funkcjonału w postaci
+%
+\begin{equation}
+E_{xc}^{hyb}[n]=E_{xc}^{DFT}[n]+\frac{1}{m}(E_x^{HF}[n]-E_x^{DFT}[n]).
+\end{equation}
+%
+Dla $m=1$, energia wymiany jest równa dokładnej wartości $E_x^{HF}$. W tym przypadku dodanie przybliżonej wartość energii korelacji $E_c^{DFT}$ 
+poprawia wyniki w porównaniu do przybliżenia Hartree-Focka. Wyniki są jednak gorsze niż w przybliżeniach LDA lub GGA, w których błędy energii wymiany i korelacji mają przeciwne znaki, co powoduję ich częściowe kasuwanie się. Przypadek $m=2$ odpowiada funkcjonałowi z pracy~\cite{becke93}, który dany jest wzorem~(\ref{becke}). 
+Za optymalny uznano wybór $m=4$~\cite{PBE0}, wskazując na bardzo dobrą zgodnością wyników otrzymanych w ramach teorii perturbacyjnej Mollera-Plesseta czwartego rzędu z danymi eksperymentalnymi \cite{pople89}. Co więcej, w tym przypadku zarówno wartości $E_{xc,\lambda}$ i $E_{xc}^{DFT}$, jak również ich pierwsze oraz drugie pochodne wzajemnie pokrywają się dla $\lambda=1$. Warunek ciągłości pochodnych nie jest spełniony dla $m=2$.
+
+Oddziaływanie wymienne ma charakter krótkozasięgowy i można uwzględnić wkład od dokładnej wartości jedynie
+w pewnym zakresie odległości. Uwzględniając ten efekt Heyd, Scuseria i Enzerhof (HSE) \cite{HSE} zaproponowali nowy funkcjonał
+w postaci
+%
+\begin{equation}
+E_{xc}^{hyb}(\mu) = (1-a)E_{x}^{GGA,SR}(\mu)+aE_x^{HF,SR}(\mu) + E_x^{GGA,LR} + E_c^{GGA},
+\end{equation}
+%
+gdzie $E_x^{GGA,SR}$ i $E_x^{GGA,LR}$ odpowiadają krótkozasięgowemu i długozasięgowemu oddziaływaniu wymiennemu w przybliżeniu GGA,
+$E_x^{HF,SR}$ jest częścią krótkozasięgowego dokladnego oddziaływania wymiennego, a parametr $\mu$
+określa zasięg oddziaływania krótkozasięgowego. Parametr $a$ związany jest z wykładnikiem $m$ prostą zależnością $a=\frac{1}{m}$.
+
+\section{Funkcjonały OEP}
+\label{sec:mgga}
+
+Główną zaletą funkcjonału Kohna-Shama, która umożliwia obliczenia nawet dla dużych układów, jest lokalny charakter potencjału
+wymienno-korelacyjnego. Dokładny potencjał jest nielokalny i ogólnie jest zależny od funkcji falowych.
+Taką formę ma energia oddziaływania wymiennego zależna od orbitali jednocząstkowych w ramach przybliżenia Hartree-Focka. 
+Omawiany wcześniej potencjał efektywny w metodzie SIC również jest zalezny od orbitali atomowych.
+Podejście nazywane metodą zoptymalizowanego potencjału efektywnego ({\it ang. optimized effective potential} - OEP)  
+zakłada funkcjonalną zależność energii wymienno-korelacyjnej od orbitali $\phi_{j\sigma}$, przy zachowanym lokalnym charakterze potencjału $V^{OEP}_{\sigma}$
+\cite{Sharp,Talman}. 
+Energię całkowitą Kohna-Shama możemy zapisać jako funkcjonał orbitali
+%
+\begin{equation}
+E[\{\phi_{j\sigma}\}]=T[\{\phi_{j\sigma}\}]+\int d\bm{r} V_{ext}(\bm{r})n(\bm{r})+\frac{1}{2}\int \int d\bm{r} d\bm{r}' \frac{n(\bm{r})n(\bm{r}')}{|\bm{r}-\bm{r}'|}+E_{xc}[\{\phi_{j\sigma}\}].
+\end{equation}
+Metoda OEP ma charakter wariacyjny i opiera się na dwóch równaniach. Pierwsze określa warunek minium (stacjonarności) energii całkowitej
+względem efektywnego potencjału
+%
+\begin{equation}
+\frac{\delta E[\{\phi_{j\sigma}\}]}{\delta V^{OEP}_{\sigma}}=0.
+\end{equation} 
+%
+Drugie z nich ma postać równania Kohna-Shama z efektywnym potencjałem zależnym od orbitali
+%
+\begin{equation}
+\Big[-\frac{\hbar^2}{2m}\nabla^2+V^{OEP}_{\sigma}[\{\phi_{j\sigma}\}](\bm{r})\Big]\phi_{j\sigma}(\bm{r})=\varepsilon_{j\sigma}\phi_{j\sigma}(\bm{r}).
+\end{equation}
+%
+Część potencjału opisującą oddziaływanie wymienno-korelacyjne moża wyrazić w formie:
+%
+\begin{equation}
+V^{OEP}_{xc\sigma}(\bm{r})=\frac{\delta E_{xc}[\{\phi_{j\sigma}\}]}{\delta n_{\sigma}(\bm{r})}=\sum_{\nu\mu\i}\int\int d\bm{r}' d\bm{r}''\frac{\delta E_{xc}}{\delta \phi_{i\nu}(\bm{r}')}\frac{\delta \phi_{i\nu}(\bm{r}')}{\delta V^{OEP}_{\mu}(\bm{r}'')}\frac{\delta V^{OEP}_{\mu}(\bm{r}'')}{\delta n_{\sigma}(\bm{r})}.
+\label{voep}
+\end{equation}
+%
+Drugą pochodną funkcjonalna pod całką można wyrazić w pierwszym rzędzie rozwinięcia pertubacyjnego przy pomocy funkcji Greena dla nieodziałujęcego układu elektronów
+%
+\begin{equation}
+\frac{\delta \phi_{i\nu}(\bm{r}')}{\delta V^{OEP}_{\mu}(\bm{r}'')}=\delta_{\nu\mu}G^R_{i\mu}(\bm{r}',\bm{r}'')\phi_{i\mu}(\bm{r}'')=\delta_{\nu\mu}\sum_{k\neq i}\Big[\frac{\phi^*_{k\mu}(\bm{r}')\phi_{k\mu}(\bm{r}'')}{\varepsilon_{i\mu}-\varepsilon_{k\mu}}\Big]\phi_{i\mu}(\bm{r}'').
+\end{equation}
+%
+Trzecia pochodna jest odwrotnością liniowej funkcji odpowiedzi, którą również możemy wyrazić przez funkcję Greena
+%
+\begin{equation}
+\chi_{\sigma}(\bm{r},\bm{r}'')=\delta_{\sigma\mu}\frac{\delta n_{\sigma}(\bm{r})}{\delta V^{OEP}_{\mu}(\bm{r}'')}=\delta_{\sigma\mu}\sum_i G^R_{i\sigma}(\bm{r}'',\bm{r})\phi_{i\sigma}(\bm{r}'')\phi^*_{i\sigma}(\bm{r}).
+\label{vchi}
+\end{equation}
+%
+Mnożąc równanie (\ref{voep}) przez $\chi_{\sigma}(\bm{r}',\bm{r})$, całkując wzlędem $\bm{r}'$ i wykorzystując (\ref{vchi}) dostajemy 
+równanie całkowe metody OEP
+%
+\begin{equation}
+\sum_i\int d\bm{r}' \phi^*_{i\sigma}(\bm{r})[V^{OEP}_{xc\sigma}(\bm{r})-u^{OEP}_{xci\sigma}(\bm{r})]G^R_{i\sigma}(\bm{r}',\bm{r})\phi_{i\sigma}(\bm{r}) + c.c.=0,
+\label{oepint}
+\end{equation}
+%
+gdzie
+%
+\begin{equation}
+u^{OEP}_{xci\sigma}(\bm{r})=\frac{1}{\phi^*_{i\sigma}(\bm{r})}\frac{\delta E_{xc}[\{\phi_{j\sigma}\}]}{\delta \phi_{i\sigma}(\bm{r})}.
+\end{equation}
+%
+Jeżeli funkcjonał wymienno-korelacyjny zależy tylko od gęstości, wtedy $u^{OEP}_{xci\sigma}(\bm{r})=V^{OEP}_{xc\sigma}(\bm{r})$ i równanie (\ref{oepint})
+jest automatycznie spełnione.
+W ramach metody OEP, część wymienną można traktować dokładnie, tak jak w przybliżeniu Hartree-Focka, i wtedy potencjał zależny od orbitali
+ma postać
+%
+\begin{equation}
+u^{OEP}_{xi\sigma}=-\frac{1}{\phi^*_{i\sigma}(\bm{r})}\sum_j \phi^*_{j\sigma}\int d\bm{r}'\frac{\phi^*_{i\sigma}(\bm{r}')\phi_{j\sigma}(\bm{r}')}{|\bm{r}-\bm{r}'|}.
+\end{equation} 
+%
+
+\section{Funkcjonały meta-GGA}
+\label{mgga}
+
+Dwa podstawowe przybliżenia stosowane do opisu funkcjonału wymienno-korelacyjnego uwzlędniają tylko gęstość ładunku w danym punkcie
+przestrzeni (LDA) lub dodatkowo jego gradient (GGA). 
+Kolejnym krokiem pozwalającym poprawić ten funkcjonał jest uwzlędnienie jego zależności od gradientu orbitali, czyli 
+części kinetycznej całkowitej energii. Takie funkcjonały noszą nazwę meta-GGA i zapisywane są w ogólnej postaci
+%
+\begin{equation}
+E_{xc}[n_{\uparrow},n_{\downarrow}]=\int d\bm{r} n(\bm{r}) \varepsilon_{xc}(n_{\uparrow},n_{\downarrow},\nabla n_{\uparrow},\nabla n_{\downarrow},\tau_{\uparrow},\tau_{\downarrow}),
+\end{equation}
+%
+gdzie $\tau_{\sigma}$ jest gęstością energii kinetycznej wyznaczoną dla obsadzonych stanów Kohna-Shama
+%
+\begin{equation}
+\tau_{\sigma}= \frac{1}{2}\sum_i |\nabla \psi_{i\sigma}|^2.
+\end{equation}
+%
+Uzasadnieniem włączenia $\tau_{\sigma}$ do funkcjonału jest występowanie tej wielkości w rozwinięciu Taylora
+uśrednionej sferycznie dziury wymiennej wokół elektronu~\cite{Becke1998}. Drugą korzystną cecha jest możliwość zredukowania samoodziaływania
+w części korelacyjnej funkcjonału.
+
+Od roku 2003 zaproponowano kilka wersji funkcjonałów meta-GGA~\cite{TPSS,Becke2006,revTPSS,Tran2009,SCAN}. 
+Najdokładniejszym z nich jest funkcjonał SCAN ({\it ang. strongly contrained and appropriately normed}), który 
+spełnia 17 znanych warunków i norm dla funkcjonału wymienno-korelacyjnego~\cite{SCAN}.
+Jednym z nich jest warunek dla współczynnika określającego stosunek energii wymiany do odpowiedniej wartości w LDA, $F_x=E_x/E^{LDA}_x$, który
+nie może przekraczać wartości 1.174.
+Poprawnie opisuje również układy, dla których dokładne wartości są znane, np. jednorodny gaz elektronowy.  
+Funkcjonał SCAN zależy od bezwymiarowego parametru 
+%
+\begin{equation}
+\alpha=\frac{\tau-\tau^w}{\tau^{u}},
+\end{equation}
+%
+gdzie $\tau^w=|\nabla n|^2/8n$ określa granicę $\tau$ dla pojedynczego orbitalu, a $\tau^u=(3/10)(3\pi^2)^{2/3}n^{5/3}$ jest jego wartością
+dla jednorodnego gazu.
+Parametr $\alpha$ wykorzystywany jest do charakteryzacji rozkładu gęstości elektronowej i pozwala odróżnić
+układy z wolnozmienną gestością elektronową, typową dla metali ($\alpha\approx 1$), 
+materiały z wiązaniami kowalencyjnymi między pojedynczymi orbitalami ($\alpha=0$) oraz słabymi wiązaniami niekowalencyjnymi między
+zamkniętymi powłokami atomowymi ($\alpha\rightarrow\infty$).
+Jest on bezpośrednio powiązany z funkcją lokalizacji elektronowej ({\it ang. electron localization function} - ELF)
+%
+\begin{equation}
+\textrm{ELF} = \frac{1}{1+\alpha^2},
+\end{equation}     
+%
+która przyjmuje wartości z przedziału $(0,1)$ i jest używana do opisu wiązań chemicznych~\cite{ELF1,ELF2,ELF3}.
+
+Część wymienną funkcjonału można zapisać w postaci
+%
+\begin{equation}
+E_x[n]=\int d\bm{r} n(\bm{r}) \varepsilon_x(n)F_x(s,\alpha),
+\end{equation}
+%
+gdzie $\varepsilon_x(n)$ jest energią wymiany dla jednorodnego gazu przypadającą na pojedynczy elektron,
+a $s$ jest bezwymiarowym gradientem gęstości
+%
+\begin{equation}
+s=\frac{|\nabla n|}{2(3\pi^2)^{1/3}n^{4/3}}.
+\end{equation}
+%
+Rysunek~\ref{fig:Fxs} pokazuje zależność współczynnika $F_x$ od $s$ dla trzech charakterystycznych wartości $\alpha$.
+$F_x$ spełnia odpowiednie warunki zarówno dla małych $s\rightarrow0$, jak i dużych wartości $s\rightarrow\infty$.  
+Dla $\alpha=1$ i małych $s$, $F_x$ pokrywa się z wartościami dla funkcjonału PBE.
+Wartości $F_x$ dla innych wartości $\alpha$ uzyskuje się przez odpowiednią interpolację między $\alpha=0$ i $\alpha=1$ oraz ekstrapolację
+do $\alpha\rightarrow\infty$.
+%
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.5]{Fxs.png}
+\caption{Współczynnik $F_x$ w funkcji $s$ dla różnych wartości $\alpha$. Rysunek z pracy \cite{SCAN}.}
+\label{fig:Fxs}
+\end{figure}
+%
+
+Podobnie skonstruowany jest całkowity fukcjonał wymienno-korelacyjny $F_{xc}=F_{x}+F_{c}$, który w granicy
+dużych gęstości niespolaryzowanego gazu przyjmuje wartość energii wymiennej $F_x$.
+Dla małych gęstości funkcjonał spełnia warunek ograniczenia Lieba-Oxforda, $F_{xc}\leq 2.215$.
+ 
+
+
+
+
+\section{Metoda LDA+U}
+\label{sec:ldau}
+
+Metoda LDA+U została zaproponowana przez Anisimova, Zaanena i Andersena w roku 1991~\cite{anisimov}.
+Jednym z pierwszych jej zastosowań było wyliczenie struktury elektronowej dla nadprzewodnika wysokotemperaturowego La$_2$CuO$_4$~\cite{czyzyk}.
+Metoda ta polega na połaczeniu podejścia DFT z modelem Hubbarda, który stosowany jest od lat sześćdziesiątych ubiegłego wieku do opisu układów silnie skorelowanych elektronów~\cite{hubbard}. Zacznę od omówienia tego modelu. 
+
+W najbardziej tradycyjnym podejściu, stany elektronowe w krysztale dzielimy na dwie grupy: stany zlokalizowane, które znajdują się w obrębie rdzenia atomowego i posiadają cechy orbitali atomowych oraz stany zdelokalizowane, które rozciągają się w całej przestrzeni kryształu.
+O własnościach transportowych danego materiału decydują głównie elektrony należące do drugiej grupy.
+Natomiast jeżeli chodzi o własności magnetyczne, to zarówno elektrony zlokalizowane, jak i wędrowne mogą oddziaływać wymiennie
+i decydować o rodzaju uporządkowania magnetycznego. W pierwszym przypadku mówimy o zlokalizowanych momentach magnetycznych, 
+których oddziaływanie można opisać w ramach modelu Heisenberga. W drugim mamy doczynienia z magnetyzmem pasmowym, który wynika
+z oddziaływania między mobilnymi elektronami walencyjnymi, które można opisać przy pomocy funkcji Blocha.
+
+Występują również stany elektronowe, które posiadają cechy obydwu tych grup. Stany te tworzą pasma, zachowując jednocześnie
+cechy orbitali atomowych. Ruch elektronów w takiej sytuacji polega na przeskokach między lokalnymi orbitali i odpowiadajace im pasma są znacznie węższe od
+typowych pasm metalicznych. Żródłem takiego zachowania są efekty korelacyjne, które uniemożliwiają swobodny przepływ elektronów w krysztale.
+Najlepszym przykładem są stany należące do niezapełnionej powłoki $3d$ w metalach przejściowych.
+Zgodnie z zakazem Pauliego, w każdym orbitalu mogą znajdować się tylko dwa elektrony z przeciwnymi kierunkami spinu. 
+Jeżeli występuje silne, lokalne oddziaływanie kulombowskie między ładunkami, to stany kwantowe, w których dwa elektrony   
+znajdują się w tym samym orbitalu są niekorzystne energetycznie. Zatem ruch elektronu jest bardzo utrudniony i dla odpowiednio dużego oddziaływania kulombowskiego
+elektrony zostają zlokalizowane. Materiały, w których występuje taki mechanizm lokalizacji to izolatory Motta.
+
+Hubbard zaproponował model do opisu stanów elektronowych, które posiadają cechy zlokalizowanych orbitali atomowych,
+wynikające z korelacji elektronowych~\cite{hubbard}.
+Jest to przykład  modelu ciasnego wiązania z orbitalami Wanniera, który opisany jest w rozdziale~\ref{sec:wannier}. 
+W najprostszym przypadku rozważamy pojedyncze orbitale typu $s$, zlokalizowane w węzłach atomowych. Silne korelacje elektronów znajdujących
+się w tym samym orbitalu można uwzględnić dodają do hamiltonianu lokalne oddziaływanie kulombowskie o ustalonej energii $U$. 
+Hamiltonian modelu Hubbarda zapisujemy stosując formalizm drugiego kwantowania
+%
+\begin{equation}
+H=\sum_{i,j,\sigma}t_{ij}c^{\dagger}_{i\sigma}c_{j\sigma}+U\sum_i n_{i\uparrow}n_{i\downarrow},
+\label{hubbard}
+\end{equation}
+%
+gdzie $c^{\dagger}_{i\sigma}$ i $c_{i\sigma}$ to operatory kreacji i anihilacji elektronu ze spinem $\sigma$ w zlokalizowanym orbitalu Wanniera $w(\bm{r}-\bm{R}_i)$,
+a całki przeskoku dane są wzorem
+%
+\begin{equation}
+t_{ij}=\int d\bm{r} w^*(\bm{r}-\bm{R}_i)H_0w(\bm{r}-\bm{R}_j).
+\end{equation}
+%
+$H_0$ jest jednocząstkowym hamiltonianem złożonym z energii kinetycznej i efektywnego potencjału atomowego. 
+Najczęście uwzlędnia się tylko całki przeskoku między najbliższymi sąsiadami. 
+Operator liczby cząstek ze spinem $\sigma$ na węźle $i$ dany jest wyrażeniem $n_{i\sigma}=c^{\dagger}_{i\sigma}c_{i\sigma}$.
+Energię oddziaływania kulombowskiego dwóch elektronów w tym samym orbitalu można wyliczyć ze wzoru
+%
+\begin{equation}
+U=\int d\bm{r}d\bm{r}' |w(\bm{r}-\bm{R}_i)|^2\frac{e^2}{|\bm{r}-\bm{r}'|}|w(\bm{r}-\bm{R}_i)|^2.
+\end{equation}
+%
+Jeżeli wykonamy transformatę Fouriera operatorów kreacji i anihilacji,
+pierwszy wyraz hamiltonianu (\ref{hubbard}) przyjmie postać $\sum_{\bm{k}\sigma}\varepsilon_{\bm{k}}n_{\bm{k}\sigma}$,
+gdzie $\varepsilon_{\bm{k}}$ opisuje strukturę pasmową w modelu ciasnego wiązania,
+a $n_{\bm{k}\sigma}=c^{\dagger}_{\bm{k}\sigma}c_{\bm{k}\sigma}$ jest operatorem liczby obsadzeń w stanie $\bm{k}$ i spinie $\sigma$.
+
+Zaproponowano kilka sformułowań metody LDA+U \cite{anisimov,orbital1,dudarev}, które różnią się opisem lokalnych 
+oddziaływań eletronowych. Ogólny schemat używany do wyliczenia całkowitej energii ma postać
+%
+\begin{equation}
+E_{tot}=E_{DFT}+E_U-E_{dc},
+\label{eldau}
+\end{equation}
+%
+gdzie $E_{DFT}$ jest energią układu otrzymaną w ramach metody DFT (w przybliżeniu LDA lub GGA), $E_U$ jest energią lokalnych oddziaływań elektronowych,
+a $E_{dc}$ odpowiada energii oddziaływań kulombowskich w przybliżeniu średniego pola.
+Ten ostatni wyraz jest konieczny, aby odjąć przybliżoną energię oddziaływań elektronowych, która uwzlędniona jest w $E_{DFT}$.
+W pracy \cite{orbital1} zaproponowano uogólnioną postać energii $E_U$, która uwzglądnia orbitalną zależność oddziaływań elektronowych
+%
+\begin{multline}
+E_U=\frac{1}{2}\sum_{i,\{m\},\sigma}[\langle m,m''|V_{ee}|m',m'''\rangle n_{i\sigma}^{mm'}n_{i-\sigma}^{m''m'''}
+\\+(\langle m,m''|V_{ee}|m',m'''\rangle - \langle m,m''|V_{ee}|m''',m'\rangle  )n_{i\sigma}^{mm'}n_{i\sigma}^{m''m'''}],
+\end{multline}  
+%
+gdzie $i$ numeruje węzły sieci,  $\{m\}=(m, m',m'', m''')$ są magnetycznymi liczbami kwantowymi,
+a elementy macierzowe oddziaływania kulombowskiego dane są wzorem
+%
+\begin{equation}
+\langle m,m''|V_{ee}|m',m'''\rangle=\int d\bm{r} \int \bm{r}' \phi_{lm}^*(\bm{r})\phi_{lm'}(\bm{r})\frac{e^2}{|\bm{r}-\bm{r}'|}\phi_{lm''}^*(\bm{r}')\phi_{lm'''}(\bm{r}').
+\label{integral}
+\end{equation}
+%
+Występujące pod całką atomowe funkcje falowe określone są dla orbitalnej liczby kwantowej $l$, która definiują zakres magnetycznych liczb kwantowych $-l\le \{m\} \le l$. Liczby obsadzeń orbitali atomowych tworzą tensor drugiego rzędu, którego elementy wyznaczane są przez rzutowanie funkcji falowych Kohna-Shama $\psi_{\bm{k}j}^{\sigma}$ na orbitale atomowe
+%
+\begin{equation}
+n_{i\sigma}^{mm'}=\sum_{\bm{k},j} f_{\bm{k}j}^{\sigma}\langle\psi_{\bm{k}j}^{\sigma}|\phi_{lm'}\rangle\langle\phi_{lm}|\psi_{\bm{k}j}\rangle, 
+\end{equation}
+%
+gdzie współczynniki $f_{\bm{k}j}^{\sigma}$ okreśkaja obsadzenia stanów $j$ z wektorem falowym $\bm{k}$ i spinie $\sigma$.
+Całkę (\ref{integral}) można przedstawić w postaci sumy iloczynów części kątowej i radialnej 
+%
+\begin{equation}
+\langle m,m''|V_{ee}|m',m'''\rangle=\sum_p a_p(m,m',m'',m''')F^p,
+\label{vee}
+\end{equation}
+%
+gdzie $p$ jest liczbą parzystą z przedziału $0\le p \le 2l$. Część kątowa $a_p$ wyliczana jest przy pomocy iloczynów współczynników Clebsha-Gordana 
+%
+\begin{equation}
+a_p(m,m',m'',m''')=\frac{4\pi}{2p+1}\sum_{q=-p}^p \langle lm|Y_{pq}|lm'\rangle\langle lm''|Y_{pq}^*|lm'''\rangle.
+\end{equation}
+%
+$F^p$ nazywane są całkami Slatera i wyznaczane są ze wzoru
+%
+\begin{equation}
+F^p=e^2\int d\bm{r}\int d\bm{r}' r^2 r'^2 R_{nl}^2(\bm{r})\frac{r_1^p}{r_2^{p+1}} R_{nl}^2(\bm{r}'),
+\end{equation}
+%
+gdzie $R_{nl}(\bm{r})$ są częścią radialną atomu funkcji falowej. 
+Dla stanów $d$ potrzebne są trzy całki Slatera $F^0$, $F^2$ i $F^4$, a dla stanów $f$ dodatkowo $F^6$, aby wyznaczyć elementy macierzowe 
+potencjału kulombowskiego (\ref{vee}).
+Efektywne parametry, które określają lokalne oddziaływanie kulombowskie ($U$) i wymienne ($J$), można wyrazić przy pomocy całek Slatera
+%
+\begin{eqnarray}
+U&=&\frac{1}{(2l+1)^2}\sum_{m.m'} \langle m,m'|V_{ee}|m,m'\rangle=F^0,\\
+J&=&\frac{1}{2l(2l+1)}\sum_{m\ne m'} \langle m,m'|V_{ee}|m',m\rangle=\frac{F^2+F^4}{14}.
+\label{HundJ}
+\end{eqnarray} 
+%
+Wykorzystując te parametry, możemy zapisać ostatni wyraz we wzorze (\ref{eldau}) w następującej formie
+%
+\begin{equation}
+E_{dc}=\frac{1}{2}\Big[\sum_i Un_i(n_i-1)-J[n_{i\uparrow}(n_{i\uparrow}-1)+n_{i\downarrow}(n_{i\downarrow}-1)]\Big],
+\end{equation}
+%
+gdzie $n_{i\sigma}=\Tr(n_{i\sigma}^{mm'})$ i $n_i=n_{i\uparrow}+n_{i\downarrow}$ jest całkowitym obsadzeniem orbitali w węźle $i$.
+Tak wyznaczone parametry $U$ i $J$ odnoszą sie do izolowanych atomów. Efektywne wartości parametru kulombowskiego $U$,
+stosowane dla danego rodzaju atomu, uwzględniaja efekty ekranowania elektronowego i zależą od rodzaju materiału.
+Można go wyznaczyć w ramach metody odpowiedzi liniowej poprzez wyliczenie zmiany obsadzenia stanów elektronowych na wybranym atomie
+pod wpływem przyłożonego lokalnego potencjału \cite{coco1,coco2}.
+Drugi z parametrów $J$, nazywany energią wymiany Hunda, znacznie słabiej zależy od rodzaju materiału i często stosowana jest jego wartość atomowa (\ref{HundJ}). 
+
+\section{Oddziaływanie van der Waalsa}
+\label{sec:vdw}
+
+\chapter{Izolatory i półprzewodniki}
+\label{sec:gapproblem}
+
+\section{Przerwa energetyczna}
+
+Fundamentalna przerwa energetyczna zdefiniowana jest jako różnica między energią jonizacji ($I$), czyli procesu usunięcia elektronu z danego materiału, 
+a powinowactwem elektronowym ($A$), czyli energią uzyskaną z dodania elektronu
+%
+\begin{eqnarray}
+E_g=I-A&=&[E(N-1)-E(N)]-[E(N)-E(N+1)] \nonumber \\ 
+       &=&E(N+1)+E(N-1)-2E(N),
+\label{energygap}       
+\end{eqnarray}
+%
+gdzie $E(N)$, $E(N-1)$ i $E(N+1)$ to energie całkowite wyznaczone kolejno dla układu neutralnego składającego się z $N$ elektronów oraz
+układów z odjętym i dodanym elektronem. Każda z tych energii może być wyznaczona jako energia stanu podstawowego układu z odpowiednią ilością
+elektronów. Wartość przerwy możemy również zapisać używając energii stanów Kohna-Shama 
+%
+\begin{equation}
+E_g=E(N+1)-E(N)-[E(N)-E(N-1)]=\varepsilon_{N+1}(N+1)-\varepsilon_N(N),
+\label{truegap}
+\end{equation}
+%
+gdzie $\varepsilon_N(N)$ jest energią najwyższego poziomu pasma walencyjnego w układzie z $N$ elektronami,
+a $\varepsilon_{N+1}(N+1)$ energią najniższego stanu pasma przewodnictwa w układzie z $N+1$ elektronami.
+Czyli wartość przerwy energetycznej jest teoretycznie osiągalna w ramach DFT, 
+pod warunkiem, że znana jest dokladna zależność $E(N)$. Stosując funkcjonały LDA i GGA możemy otrzymać ze wzoru (\ref{truegap}) jedynie przybliżone wartości przerwy fundamentalnej. 
+   
+Zwykle wykonujemy obliczenia dla układu z ustaloną liczbą elektronów $N$ i otrzymujemy przerwę w spektrum energetycznym Kohna-Shama, 
+która wynosi
+%
+\begin{equation}
+\Delta_{KS}=\varepsilon_{N+1}(N)-\varepsilon_N(N).
+\label{ksgap}
+\end{equation}
+%
+Porównując wzory (\ref{truegap}) i (\ref{ksgap}) dostajemy związek między tymi dwiema przerwami
+%
+\begin{equation}
+E_g=\Delta_{KS}+\varepsilon_{N+1}(N+1)-\varepsilon_{N+1}(N)=\Delta_{KS}+\Delta_{xc},
+\end{equation}
+%
+gdzie różnica między nimi $\Delta_{xc}$ wynika ze zmiany nachylenia liniowej funkcji $E(N)$ przy całkowitej liczbie elektronów \cite{pardew82}.
+Ta nieciągłość ma swoje źródło w potencjale wymienno-korelacyjnym, którego pochodna zmienia się skokowo przy zmianie ilości elektronów
+%
+\begin{equation}
+\Delta_{xc}=\frac{\delta E_{xc}[n]}{\delta n(\bm{r})}|_{N+\delta}-\frac{\delta E_{xc}[n]}{\delta n(\bm{r})}|_{N-\delta},
+\label{deltaxc}
+\end{equation}
+%
+gdzie pochodne funkcjonalne wyznaczone są dla gęstości elektronów $n(\bm{r})$, których całki po całej przestrzeni równe są $N+\delta$ i $N-\delta$, w granicy $\delta\rightarrow 0$. 
+
+Występowanie tej nieciągłości jest podstawową cechą DFT, ale w stosowanych przybliżeniach LDA i GGA, które charakteryzują się analityczną zależnością
+energii od gęstości elektronowej, te nieciągłości nie występują. Przybliżony charakter energii stanów jednocząstkowych,
+z których wyznaczana jest wartość $\Delta_{KS}$, w połączeniu z brakiem nieciągłości powoduje, że przerwy energetyczne wyznaczone w przybliżeniu LDA są średnio zaniżone o $40\%$. W GGA te wartości są zwykle poprawione, ale również znacznie odbiegają od wartości eksperymentalnych. 
+
+\section{Izolatory Motta}
+
+Szczególną klasę materiałów stanowią izolatory Motta, których własności elektronowe wynikają z silnych oddziaływaniań kulombowskich miedzy elektronami.
+W tym przypadku wielkość charakteryzująca nieciągłość wyliczana w ramach standardowych przybliżeń $\Delta_{KS}$ jest równe zeru 
+lub jest bardzo małą wielkością. Przerwa energetyczna wynika zasadniczo z nieciągłości funkcjonału energii ($\Delta_{xc}>0$), powstającej przy zmianie obsadzenia stanów orbitalnych. 
+Ta nieciągła zmiana energii jest proporcjonalna do energii oddziaływania kulombowskiego $U$. Dla stanów $d$ w metalach przejściowych parametr $U$ można zdefiniować
+jako energię związaną z transferem elektronu między dwoma atomami z początkowym obsadzeniem $d^n$,
+który prowadzi do zwiększenia ilości elektronów na jednym atomie $d^{n+1}$ i zmniejszenia na drugim $d^{n-1}$
+%
+\begin{equation}
+U=E(d^{n+1})+E(d^{n-1})-2E(d^n),
+\end{equation} 
+%
+gdzie $E(d^n)$ jest całkowitą energią układu, w którym pojedynczy atom posiada obsadzenie $d^n$.
+Ta relacja oznacza, że sama przerwa energetyczna dana wzorem (\ref{energygap}) powinna być liniową funkcją $U$.
+Potwierdzają to obliczenia przeprowadzone w ramach metody LDA+U.
+
+Jako przykład omówię wyniki obliczeń gestości stanów elektronowych dla izolatora Motta Fe$_2$SiO$_4$, otrzymane metodą GGA+U \cite{Mariana}.
+Na rysunku 6.2 pokazane sa wyniki dla stanu antyferromagnetycznego (AFM).
+Dla $U=0$ dostajemy nieprawidłowy stan metaliczny ($\Delta_{KS}=0$) z energią Fermiego przecinającą pasmo $t_{2g}$. 
+Pasmo to obsadzone jest przez elektrony z mniejszościowym kierunkiem spinów (kierunek przeciwny do momentu magnetycznego danego atomu). 
+Obliczenia dla $U=4.5$ eV dają prawidłowy stan elektronowy z przerwą energetyczną równą około 2 eV,
+która rozdziela pasmo $t_{2g}$ na dwie części: obsadzone dolne pasmo Hubbarda i nieobsadzone górne pasmo Hubbarda.
+
+\begin{figure}[t!]
+\centering
+\includegraphics[scale=0.21]{Fe2SiO4-2.pdf}
+\caption{Gęstość stanów elektronowych w Fe$_2$SiO$_4$ dla $U=0$ (górny panel) i dla $U=4.5$~eV (dolny panel). Rysunek z pracy \cite{Mariana}.}
+\label{fig:mott}
+\end{figure}
+
+\begin{figure}[b!]
+\centering
+\includegraphics[scale=0.18]{Fe2SiO4-1.pdf}
+\caption{Zależność przerwy energetycznej od parametru oddziaływania kulombowskiego $U$ w Fe$_2$SiO$_4$ dla stanu antyferromagnetycznego (czerwone kółka)
+i ferromagnetycznego (niebieskie kwadraty). Rysunek z pracy \cite{Mariana}.}
+\label{fig:gap}
+\end{figure}
+
+Wartość przerwy energetycznej zależy od dokładnej wartości parametru $U$, co pokazano na rysunku 6.3.
+Dla małych wartości $U\leq 2$ eV, przerwa energetyczna równa jest zeru. Wynika to z kryterium, które mówi, że w izolatorach Motta, 
+niezerowa przerwa tworzy się dla wartości energii oddziaływania kulombowskiego większych od szerokości
+pasma elektronowego, $U>W$. Rzeczywiście, z rysunku 6.2 wynika, że szerokość pasma $t_{2g}$ jest równa z dobrym przybliżeniem $W=2$ eV.
+Gdy energia oddziaływania kulombowskiego $U$ przewyższa $W$, przerwa energetyczna rośnie praktycznie liniowo z jej wartością. 
+Jak widać z rysunku 6.3 wartości przerwy zależą od rodzaju uporządkowania magnetycznego i dla stanu AFM są większe niż dla stanu FM.
+
+\section{Izolatory pasmowe i półprzewodniki}
+
+Metoda LDA+U skutecznie poprawia wartość przerwy energetycznie jedynie w izolatorach Motta.
+W przypadku izolatorów pasmowych i półprzewodników lepszymi podejściami są dwie omówione wcześniej 
+metody: SIC i funkcjonały hybrydowe. 
+W metodzie SIC, energia całkowita zależy od obsadzenia orbitali atomowych, co daje możliwość odtworzenie nieciągłości
+pochodnych funkcjonału wymienno-korelacyjnego (\ref{deltaxc}) i poprawienia wartości przerwy energetycznej.
+SIC daje dobre wyniki dla izolatorów z dużą przerwa takich, jak kryształy gazów szlachetnych \cite{PZ}, czy kryształy jonowe. Przykładowo dla NaCl przerwa energetyczna wynosi $E_g^{SIC}=9.2$~eV \cite{norman83}, co dobrze zgadza się z wartością eksperymentalną $E_g^{exp}=8.97$~eV.  
+
+Funkcjonały hybrydowe, które częściowo uwzlędniają dokladną wartość oddziaływania wymiennego i przez to redukują błąd samooddziaływania elektronów, 
+również poprawiają wartość przerwy energetycznej. Na rysunku~\ref{fig:gaphyb} porównano eksperymentalne wartości przerwy energetycznej
+z wyliczonymi w ramach czterech funkcjonałów hybrydowych dla wybranej grupy półprzewodników i tlenków metali przejściowych (FeO, CoO, NiO, MnO, and VO$_2$)~\cite{Gap-hyb}. Dwa z tych funkcjonałów zawierają 20 \% dokładnej wartości energii wymiany (B3PW91 i B3LYP), a dwa pozostałe 25 \% (PBE0 i HSE). Dla wiekszości materiałów 
+z przerwą mniejszą niź 5 eV, zgodność z eksperymentem jest bardzo dobra dla wszystkich funkcjonałów. Jednocześnie widzimy, że wybrane funkcjonały znacznie zaniżają wartości przerwy dla trzech półprzewodników o dużej przerwie (NaCl, LiCl i LiF).
+Dokładna analiza błędów pokazała, że najlepszą zgodność uzyskano dla funkcjonału HSE, który ma tendencję do niewielkiego zaniżania wartości przerwy (średnio o -0.24 eV). Dwa funkcjonały B3PW91 i B3LYP lekko zawyżają przerwę (średnie błedy wynoszą 0.14 eV i 0.13 eV). Największe odstępstwo obserwujemy dla funkcjonału PBE0, który zawyża wartość przerwy średnio o 0.43 eV.
+
+\begin{figure}[t!]
+\centering
+\includegraphics[scale=0.5]{gap-hyb.pdf}
+\caption{Porównanie eksperymentalnych wartości przerwy energetycznej z obliczonymi dla różnych funkcjonałów hybrydowych. Rysunek z pracy \cite{Gap-hyb}.}
+\label{fig:gaphyb}
+\end{figure}
+
+W tabeli~\ref{gap} zebrane są wartości przerwy energetycznej dla wybranych materiałów, wyliczone różnymi metodami
+i porównane z danymi eksperymentalnymi. LDA i GGA we wszystkich przypadkach znacznie zaniżają wartość przerwy.
+Dotyczy to zarówno półprzewodników, szczególnie germanu, gdzie przerwa jest równa zeru, jak i izolatorów.
+Duże rozbieżności w porównaniu do eksperymentu widzimy dla trzech ostatnich materiałów, zaliczanych do izolatorów Motta.
+Zastosowanie funkcjonału hybrydowego HSE poprawia wartości przerwy i dla większości półprzewodników zgodność z eksperymentem jest bardzo dobra.
+Dla izolatorów, ta zgodność jest lepsza lub gorsza w zależności od materiału.
+W tabeli~\ref{gap} pokazano również wyniki otrzymane w ramach metody GW i jej uproszczonej wersji G$_0$W$_0$, które również dają
+lepsze wartości przerwy. Metoda GW, która uwzlędnia oddziaływania wielociałowe w ramach rozwinięcia perturbacyjnego, będzie tematem jednego z
+kolejnych rozdziałów. 
+
+\begin{table}[h!]
+\caption{Wartości przerwy energetycznej wyliczone różnymi metodami i porównane z danymi eksperymentalnymi.}
+\label{gap}
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+ Materiał & LDA & PBE & HSE & G$_0$W$_0$ & GW & Eksperyment \\ \hline
+  C & 4.14 & 4.17  & 4.94 & 5.50 & 6.18 & 5.50 \\
+  Si & 0.60 & 0.71  & 1.11 & 1.12 & 1.41 & 1.17 \\
+  Ge & 0.00 &  & 0.83 & 0.66 & 0.95 & 0.74 \\
+  MgO & 4.70 & 4.74  & 6.46 & 7.25 & 9.16 & 7.90 \\
+  GaAs & 0.30 & 0.53  & 1.41 & 1.30 & 1.85 & 1.52 \\
+  SiC & 1.35 &    & 2.40 & 2.27 & 2.88 & 2.40 \\ 
+  GaP & 1.53 & 1.69 & 2.09 &   &   & 2.35  \\
+  CdS & 0.96 & 1.23 & 2.27 &   &   & 2.48 \\
+  InP & 0.50 & 0.72 & 1.52 &   &   &  1.42 \\
+  BN  & 4.42 & 4.53 & 5.39 &   &   &  6.20 \\
+  NaCl & 4.70 & 5.08 & 6.42 &  &   & 8.97  \\
+  LiF  & 8.84 & 9.04 & 11.4 &  &   & 13.6  \\  
+  MnO & 0.76 &    & 2.80 &  & 3.50 & 3.90 \\ 
+  FeO & 0 &    & 2.2 &  &  & 2.4 \\ 
+  NiO & 0.42 &    & 4.2 & 1.10 & 4.80 & 4.30 \\ \hline 
+\end{tabular}
+\end{center}
+\end{table}
+
+\section{Ferroelektryki}
+
+
+
+%\chapter{Efekty wielociałowe i stany wzbudzone}
+
+%\section{Oddziaływanie van der Waalsa}
+%\label{sec:vdw}
+
+%\section{Metoda GW}
+%\label{sec:gw}
+
+%\section{Teoria dynamicznego średniego pola (DMFT)}
+%\label{sec:dmft}
+
+%\section{Kwantowe Monte Carlo (QMC)}
+%\label{sec:qmc}
+
+
+
+
+\begin{thebibliography}{500}
+
+
+\bibitem{Schrodinger} E. Schr\"{o}dinger, {\it An undulatory theory of the mechanics of atoms and molecules}, Phys. Rev. {\bf 28}, 1049 (1926).
+
+\bibitem{HL} W. Heitler and F. London, {\it Wechselwirkung neutraler Atome und homöopolare Bindung nach der Quantenmechanik},
+Zeitschrift für Physik {\bf 44}, 455 (1927). 
+
+\bibitem{hartree28} D. Hartree, {\it The wave mechanics of an atom with a non-coulomb central field. Part I. Theory and methods}, Proc. Cambridge Philos. Soc. {\bf 24}, 89 (1928).
+
+\bibitem{mulliken} R. S. Mulliken, {\it The assignment of quantum numbers for electrons in molecules}, 
+Phys. Rev. {\bf 32}, 186 (1928).
+
+\bibitem{JC} H. M. James and A. S. Coolidge, {\it The ground state of the hydrogen molecule}, J. Chem. Phys. {\bf 1}, 825 (1933).
+
+\bibitem{Fermi} E. Fermi, {\it Zur Quantelung des idealen einatomigen Gases}, Z. Physik {\bf 36}, 902 (1926).
+
+\bibitem{Dirac26} P. A. M. Dirac, {\it On the theory of quantum mechanics}, Proc. Roy. Soc. Lond. A {\bf 112}, 661 (1926).
+
+\bibitem{Pauli25} W. Pauli, Z. Physik {\bf 31}, 765 (1925).
+ 
+\bibitem{Bloch} F. Bloch, {\it Über die Quantenmechanik der Elektronen in Kristallgittern}, Z. Phys. {\bf 52}, 555 (1928).
+
+\bibitem{Peierls} R. Peierls, {\it Zur Theorie der galvanomagnetischen Effekte}, Z. Phys. {\bf 53}, 255 (1929). 
+
+\bibitem{Wilson} A. H. Wilson, {\it The theory of electronic semi-conductors}, Proc. R. Soc. Lond. A {\bf 133}, 458 (1931). 
+
+\bibitem{fock30} V. Fock, {\it Naherungsmethode zur Losung des quantenmechanischen Mehrkorperproblems}, Z. Physik {\bf 61}, 126 (1930).
+  
+\bibitem{slater30} J. C. Slater, {\it Note on Hartree's method}, Phys. Rev. {\bf 35}, 210 (1930).
+
+\bibitem{slater51} J. C. Slater, {\it A simplification of the Hartree-Fock method}, Phys. Rev. {\bf 81}, 385 (1951).
+
+\bibitem{wigner34} E. P. Wigner, {\it On the interactions of electrons in metals}, Phys. Rev. {\bf 46}, 1002 (1934).
+
+\bibitem{GB} M. Gellman and K. A. Brueckner, {\it Correlation energy of an electron gas at high-density},
+Phys. Rev. {\bf 106}, 364 (1957).
+
+\bibitem{wigner33} E. Wigner and F. Seitz, {\it On the constitution of metallic sodium}, Phys. Rev. {\bf 43}, 804 (1933).
+
+\bibitem{slater37} J. C. Slater, {\it Wave functions in a periodic potential}, Phys. Rev. {\bf 51}, 846 (1937).
+
+\bibitem{K47} J. Korringa, {\it On the calculation of the energy of a Bloch wave in a metal}, Physica {\bf 13}, 392 (1947).
+
+\bibitem{KR54} W. Kohn and N. Rostoker, {\it Solution of the Schr\"{o}dinger equation in periodic
+lattices with an application to metallic lithium}, Phys. Rev. {\bf 94}, 1111 (1954).
+
+\bibitem{herring40} C. Herring, {\it A new method for calculating wave functions in crystals}, Phys. Rev. {\bf 57}, 250 (1940).
+
+\bibitem{Antoncik} E. Antoncik, {\it A new formulation of the method of nearly free electrons}, Czech. J. Phys. {\bf 4}, 439 (1954).
+
+\bibitem{KP} J. C. Philips and L. Kleiman, {\it New method for calculating wave functions in crystals and molecules}, Phys. Rev. B {\bf 116}, 287 (1959).
+
+\bibitem{kohn64} P. Hohenberg and W. Kohn, {\it Inhomogeneous electron gas}, Phys. Rev. {\bf 136}, 864 (1964).
+
+\bibitem{kohn65} W. Kohn and L. J. Sham, {\it Self-consistent equations including exchange and correlation effects}, Phys. Rev. {\bf 140}, 1133 (1965).
+
+\bibitem{CeperleyAlder80} D. M. Ceperley and B. J. Alder, {\it Ground state of the electron gas by a stochastic method},
+Phys. Rev. Lett. {\bf 45}, 566 (1980).
+
+\bibitem{PZ} J. P. Pardew and A. Zunger, {\it Self-interaction correction to density-functional approximations for many-electron systems},
+Phys. Rev. B {\bf 23}, 5048 (1981).
+
+\bibitem{VWN} S. Vosko, L. Wilk, and M. Nusair, {\it Accurate spin-dependent electron liquid correlation energies for local spin density calculations: a critical analysis}, Can. J. Phys. {\bf 58}, 1200 (1983).
+
+\bibitem{Langreth83} D. C. Langreth and M. J. Mehl, {\it Beyond the local-density approximation in calculations of ground-state electronic properties}, Phys. Rev. B {\bf 28}, 1809 (1983).
+
+\bibitem{Pardew86} J. P. Perdew and Y. Wang, {\it Accurate and simple density functional for the electronic exchange energy: generalized gradient approximation}, Phys. Rev. B {\bf 33}, 8800 (1986).
+
+\bibitem{Becke88} A. D. Becke, {\it Density-functional exchange-energy approximation with correct asymptotic behavior},
+Phys. Rev. A {\bf 38}, 3098 (1988).
+
+\bibitem{Andersen75} O. K. Andersen, {\it Linear methods in band theory}, Phys. Rev. B {\bf 12}, 3060 (1975).
+
+\bibitem{HSC} D. R. Hamann, M. Schl\"{u}ter, and C. Chiang, {\it Norm-conserving pseudopotentials}, Phys. Rev. Lett. {\bf 43}, 1494 (1979).
+
+\bibitem{BHS} G. B. Bachelet, D. R. Hamann, and M. Schl\"{u}ter, {\it Pseudopotentials that work: from H to Pu}, Phys. Rev. B {\bf 26}, 4199 (1982). 
+
+\bibitem{Vanderbilt90} D. Vanderbilt, {\it Soft self-consistent pseudopotentials in a generalized eigenvalue formalism}, Phys. Rev. B {\bf 41}, 7892 (1990).
+
+\bibitem{jones} R. O. Jones and O. Gunnarsson, {\it The density functional formalism, its applications and prospects}, Rev. Mod. Phys. {\bf 61}, 689 (1989).
+
+\bibitem{payne} M. C. Payne, M. P. Teter, D. C. Allan, T. A. Arias, 
+                and J. D. Joannopoulos, {\it Iterative minimization techniques for ab initio total-energy calculations: molecular dynamics and conjugate gradients},   
+                Rev. Mod. Phys. {\bf 64}, 1045 (1992).
+
+\bibitem{martin} R. M. Martin, {\it Electronic structure. Basic theory and practical methods}, Cambridge University Press, 2010.
+
+\bibitem{peierls} N. F. Mott and R. Peierls, {\it Discussion of the paper by de Boer and Verwey}, Proc. Phys. Soc. (London) {\bf A49}, 72 (1937).
+               
+\bibitem{mott} N. F. Mott, {\it The basis of the electron theory of metals, with special reference to the transition metals}, Proc. Phys. Soc. (London) {\bf A62}, 416 (1949).
+
+\bibitem{hubbard} J. Hubbard, {\it Electron correlations in narrow energy bands}, Proc. Roy. Soc. (London) {\bf 276}, 238 (1963).
+
+\bibitem{terakura} K. Terakura, T. Oguchi, A. R. Williams, and J. K\"{u}bler, {\it Band theory of insulating transition-metal monoxides: Band-structure calculations},
+                  Phys. Rev. B {\bf 30}, 4734 (1984).
+
+\bibitem{becke93} A. D. Becke, {\it A new mixing of Hartree-Fock and local density-functional theories}, J. Chem. Phys. {\bf 98}, 1372 (1993).                   
+    
+              
+\bibitem{anisimov} V. I. Anisimov, J. Zaanen, and O. K. Andersen, {\it Band theory and Mott insulators: Hubbard U instead of Stoner I},
+                   Phys. Rev. B {\bf 44}, 943 (1991).
+
+\bibitem{czyzyk} M. T. Czy\.{z}yk and G. A. Sawatzky, {\it Local-density functional and on-site correlations: The electronic structure of La$_2$CuO$_4$ and LaCuO$_3$}, Phys. Rev. B {\bf 49}, 14211 (1994).
+
+\bibitem{orbital1} A. I. Liechtenstein, V. I. Anisimov, and J. Zaanen, {\it Density-functional theory and strong interactions: orbital ordering in Mott-Hubbard insulators}, Phys. Rev. B {\bf 52}, R5467 (1995).
+                  
+\bibitem{orbital2} T. Mizokawa and A. Fujimori, {\it Electronic structure and orbital ordering in perovskite-type 3d transition-metal oxides studied by Hartree-Fock band-structure calculations}, Phys. Rev. B {\bf 54}, 5368 (1996).
+
+\bibitem{orbital3} V. I. Anisimov, F. Aryasetiawan and A. I. Lichtenstein, {\it First-principles calculations of the electronic structure and spectra of strongly correlated systems: the LDA+U method}, J. Phys.: Cond. Mat. {\bf 9}, 767 (1997).
+
+\bibitem{dudarev} S. L. Dudarev, G. A. Botton, S. Y. Savrasov, C. J. Humphreys, A. P. Sutton, {\it Electron-energy-loss spectra and the structural stability of nickel oxide: an LSDA+U study}, Phys. Rev. B {\bf 57}, 1505 (1998).
+
+%\bibitem{Pu-LDAU} S. Y. Savrasov and G. Kotliar, {\it Ground state theory of $\delta$−Pu}, Phys. Rev. Lett. {\bf 84}, 3670 %(2000).                                     
+
+\bibitem{Georges} A. Georges, G. Kotliar, W. Krauth, and M. J. Rozenberg, {\it Dynamical mean-field theory of strongly correlated fermion systems and the limit of infinite dimensions}, Rev. Mod. Phys. {\bf 68}, 13 (1996).
+
+\bibitem{BO} M. Born and J. R. Oppenheimer, {\it On the quantum theory of molecules}, Ann. Physik {\bf 84}, 457 (1927).    
+
+\bibitem{GTO} S. F. Boys, {\it Electron wave functions I. A general method for calculation for the stationary states of any molecular system}, Proc. Roy. Soc. London {\bf 200}, 542 (1950).
+
+\bibitem{MP} H. J. Monkhorst and J. D. Pack, {\it Special points for Brillouin-zone integrations}, Phys. Rev. B {\bf 13}, 5188 (1976).
+
+\bibitem{thomas} L. H. Thomas, {\it The calculations of atomic fields}, Proc. Cambridge Phil. Roy. Soc. {\bf 23}, 542 (1927). 
+
+\bibitem{fermi} E. Fermi, {\it Un metodo statistico per la determinazione di alcune prioprietà dell'atomo}, Rend. Accad. Naz. Lincei. {\bf 6}, 602 (1927).
+
+\bibitem{dirac} P. A. M. Dirac, {\it Note on exchange phenomena in the Thomas-Fermi atom}, Proc. Cambridge Phil. Roy. Soc. {\bf 26}, 376 (1930). 
+
+\bibitem{janak} J. F. Janak, {\it Proof that $\partial E/\partial n_i=\varepsilon_i$ in density-functional theory}, Phys. Rev. B {\bf 18}, 7165 (1977)
+
+\bibitem{PW91} J. P. Perdew and Y. Wang, {\it Accurate and simple representation of the electron-gas
+correlation energy}, Phys. Rev. B {\bf 45}, 13244 (1992). 
+
+\bibitem{Pardew92} J. P. Perdew, J. A. Chevary, S. H. Vosko, K. A. Jackson, M. R. Pederson, D. J. Singh, and C. Fiolhais,
+{\it Atoms, molecules, solids, and surfaces: Applications of the generalized gradient approximation for exchange and correlation},
+Phys. Rev. B {\bf 46}, 6671 (1992).
+
+\bibitem{PBE}   J. P. Perdew, K. Burke, and M. Ernzerhof, {\it Generalized gradient approximation made simple},
+                   Phys. Rev. Lett.  {\bf 77}, 3865 (1996). 
+                   
+\bibitem{Hellmann} H. Hellmann, {\it Einführung in die Quantenchemie}, Leipzig, Franz Deuticke, 1937.
+
+\bibitem{Feynman} R. Feynman, {\it Forces in molecules}, Phys. Rev. {\bf 56}, 340 (1939).
+
+
+\bibitem{Blochl} P. E. Bl\"{o}chl, {\it Projector augmented-wave method}, Phys. Rev. B {\bf 50}, 17953 (1994). 
+
+\bibitem{Vasp}  G. Kresse and J. Furthm\"{u}ller, {\it Efficiency of ab-initio total energy calculations for metals and semiconductors using a plane-wave basis set}, Comput. Mater. Sci. {\bf 6}, 15 (1996).
+
+
+\bibitem{PawVasp}  G. Kresse and J. Joubert, {\it From ultrasoft pseudopotentials to the projector augmented-wave method}, Phys. Rev. B {\bf 59}, 1758 (1999).
+                               
+\bibitem{FeSe} A. Ptok, K. J. Kapcia, P. Piekarz, and A. M. Oleś, {\it The ab initio study of unconventional
+superconductivity in CeCoIn$_5$ and FeSe}, New, J. Phys. {\bf 19}, 063039 (2017).
+
+\bibitem{QE} P. Giannozzi {\it et al.}, J. Phys.: Condens. Matter {\bf 21}, 395502 (2009).
+
+\bibitem{STO1} J. C. Slater, {\it Atomic shielding constants}, Phys. Rev. {\bf 36}, 57 (1930).
+
+\bibitem{STO2} J. C. Slater, {\it Analytic atomic wave function}. Phys. Rev. {\bf 42}, 33 (1932).
+
+\bibitem{Moruzzi77} V. L. Moruzzi, A. R. Williams, and J. F. Janak, {\it Local density theory of metallic cohesion}, Phys. Rev. B {\bf 15}, 2854 (1977).
+
+\bibitem{CPA1} G. M. Stocks, W. M. Temmerman, and B. L. Gyorffy, {\it Complete solution of the Korringa-Kohn-Rostocker coherent-potential-approximation equations: Cu-Ni alloys}, Phys. Rev. Lett. {\bf 41}, 339 (1978).
+
+\bibitem{CPA2} J. S. Faulkner and G. M. Stocks, {\it Calculating properties with the coherent-potential approximation}, Phys. Rev. B {\bf 21}, 3222 (1980).
+
+\bibitem{singh91} D. Singh, {\it Ground-state properties of lanthanum: Treatment of extended-core states}, Phys. Rev. B 43, 6388 (1991).
+                                                 
+\bibitem{RE} P. Strange, A. Svane, W. M. Temmerman, Z. Szotek, and H. Winter, {\it Understanding the valency of rare earths from first-principles theory}, Nature {\bf 399}, 756 (1999).
+
+\bibitem{PBE0}  J. P. Perdew, M. Ernzerhof, and K. Burke, {\it Rationale for mixing exact exchange with density functional approximations},  
+                   J. Chem. Phys {\bf 105}, 9982 (1996).         
+  
+\bibitem{pople89} J. A Pople, M. Head-Gordon, D. J. Fox, K. Raqhavachari, and L. A. Curtiss, {\it Gaussian-1 theory: a general procedure for prediction of molecular energies}, J. Chem. Phys. {\bf 90}, 5622 (1989).  
+                   
+\bibitem{HSE} J. Heyd, G. E. Scuseria, and M. Ernzerhof, {\it Hybrid functionals based on a screened Coulomb potential}, J. Chem. Phys. {\bf 118}, 8207 (2003).
+
+\bibitem{Sharp} R. T. Sharp and G. K. Horton, {\it A variational approach to the unipotential many-electron problem}, Phys. Rev. {\bf 90}, 317 (1953).
+
+\bibitem{Talman} J. D. Talman and W. F. Shadwick, {\it Optimized effective atomic central potential}, Phys. Rev. A {\bf 14}, 36 (1976). 
+
+\bibitem{Becke1998} A. D. Becke, {\it A new inhomogeneity parameter in density-functional theory}, J. Chem. Phys. {\bf 109}, 2092 (1998).
+
+\bibitem{TPSS} J. Tao, J. P. Perdew, V. N. Staroverov, and G. E. Scuseria, {\it Climbing the density functional ladder: nonempirical meta–generalized gradient
+approximation designed for molecules and solids}, Phys. Rev. Lett. {\bf 91}, 146401 (2003).
+
+\bibitem{Becke2006} A. D. Becke and E. R. Johnson, {\it A simple effective potential for exchange}, J. Chem. Phys. {\bf 124}, 221101 (2006). 
+
+\bibitem{revTPSS} J. P. Perdew, A. Ruzsinszky, G. I. Csonka, L. A. Constantin, and J. Sun, {\it Workhorse semilocal density functional for condensed matter physics and quantum chemistry}, Phys. Rev. Lett. {\bf 103}, 026403 (2009).
+
+\bibitem{Tran2009} F. Tran and P. Blaha, {\it Accurate band gaps of semiconductors and insulators with a semilocal exchange-correlation potential}, 
+Phys. Rev. Lett. {\bf 102}, 226401 (2009). 
+
+\bibitem{SCAN} J. Sun, A. Ruzsinszky, and J. P. Perdew, {\i Strongly constrained and appropriately normed semilocal density functional}, Phys. Rev. Lett. {\bf 115}, 036402 (2015).
+
+\bibitem{ELF1} A. D. Becke and K. E. Edgecombe, {\it A simple measure of electron localization in atomic and molecular systems}, J. Chem. Phys. {\bf 92}, 5397 (1990).
+
+\bibitem{ELF2} B. Silvi and A. Savin, {\it Classification of chemical bonds based on topological analysis of electron localization functions}, Nature {\bf 371}, 683 (1994). 
+
+\bibitem{ELF3} J. Sun, B. Xiao, Y. Fang, R. Haunschild, P. Hao, A. Ruzsinszky, G. I. Csonka, G. E. Scuseria, and J. P. Perdew, {\it Density Functionals that Recognize Covalent, Metallic, and Weak Bonds}, Phys. Rev. Lett. {\bf 111}, 106401 (2013). 
+
+\bibitem{coco1} M. Cococcioni and S. de Gironcoli, {\it Linear response approach to the calculation of the effective interaction parameters
+in the LDA+U method}, Phys. Rev. B {\bf 71}, 035105 (2005).
+
+\bibitem{coco2} B. Himmetoglu, A. Floris, S. de Gironcoli, and M. Cococcioni, {\it Hubbard-corrected DFT energy functionals: the LDA+U
+description of correlated systems}, Int. J. Quant. Chem. {\bf 114}, 14 (2014).
+
+\bibitem{pardew82} J. P. Perdew, R. G. Parr, M. Levy, and J. L. Balduz, {Density-functional theory for fractional particle number: derivative discontinuities of the energy}, Phys. Rev. Lett. {\bf 49}, 1691 (1982).
+
+\bibitem{Mariana} M. Derzsi, P. Piekarz, P. T. Jochym, J. Łażewski, M. Sternik, A. M. Oleś, and K. Parlinski, {\it Effects of Coulomb interaction on the electronic structure and lattice dynamics of the Mott insulator Fe2SiO4 spinel}, Phys. Rev. B {\bf 79}, 205105 (2009).
+                   
+\bibitem{norman83} M. R. Norman and J. P. Pardew, {\it Simplified self-interaction correction applied to the energy bands of neon and sodium chloride},
+Phys. Rev. B {\bf 28}, 2135 (1983).                   
+
+\bibitem{Gap-hyb} A. J. Garza and G. E. Scuseria, {\it Predicting band gaps with hybrid density functionals}, J. Phys. Chem. Lett. {\bf  7}, 4165 (2016).
+
+
+                          
+
+		     
+\end{thebibliography} 
+
+
+\end{document}
+
+
+
+
