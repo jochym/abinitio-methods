@@ -90,7 +90,7 @@ jobs:
           retention-days: 90
       
       - name: Upload PDF to Release
-        if: success() && github.ref == 'refs/heads/book'
+        if: success()
         uses: softprops/action-gh-release@v2
         with:
           tag_name: latest-pdf
