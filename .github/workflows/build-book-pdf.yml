@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     
     permissions:
-      contents: read
+      contents: write  # Needed to create/update releases
     
     steps:
       - name: Checkout repository
@@ -88,3 +88,20 @@ jobs:
           name: book-pdf
           path: book/main.pdf
           retention-days: 90
+      
+      - name: Upload PDF to Release
+        if: success() && github.ref == 'refs/heads/book'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest-pdf
+          name: Latest Book PDF
+          files: book/main.pdf
+          body: |
+            Auto-generated PDF from the book branch.
+            
+            Direct link to PDF: https://github.com/${{ github.repository }}/releases/download/latest-pdf/main.pdf
+            
+            Built from commit: ${{ github.sha }}
+            Build date: ${{ github.event.head_commit.timestamp }}
+          fail_on_unmatched_files: true
+          generate_release_notes: false
