@@ -47,6 +47,29 @@ jobs:
             exit 1
           fi
       
+      - name: List LaTeX log files
+        if: always()
+        run: |
+          echo "LaTeX log files in book directory:"
+          ls -lah book/*.log book/*.aux book/*.blg book/*.bbl book/*.out book/*.toc book/*.fls book/*.fdb_latexmk 2>/dev/null || echo "No log files found"
+      
+      - name: Upload LaTeX logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: latex-logs
+          path: |
+            book/*.log
+            book/*.aux
+            book/*.blg
+            book/*.bbl
+            book/*.out
+            book/*.toc
+            book/*.fls
+            book/*.fdb_latexmk
+          retention-days: 30
+          if-no-files-found: warn
+      
       - name: Upload PDF artifact
         if: success()
         uses: actions/upload-artifact@v4
