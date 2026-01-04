@@ -18,18 +18,24 @@ The `build-book-pdf.yml` workflow automatically builds the LaTeX book manuscript
    - Compiles `book/main.tex` into `book/main.pdf`
 
 3. **Output**:
-   - The generated PDF is uploaded as a GitHub Actions artifact
-   - Artifacts are available for download from the Actions tab for 90 days
-   - Each workflow run creates a `book-pdf` artifact containing `main.pdf`
+   - The generated PDF is uploaded as a GitHub Actions artifact (90-day retention)
+   - LaTeX build logs are uploaded as artifacts (30-day retention) for debugging
+   - Each workflow run creates:
+     - `book-pdf` artifact: Contains `main.pdf` (only on successful build)
+     - `latex-build-logs` artifact: Contains `.log`, `.aux`, and other build files (always uploaded)
 
-### Accessing the PDF
+### Accessing the PDF and build logs
 
-After a successful build:
+After a workflow run:
 
 1. Go to the **Actions** tab in the GitHub repository
 2. Click on the workflow run you're interested in
 3. Scroll down to the **Artifacts** section
-4. Download the `book-pdf` artifact (will be a .zip file containing main.pdf)
+4. Download the artifacts:
+   - **book-pdf**: The compiled PDF (available only if build succeeded)
+   - **latex-build-logs**: LaTeX log files for debugging (always available)
+
+Both artifacts are .zip files that need to be extracted after download.
 
 ### Manual triggering
 
@@ -55,16 +61,25 @@ The workflow uses a full TeX Live distribution that includes all required packag
 ### Troubleshooting
 
 If the build fails:
-1. Check the workflow logs in the Actions tab for error messages
-2. Common issues:
+
+1. **Download the build logs**: 
+   - Go to the Actions tab and find the failed workflow run
+   - Scroll to the **Artifacts** section
+   - Download the `latex-build-logs` artifact
+   - Extract the .zip file and open `main.log` to see detailed error messages
+
+2. **Check the workflow logs**:
+   - Click on the failed job in the Actions tab
+   - Review the "Compile LaTeX document" step for immediate error output
+
+3. **Common issues**:
    - Missing figures: Ensure all PDF/PNG files referenced in main.tex are in the book/ directory
-   - LaTeX syntax errors: Check the error log for line numbers
+   - LaTeX syntax errors: Check the .log file for line numbers and error context
    - Missing bibliography: The workflow expects inline bibliography (using `\begin{thebibliography}`)
 
 ### Future enhancements
 
 Possible improvements to consider:
 - Add automatic release creation for tagged versions
-- Generate and upload build logs
 - Cache TeX Live packages for faster builds
 - Add PDF validation/linting
