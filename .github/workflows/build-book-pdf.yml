@@ -1,0 +1,56 @@
+name: Build Book PDF
+
+# Trigger the workflow on pushes and pull requests to the book branch
+on:
+  push:
+    branches:
+      - book
+    paths:
+      - 'book/**'
+  pull_request:
+    branches:
+      - book
+    paths:
+      - 'book/**'
+  # Allow manual triggering from Actions tab
+  workflow_dispatch:
+
+jobs:
+  build-pdf:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: read
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Compile LaTeX document
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: main.tex
+          working_directory: book
+          # Use latexmk for automatic handling of multiple passes
+          args: -pdf -file-line-error -interaction=nonstopmode
+          latexmk_use_lualatex: false
+          latexmk_use_xelatex: false
+          latexmk_shell_escape: false
+      
+      - name: Check PDF was created
+        run: |
+          if [ -f book/main.pdf ]; then
+            echo "✓ PDF successfully created"
+            ls -lh book/main.pdf
+          else
+            echo "✗ PDF was not created"
+            exit 1
+          fi
+      
+      - name: Upload PDF artifact
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: book-pdf
+          path: book/main.pdf
+          retention-days: 90
