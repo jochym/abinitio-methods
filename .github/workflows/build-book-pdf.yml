@@ -13,7 +13,14 @@ on:
     paths:
       - 'book/**'
   # Allow manual triggering from Actions tab
+  # When manually triggering, you can specify which branch to build from
   workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to build PDF from'
+        required: false
+        default: 'book'
+        type: string
 
 jobs:
   build-pdf:
@@ -25,6 +32,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          # Use the branch specified in workflow_dispatch input (defaults to 'book'), 
+          # or use the triggering branch for automatic triggers (push/PR events)
+          ref: ${{ github.event.inputs.branch || github.ref }}
       
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v3

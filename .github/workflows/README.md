@@ -41,13 +41,22 @@ Both artifacts are downloaded as .zip files.
 
 ### Manual triggering
 
-You can manually trigger a build:
+You can manually trigger a build from any branch:
 
 1. Go to **Actions** tab
 2. Select **Build Book PDF** workflow
 3. Click **Run workflow** button
-4. Select the `book` branch
-5. Click **Run workflow**
+4. Select the branch you want to run the workflow from (the workflow file must exist on this branch)
+5. Optionally, change the **"Branch to build PDF from"** input field (defaults to 'book')
+   - This allows you to run the workflow from `main` branch but build the PDF from the `book` branch
+   - The default value is 'book', but you can specify any branch name
+   - This is useful for testing changes on feature branches before merging
+6. Click **Run workflow**
+
+**Note**: 
+- The workflow file must exist on the branch you're triggering from (step 4)
+- The branch you're building from (step 5) can be different from the triggering branch
+- For automatic triggers (push/PR), it will build from the branch that triggered the event
 
 ### LaTeX packages
 
