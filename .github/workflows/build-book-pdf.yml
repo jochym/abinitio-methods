@@ -34,7 +34,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           # Use the branch specified in workflow_dispatch input, or default to the triggering branch
-          ref: ${{ inputs.branch || github.ref }}
+          ref: ${{ github.event.inputs.branch || github.ref }}
       
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v3

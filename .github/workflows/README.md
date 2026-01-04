@@ -49,7 +49,8 @@ You can manually trigger a build from any branch:
 4. Select the branch you want to run the workflow from (the workflow will run on this branch)
 5. Optionally, specify a different branch to build in the **"Branch to build PDF from"** input field
    - This allows you to run the workflow from `main` branch but build the PDF from the `book` branch
-   - If left empty, it will build from the branch selected in step 4
+   - If left with the default value, it will build from the `book` branch
+   - You can also specify any other branch name
 6. Click **Run workflow**
 
 **Note**: The workflow input allows you to build a PDF from a different branch than the one the workflow is running on. This is useful for testing changes on feature branches before merging to `book`.
