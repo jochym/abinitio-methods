@@ -16,20 +16,28 @@ The `build-book-pdf.yml` workflow automatically builds the LaTeX book manuscript
    - Uses the `xu-cheng/latex-action@v3` to compile the LaTeX document
    - Runs `latexmk` which automatically handles multiple pdflatex passes for cross-references
    - Compiles `book/main.tex` into `book/main.pdf`
+   - Lists all generated LaTeX log files for visibility
+   - Uploads compilation logs regardless of build success/failure
 
 3. **Output**:
-   - The generated PDF is uploaded as a GitHub Actions artifact
-   - Artifacts are available for download from the Actions tab for 90 days
-   - Each workflow run creates a `book-pdf` artifact containing `main.pdf`
+   - The generated PDF is uploaded as a GitHub Actions artifact (90-day retention)
+   - LaTeX compilation logs are uploaded as artifacts (30-day retention)
+   - Each workflow run creates:
+     - `book-pdf` artifact: Contains `main.pdf` (only on successful builds)
+     - `latex-logs` artifact: Contains all LaTeX log files (always uploaded for debugging)
 
-### Accessing the PDF
+### Accessing build artifacts
 
-After a successful build:
+After a workflow run:
 
 1. Go to the **Actions** tab in the GitHub repository
 2. Click on the workflow run you're interested in
 3. Scroll down to the **Artifacts** section
-4. Download the `book-pdf` artifact (will be a .zip file containing main.pdf)
+4. Download artifacts:
+   - `book-pdf`: Contains the compiled PDF (only available on successful builds)
+   - `latex-logs`: Contains compilation logs (.log, .aux, .blg, .bbl, .out, .toc, .fls, .fdb_latexmk files)
+
+Both artifacts are downloaded as .zip files.
 
 ### Manual triggering
 
@@ -56,15 +64,26 @@ The workflow uses a full TeX Live distribution that includes all required packag
 
 If the build fails:
 1. Check the workflow logs in the Actions tab for error messages
-2. Common issues:
+2. **Download the `latex-logs` artifact** to examine detailed compilation logs:
+   - `main.log`: Main LaTeX compilation log with error messages and line numbers
+   - `main.aux`: Auxiliary file with cross-reference information
+   - `main.blg`: BibTeX log file (if bibliography is used)
+   - Other files: `.out`, `.toc`, `.fls`, `.fdb_latexmk` for additional debugging info
+3. Common issues:
    - Missing figures: Ensure all PDF/PNG files referenced in main.tex are in the book/ directory
    - LaTeX syntax errors: Check the error log for line numbers
    - Missing bibliography: The workflow expects inline bibliography (using `\begin{thebibliography}`)
+
+### Debugging features
+
+The workflow includes comprehensive debugging support:
+- **Always-available logs**: The `latex-logs` artifact is uploaded regardless of build success or failure
+- **Immediate visibility**: Log files are listed in the workflow output before upload
+- **Complete log coverage**: All LaTeX-generated files are captured for thorough debugging
 
 ### Future enhancements
 
 Possible improvements to consider:
 - Add automatic release creation for tagged versions
-- Generate and upload build logs
 - Cache TeX Live packages for faster builds
 - Add PDF validation/linting
