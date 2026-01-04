@@ -33,7 +33,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          # Use the branch specified in workflow_dispatch input, or default to the triggering branch
+          # Use the branch specified in workflow_dispatch input (defaults to 'book'), 
+          # or use the triggering branch for automatic triggers (push/PR events)
           ref: ${{ github.event.inputs.branch || github.ref }}
       
       - name: Compile LaTeX document
